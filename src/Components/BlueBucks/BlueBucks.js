@@ -25,8 +25,5 @@ export function BlueBucks() {
                 </Card>
             </div>
         </>
-        
-        
-
     )
 }

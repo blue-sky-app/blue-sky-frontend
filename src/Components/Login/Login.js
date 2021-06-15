@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { NavBar } from "../NavBar/NavBar.js"
 import Form from "react-bootstrap/Form";
+import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import "./Login.css";
+import BlueSkyLogo from "../Images/logo_bluesky.jpg";
 
 export function Login() {
     const [email, setEmail] = useState("");
@@ -17,9 +18,9 @@ export function Login() {
     }
 
     return (
-        <>
-            <NavBar />
-            <div className="Login">
+        <div className="d-flex flex-column justify-content-center mt-5">
+            <Image src={BlueSkyLogo} className="w-75 mx-auto" />
+            <div className="mt-5 w-75 mx-auto">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group size="lg" controlId="email">
                     <Form.Label>Email</Form.Label>
@@ -43,7 +44,10 @@ export function Login() {
                     </Button>
                 </Form>
             </div>
-        </>
+            <div className="mt-5 w-75 mx-auto">
+                <Button href="/signUp" variant="secondary" size="sm">Sign Up</Button> 
+            </div>
+        </div>
     );
 }
 

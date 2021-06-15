@@ -1,12 +1,9 @@
 import React from "react";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import Image from "react-bootstrap/Image";
 import Dropdown from "react-bootstrap/Dropdown";
-import blueSkyLogo from "../Images/logo_bluesky.jpg";
 import style from "./NavBar.css";
 import {BrowserView, MobileView} from "react-device-detect";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
