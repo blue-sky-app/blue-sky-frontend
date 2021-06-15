@@ -11,7 +11,7 @@ export function BlueBucks() {
         
     return (
         <>
-            {/* <NavBar /> */}
+            <NavBar />
             <div className="pt-5">
                 <Card className="mx-auto" style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={blueBuck}/>

@@ -7,7 +7,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import style from "./NavBar.css";
 import {BrowserView, MobileView} from "react-device-detect";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 export function NavBar() {
   return (
@@ -28,6 +29,7 @@ export function NavBar() {
           <Form inline className="d-flex justify-content-around">
             <FormControl type="text" placeholder="Search" className="w-50" />
             <Button variant="outline-muted" className="btn-outline-light ml-2">Search</Button>
+            <FontAwesomeIcon style={{color: "white"}} icon={faUserCircle}/>
           </Form>
         </Navbar>
       </BrowserView>
