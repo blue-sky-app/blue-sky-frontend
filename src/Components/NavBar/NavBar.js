@@ -18,17 +18,19 @@ export function NavBar() {
             <FontAwesomeIcon style={{color: "white"}} icon={faBars} />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="/estimate">Estimates</Dropdown.Item>
+            <Dropdown.Item href="/estimates">Estimates</Dropdown.Item>
             <Dropdown.Item href="/schedule">Schedule Services</Dropdown.Item>
             <Dropdown.Item href="/blueBucks">Blue Bucks</Dropdown.Item>
-            <Dropdown.Item href="/login">Log Out</Dropdown.Item>
+            <Dropdown.Item href="/">Log Out</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
         <Form inline className="d-flex justify-content-around">
           <FormControl type="text" placeholder="Search" className="w-50" />
           <Button variant="outline-muted" className="btn-outline-light ml-1">Search</Button>
-          <FontAwesomeIcon className="ml-1 fa-2x" style={{color: "white"}} icon={faUserCircle}/>
+          <a href="/profile" >
+            <FontAwesomeIcon className="ml-1 fa-2x fa-external" style={{color: "white"}} icon={faUserCircle}/>
+          </a>
         </Form>
       </Navbar>
     </>
