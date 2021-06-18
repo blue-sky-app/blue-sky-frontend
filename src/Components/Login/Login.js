@@ -23,26 +23,23 @@ export function Login() {
             <div className="mt-5 w-75 mx-auto">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group size="lg" controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                            autoFocus
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </Form.Group>
                     <Form.Group size="lg" controlId="password">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                     </Form.Group>
-                    {/* <Button block size="lg" type="submit" disabled={!validateForm()}> */}
-                    <Button href="/dashboard" block size="lg">
-                        Login
-                    </Button>
+                    <Button href="/dashboard" block size="lg" type="submit" disabled={!validateForm()}>Login</Button>
                 </Form>
             </div>
             <div className="mt-5 w-75 mx-auto">
