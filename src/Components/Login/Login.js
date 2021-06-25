@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import BlueSkyLogo from "../Images/logo_bluesky.jpg";
+import style from "./Login.css";
 
 export function Login() {
     const [email, setEmail] = useState("");
@@ -18,32 +19,48 @@ export function Login() {
     }
 
     return (
-        <div className="d-flex flex-column justify-content-center mt-5">
-            <Image src={BlueSkyLogo} className="w-75 mx-auto" />
+        <div className="d-flex flex-column justify-content-center" style={{backgroundImage:"linear-gradient(to bottom, #66b3ff, #e6f2ff"}}>
+            <Image src={BlueSkyLogo} className="mt-5 w-75 mx-auto" />
+            <p className="mt-3 w-80 mx-auto text-center" style={{fontSize:"11px", fontWeight:"bold", color:"#0a7ebd"}}>SERVING NEW YORK, NEW JERSEY & FLORIDA</p>
             <div className="mt-5 w-75 mx-auto">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group size="lg" controlId="email">
-                        <Form.Label>Email</Form.Label>
                         <Form.Control
-                            autoFocus
+                            style={{fontSize:"14px"}}
                             type="email"
                             value={email}
+                            placeHolder="Email"
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </Form.Group>
                     <Form.Group size="lg" controlId="password">
-                        <Form.Label>Password</Form.Label>
                         <Form.Control
+                            style={{fontSize:"14px"}}
                             type="password"
                             value={password}
+                            placeHolder="Password"
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </Form.Group>
-                    <Button href="/dashboard" block size="lg" type="submit" disabled={!validateForm()}>Login</Button>
+                    <br />
+                    <Button 
+                        style={{fontWeight:"bold"}}
+                        href="/dashboard" 
+                        block size="md" 
+                        type="submit" 
+                        disabled={!validateForm()}>
+                            LOGIN
+                    </Button>
                 </Form>
             </div>
-            <div className="mt-5 w-75 mx-auto">
-                <Button href="/signUp" variant="secondary" size="sm">Sign Up</Button> 
+            <div className="mt-3 mb-5 w-75 mx-auto">
+                <Button 
+                    style={{fontWeight:"bold"}}
+                    href="/signUp" 
+                    variant="secondary" 
+                    block size="md" >
+                        SIGN UP                
+                </Button> 
             </div>
         </div>
     );

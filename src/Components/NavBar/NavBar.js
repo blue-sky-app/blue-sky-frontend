@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
@@ -7,31 +8,34 @@ import Dropdown from "react-bootstrap/Dropdown";
 import style from "./NavBar.css";
 import {BrowserView, MobileView} from "react-device-detect";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCalculator, faBuilding, faMoneyBillWaveAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 export function NavBar() {
   return (
     <>
-      <Navbar bg="primary" variant="dark">      
-        <Dropdown >
-          <Dropdown.Toggle id="dropdown-basic">
-            <FontAwesomeIcon style={{color: "white"}} icon={faBars} />
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="/estimates">Estimates</Dropdown.Item>
-            <Dropdown.Item href="/schedule">Schedule Services</Dropdown.Item>
-            <Dropdown.Item href="/blueBucks">Blue Bucks</Dropdown.Item>
-            <Dropdown.Item href="/">Log Out</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-
-        <Form inline className="d-flex justify-content-around">
-          <FormControl type="text" placeholder="Search" className="w-50" />
-          <Button variant="outline-muted" className="btn-outline-light ml-1">Search</Button>
-          <a href="/profile" >
-            <FontAwesomeIcon className="ml-1 fa-2x fa-external" style={{color: "white"}} icon={faUserCircle}/>
-          </a>
-        </Form>
+      <Navbar>      
+        <Container>
+          <Navbar.Brand href="/login" className="d-flex flex-column">
+            <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faHome}/>
+            <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Home</Navbar.Text>
+          </Navbar.Brand>
+          <Navbar.Brand href="/estimates" className="d-flex flex-column">
+            <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faCalculator}/>
+            <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Estimate</Navbar.Text>
+          </Navbar.Brand>
+          <Navbar.Brand href="/schedule" className="d-flex flex-column">
+            <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faBuilding}/>
+            <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Services</Navbar.Text>
+          </Navbar.Brand>
+          <Navbar.Brand href="/blueBucks" className="d-flex flex-column">
+            <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faMoneyBillWaveAlt}/>
+            <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Blue Bucks</Navbar.Text>
+          </Navbar.Brand>
+          <Navbar.Brand href="/login" className="d-flex flex-column">
+            <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faSignOutAlt}/>
+            <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Log Out</Navbar.Text>
+          </Navbar.Brand>
+        </Container>
       </Navbar>
     </>
   )
