@@ -3,7 +3,7 @@ import { NavBar } from "../NavBar/NavBar.js"
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import BlueSkyLogo from "../Images/logo_bluesky.jpg";
+import BlueSkyLogo from "../Images/BlueSkyCleaning-final.jpg";
 
 export function SignUp() {
     const [email, setEmail] = useState("");
@@ -86,7 +86,7 @@ export function SignUp() {
                     </Form.Group>
                     <Button 
                         style={{fontWeight:"bold"}}
-                        href="/dashboard" 
+                        href="/home" 
                         block size="md" 
                         type="submit" 
                         disabled={!validateForm()}>

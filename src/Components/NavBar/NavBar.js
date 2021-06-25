@@ -1,21 +1,18 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container"
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import Dropdown from "react-bootstrap/Dropdown";
-import style from "./NavBar.css";
 import {BrowserView, MobileView} from "react-device-detect";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCalculator, faBuilding, faMoneyBillWaveAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { ContactUs } from "../ContactUs/ContactUs";
 
 export function NavBar() {
   return (
-    <>
+    <div>
+      <ContactUs />
       <Navbar>      
         <Container>
-          <Navbar.Brand href="/login" className="d-flex flex-column">
+          <Navbar.Brand href="/home" className="d-flex flex-column">
             <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faHome}/>
             <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Home</Navbar.Text>
           </Navbar.Brand>
@@ -37,6 +34,6 @@ export function NavBar() {
           </Navbar.Brand>
         </Container>
       </Navbar>
-    </>
+    </div>
   )
 }
