@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-import { NavBar } from "../NavBar/NavBar.js"
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import BlueSkyLogo from "../Images/BlueSkyCleaning-final.jpg";
+import user from "../hooks/user.json";
 
 export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // QUICK VALIDATION
+    // function validateForm() {
+    //     return email.length > 0 && password.length > 0;
+    // }
+
     function validateForm() {
-        return email.length > 0 && password.length > 0;
+        return email == user[3].email && password == user[3].password;
+
     }
 
     function handleSubmit(event) {

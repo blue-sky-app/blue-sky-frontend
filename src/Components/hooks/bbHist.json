@@ -1,0 +1,45 @@
+[
+    {
+        "email": "dan@gmail.com",
+        "transaction_number": 1,
+        "transaction_type": "earned",
+        "amount": 25,
+        "date": "6/1/2021"
+    },
+    {
+        "email": "dan@gmail.com",
+        "transaction_number": 2,
+        "transaction_type": "earned",
+        "amount": 50,
+        "date": "6/15/2021"
+    },
+    {
+        "email": "dan@gmail.com",
+        "transaction_number": 3,
+        "transaction_type": "redeemed",
+        "amount": 25,
+        "date": "6/25/2021"
+    },
+    {
+        "email": "marlon@gmail.com",
+        "transaction_number": 1,
+        "transaction_type": "earned",
+        "amount": 25,
+        "date": "5/1/2021"
+    },
+    {
+        "email": "marlon@gmail.com",
+        "transaction_number": 2,
+        "transaction_type": "earned",
+        "amount": 75,
+        "date": "5/15/2021"
+    },
+    {
+        "email": "marlon@gmail.com",
+        "transaction_number": 3,
+        "transaction_type": "redeemed",
+        "amount": 50,
+        "date": "5/25/2021"
+    }
+
+]
