@@ -1,24 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Component } from "react";
+import Axios from 'axios'
 import { NavBar } from "../NavBar/NavBar.js";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
-import user from "../hooks/user.json";
-import bbHist from "../hooks/bbHist.json";
-import fetchData from "../hooks/fetchData";
 
 export function BlueBucks() {
+        const [users,setUsers]=useState([])
+        
+        useEffect(() => {
+            fetchUser();
+        }, [])
+        useEffect(() => {
+            console.log(users)
+            }, [users])
+            
+        const fetchUser=async()=>{
+            const response=await Axios('http://localhost:8080/user/9');
+            setUsers(response.data)    
+        }
 
-    return (
-        <div>
+        return (
+            <div>
                 <Image src={HeaderLogo} className="d-flex w-100 mx-auto justify-content-center" />
                 <Card className="border-0">
                     <Card.Header 
                         className="d-flex justify-content-center align-items-center text-white" 
                         style={{backgroundColor:"#0a7ebd", height: "40px", fontWeight: "bold"}}
                     >
-                        's Blue Bucks History
+                        {users.firstName}'s Blue Bucks History
                     </Card.Header>
                     
                     <Card.Body>
@@ -49,5 +60,5 @@ export function BlueBucks() {
 
                 <NavBar />
             </div>
-    )
+    );
 }
