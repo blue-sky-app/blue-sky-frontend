@@ -123,6 +123,36 @@ export function BlueBucks() {
                                         <th>Amount</th>
                                         <th>Date</th>
                                     </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
 
 
                                 </tbody>
