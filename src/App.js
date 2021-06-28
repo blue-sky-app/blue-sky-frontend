@@ -6,14 +6,14 @@ import { Home } from "./Components/Home/Home";
 import { BlueBucks } from "./Components/BlueBucks/BlueBucks";
 import { Profile } from "./Components/Profile/Profile";
 import { Estimates } from "./Components/Estimates/Estimates";
-import { Schedule } from "./Components/Schedule/Schedule";
+import { Services } from "./Components/Services/Services";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/schedule" component={Schedule} />
+        <Route path="/services" component={Services} />
         <Route path="/estimates" component={Estimates} />
         <Route path="/profile" component={Profile} />
         <Route path="/blueBucks" component={BlueBucks} />

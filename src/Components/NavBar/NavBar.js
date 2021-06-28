@@ -20,7 +20,7 @@ export function NavBar() {
             <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faCalculator}/>
             <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Estimate</Navbar.Text>
           </Navbar.Brand>
-          <Navbar.Brand href="/schedule" className="d-flex flex-column">
+          <Navbar.Brand href="/services" className="d-flex flex-column">
             <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faBuilding}/>
             <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Services</Navbar.Text>
           </Navbar.Brand>
@@ -28,7 +28,7 @@ export function NavBar() {
             <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faMoneyBillWaveAlt}/>
             <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Blue Bucks</Navbar.Text>
           </Navbar.Brand>
-          <Navbar.Brand href="/login" className="d-flex flex-column">
+          <Navbar.Brand href="/" className="d-flex flex-column">
             <FontAwesomeIcon className="mx-auto" style={{color: "#014388"}} icon={faSignOutAlt}/>
             <Navbar.Text className="text-center h-25 pt-0" style={{fontSize: "12px"}}>Log Out</Navbar.Text>
           </Navbar.Brand>

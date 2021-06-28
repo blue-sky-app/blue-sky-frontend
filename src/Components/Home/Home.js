@@ -9,7 +9,6 @@ import HeroImage from "../Images/hero.jpg"
 
 export function Home() {
   return (
-    <>
       <div>
         <Image src={HeaderLogo} className="d-flex w-100 mx-auto justify-content-center" />
         <Card className="border-0">
@@ -40,6 +39,5 @@ export function Home() {
 
         <NavBar />
       </div>
-    </>
   )
 }
