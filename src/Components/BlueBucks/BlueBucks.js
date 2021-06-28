@@ -93,6 +93,38 @@ export function BlueBucks() {
                                 </thead>        
                                 <tbody style={{fontSize: "14px", textAlign: "center"}}>
                                     {bb_table}
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Transaction Type</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                    </tr>
+
+
                                 </tbody>
                             </Table>
                     </Card.Body>

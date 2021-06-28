@@ -9,11 +9,8 @@ export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // QUICK VALIDATION
-    // function validateForm() {
-    //     return email.length > 0 && password.length > 0;
-    // }
-
+    // email: dan@gmail.com
+    // password: 123!@#
     function validateForm() {
         return email == user[3].email && password == user[3].password;
 

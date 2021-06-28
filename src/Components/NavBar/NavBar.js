@@ -8,7 +8,7 @@ import { ContactUs } from "../ContactUs/ContactUs";
 
 export function NavBar() {
   return (
-    <div>
+    <div style={{position:"absolute", bottom:"0", width:"100%"}}>
       <ContactUs />
       <Navbar>      
         <Container>
