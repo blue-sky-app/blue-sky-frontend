@@ -19,7 +19,7 @@ function App() {
         <Route path="/blueBucks" component={BlueBucks} />
         <Route path="/home" component={Home} />
         <Route path="/signUp" component={SignUp}/>
-        <Route path="/login" component={Login} />     
+        <Route path="/" component={Login} />     
       </Switch>
     </BrowserRouter>
 

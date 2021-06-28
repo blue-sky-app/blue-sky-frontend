@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import BlueSkyLogo from "../Images/BlueSkyCleaning-final.jpg";
+import BlueSkyLogo from "../Images/loginHeader.png";
 import user from "../hooks/user.json";
 
 export function Login() {
@@ -24,10 +24,10 @@ export function Login() {
     }
 
     return (
-        <div className="d-flex flex-column justify-content-center">
-            <Image src={BlueSkyLogo} className="w-75 mx-auto" style={{maxWidth: "50%"}} />
+        <div className="d-flex flex-column justify-content-center" style={{backgroundImage:"linear-gradient(to bottom, #99cfff, #e6f2ff"}}>
+            <Image src={BlueSkyLogo} className="mx-auto" style={{maxWidth: "100%"}} />
             <p className="mt-3 w-80 mx-auto text-center" style={{fontSize:"11px", fontWeight:"bold", color:"#0a7ebd"}}>SERVING NEW YORK, NEW JERSEY & FLORIDA</p>
-            <div className="mt-5 w-75 mx-auto">
+            <div className="mt-5 w-75 mx-auto" style={{maxHeight:"100%"}}>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group size="lg" controlId="email">
                         <Form.Control

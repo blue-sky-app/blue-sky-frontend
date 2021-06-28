@@ -3,7 +3,7 @@ import { NavBar } from "../NavBar/NavBar.js"
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import BlueSkyLogo from "../Images/BlueSkyCleaning-final.jpg";
+import BlueSkyLogo from "../Images/loginHeader.png";
 
 export function SignUp() {
     const [email, setEmail] = useState("");
@@ -24,8 +24,8 @@ export function SignUp() {
     }
 
     return (
-        <div className="d-flex flex-column justify-content-center" style={{backgroundImage:"linear-gradient(to bottom, #66b3ff, #e6f2ff"}}>
-            <Image src={BlueSkyLogo} className="mt-5 w-75 mx-auto" />
+        <div className="d-flex flex-column justify-content-center" style={{backgroundImage:"linear-gradient(to bottom, #99cfff, #e6f2ff"}}>
+            <Image src={BlueSkyLogo} className="mx-auto" style={{maxWidth: "100%"}} />
             <p className="mt-3 w-80 mx-auto text-center" style={{fontSize:"11px", fontWeight:"bold", color:"#0a7ebd"}}>SERVING NEW YORK, NEW JERSEY & FLORIDA</p>
             <div className="w-75 mx-auto">
                 <Form onSubmit={handleSubmit}>
