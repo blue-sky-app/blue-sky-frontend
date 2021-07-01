@@ -21,8 +21,9 @@ export function Login() {
     }
 
     return (
-        <div className="d-flex flex-column justify-content-center" style={{backgroundImage:"linear-gradient(to bottom, #99cfff, #e6f2ff"}}>
-            <Image src={BlueSkyLogo} className="mx-auto" style={{maxWidth: "100%"}} />
+        <div className="d-flex flex-column" style={{backgroundImage:"linear-gradient(to bottom, #99cfff, #e6f2ff", height: "100vh",
+        minWidth: "100%"}}>
+            <Image src={BlueSkyLogo} className="mx-auto" style={{minWidth: "100%", maxWidth: "100%"}} />
             <p className="mt-3 w-80 mx-auto text-center" style={{fontSize:"11px", fontWeight:"bold", color:"#0a7ebd"}}>SERVING NEW YORK, NEW JERSEY & FLORIDA</p>
             <div className="mt-5 w-75 mx-auto" style={{maxHeight:"100%"}}>
                 <Form onSubmit={handleSubmit}>

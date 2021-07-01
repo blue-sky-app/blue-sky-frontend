@@ -81,7 +81,7 @@ export function BlueBucks() {
                         {users.firstName}'s Blue Bucks History
                     </Card.Header>
                     
-                    <Card.Body>
+                    <Card.Body style={{overflowY: "scroll", maxHeight: "53vh"}}>
                         <Card.Title style={{fontSize: "16px"}}>Current Balance: <strong>{currentBalance}</strong></Card.Title>
                             <Table striped bordered hover size="sm">
                                 <thead style={{backgroundColor: "#434444", color: "white", fontSize: "12px",  textAlign: "center"}}>
@@ -93,72 +93,10 @@ export function BlueBucks() {
                                 </thead>        
                                 <tbody style={{fontSize: "14px", textAlign: "center"}}>
                                     {bb_table}
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Transaction Type</th>
-                                        <th>Amount</th>
-                                        <th>Date</th>
-                                    </tr>
-
-
                                 </tbody>
                             </Table>
                     </Card.Body>
-                    <Card.Text className="text-center mr-3 ml-3 mb-1" style={{fontSize: "12px"}}>
+                    <Card.Text className="text-center mr-3 ml-3 mb-1 mt-3" style={{fontSize: "12px"}}>
                         
                             Blue Bucks are earned through special promotions and upon payment of services and can be redeemed for future service discounts.
                         
