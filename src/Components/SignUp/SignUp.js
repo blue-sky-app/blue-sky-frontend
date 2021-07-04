@@ -77,9 +77,10 @@ function SignUp(props) {
     }
 
     return (
-        <div className="d-flex flex-column justify-content-center" style={{backgroundImage:"linear-gradient(to bottom, #99cfff, #e6f2ff"}}>
-            <Image src={BlueSkyLogo} className="mx-auto" style={{maxWidth: "100%"}} />
-            <p className="mt-3 w-80 mx-auto text-center" style={{fontSize:"11px", fontWeight:"bold", color:"#0a7ebd"}}>SERVING NEW YORK, NEW JERSEY & FLORIDA</p>
+        <div className="d-flex flex-column" style={{backgroundImage:"linear-gradient(to bottom, #b1ddf2, #e6f2ff", height: "100vh",
+        minWidth: "100%"}}>
+            <Image src={BlueSkyLogo} className="mx-auto" style={{minWidth: "100%", maxWidth: "100%"}} />
+            <p className="mt-3 w-80 mx-auto text-center" style={{fontSize:"11px", fontWeight:"bold", color:"#0a7ebd"}}>SERVING CENTRAL FLORIDA</p>
             <div className="w-75 mx-auto">
                 <Form>
                     <Form.Label className="mt-1" style={{fontSize:"14px", fontWeight:"bold", color:"#434444"}}>REGISTER NEW USER</Form.Label>
@@ -150,10 +151,6 @@ function SignUp(props) {
             </div>
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
-            </div>
-            <div className="mt-2">
-                <span>Already have an account? </span>
-                <span className="loginText" onClick={() => redirectToLogin()}>Login here</span> 
             </div>
             <div className="mt-3 mb-5 w-75 mx-auto">
                 <Button 

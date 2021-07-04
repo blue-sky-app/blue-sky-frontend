@@ -1,17 +1,17 @@
 import React, { useState, useEffect} from "react";
-import Axios from 'axios'
+import axios from 'axios'
 import { NavBar } from "../NavBar/NavBar.js";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
 
-export function BlueBucks() {
-        const [users, setUsers]=useState([]);
-        const [tables, setTables]=useState([]);
-        const [error, setError] = useState(null);
-        const [isLoaded, setIsLoaded] = useState(false);
- 
+export function BlueBucks(props) {
+        const [users, setUsers] = useState([]);
+        const [tables, setTables] = useState([]);
+        // const [error, setError] = useState(null);
+        // const [isLoaded, setIsLoaded] = useState(false);
+
         // This fetch is for the FirstName
         useEffect(() => {
             fetchUser();
@@ -20,8 +20,8 @@ export function BlueBucks() {
             console.log(users)
             }, [users])
             
-        const fetchUser=async()=>{
-            const response=await Axios('http://localhost:8080/user/9');
+        const fetchUser= async() =>{
+            const response = await axios('http://localhost:8080/user/9'); //3, 4, 9 
             setUsers(response.data)    
         }
 
@@ -33,20 +33,22 @@ export function BlueBucks() {
             console.log(tables)
             }, [tables])
             
-        const fetchTable=async()=>{
-            const response=await Axios('http://localhost:8080/bb_hist');
+        const fetchTable = async() => {
+            const response= await axios('http://localhost:8080/bb_hist');
             setTables(response.data)    
         }
      
         let bb_table = [];
-        const email = "dan@gmail.com";
+        const user = users.email;
         for (const [i, table] of tables.entries()) {
-            if (table.email === email) {
+            if (table.email === user) {
+                let date = JSON.stringify(table.date);
+                let newDate = `${date.slice(6, 8)}/${date.slice(9,11)}/${date.slice(1,5)}`;
                 bb_table.push(
                     <tr style={{fontSize: "11px",  textAlign: "center"}}>
                         <td>{table.transaction_type}</td>
                         <td>{table.amount}</td>
-                        <td>{table.date}</td>  
+                        <td>{newDate}</td>
                     </tr>                          
                     
                 );
@@ -56,14 +58,14 @@ export function BlueBucks() {
         // TODO: Refactor this
         let earned = 0;
         for (const [i, table] of tables.entries()) {
-            if (table.email === email && table.transaction_type === "earned") {
+            if (table.email === user && table.transaction_type === "earned") {
                 earned = earned + table.amount;
             }
         }
 
         let redeemed = 0;
         for (const [i, table] of tables.entries()) {
-            if (table.email === email && table.transaction_type === "redeemed") {
+            if (table.email === user && table.transaction_type === "redeemed") {
                 redeemed = redeemed + table.amount;
             }
         }

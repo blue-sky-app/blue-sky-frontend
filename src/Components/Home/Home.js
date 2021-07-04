@@ -34,7 +34,6 @@ export function Home() {
               </Card.Text>
               <Button className="mt-3 p-2" variant="dark" style={{fontSize: "12px", fontWeight:"bold"}} href="/estimates">REQUEST A QUOTE</Button>
             </Card.Body>
-
         </Card>
 
         <NavBar />

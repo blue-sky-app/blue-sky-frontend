@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCalculator, faBuilding, faMoneyBillWaveAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ContactUs } from "../ContactUs/ContactUs";
 
-export function NavBar() {
+export function NavBar() { 
   return (
     <div style={{position:"absolute", bottom:"0", width:"100%"}}>
       <ContactUs />
