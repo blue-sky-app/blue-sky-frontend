@@ -29,10 +29,13 @@ export function Home() {
               <Card.Text className="text-center mr-3 ml-3 mb-1" style={{fontSize: "15px", color: "#FFF", fontWeight: "bold"}}>
                   WHAT CAN BLUE DO FOR YOU?              
               </Card.Text>
-              <Card.Text className="mr-3 ml-3 mb-1 mt-2" style={{fontSize: "11px", color: "#FFF", fontWeight: "bold"}}>
+              <Card.Text className="mr-3 ml-3 mt-2" style={{fontSize: "11px", color: "#FFF", fontWeight: "bold"}}>
                   All estimates and proposals are guaranteed for six months and are completed free of charge
               </Card.Text>
-              <Button className="mt-3 p-2" variant="dark" style={{fontSize: "12px", fontWeight:"bold"}} href="/estimates">REQUEST A QUOTE</Button>
+            </Card.Body>
+            <Card.Body className="d-flex justify-content-center align-items-center" style={{backgroundColor: "#014388"}}>
+              <Button className="p-2 mr-2" variant="dark" style={{fontSize: "12px", fontWeight:"bold"}} href="/estimates">REQUEST A QUOTE</Button>
+              <Button className="p-2" variant="dark" style={{fontSize: "12px", fontWeight:"bold"}} href="/services">REPEAT A SERVICE</Button>
             </Card.Body>
         </Card>
 

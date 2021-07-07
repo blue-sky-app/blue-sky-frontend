@@ -12,7 +12,7 @@ function SignUp(props) {
         email: "",
         firstName: "",
         lastName: "",
-        // accountNumber: "",
+        accountType: "",
         newPassword: "",
         confirmPassword: "",
         successMessage : null
@@ -42,6 +42,7 @@ function SignUp(props) {
                 "firstName":state.firstName,
                 "lastName":state.lastName,
                 "email":state.email,
+                "accountType":state.accountType,
                 "password":state.newPassword, 
                 "confirmPassword":state.confirmPassword,
                 "successMessage": null
@@ -80,11 +81,11 @@ function SignUp(props) {
         <div className="d-flex flex-column" style={{backgroundImage:"linear-gradient(to bottom, #b1ddf2, #e6f2ff", height: "100vh",
         minWidth: "100%"}}>
             <Image src={BlueSkyLogo} className="mx-auto" style={{minWidth: "100%", maxWidth: "100%"}} />
-            <p className="mt-3 w-80 mx-auto text-center" style={{fontSize:"11px", fontWeight:"bold", color:"#0a7ebd"}}>SERVING CENTRAL FLORIDA</p>
+            <p className="w-80 mx-auto text-center" style={{fontSize:"11px", fontWeight:"bold", color:"#0a7ebd"}}>SERVING CENTRAL FLORIDA</p>
             <div className="w-75 mx-auto">
                 <Form>
                     <Form.Label className="mt-1" style={{fontSize:"14px", fontWeight:"bold", color:"#434444"}}>REGISTER NEW USER</Form.Label>
-                    <Form.Group size="lg" controlId="email">
+                    <Form.Group size="lg" controlId="email" className="mb-1">
                         <Form.Control
                             style={{fontSize:"14px"}}
                             type="email"
@@ -93,7 +94,7 @@ function SignUp(props) {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group size="lg" controlId="firstName">
+                    <Form.Group size="lg" controlId="firstName" className="mb-1">
                         <Form.Control
                             style={{fontSize:"14px"}}
                             type="text"
@@ -102,7 +103,7 @@ function SignUp(props) {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    <Form.Group size="lg" controlId="lastName">
+                    <Form.Group size="lg" controlId="lastName" className="mb-1">
                         <Form.Control
                             style={{fontSize:"14px"}}
                             type="text"
@@ -111,16 +112,20 @@ function SignUp(props) {
                             onChange={handleChange}
                         />
                     </Form.Group>
-                    {/* <Form.Group size="lg" controlId="accountNumber">
-                        <Form.Control
+                    <Form.Group size="lg" controlId="accountType" className="mb-1">
+                        <Form.Control as="select"
                             style={{fontSize:"14px"}}
                             type="text"
-                            value={state.accountNumber}
-                            placeHolder="Blue Sky Account # (if known)"
+                            value={state.accountType}
                             onChange={handleChange}
-                        />
-                    </Form.Group> */}
-                    <Form.Group size="lg" controlId="newPassword">
+                        >
+                            <option>Choose Service Type</option>
+                            <option>Commercial</option>
+                            <option>Residential</option>
+
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group size="lg" controlId="newPassword" className="mb-1">
                         <Form.Control
                             style={{fontSize:"14px"}}
                             type="password"
@@ -152,7 +157,7 @@ function SignUp(props) {
             <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
                 {state.successMessage}
             </div>
-            <div className="mt-3 mb-5 w-75 mx-auto">
+            <div className="mt-2 mb-5 w-75 mx-auto">
                 <Button 
                     style={{fontWeight:"bold"}}
                     href="/login" 

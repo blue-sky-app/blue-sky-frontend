@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Home } from "../Home/Home";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import BlueSkyLogo from "../Images/loginHeader.png";
-import user from "../hooks/user.json";
-import { Redirect } from "react-router-dom";
 
 export function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState("");
-    const [logins, setLogins] = useState("");
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
