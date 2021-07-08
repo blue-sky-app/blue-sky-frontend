@@ -1,12 +1,11 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container"
-import {BrowserView, MobileView} from "react-device-detect";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCalculator, faBuilding, faMoneyBillWaveAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { ContactUs } from "../ContactUs/ContactUs";
 
-export function NavBar() { 
+export function MobileNavBar() { 
   return (
     <div style={{position:"absolute", bottom:"0", width:"100%"}}>
       <ContactUs />

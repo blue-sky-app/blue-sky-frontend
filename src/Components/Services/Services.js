@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import axios from 'axios'
-import { NavBar } from "../NavBar/NavBar.js";
+import { MobileNavBar } from "../NavBar/MobileNavBar.js";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
@@ -67,7 +67,7 @@ export function Services() {
       </Card.Body>
     </Card>
 
-    <NavBar />
+    <MobileNavBar />
   </div>
   )
 }
