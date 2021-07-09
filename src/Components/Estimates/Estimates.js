@@ -8,12 +8,12 @@ export function Estimates() {
     <>
       <BrowserView>
         <BrowserNavBar />
-          <h1> This is rendered only in browser </h1>
+        <h1> This is rendered only in browser </h1>
       </BrowserView>
       <MobileView>
         <MobileNavBar />
-          <h1> This is rendered only on mobile </h1>
+        <h1> This is rendered only on mobile </h1>
       </MobileView>
     </>
-  )
+  );
 }
