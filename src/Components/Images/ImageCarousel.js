@@ -14,7 +14,7 @@ export function ImageCarousel() {
     };
   
     return (
-      <Carousel activeIndex={index} onSelect={handleSelect} className="mx-auto">
+      <Carousel activeIndex={index} onSelect={handleSelect} className="mx-auto mt-2 mb-2">
         <Carousel.Item>
           <Image src={FirstSlide} className="d-block" style={{maxHeight: "75vh"}} alt="First slide"></Image>
 
