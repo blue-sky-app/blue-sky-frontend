@@ -91,7 +91,7 @@ export function BlueBucks(props) {
                         }}
                     >
                         {users.firstName}'s Blue Bucks History
-          </Card.Header>
+                    </Card.Header>
 
                     <Card.Body
                         className="mx-auto w-50"
@@ -126,7 +126,7 @@ export function BlueBucks(props) {
                     >
                         Blue Bucks are earned through special promotions and upon payment of
                         services and can be redeemed for future service discounts.
-          </Card.Text>
+                    </Card.Text>
                 </Card>
             </BrowserView>
 
@@ -146,7 +146,7 @@ export function BlueBucks(props) {
                         }}
                     >
                         {users.firstName}'s Blue Bucks History
-          </Card.Header>
+                    </Card.Header>
 
                     <Card.Body style={{ overflowY: "scroll", maxHeight: "53vh" }}>
                         <Card.Title style={{ fontSize: "16px" }}>
@@ -178,7 +178,7 @@ export function BlueBucks(props) {
                     >
                         Blue Bucks are earned through special promotions and upon payment of
                         services and can be redeemed for future service discounts.
-          </Card.Text>
+                    </Card.Text>
                 </Card>
 
                 <MobileNavBar />
