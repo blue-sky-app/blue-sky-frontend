@@ -1,0 +1,26 @@
+#bottom {
+    position: relative;
+    bottom: 0; 
+    width: 100%;
+}
+
+#bg {
+    background-color: #014388;
+}
+
+#blueyou {
+    font-size: 18px;
+    color: #FFF; 
+    font-weight: bold; 
+}
+
+#estimates {
+    font-size: 14px; 
+    color: #FFF; 
+    font-weight: bold; 
+}
+
+#copyright {
+    font-size: 12px; 
+    color: #FFF;
+}

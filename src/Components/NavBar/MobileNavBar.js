@@ -10,22 +10,23 @@ import {
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { ContactUs } from "../ContactUs/ContactUs";
+import './NavBar.css';
 
 export function MobileNavBar() {
   return (
-    <div style={{ position: "absolute", bottom: "0", width: "100%" }}>
+    <div id="nav">
       <ContactUs />
       <Navbar>
         <Container>
           <Navbar.Brand href="/home" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
-              style={{ color: "#014388" }}
+              id="icon"
               icon={faHome}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
-              style={{ fontSize: "12px" }}
+              id="txt"
             >
               Home
             </Navbar.Text>
@@ -33,12 +34,12 @@ export function MobileNavBar() {
           <Navbar.Brand href="/estimates" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
-              style={{ color: "#014388" }}
+              id="icon"
               icon={faCalculator}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
-              style={{ fontSize: "12px" }}
+              id="txt"
             >
               Estimate
             </Navbar.Text>
@@ -46,12 +47,12 @@ export function MobileNavBar() {
           <Navbar.Brand href="/services" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
-              style={{ color: "#014388" }}
+              id="icon"
               icon={faBuilding}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
-              style={{ fontSize: "12px" }}
+              id="txt"
             >
               Services
             </Navbar.Text>
@@ -59,12 +60,12 @@ export function MobileNavBar() {
           <Navbar.Brand href="/blueBucks" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
-              style={{ color: "#014388" }}
+              id="icon"
               icon={faMoneyBillWaveAlt}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
-              style={{ fontSize: "12px" }}
+              id="txt"
             >
               Blue Bucks
             </Navbar.Text>
@@ -72,12 +73,12 @@ export function MobileNavBar() {
           <Navbar.Brand href="/" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
-              style={{ color: "#014388" }}
+              id="icon"
               icon={faSignOutAlt}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
-              style={{ fontSize: "12px" }}
+              id="txt"
             >
               Log Out
             </Navbar.Text>

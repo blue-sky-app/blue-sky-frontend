@@ -1,0 +1,27 @@
+#nav {
+    position: absolute; 
+    bottom: 0; 
+    width: 100%; 
+    background-color:#FFF;
+}
+
+#icon {
+    color: #014388;
+}
+
+#txt {
+    font-size: 12px;
+}
+
+#wdth {
+    width: 100%;
+}
+
+#bckgnd {
+    background-color: #0a7ebd;
+}
+
+#wfnt {
+    font-weight: bold; 
+    color: white;
+}

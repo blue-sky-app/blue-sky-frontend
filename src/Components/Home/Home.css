@@ -1,0 +1,88 @@
+@media all and (min-width: 480px) {
+
+    #background {
+        background-repeat: no-repeat; 
+        background-position: center; 
+        background-size: cover; 
+        min-height: 60vh; 
+        height: 100%; 
+        position: relative;
+
+    }
+
+    #news {
+        font-size: 20px; 
+        color: #434444; 
+        background-color: rgba(255,255,255, 0.75);
+    }
+    
+    #buttons {
+        position: absolute; 
+        bottom: 0; 
+        margin-bottom: 30px; 
+        width: 100%
+    }
+
+    #btn {
+        font-size: 16px; 
+        font-weight: bold; 
+        box-shadow: 0px 0px 6px #006666;
+    }
+}
+
+
+@media all and (max-width: 1366px) {
+
+    #image {
+        background-image: url("../Images/hero.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 40vh;
+        min-width: 100vw;
+    }
+
+    #header {
+        background-color: #F1f2f2; 
+        height: 60px;
+    }
+
+    #ctext {
+        font-size: 10px; 
+        color: #434444;
+    }
+
+    #cardbody {
+        background-color: #014388;
+        border-style: none;
+    }
+
+    #cardtext {
+        font-size: 14px; 
+        color: #FFF; 
+        font-weight: bold;
+    }
+
+    #blueyou {
+        font-size: 14px; 
+        color: #FFF; 
+        font-weight: bold;
+    }
+
+    #estimates {
+        font-size: 11px; 
+        color: #FFF; 
+        font-weight: bold;
+    }
+
+    #btn {
+        font-size: 12px; 
+        font-weight: bold; 
+        box-shadow: 1px 1px 3px #013636;
+    }
+}
+
+@media all and (max-width: 320px) {
+    #image {
+        min-height: 30vh; 
+    }
+}

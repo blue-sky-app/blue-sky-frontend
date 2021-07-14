@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import BlueSkyLogo from "../Images/loginHeader.png";
+import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import './Login.css';
 
@@ -36,14 +35,14 @@ export function Login() {
         <>
             <BrowserView>
                 <div className="d-flex flex-column mx-auto" id="bckgrnd">
-                    <div className="wrapper">
-                        <Image
-                            src={BlueSkyLogo}
-                            className="img-fluid"
-                        />
-                        <p
-                            className="mt-1 w-80 mx-auto text-center" id="text"
-                        >SERVING CENTRAL FLORIDA
+
+                    <div className="img-fluid">
+                        <Image id="img" src={BlueSkyLogo} />
+                    </div>
+
+                    <div>
+                        <p className="mt-1 w-80 mx-auto text-center" id="text">
+                            SERVING CENTRAL FLORIDA
                         </p>
                     </div>
                     <div className="w-50 mx-auto" id="form">
