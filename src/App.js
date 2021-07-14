@@ -7,6 +7,7 @@ import { BlueBucks } from "./Components/BlueBucks/BlueBucks";
 import { Profile } from "./Components/Profile/Profile";
 import { Estimates } from "./Components/Estimates/Estimates";
 import { Services } from "./Components/Services/Services";
+import { ThankYou } from "./Components/Estimates/ThankYou";
 import { Alert } from "./Components/SignUp/Alert.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -17,6 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/thankYou" component={ThankYou} />
         <Route path="/services" component={Services} />
         <Route path="/estimates" component={Estimates} />
         <Route path="/profile" component={Profile} />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -21,7 +22,7 @@ export function BlueBucks(props) {
     }, [users]);
 
     const fetchUser = async () => {
-        const response = await axios("http://localhost:8080/user/9"); //3, 4, 9
+        const response = await axios(`${API_BASE_URL}user/9`); //3, 4, 9
         setUsers(response.data);
     };
 
@@ -34,7 +35,7 @@ export function BlueBucks(props) {
     }, [tables]);
 
     const fetchTable = async () => {
-        const response = await axios("http://localhost:8080/bb_hist");
+        const response = await axios(`${API_BASE_URL}bb_hist`);
         setTables(response.data);
     };
 
@@ -57,7 +58,7 @@ export function BlueBucks(props) {
         }
     }
 
-    // TODO: Refactor this
+    // Calculate the Current Balance
     let earned = 0;
     for (const [i, table] of tables.entries()) {
         if (table.email === user && table.transaction_type === "Earned") {

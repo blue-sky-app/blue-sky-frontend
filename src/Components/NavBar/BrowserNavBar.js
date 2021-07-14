@@ -12,11 +12,14 @@ import { ContactUs } from "../ContactUs/ContactUs";
 export function BrowserNavBar() {
     return (
         <>
-            <Image src={BlueSkyLogo} className="" style={{ width: "100%" }} />
+            <Image src={BlueSkyLogo} style={{ width: "100%" }} />
 
             <Navbar style={{ backgroundColor: "#0a7ebd" }}>
                 <Nav className="mx-auto">
-                    <Nav.Link href="/home" style={{ fontWeight: "bold", color: "white" }}>
+                    <Nav.Link 
+                        href="/home" 
+                        style={{ fontWeight: "bold", color: "white" }}
+                    >
                         HOME
                     </Nav.Link>
                     <Nav.Link
