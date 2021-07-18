@@ -1,0 +1,153 @@
+@media all and (min-width: 480px) {
+
+    .card {
+        border-radius: 0px !important;
+    }
+
+    #cardh {
+        background-color: #FFF;
+        height: 40px;
+        font-weight: bold;
+        color: #0a7ebd;
+        font-size: 20px;
+    }
+
+    #ctitle {
+        font-size: 18px;
+    }
+
+    #tbdy {
+        font-size: 14px; 
+        text-align: center;
+    }
+
+    .tableFixHead {
+        overflow-y: auto;
+        height: 60vh;
+    }
+
+    .tableFixHead thead th {
+        position: sticky;
+        top: 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+    }
+
+    th {
+        background: #434444;
+        color: white;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    thead {
+        text-align: center;
+    }
+
+    tbody {
+        font-size: 14px; 
+        text-align: center;
+    }
+
+}
+
+@media all and (max-width: 1366px) {
+
+    .card {
+        border-radius: 0px !important;
+    }
+
+    #cardh {
+        background-color: #FFF;
+        height: 40px;
+        font-weight: bold;
+        color: #0a7ebd;
+        font-size: 20px;
+    }
+
+    #mchead {
+        background-color: #0a7ebd;
+        height: 40px;
+        font-weight: bold;
+    }
+
+    #ctitle {
+        font-size: 16px;
+    }
+
+    #tbdy {
+        font-size: 12px; 
+        text-align: center;
+    }
+
+    #earned {
+        font-size: 12px;
+    }
+
+    .tableFixHead {
+        overflow-y: auto;
+        height: 40vh;
+    }
+
+    .tableFixHead thead th {
+        position: sticky;
+        top: 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+    }
+
+    th {
+        background: #434444;
+        color: white;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    thead {
+        text-align: center;
+    }
+
+    tbody {
+        font-size: 14px; 
+        text-align: center;
+    }
+
+}
+
+@media all and (min-height: 600px) {
+
+    .tableFixHead {
+        overflow-y: auto;
+        height: 42vh;
+    }
+
+}
+
+@media all and (min-height: 700px) {
+
+    .tableFixHead {
+        overflow-y: auto;
+        height: 58vh;
+    }
+
+    #crdbody {
+        max-height: 64vh;
+    } 
+
+}

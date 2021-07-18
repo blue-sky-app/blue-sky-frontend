@@ -12,9 +12,14 @@ import { Alert } from "./Components/SignUp/Alert.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const [token, setToken] = useState();
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
   
+  // if(!token) {
+  //   return <Login setToken={setToken} />
+  // }
+
   return (
     <BrowserRouter>
       <Switch>

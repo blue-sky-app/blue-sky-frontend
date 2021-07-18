@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { BrowserView, MobileView } from "react-device-detect";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
@@ -8,9 +9,21 @@ import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import './Login.css';
 
-export function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+async function loginUser(credentials) {
+    return fetch('http://localhost:8080/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(credentials)
+    })
+      .then(data => data.json())
+   }
+
+
+export function Login({setToken}) { 
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
     const [user, setUser] = useState("");
 
     useEffect(() => {
@@ -36,7 +49,7 @@ export function Login() {
             <BrowserView>
                 <div className="d-flex flex-column mx-auto" id="bckgrnd">
 
-                    <div className="img-fluid">
+                    <div className="img-fluid mt-5">
                         <Image id="img" src={BlueSkyLogo} />
                     </div>
 
@@ -146,6 +159,11 @@ export function Login() {
         </>
     );
 }
+
+Login.propTypes = {
+    setToken: PropTypes.func.isRequired
+  }
+
 
 // https://serverless-stack.com/chapters/create-a-login-page.html
 // https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications

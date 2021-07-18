@@ -8,6 +8,9 @@ import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
+import { DeskFooter } from "../DeskFooter/DeskFooter";
+import './BlueBucks.css';
+
 
 export function BlueBucks(props) {
     const [users, setUsers] = useState([]);
@@ -44,16 +47,14 @@ export function BlueBucks(props) {
     for (const [i, table] of tables.entries()) {
         if (table.email === user) {
             let date = JSON.stringify(table.date);
-            let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(
-                1,
-                5
-            )}`;
+            let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(1, 5)}`;
             bb_table.push(
                 <tr style={{ textAlign: "center" }}>
                     <td>{table.transaction_type}</td>
                     <td>{table.amount}</td>
                     <td>{newDate}</td>
                 </tr>
+       
             );
         }
     }
@@ -62,14 +63,14 @@ export function BlueBucks(props) {
     let earned = 0;
     for (const [i, table] of tables.entries()) {
         if (table.email === user && table.transaction_type === "Earned") {
-            earned = earned + table.amount;
+            earned += table.amount;
         }
     }
 
     let redeemed = 0;
     for (const [i, table] of tables.entries()) {
         if (table.email === user && table.transaction_type === "Redeemed") {
-            redeemed = redeemed + table.amount;
+            redeemed += table.amount;
         }
     }
 
@@ -80,54 +81,41 @@ export function BlueBucks(props) {
             <BrowserView>
                 <BrowserNavBar />
 
-                <Card className="border-0 w-75 mx-auto">
+                <Card className="border-0 w-100 mx-auto">
                     <Card.Header
                         className="d-flex justify-content-center align-items-center mt-3 mb-4 border-0"
-                        style={{
-                            backgroundColor: "#FFF",
-                            height: "40px",
-                            fontWeight: "bold",
-                            color: "#0a7ebd",
-                            fontSize: "20px",
-                        }}
+                        id="cardh"
                     >
                         {users.firstName}'s Blue Bucks History
                     </Card.Header>
 
-                    <Card.Body
-                        className="mx-auto w-50"
-                        style={{ overflowY: "scroll", maxHeight: "100vh" }}
-                    >
-                        <Card.Title style={{ fontSize: "18px" }}>
+                    <Card.Body className="mx-auto w-50">
+                        <Card.Title id="ctitle">
                             Current Balance: <strong>{currentBalance}</strong>
                         </Card.Title>
+                        <div class="tableFixHead">
                         <Table striped bordered hover size="sm">
-                            <thead
-                                style={{
-                                    backgroundColor: "#434444",
-                                    color: "white",
-                                    fontSize: "16px",
-                                    textAlign: "center",
-                                }}
-                            >
+                            <thead>
                                 <tr>
                                     <th>Transaction Type</th>
                                     <th>Amount</th>
                                     <th>Date</th>
                                 </tr>
                             </thead>
-                            <tbody style={{ fontSize: "14px", textAlign: "center" }}>
+                            <tbody id="tbdy">
                                 {bb_table}
                             </tbody>
                         </Table>
+                        </div>
                     </Card.Body>
                     <Card.Text
                         className="text-center mr-3 ml-3 mb-1 mt-3"
-                        style={{ fontSize: "12px" }}
+                        id="earned"
                     >
                         Blue Bucks are earned through special promotions and upon payment of
                         services and can be redeemed for future service discounts.
                     </Card.Text>
+                    <DeskFooter />
                 </Card>
             </BrowserView>
 
@@ -140,42 +128,33 @@ export function BlueBucks(props) {
                 <Card className="border-0">
                     <Card.Header
                         className="d-flex justify-content-center align-items-center text-white"
-                        style={{
-                            backgroundColor: "#0a7ebd",
-                            height: "40px",
-                            fontWeight: "bold",
-                        }}
+                        id="mchead"
                     >
                         {users.firstName}'s Blue Bucks History
                     </Card.Header>
 
-                    <Card.Body style={{ overflowY: "scroll", maxHeight: "53vh" }}>
-                        <Card.Title style={{ fontSize: "16px" }}>
+                    <Card.Body id="crdbody">
+                        <Card.Title id="ctitle">
                             Current Balance: <strong>{currentBalance}</strong>
                         </Card.Title>
+                        <div class="tableFixHead">
                         <Table striped bordered hover size="sm">
-                            <thead
-                                style={{
-                                    backgroundColor: "#434444",
-                                    color: "white",
-                                    fontSize: "12px",
-                                    textAlign: "center",
-                                }}
-                            >
+                            <thead>
                                 <tr>
                                     <th>Transaction Type</th>
                                     <th>Amount</th>
                                     <th>Date</th>
                                 </tr>
                             </thead>
-                            <tbody style={{ fontSize: "12px", textAlign: "center" }}>
+                            <tbody id="tbdy">
                                 {bb_table}
                             </tbody>
                         </Table>
+                        </div>
                     </Card.Body>
                     <Card.Text
-                        className="text-center mr-3 ml-3 mb-1 mt-3"
-                        style={{ fontSize: "12px" }}
+                        className="text-center mr-3 ml-3 mb-1"
+                        id="earned"
                     >
                         Blue Bucks are earned through special promotions and upon payment of
                         services and can be redeemed for future service discounts.
