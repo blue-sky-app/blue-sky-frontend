@@ -161,7 +161,7 @@ export function BlueBucks(props) {
                     </Card.Text>
                 </Card>
 
-                <MobileNavBar />
+                <MobileNavBar active ="blueBucks"  />
             </MobileView>
         </>
     );

@@ -136,7 +136,7 @@ export function Home() {
             </Button>
           </Card.Body>
         </Card>
-        <MobileNavBar />
+        <MobileNavBar active ="home" />
       </MobileView>
     </>
   );

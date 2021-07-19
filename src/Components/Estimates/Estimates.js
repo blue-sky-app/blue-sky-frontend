@@ -135,7 +135,7 @@ export function Estimates() {
           </Card.Body>
         </Card>
 
-        <MobileNavBar />
+        <MobileNavBar active ="estimates" />
       </MobileView>
     </>
   );

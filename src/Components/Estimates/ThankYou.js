@@ -87,7 +87,7 @@ export function ThankYou() {
                     </Card.Body>
                 </Card>
 
-                <MobileNavBar />
+                <MobileNavBar active ="estimates" />
             </MobileView>
         </>
     );
