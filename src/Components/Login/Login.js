@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { API_BASE_URL } from "../API/Api.js";
 import PropTypes from 'prop-types';
 import { BrowserView, MobileView } from "react-device-detect";
 import axios from "axios";
@@ -10,7 +11,7 @@ import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import './Login.css';
 
 async function loginUser(credentials) {
-    return fetch('http://localhost:8080/user', {
+    return fetch(`${API_BASE_URL}user`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -37,7 +38,7 @@ export function Login({setToken}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const user = { email, password };
-        const response = await axios.post("http:/localhost:8080/user/", user);
+        const response = await axios.post(`${API_BASE_URL}user`);
 
         setUser(response.data);
         localStorage.setItem("user", response.data);
