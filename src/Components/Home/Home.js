@@ -68,7 +68,6 @@ export function Home() {
         </Card>
       </BrowserView>
 
-
       <MobileView>
         <Image
           src={HeaderLogo}

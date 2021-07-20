@@ -26,25 +26,25 @@ export function MobileNavBar(props) {
     setIconColor(props.active);
   }
 
-    switch (iconColor) {
-      case "home":
-        var home = iconStyle;
-        break;
+  switch (iconColor) {
+    case "home":
+      var home = iconStyle;
+      break;
 
-      case "estimates":
-        var estimates = iconStyle;
-        break;
+    case "estimates":
+      var estimates = iconStyle;
+      break;
 
-      case "services":
-        var services = iconStyle;
-        break;
+    case "services":
+      var services = iconStyle;
+      break;
 
-      case "blueBucks":
-        var blueBucks = iconStyle;
-        break;
+    case "blueBucks":
+      var blueBucks = iconStyle;
+      break;
 
-      // no default
-    }
+    // no default
+  }
 
   return (
     <div id="nav">

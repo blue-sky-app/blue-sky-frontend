@@ -98,7 +98,6 @@ export function Services() {
         </Card>
       </BrowserView>
 
-
       <MobileView>
         <Image
           src={HeaderLogo}

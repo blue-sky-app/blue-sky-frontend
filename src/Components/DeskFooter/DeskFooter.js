@@ -2,6 +2,8 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import './DeskFooter.css';
 
+// This is the footer component for the Desktop view
+
 export function DeskFooter() {
 
   return (

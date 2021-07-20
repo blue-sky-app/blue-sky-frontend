@@ -11,7 +11,6 @@ import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import './BlueBucks.css';
 
-
 export function BlueBucks(props) {
     const [users, setUsers] = useState([]);
     const [tables, setTables] = useState([]);
@@ -41,7 +40,8 @@ export function BlueBucks(props) {
         const response = await axios(`${API_BASE_URL}bb_hist`);
         setTables(response.data);
     };
-      // Creating the table for BlueBucks
+    
+    // Creating the table for BlueBucks
     let bb_table = [];
     const user = users.email;
     for (const [i, table] of tables.entries()) {
@@ -59,7 +59,7 @@ export function BlueBucks(props) {
         }
     }
 
-    // Calculate the Current Balance
+    // Calculation for the Current Balance
     let earned = 0;
     for (const [i, table] of tables.entries()) {
         if (table.email === user && table.transaction_type === "Earned") {
@@ -118,7 +118,6 @@ export function BlueBucks(props) {
                     <DeskFooter />
                 </Card>
             </BrowserView>
-
 
             <MobileView>
                 <Image
