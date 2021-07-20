@@ -65,16 +65,16 @@
         border-radius: 0px !important;
     }
 
-    #mcrd {
-        height: 71.5vh;
-    }
-
     #cardh {
         background-color: #FFF;
         height: 40px;
         font-weight: bold;
         color: #0a7ebd;
         font-size: 20px;
+    }
+
+    #mcrd {
+        height: 71.5vh;
     }
 
     #mchead {
@@ -141,10 +141,9 @@
         height: 45vh;
     }
 
-        #crdbody {
-        min-height: 60vh;
-        max-height: 64vh;
-    } 
+    #mcrd {
+        height: 75vh;
+    }
 
 }
 
@@ -152,12 +151,12 @@
 
     .tableFixHead {
         overflow-y: auto;
-        height: 58vh;
+        height: 60vh;
     }
 
-    #crdbody {
-        max-height: 64vh;
-    } 
+    #mcrd {
+        height: 75vh;
+    }
 
 }
 
@@ -168,12 +167,8 @@
         height: 58vh;
     }
 
-    #crdbody {
-        max-height: 75vh;
-    } 
-
     #mcrd {
-        height: 75vh;
+        height: 71.5vh;
     }
 
 }

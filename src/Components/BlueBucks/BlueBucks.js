@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../API/Api.js";
-import { UserId } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -26,7 +25,7 @@ export function BlueBucks(props) {
     }, [users]);
 
     const fetchUser = async () => {
-        const response = await axios(`${API_BASE_URL}user/${UserId}`);
+        const response = await axios(`${API_BASE_URL}user/9`); //3, 4, 9
         setUsers(response.data);
     };
 
@@ -42,7 +41,7 @@ export function BlueBucks(props) {
         const response = await axios(`${API_BASE_URL}bb_hist`);
         setTables(response.data);
     };
-
+      // Creating the table for BlueBucks
     let bb_table = [];
     const user = users.email;
     for (const [i, table] of tables.entries()) {
@@ -120,13 +119,14 @@ export function BlueBucks(props) {
                 </Card>
             </BrowserView>
 
+
             <MobileView>
                 <Image
                     src={HeaderLogo}
                     className="d-flex w-100 mx-auto justify-content-center"
                 />
 
-                <Card className="border-0">
+                <Card className="border-0" id="mcrd">
                     <Card.Header
                         className="d-flex justify-content-center align-items-center text-white"
                         id="mchead"

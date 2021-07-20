@@ -4,9 +4,11 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import BlueSkyLogo from "../Images/loginHeader.png";
+import BlueSkyLogo from "../Images/loginLogo.png";
+import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import { API_BASE_URL } from "../API/Api";
 import { withRouter } from "react-router-dom";
+import './SignUp.css';
 
 function SignUp(props) {
     const [state, setState] = useState({
@@ -83,40 +85,27 @@ function SignUp(props) {
     return (
         <>
             <BrowserView>
-                <div
-                    className="d-flex flex-column"
-                    style={{
-                        backgroundImage: "linear-gradient(to bottom, #b1ddf2, #e6f2ff",
-                        height: "100vh",
-                        minWidth: "100%",
-                    }}
-                >
-                    <Image
-                        src={BlueSkyLogo}
-                        className="mx-auto"
-                        style={{ minWidth: "100%", maxWidth: "100%" }}
-                    />
-                    <p
-                        className="w-80 mx-auto text-center"
-                        style={{ fontSize: "11px", fontWeight: "bold", color: "#0a7ebd" }}
-                    >
-                        SERVING CENTRAL FLORIDA
-                    </p>
-                    <div className="w-75 mx-auto">
+            <div className="d-flex flex-column mx-auto" id="bckgrnd">
+
+                <div className="img-fluid mt-5">
+                    <Image id="img" src={BlueSkyLogo} />
+                </div>
+                    <div>
+                        <p className="mt-1 w-80 mx-auto text-center" id="text">
+                            SERVING CENTRAL FLORIDA
+                        </p>
+                    </div><br/>
+                    <div className="w-50 mx-auto" id="form">
                         <Form>
                             <Form.Label
                                 className="mt-1"
-                                style={{
-                                    fontSize: "14px",
-                                    fontWeight: "bold",
-                                    color: "#434444",
-                                }}
+                                id="flabel"
                             >
                                 REGISTER NEW USER
                             </Form.Label>
                             <Form.Group size="lg" controlId="email" className="mb-1">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="email"
                                     value={state.email}
                                     placeHolder="Email"
@@ -125,7 +114,7 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="firstName" className="mb-1">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="text"
                                     value={state.firstName}
                                     placeHolder="First Name"
@@ -134,7 +123,7 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="lastName" className="mb-1">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="text"
                                     value={state.lastName}
                                     placeHolder="Last Name"
@@ -144,7 +133,7 @@ function SignUp(props) {
                             <Form.Group size="lg" controlId="accountType" className="mb-1">
                                 <Form.Control
                                     as="select"
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="text"
                                     value={state.accountType}
                                     onChange={handleChange}
@@ -156,7 +145,7 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="newPassword" className="mb-1">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="password"
                                     value={state.newPassword}
                                     placeHolder="New Password"
@@ -165,7 +154,7 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="confirmPassword">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="password"
                                     value={state.confirmPassword}
                                     placeHolder="Confirm Password"
@@ -173,7 +162,6 @@ function SignUp(props) {
                                 />
                             </Form.Group>
                             <Button
-                                style={{ fontWeight: "bold" }}
                                 href="/home"
                                 block
                                 size="md"
@@ -191,9 +179,8 @@ function SignUp(props) {
                     >
                         {state.successMessage}
                     </div>
-                    <div className="mt-2 mb-5 w-75 mx-auto">
+                    <div className="mt-2 mb-5 w-50 mx-auto" id="form">
                         <Button
-                            style={{ fontWeight: "bold" }}
                             href="/login"
                             variant="secondary"
                             block
@@ -206,40 +193,27 @@ function SignUp(props) {
             </BrowserView>
 
             <MobileView>
-                <div
-                    className="d-flex flex-column"
-                    style={{
-                        backgroundImage: "linear-gradient(to bottom, #b1ddf2, #e6f2ff",
-                        height: "100vh",
-                        minWidth: "100%",
-                    }}
-                >
-                    <Image
-                        src={BlueSkyLogo}
-                        className="mx-auto"
-                        style={{ minWidth: "100%", maxWidth: "100%" }}
-                    />
-                    <p
-                        className="w-80 mx-auto text-center"
-                        style={{ fontSize: "11px", fontWeight: "bold", color: "#0a7ebd" }}
-                    >
-                        SERVING CENTRAL FLORIDA
-                    </p>
+            <div className="d-flex flex-column mx-auto" id="bckgrnd">
+                    <div className="wrapper">
+                        <Image
+                            src={MobileBlueSkyLogo}
+                            className="image-fluid"
+                        />
+                        <p className="mt-3 w-80 mx-auto text-center" id="text">
+                            SERVING CENTRAL FLORIDA
+                        </p>
+                    </div><br/>
                     <div className="w-75 mx-auto">
                         <Form>
                             <Form.Label
                                 className="mt-1"
-                                style={{
-                                    fontSize: "14px",
-                                    fontWeight: "bold",
-                                    color: "#434444",
-                                }}
+                                id="flabel"
                             >
                                 REGISTER NEW USER
                             </Form.Label>
                             <Form.Group size="lg" controlId="email" className="mb-1">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="email"
                                     value={state.email}
                                     placeHolder="Email"
@@ -248,7 +222,7 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="firstName" className="mb-1">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="text"
                                     value={state.firstName}
                                     placeHolder="First Name"
@@ -257,7 +231,7 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="lastName" className="mb-1">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="text"
                                     value={state.lastName}
                                     placeHolder="Last Name"
@@ -267,7 +241,7 @@ function SignUp(props) {
                             <Form.Group size="lg" controlId="accountType" className="mb-1">
                                 <Form.Control
                                     as="select"
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="text"
                                     value={state.accountType}
                                     onChange={handleChange}
@@ -279,7 +253,7 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="newPassword" className="mb-1">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="password"
                                     value={state.newPassword}
                                     placeHolder="New Password"
@@ -288,7 +262,7 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="confirmPassword">
                                 <Form.Control
-                                    style={{ fontSize: "14px" }}
+                                    id="fcontrol"
                                     type="password"
                                     value={state.confirmPassword}
                                     placeHolder="Confirm Password"
@@ -296,7 +270,6 @@ function SignUp(props) {
                                 />
                             </Form.Group>
                             <Button
-                                style={{ fontWeight: "bold" }}
                                 href="/home"
                                 block
                                 size="md"
@@ -316,7 +289,6 @@ function SignUp(props) {
                     </div>
                     <div className="mt-2 mb-5 w-75 mx-auto">
                         <Button
-                            style={{ fontWeight: "bold" }}
                             href="/login"
                             variant="secondary"
                             block

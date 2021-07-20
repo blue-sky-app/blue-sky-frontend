@@ -1,12 +1,5 @@
-@media all and (min-width: 480px) { NOT NEEDED FOR LOGIN PAGE
-  .Login {
-    padding: 60px 0;
-  }
+@media all and (min-width: 480px) { 
 
-  .Login form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
 
   /*set div after "<BrowserView>" to this id*/
   #bckgrnd {
@@ -17,12 +10,10 @@
     min-width: 100%;
   }
 
-  /*add div with this class around bluesky image & "SERVING CENTRAL FLORIDA"*/
   .wrapper {
     position: relative;
   }
 
-  /*set "SERVING CENTRAL FLORIDA" to this id*/
   #text {
     font-weight: bold; 
     color: #0a7ebd;
@@ -42,7 +33,6 @@
    width: 100%; 
   }
 
-  /*set form elements to this id*/
   #form {
     max-width: 250px;
   }
@@ -55,8 +45,6 @@
     font-weight: bold !important;
   }
 }
-
-/* MOBILE VIEW */
 
 @media all and (max-width: 480px) {
   .Login {

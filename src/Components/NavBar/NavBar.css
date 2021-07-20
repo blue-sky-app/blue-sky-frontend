@@ -5,7 +5,7 @@
     background-color:#FFF;
 }
 
-.mx-auto, #txt {
+#icon, #txt {
     color:lightgrey; 
 }
 
@@ -24,6 +24,14 @@
 #wfnt {
     font-weight: bold; 
     color: white;
+}
+
+#wfnt:hover {
+    color:yellow;
+}
+
+#wfnt:active {
+    color: #434444;
 }
 
 #mleft {

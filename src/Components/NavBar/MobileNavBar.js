@@ -55,6 +55,7 @@ export function MobileNavBar(props) {
             <FontAwesomeIcon
               className="mx-auto"
               style= {home}
+              id="icon"
               icon={faHome}
             />
             <Navbar.Text
@@ -69,6 +70,7 @@ export function MobileNavBar(props) {
             <FontAwesomeIcon
               className="mx-auto"
               style= {estimates}
+              id="icon"
               icon={faCalculator}
             />
             <Navbar.Text
@@ -83,6 +85,7 @@ export function MobileNavBar(props) {
             <FontAwesomeIcon
               className="mx-auto"
               style= {services}
+              id="icon"
               icon={faBuilding}
             />
             <Navbar.Text
@@ -97,6 +100,7 @@ export function MobileNavBar(props) {
             <FontAwesomeIcon
               className="mx-auto"
               style={blueBucks}
+              id="icon"
               icon={faMoneyBillWaveAlt}
             />
             <Navbar.Text

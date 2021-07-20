@@ -1,0 +1,64 @@
+@media all and (min-width: 480px) {
+
+    #bchead {
+        background-color: #FFF;
+        height: 40px;
+        font-weight: bold;
+        color: #0a7ebd;
+        font-size: 20px;
+      }
+
+    #bcbody {
+        overflow-y: scroll; 
+        min-height: 55vh; 
+        max-height: 60vh;
+    }
+
+    #tybbody {
+        height: 55vh;
+    }
+
+    #btn {
+        font-size: 14px; 
+        font-weight: bold;
+    }
+
+    #bctitle {
+        font-size: 18px;
+    }
+
+}
+
+@media all and (max-width: 480px) {
+
+    #mchead {
+        background-color: #0a7ebd;
+              height: 40px;
+              font-weight: bold;
+    }
+
+    #mcbody {
+        overflow-y: scroll;
+        height: 65vh;
+    }
+
+    #mctitle {
+        font-size: 16px;
+    }
+
+    #mbtn {
+        font-size: 12px; 
+        font-weight: bold;
+    }
+
+    #mcrd {
+        height: 71.5vh;
+    }
+
+}
+
+
+@media all and (max-width: 320px) {
+
+
+}

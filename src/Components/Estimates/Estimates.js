@@ -10,6 +10,8 @@ import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import HeaderLogo from "../Images/topLogoBar.png";
+import { DeskFooter } from "../DeskFooter/DeskFooter";
+import './Estimates.css';
 
 export function Estimates() {
   const [users, setUsers] = useState([]);
@@ -61,31 +63,26 @@ export function Estimates() {
     <>
       <BrowserView>
         <BrowserNavBar />
-        <Card className="border-0 w-75 mx-auto">
+        <Card className="border-0 w-100 mx-auto">
           <Card.Header
             className="d-flex justify-content-center align-items-center mt-3 mb-4 border-0"
-            style={{
-              backgroundColor: "#FFF",
-              height: "40px",
-              fontWeight: "bold",
-              color: "#0a7ebd",
-              fontSize: "20px",
-            }}
+            id="bchead"
           >
 
             {users.firstName}'s Estimate
               </Card.Header>
 
-          <Card.Body style={{ overflowY: "scroll", maxHeight: "53vh" }}>
-            <Card.Title className="mb-3" style={{ fontSize: "18px" }}>
+          <Card.Body id="bcbody">
+            <Card.Title className="mb-3" id="bctitle">
                 <strong>{users.accountType}</strong> Services
             </Card.Title>
             <Form className="ml-3">
               {serviceCategories}
+
               <Button 
                 className="p-2 mt-2"
                 variant="dark"
-                style={{ fontSize: "14px", fontWeight: "bold" }}
+                id="btn"
                 href="/thankYou"
                 type="submit"
               >
@@ -94,6 +91,7 @@ export function Estimates() {
             </Form>
 
           </Card.Body>
+          <DeskFooter />
         </Card>
       </BrowserView>
 
@@ -103,20 +101,16 @@ export function Estimates() {
           className="d-flex w-100 mx-auto justify-content-center"
         />
 
-        <Card className="border-0">
+        <Card className="border-0" id="mcrd">
           <Card.Header
             className="d-flex justify-content-center align-items-center text-white"
-            style={{
-              backgroundColor: "#0a7ebd",
-              height: "40px",
-              fontWeight: "bold",
-            }}
+            id="mchead"
           >
             {users.firstName}'s Estimate
               </Card.Header>
 
-          <Card.Body style={{ overflowY: "scroll", maxHeight: "53vh" }}>
-          <Card.Title className="mb-3" style={{ fontSize: "16px" }}>
+          <Card.Body id="mcbody">
+          <Card.Title className="mb-3" id="mctitle">
               <strong>{users.accountType}</strong> Services
           </Card.Title>
           <Form className="ml-3">
@@ -124,7 +118,7 @@ export function Estimates() {
             <Button 
               className="p-2 mt-2"
               variant="dark"
-              style={{ fontSize: "12px", fontWeight: "bold" }}
+              id="mbtn" 
               href="/thankYou"
               type="submit"
             >

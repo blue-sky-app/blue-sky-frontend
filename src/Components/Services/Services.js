@@ -9,6 +9,8 @@ import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
+import { DeskFooter } from "../DeskFooter/DeskFooter";
+import './Services.css';
 
 export function Services() {
   const [users, setUsers] = useState([]);
@@ -68,43 +70,34 @@ export function Services() {
     <>
       <BrowserView>
         <BrowserNavBar />
-        <Card className="border-0 w-75 mx-auto">
+        <Card className="border-0 w-100 mx-auto">
           <Card.Header
             className="d-flex justify-content-center align-items-center mt-3 mb-4 border-0"
-            style={{
-              backgroundColor: "#FFF",
-              height: "40px",
-              fontWeight: "bold",
-              color: "#0a7ebd",
-              fontSize: "20px",
-            }}
+            id="cardh"
           >
 
             {users.firstName}'s Service History
               </Card.Header>
 
-          <Card.Body style={{ overflowY: "scroll", maxHeight: "53vh" }}>
+          <Card.Body className="mx-auto w-50">
+            <div class="tableFixHead">
             <Table striped bordered hover size="sm">
-              <thead
-                style={{
-                  backgroundColor: "#434444",
-                  color: "white",
-                  fontSize: "12px",
-                  textAlign: "center",
-                }}
-              >
+              <thead>
                 <tr>
                   <th>Date</th>
                   <th>Amount</th>
                 </tr>
               </thead>
-              <tbody style={{ fontSize: "12px", textAlign: "center" }}>
+              <tbody id="tbdy">
                 {invoiceInputs}
               </tbody>
             </Table>
+            </div>
           </Card.Body>
+          <DeskFooter />
         </Card>
       </BrowserView>
+
 
       <MobileView>
         <Image
@@ -112,37 +105,28 @@ export function Services() {
           className="d-flex w-100 mx-auto justify-content-center"
         />
 
-        <Card className="border-0">
+        <Card className="border-0" id="mcrd">
           <Card.Header
             className="d-flex justify-content-center align-items-center text-white"
-            style={{
-              backgroundColor: "#0a7ebd",
-              height: "40px",
-              fontWeight: "bold",
-            }}
+            id="mchead"
           >
             {users.firstName}'s Service History
               </Card.Header>
 
-          <Card.Body style={{ overflowY: "scroll", maxHeight: "53vh" }}>
+          <Card.Body id="crdbody">
+          <div class="tableFixHead">
             <Table striped bordered hover size="sm">
-              <thead
-                style={{
-                  backgroundColor: "#434444",
-                  color: "white",
-                  fontSize: "12px",
-                  textAlign: "center",
-                }}
-              >
+              <thead>
                 <tr>
                   <th>Date</th>
                   <th>Amount</th>
                 </tr>
               </thead>
-              <tbody style={{ fontSize: "12px", textAlign: "center" }}>
+              <tbody id="tbdy">
                 {invoiceInputs}
               </tbody>
             </Table>
+            </div>
           </Card.Body>
         </Card>
 

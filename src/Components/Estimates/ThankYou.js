@@ -8,6 +8,8 @@ import { BrowserView, MobileView } from "react-device-detect";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import HeaderLogo from "../Images/topLogoBar.png";
+import { DeskFooter } from "../DeskFooter/DeskFooter";
+import './Estimates.css';
 
 export function ThankYou() {
     const [users, setUsers] = useState([]);
@@ -29,30 +31,25 @@ export function ThankYou() {
         <>
             <BrowserView>
                 <BrowserNavBar />
-                <Card className="border-0 w-75 mx-auto">
+                <Card className="border-0 w-100 mx-auto">
                     <Card.Header
                         className="d-flex justify-content-center align-items-center mt-3 mb-4 border-0"
-                        style={{
-                            backgroundColor: "#FFF",
-                            height: "40px",
-                            fontWeight: "bold",
-                            color: "#0a7ebd",
-                            fontSize: "20px",
-                        }}
+                        id="bchead"
                     >
 
                         Thank You {users.firstName}!
 
                     </Card.Header>
 
-                    <Card.Body style={{maxHeight: "53vh" }}>
-                        <Card.Title className="mb-3 text-center" style={{ fontSize: "18px" }}>
+                    <Card.Body id="tybbody">
+                        <Card.Title className="mb-3 text-center" id="bctitle">
 
                             Your estimate will be reviewed by one of our technicians
                             and you will receive a quote via email to <strong>{users.email}</strong>
 
                         </Card.Title>
                     </Card.Body>
+                    <DeskFooter />
                 </Card>
             </BrowserView>
 
@@ -62,22 +59,18 @@ export function ThankYou() {
                     className="d-flex w-100 mx-auto justify-content-center"
                 />
 
-                <Card className="border-0">
+                <Card className="border-0" id="mcrd">
                     <Card.Header
                         className="d-flex justify-content-center align-items-center text-white"
-                        style={{
-                            backgroundColor: "#0a7ebd",
-                            height: "40px",
-                            fontWeight: "bold",
-                        }}
+                        id="mchead"
                     >
                         
                         Thank You {users.firstName}!
                     
                     </Card.Header>
 
-                    <Card.Body style={{ overflowY: "scroll", maxHeight: "53vh" }}>
-                        <Card.Title className="mb-3 text-center" style={{ fontSize: "16px" }}>
+                    <Card.Body id="mcbody">
+                        <Card.Title className="mb-3 text-center" id="mctitle">
 
                             Your estimate will be reviewed by one of our technicians
                             and you will receive a quote via email to <strong>{users.email}</strong>
