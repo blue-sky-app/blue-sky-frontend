@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../API/Api.js";
-import { UserId } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -11,11 +10,13 @@ import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
-import './Estimates.css';
+import './Estimates.css'; 
 
 export function Estimates() {
   const [users, setUsers] = useState([]);
   const [categories, setCategories] = useState([]);
+  const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
+  const userId = userArray[0].localUser
 
   // This fetch is for the FirstName
   useEffect(() => {
@@ -26,7 +27,7 @@ export function Estimates() {
   }, [users]);
 
   const fetchUser = async () => {
-    const response = await axios(`${API_BASE_URL}user/${UserId}`);
+    const response = await axios(`${API_BASE_URL}user/${userId}`);
     setUsers(response.data);
   };
 

@@ -14,6 +14,8 @@ import './BlueBucks.css';
 export function BlueBucks(props) {
     const [users, setUsers] = useState([]);
     const [tables, setTables] = useState([]);
+    const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
+    const userId = userArray[0].localUser
 
     // This fetch is for the FirstName
     useEffect(() => {
@@ -24,7 +26,7 @@ export function BlueBucks(props) {
     }, [users]);
 
     const fetchUser = async () => {
-        const response = await axios(`${API_BASE_URL}user/9`); //3, 4, 9
+        const response = await axios(`${API_BASE_URL}user/${userId}`); //3, 4, 9
         setUsers(response.data);
     };
 

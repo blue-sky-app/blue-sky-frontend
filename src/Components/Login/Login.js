@@ -1,47 +1,45 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
+import axios from "axios";
 import { API_BASE_URL } from "../API/Api.js";
 import { BrowserView, MobileView } from "react-device-detect";
-import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
-import './Login.css';
+import './Login.css'; 
 
-async function loginUser(credentials) {
-    return fetch(`${API_BASE_URL}user/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(credentials)
-    })
-      .then(data => data.json())
-   }
-
-export function Login({setToken}) { 
+export function Login() { 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [user, setUser] = useState("");
-
+    const [users, setUsers] = useState([]);
+    const emailValue = document.getElementById('email');
+    
+    // Create fake authentication
+    const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
+    
     useEffect(() => {
-        const loggedInUser = localStorage.getItem("user");
-        if (loggedInUser) {
-            const foundUser = JSON.parse(loggedInUser);
-            setUser(foundUser);
-        }
+        fetchUser();
     }, []);
+    useEffect(() => {
+        console.log(users);
+    }, [users]);
+
+    const fetchUser = async () => {
+        const response = await axios(`${API_BASE_URL}user/`);
+        setUsers(response.data);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const user = { email, password };
-        const response = await axios.post(`${API_BASE_URL}user/`, user);
-
-        setUser(response.data);
-        localStorage.setItem("user", response.data);
-        console.log(response.data);
+        for (const [i, user] of users.entries()) {
+            if (emailValue.value === user.email) {
+                userArray.push({"localUser": user.id});
+                sessionStorage.setItem('localUser', JSON.stringify(userArray));
+                window.location.href = '/home';
+            }
+        }
     };
 
     return (
@@ -59,13 +57,14 @@ export function Login({setToken}) {
                         </p>
                     </div><br/>
                     <div className="w-50 mx-auto" id="form">
-                        <Form onSubmit={handleSubmit}>
+                        <Form onClick={handleSubmit}>
                             <Form.Group size="lg" controlId="email">
                                 <Form.Control
                                     type="email"
                                     value={email}
                                     placeholder="Email"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    id="email"
+                                    // onChange={(e) => setEmail(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="password">
@@ -73,13 +72,14 @@ export function Login({setToken}) {
                                     type="password"
                                     value={password}
                                     placeholder="Password"
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    id="password"
+                                    // onChange={(e) => setPassword(e.target.value)}
                                 />
                             </Form.Group>
                             <p id="invalid"></p>
                             <br />
                             <Button
-                                id="home"
+                                id="loginButton"
                                 href="/home"
                                 block
                                 size="md"
@@ -114,13 +114,13 @@ export function Login({setToken}) {
                         </p>
                     </div>
                     <div className="mt-5 w-75 mx-auto" id="form">
-                        <Form onSubmit={handleSubmit}>
+                        <Form>
                             <Form.Group size="lg" controlId="email">
                                 <Form.Control
                                     type="email"
                                     value={email}
                                     placeholder="Email"
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    // onChange={(e) => setEmail(e.target.value)}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="password">
@@ -128,17 +128,17 @@ export function Login({setToken}) {
                                     type="password"
                                     value={password}
                                     placeholder="Password"
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    // onChange={(e) => setPassword(e.target.value)}
                                 />
                             </Form.Group>
                             <p id="invalid"></p>
                             <br />
-                            <Button
-                                id="home"
+                            <Button onClick={handleSubmit}
+                                id="loginButton"
                                 href="/home"
                                 block
                                 size="md"
-                                type="submit"
+                                type="button"
                             >
                                 LOGIN
                             </Button>

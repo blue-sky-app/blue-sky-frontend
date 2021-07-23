@@ -14,17 +14,21 @@ import './NavBar.css';
 
 export function MobileNavBar(props) {
   const [iconColor, setIconColor] = useState('');
-    let iconStyle = {
-      color: "#014388"
-    };
+  let iconStyle = {
+    color: "#014388"
+  };
 
   useEffect(() => {
-      getState();
-  }, );
+    getState();
+  });
 
-  const getState = ()=> {
+  const getState = () => {
     setIconColor(props.active);
   }
+
+  const logOut = () => {
+    sessionStorage.clear();
+  };
 
   switch (iconColor) {
     case "home":
@@ -54,14 +58,14 @@ export function MobileNavBar(props) {
           <Navbar.Brand href="/home" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
-              style= {home}
+              style={home}
               id="icon"
               icon={faHome}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
               id="txt"
-              style = {home}
+              style={home}
             >
               Home
             </Navbar.Text>
@@ -69,14 +73,14 @@ export function MobileNavBar(props) {
           <Navbar.Brand href="/estimates" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
-              style= {estimates}
+              style={estimates}
               id="icon"
               icon={faCalculator}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
               id="txt"
-              style = {estimates}
+              style={estimates}
             >
               Estimate
             </Navbar.Text>
@@ -84,14 +88,14 @@ export function MobileNavBar(props) {
           <Navbar.Brand href="/services" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
-              style= {services}
+              style={services}
               id="icon"
               icon={faBuilding}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
               id="txt"
-              style = {services}
+              style={services}
             >
               Services
             </Navbar.Text>
@@ -106,12 +110,12 @@ export function MobileNavBar(props) {
             <Navbar.Text
               className="text-center h-25 pt-0"
               id="txt"
-              style = {blueBucks}
+              style={blueBucks}
             >
               Blue Bucks
             </Navbar.Text>
           </Navbar.Brand>
-          <Navbar.Brand href="/" className="d-flex flex-column">
+          <Navbar.Brand href="/" className="d-flex flex-column" onClick={logOut}>
             <FontAwesomeIcon
               className="mx-auto"
               id="icon"

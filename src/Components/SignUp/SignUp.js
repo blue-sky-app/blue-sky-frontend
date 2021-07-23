@@ -4,12 +4,10 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
-import Modal from 'react-bootstrap/Modal'
 import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import { API_BASE_URL } from "../API/Api";
 import { withRouter } from "react-router-dom";
-import { Alert } from "./Alert";
 import './SignUp.css';
 
 function SignUp(props) {
@@ -35,6 +33,8 @@ function SignUp(props) {
         props.updateTitle("Home");
         props.history.push("/home");
     };
+
+    // For Later
     const redirectToLogin = () => {
         props.updateTitle("Login");
         props.history.push("/");

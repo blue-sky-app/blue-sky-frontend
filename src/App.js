@@ -7,17 +7,11 @@ import { BlueBucks } from "./Components/BlueBucks/BlueBucks";
 import { Estimates } from "./Components/Estimates/Estimates";
 import { Services } from "./Components/Services/Services";
 import { ThankYou } from "./Components/Estimates/ThankYou";
-import { Alert } from "./Components/SignUp/Alert.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [token, setToken] = useState();
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
-  
-  // if(!token) {
-  //   return <Login setToken={setToken} />
-  // }
 
   return (
     <BrowserRouter>
@@ -32,7 +26,6 @@ function App() {
         </Route>
         <Route path="/" component={Login} />     
       </Switch>
-      <Alert errorMessage={errorMessage} hideError={updateErrorMessage}/>
     </BrowserRouter>
 
   );

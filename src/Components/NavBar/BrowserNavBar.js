@@ -6,18 +6,22 @@ import BlueSkyLogo from "../Images/topLogoBar.png";
 import './NavBar.css';
 
 export function BrowserNavBar(props) {
-    const [navColor, setNavColor] = useState('');
-    let navStyle = {
-      color: "white"
-    };
+  const [navColor, setNavColor] = useState('');
+  let navStyle = {
+    color: "white"
+  };
 
   useEffect(() => {
-      getState();
-  }, );
+    getState();
+  });
 
-  const getState = ()=> {
+  const getState = () => {
     setNavColor(props.active);
   }
+
+  const logOut = () => {
+    sessionStorage.clear();
+  };
 
   switch (navColor) {
     case "home":
@@ -39,48 +43,49 @@ export function BrowserNavBar(props) {
     // no default
   }
 
-    return (
-        <>
-            <Image src={BlueSkyLogo} id="wdth"/>
+  return (
+    <>
+      <Image src={BlueSkyLogo} id="wdth" />
 
-            <Navbar id="bckgnd">
-                <Nav className="mx-auto">
-                    <Nav.Link
-                        style= {home} 
-                        href="/home" 
-                        id="wfnt"
-                    >
-                        HOME
+      <Navbar id="bckgnd">
+        <Nav className="mx-auto">
+          <Nav.Link
+            style={home}
+            href="/home"
+            id="wfnt"
+          >
+            HOME
                     </Nav.Link>
-                    <Nav.Link
-                        style= {estimates}
-                        href="/estimates"
-                        id="wfnt"
-                    >
-                        ESTIMATE
+          <Nav.Link
+            style={estimates}
+            href="/estimates"
+            id="wfnt"
+          >
+            ESTIMATE
                     </Nav.Link>
-                    <Nav.Link
-                        style= {services}
-                        href="/services"
-                        id="wfnt"
-                    >
-                        SERVICES
+          <Nav.Link
+            style={services}
+            href="/services"
+            id="wfnt"
+          >
+            SERVICES
                     </Nav.Link>
-                    <Nav.Link
-                        style={blueBucks}
-                        href="/blueBucks"
-                        id="wfnt"
-                    >
-                        BLUE BUCKS
+          <Nav.Link
+            style={blueBucks}
+            href="/blueBucks"
+            id="wfnt"
+          >
+            BLUE BUCKS
                     </Nav.Link>
-                    <Nav.Link
-                        href="/login"
-                        id="wfnt"
-                    >
-                        LOG OUT
+          <Nav.Link
+            href="/login"
+            id="wfnt"
+            onClick={logOut}
+          >
+            LOG OUT
                     </Nav.Link>
-                </Nav>
-            </Navbar>
-        </>
-    );
+        </Nav>
+      </Navbar>
+    </>
+  );
 }
