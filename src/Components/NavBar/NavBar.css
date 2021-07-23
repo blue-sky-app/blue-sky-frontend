@@ -18,20 +18,20 @@
 }
 
 #bckgnd {
-    background-color: #0a7ebd;
+    background-color: #014388;
 }
 
 #wfnt {
     font-weight: bold; 
-    color: white;
+    color: #0a7ebd;
 }
 
 #wfnt:hover {
-    color:yellow;
+    color:white;
 }
 
 #wfnt:active {
-    color: #434444;
+    color: yellow;
 }
 
 #mleft {

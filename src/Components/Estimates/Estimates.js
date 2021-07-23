@@ -62,10 +62,10 @@ export function Estimates() {
   return (
     <>
       <BrowserView>
-        <BrowserNavBar />
+        <BrowserNavBar active ="estimates"/>
         <Card className="border-0 w-100 mx-auto">
           <Card.Header
-            className="d-flex justify-content-center align-items-center mt-3 mb-4 border-0"
+            className="d-flex justify-content-center align-items-center mb-4 border-0"
             id="bchead"
           >
 

@@ -20,11 +20,10 @@ export function Home() {
     const randIndex = Math.floor(Math.random() * picArray.length);
     const selPicture = picArray[randIndex];
 
-
   return (
     <>
       <BrowserView>
-        <BrowserNavBar />
+        <BrowserNavBar active ="home"/>
         <Card className="border-0 mx-auto">
           <Card.Header
             className="flex-row mt-3 mb-3 border-0"

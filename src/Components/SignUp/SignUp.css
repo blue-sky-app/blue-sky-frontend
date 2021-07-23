@@ -38,8 +38,8 @@
       color: #434444;
   }
 
-  #fcontrol {
-      font-size: 14px;
+  .fcontrol {
+      font-size: 14px !important;
   }
 
 }
@@ -89,7 +89,7 @@
   }
 }
 
-@media all and (max-width: 540px) and (min-height: 700px) {
+@media all and (width: 540px) and (min-height: 700px) {
 
 #text {
   font-weight: bold; 

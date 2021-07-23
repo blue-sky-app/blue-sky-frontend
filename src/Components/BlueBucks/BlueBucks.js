@@ -79,11 +79,11 @@ export function BlueBucks(props) {
     return (
         <>
             <BrowserView>
-                <BrowserNavBar />
+                <BrowserNavBar active="blueBucks" />
 
                 <Card className="border-0 w-100 mx-auto">
                     <Card.Header
-                        className="d-flex justify-content-center align-items-center mt-3 mb-4 border-0"
+                        className="d-flex justify-content-center align-items-center mb-4 border-0"
                         id="cardh"
                     >
                         {users.firstName}'s Blue Bucks History

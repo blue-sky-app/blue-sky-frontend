@@ -4,10 +4,12 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
+import Modal from 'react-bootstrap/Modal'
 import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import { API_BASE_URL } from "../API/Api";
 import { withRouter } from "react-router-dom";
+import { Alert } from "./Alert";
 import './SignUp.css';
 
 function SignUp(props) {
@@ -104,36 +106,36 @@ function SignUp(props) {
                                 REGISTER NEW USER
                             </Form.Label>
                             <Form.Group size="lg" controlId="email" className="mb-1">
-                                <Form.Control
-                                    id="fcontrol"
+                                <Form.Control 
+                                    className="fcontrol"
                                     type="email"
                                     value={state.email}
-                                    placeHolder="Email"
+                                    placeholder="Email"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="firstName" className="mb-1">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="text"
                                     value={state.firstName}
-                                    placeHolder="First Name"
+                                    placeholder="First Name"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="lastName" className="mb-1">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="text"
                                     value={state.lastName}
-                                    placeHolder="Last Name"
+                                    placeholder="Last Name"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="accountType" className="mb-1">
                                 <Form.Control
                                     as="select"
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="text"
                                     value={state.accountType}
                                     onChange={handleChange}
@@ -145,19 +147,19 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="newPassword" className="mb-1">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="password"
                                     value={state.newPassword}
-                                    placeHolder="New Password"
+                                    placeholder="New Password"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="confirmPassword">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="password"
                                     value={state.confirmPassword}
-                                    placeHolder="Confirm Password"
+                                    placeholder="Confirm Password"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
@@ -203,7 +205,7 @@ function SignUp(props) {
                             SERVING CENTRAL FLORIDA
                         </p>
                     </div><br/>
-                    <div className="w-75 mx-auto">
+                    <div className="w-75 mx-auto" id="form">
                         <Form>
                             <Form.Label
                                 className="mt-1"
@@ -213,35 +215,35 @@ function SignUp(props) {
                             </Form.Label>
                             <Form.Group size="lg" controlId="email" className="mb-1">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="email"
                                     value={state.email}
-                                    placeHolder="Email"
+                                    placeholder="Email"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="firstName" className="mb-1">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="text"
                                     value={state.firstName}
-                                    placeHolder="First Name"
+                                    placeholder="First Name"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="lastName" className="mb-1">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="text"
                                     value={state.lastName}
-                                    placeHolder="Last Name"
+                                    placeholder="Last Name"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="accountType" className="mb-1">
                                 <Form.Control
                                     as="select"
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="text"
                                     value={state.accountType}
                                     onChange={handleChange}
@@ -253,19 +255,19 @@ function SignUp(props) {
                             </Form.Group>
                             <Form.Group size="lg" controlId="newPassword" className="mb-1">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="password"
                                     value={state.newPassword}
-                                    placeHolder="New Password"
+                                    placeholder="New Password"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="confirmPassword">
                                 <Form.Control
-                                    id="fcontrol"
+                                    className="fcontrol"
                                     type="password"
                                     value={state.confirmPassword}
-                                    placeHolder="Confirm Password"
+                                    placeholder="Confirm Password"
                                     onChange={handleChange}
                                 />
                             </Form.Group>
@@ -287,7 +289,7 @@ function SignUp(props) {
                     >
                         {state.successMessage}
                     </div>
-                    <div className="mt-2 mb-5 w-75 mx-auto">
+                    <div className="mt-2 mb-5 w-75 mx-auto" id="form">
                         <Button
                             href="/login"
                             variant="secondary"

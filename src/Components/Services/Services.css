@@ -5,10 +5,10 @@
     }
 
     #cardh {
-        background-color: #FFF;
+        background-color: #0a7ebd;
         height: 40px;
         font-weight: bold;
-        color: #0a7ebd;
+        color: white;
         font-size: 20px;
     }
 
@@ -66,11 +66,12 @@
     }
 
     #cardh {
-        background-color: #FFF;
+        background-color: #0a7ebd;
         height: 40px;
         font-weight: bold;
-        color: #0a7ebd;
+        color: white;
         font-size: 20px;
+        border-radius: 0 !important;
     }
 
     #mcrd {
@@ -81,6 +82,7 @@
         background-color: #0a7ebd;
         height: 40px;
         font-weight: bold;
+        border-radius: 0 !important;
     }
 
     #ctitle {
