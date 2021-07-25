@@ -29,12 +29,6 @@ function SignUp(props) {
         }));
     };
 
-    const redirectToHome = () => {
-        props.updateTitle("Home");
-        props.history.push("/home");
-    };
-
-    // For Later
     const redirectToLogin = () => {
         props.updateTitle("Login");
         props.history.push("/");
@@ -59,9 +53,9 @@ function SignUp(props) {
                         setState((prevState) => ({
                             ...prevState,
                             successMessage:
-                                "Registration successful. Redirecting to home page..",
+                                "Registration successful. Redirecting to Log In",
                         }));
-                        redirectToHome();
+                        redirectToLogin();
                         props.showError(null);
                     } else {
                         props.showError("Some error ocurred");
