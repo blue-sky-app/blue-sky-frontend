@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";

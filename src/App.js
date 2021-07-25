@@ -7,6 +7,7 @@ import { BlueBucks } from "./Components/BlueBucks/BlueBucks";
 import { Estimates } from "./Components/Estimates/Estimates";
 import { Services } from "./Components/Services/Services";
 import { ThankYou } from "./Components/Estimates/ThankYou";
+import { SignUpSuccess } from "./Components/SignUp/SignUpSuccess";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/signUpSuccess" component={SignUpSuccess} />
         <Route path="/thankYou" component={ThankYou} />
         <Route path="/services" component={Services} />
         <Route path="/estimates" component={Estimates} />

@@ -29,9 +29,9 @@ function SignUp(props) {
         }));
     };
 
-    const redirectToLogin = () => {
-        props.updateTitle("Login");
-        props.history.push("/");
+    const redirectToSuccess = () => {
+        props.updateTitle("Success");
+        props.history.push("/signUpSuccess");
     };
 
     const sendDetailsToServer = () => {
@@ -55,7 +55,7 @@ function SignUp(props) {
                             successMessage:
                                 "Registration successful. Redirecting to Log In",
                         }));
-                        redirectToLogin();
+                        redirectToSuccess();
                         props.showError(null);
                     } else {
                         props.showError("Some error ocurred");
