@@ -9,26 +9,27 @@ import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
+import { fName, userId } from "../LocalUser/LocalUser";
 import './Services.css'; 
 
 export function Services() {
-  const [users, setUsers] = useState([]);
+  //const [users, setUsers] = useState([]);
   const [invoices, setInvoices] = useState([]);
-  const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
-  const userId = userArray[0].localUser
+  //const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
+  //const userId = userArray[0].localUser
 
   // This fetch is for the FirstName
-  useEffect(() => {
+  /*useEffect(() => {
     fetchUser();
   }, []);
   useEffect(() => {
     console.log(users);
-  }, [users]);
+  }, [users]);*/
 
-  const fetchUser = async () => {
+  /*const fetchUser = async () => {
     const response = await axios(`${API_BASE_URL}user/${userId}`);
     setUsers(response.data);
-  };
+  };*/
 
   // This fetch is for the invoice data
   useEffect(() => {
@@ -46,7 +47,7 @@ export function Services() {
   // Creating the table for Invoices
   let invoiceInputs = [];
   for (const [i, invoice] of invoices.entries()) {
-    if (invoice.userId === users.id) {
+    if (invoice.userId === userId) {
       let date = JSON.stringify(invoice.date);
       let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(1, 5)}`;
       invoiceInputs.push(
@@ -77,7 +78,7 @@ export function Services() {
             id="cardh"
           >
 
-            {users.firstName}'s Service History
+            {fName}'s Service History
               </Card.Header>
 
           <Card.Body className="mx-auto w-50">
@@ -110,7 +111,7 @@ export function Services() {
             className="d-flex justify-content-center align-items-center text-white"
             id="mchead"
           >
-            {users.firstName}'s Service History
+            {fName}'s Service History
               </Card.Header>
 
           <Card.Body id="crdbody">

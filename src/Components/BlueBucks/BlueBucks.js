@@ -9,16 +9,17 @@ import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
+import { fName, email } from "../LocalUser/LocalUser";
 import './BlueBucks.css';
 
 export function BlueBucks(props) {
-    const [users, setUsers] = useState([]);
+    //const [users, setUsers] = useState([]);
     const [tables, setTables] = useState([]);
-    const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
-    const userId = userArray[0].localUser
+    //const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
+    //const userId = userArray[0].localUser
 
     // This fetch is for the FirstName
-    useEffect(() => {
+    /*useEffect(() => {
         fetchUser();
     }, []);
     useEffect(() => {
@@ -28,7 +29,7 @@ export function BlueBucks(props) {
     const fetchUser = async () => {
         const response = await axios(`${API_BASE_URL}user/${userId}`); //3, 4, 9
         setUsers(response.data);
-    };
+    };*/
 
     // This fetch is for the table of transactions
     useEffect(() => {
@@ -45,9 +46,8 @@ export function BlueBucks(props) {
     
     // Creating the table for BlueBucks
     let bb_table = [];
-    const user = users.email;
     for (const [i, table] of tables.entries()) {
-        if (table.email === user) {
+        if (table.email === email) {
             let date = JSON.stringify(table.date);
             let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(1, 5)}`;
             bb_table.push(
@@ -64,14 +64,14 @@ export function BlueBucks(props) {
     // Calculation for the Current Balance
     let earned = 0;
     for (const [i, table] of tables.entries()) {
-        if (table.email === user && table.transaction_type === "Earned") {
+        if (table.email === email && table.transaction_type === "Earned") {
             earned += table.amount;
         }
     }
 
     let redeemed = 0;
     for (const [i, table] of tables.entries()) {
-        if (table.email === user && table.transaction_type === "Redeemed") {
+        if (table.email === email && table.transaction_type === "Redeemed") {
             redeemed += table.amount;
         }
     }
@@ -88,7 +88,7 @@ export function BlueBucks(props) {
                         className="d-flex justify-content-center align-items-center mb-4 border-0"
                         id="cardh"
                     >
-                        {users.firstName}'s Blue Bucks History
+                        {fName}'s Blue Bucks History
                     </Card.Header>
 
                     <Card.Body className="mx-auto w-50">
@@ -132,7 +132,7 @@ export function BlueBucks(props) {
                         className="d-flex justify-content-center align-items-center text-white"
                         id="mchead"
                     >
-                        {users.firstName}'s Blue Bucks History
+                        {fName}'s Blue Bucks History
                     </Card.Header>
 
                     <Card.Body id="crdbody">

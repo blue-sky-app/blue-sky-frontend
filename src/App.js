@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Login } from "./Components/Login/Login";
 import SignUp from "./Components/SignUp/SignUp";
@@ -11,25 +11,24 @@ import { SignUpSuccess } from "./Components/SignUp/SignUpSuccess";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [title, updateTitle] = useState(null);
-  const [errorMessage, updateErrorMessage] = useState(null);
+  //const [title, updateTitle] = useState(null);
+  //const [errorMessage, updateErrorMessage] = useState(null);
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/signUpSuccess" component={SignUpSuccess} />
-        <Route path="/thankYou" component={ThankYou} />
-        <Route path="/services" component={Services} />
-        <Route path="/estimates" component={Estimates} />
-        <Route path="/blueBucks" component={BlueBucks} />
-        <Route path="/home" component={Home} />
-        <Route path="/signUp">
-          <SignUp showError={updateErrorMessage} updateTitle={updateTitle} />
-        </Route>
-        <Route path="/" component={Login} />     
-      </Switch>
-    </BrowserRouter>
-
+      <BrowserRouter>
+        <Switch>
+            <Route path="/signUpSuccess" component={SignUpSuccess} />
+            <Route path="/thankYou" component={ThankYou} />
+            <Route path="/services" component={Services} />
+            <Route path="/estimates" component={Estimates} />
+            <Route path="/blueBucks" component={BlueBucks} />
+            <Route path="/home" component={Home} />
+            <Route path="/signUp">
+              <SignUp /*showError={updateErrorMessage} updateTitle={updateTitle}*/ />
+            </Route>
+            <Route path="/" component={Login} />     
+        </Switch>
+      </BrowserRouter>
   );
 }
 

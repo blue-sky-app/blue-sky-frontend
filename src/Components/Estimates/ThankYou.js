@@ -8,15 +8,16 @@ import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
+import { fName, email } from "../LocalUser/LocalUser";
 import './Estimates.css'; 
 
 export function ThankYou() {
-    const [users, setUsers] = useState([]);
+    /*const [users, setUsers] = useState([]);
     const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
-    const userId = userArray[0].localUser
+    const userId = userArray[0].localUser*/
 
     // This fetch is for the FirstName
-    useEffect(() => {
+    /*useEffect(() => {
         fetchUser();
     }, []);
     useEffect(() => {
@@ -26,7 +27,7 @@ export function ThankYou() {
     const fetchUser = async () => {
         const response = await axios(`${API_BASE_URL}user/${userId}`);
         setUsers(response.data);
-    };
+    };*/
 
     return (
         <>
@@ -34,11 +35,11 @@ export function ThankYou() {
                 <BrowserNavBar active ="estimates"/>
                 <Card className="border-0 w-100 mx-auto">
                     <Card.Header
-                        className="d-flex justify-content-center align-items-center mt-3 mb-4 border-0"
+                        className="d-flex justify-content-center align-items-center mb-4 border-0"
                         id="bchead"
                     >
 
-                        Thank You {users.firstName}!
+                        Thank You {fName}!
 
                     </Card.Header>
 
@@ -46,7 +47,7 @@ export function ThankYou() {
                         <Card.Title className="mb-3 text-center" id="bctitle">
 
                             Your estimate will be reviewed by one of our technicians
-                            and you will receive a quote via email to <strong>{users.email}</strong>
+                            and you will receive a quote via email to <strong>{email}</strong>
 
                         </Card.Title>
                     </Card.Body>
@@ -66,18 +67,16 @@ export function ThankYou() {
                         id="mchead"
                     >
                         
-                        Thank You {users.firstName}!
-                    
+                        Thank You {fName}!
+                
                     </Card.Header>
-
                     <Card.Body id="mcbody">
                         <Card.Title className="mb-3 text-center" id="mctitle">
 
                             Your estimate will be reviewed by one of our technicians
-                            and you will receive a quote via email to <strong>{users.email}</strong>
+                            and you will receive a quote via email to <strong>{email}</strong>
 
                         </Card.Title>
-
                     </Card.Body>
                 </Card>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import axios from "axios";
 import { API_BASE_URL } from "../API/Api.js";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -10,15 +10,14 @@ import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import './Login.css'; 
 
-export function Login() { 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+export function Login() {
     const [users, setUsers] = useState([]);
     const emailValue = document.getElementById('email');
+    const passwordValue = document.getElementById('password');
     
-    // Create fake authentication
-    const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
-    
+    // Constant for storing user data in session
+    const userArray = [];
+
     useEffect(() => {
         fetchUser();
     }, []);
@@ -26,18 +25,39 @@ export function Login() {
         console.log(users);
     }, [users]);
 
+    useEffect(() => {
+        //console.log(email);
+        //console.log(accountType);
+    })
+
     const fetchUser = async () => {
-        const response = await axios(`${API_BASE_URL}user/`);
+        const response = await axios(`${API_BASE_URL}users/`);
         setUsers(response.data);
     };
 
+    const redirect = () => {
+        let tID = setTimeout(function () {
+            window.location.href = '/home';
+            window.clearTimeout(tID);		// clear time out.
+        }, 2000);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        sessionStorage.clear();
         for (const [i, user] of users.entries()) {
+            console.log(i, user);
             if (emailValue.value === user.email) {
-                userArray.push({"localUser": user.id});
-                sessionStorage.setItem('localUser', JSON.stringify(userArray));
-                window.location.href = '/home';
+                if (passwordValue.value === user.password) {
+                    userArray.push({"localId": user.id});
+                    userArray.push({"localFname": user.firstName});
+                    userArray.push({"localLname": user.lastName});
+                    userArray.push({"localEmail": user.email});
+                    userArray.push({"localAccountType": user.accountType});
+                    sessionStorage.setItem('localUser', JSON.stringify(userArray));
+                    console.log(sessionStorage.getItem('localUser'));
+                    redirect();
+                }
             }
         }
     };
@@ -57,11 +77,10 @@ export function Login() {
                         </p>
                     </div><br/>
                     <div className="w-50 mx-auto" id="form">
-                        <Form onClick={handleSubmit}>
+                        <Form>
                             <Form.Group size="lg" controlId="email">
                                 <Form.Control
                                     type="email"
-                                    value={email}
                                     placeholder="Email"
                                     id="email"
                                     // onChange={(e) => setEmail(e.target.value)}
@@ -70,7 +89,6 @@ export function Login() {
                             <Form.Group size="lg" controlId="password">
                                 <Form.Control
                                     type="password"
-                                    value={password}
                                     placeholder="Password"
                                     id="password"
                                     // onChange={(e) => setPassword(e.target.value)}
@@ -78,9 +96,8 @@ export function Login() {
                             </Form.Group>
                             <p id="invalid"></p>
                             <br />
-                            <Button
+                            <Button onClick={handleSubmit}
                                 id="loginButton"
-                                href="/home"
                                 block
                                 size="md"
                                 type="submit"
@@ -118,7 +135,6 @@ export function Login() {
                             <Form.Group size="lg" controlId="email">
                                 <Form.Control
                                     type="email"
-                                    value={email}
                                     placeholder="Email"
                                     // onChange={(e) => setEmail(e.target.value)}
                                 />
@@ -126,16 +142,13 @@ export function Login() {
                             <Form.Group size="lg" controlId="password">
                                 <Form.Control
                                     type="password"
-                                    value={password}
                                     placeholder="Password"
-                                    // onChange={(e) => setPassword(e.target.value)}
                                 />
                             </Form.Group>
                             <p id="invalid"></p>
                             <br />
                             <Button onClick={handleSubmit}
                                 id="loginButton"
-                                href="/home"
                                 block
                                 size="md"
                                 type="button"
@@ -160,6 +173,6 @@ export function Login() {
     );
 }
 
-Login.propTypes = {
+/*Login.propTypes = {
     setToken: PropTypes.func.isRequired
-  }
+  }*/

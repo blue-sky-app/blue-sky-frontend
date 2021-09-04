@@ -9,10 +9,14 @@
         border-radius: 0 !important;
       }
 
-    #bcbody {
-        overflow-y: scroll; 
+    #bcbody { 
+        overflow-y: auto;
         min-height: 55vh; 
         max-height: 60vh;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0;  /* Remove scrollbar space */
     }
 
     #tybbody {
