@@ -5,5 +5,7 @@ if (sessionStorage.getItem('localUser')) {
     var lName = userArray[2].localLname;
     var email = userArray[3].localEmail
     var accountType = userArray[4].localAccountType;
+    var invoices = userArray[5].localInvoices;
+    var blueBucks = userArray[6].localBlueBucks;
 };
-export {userId, fName, lName, email, accountType}
+export {userId, fName, lName, email, accountType, invoices, blueBucks}

@@ -13,33 +13,39 @@ import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, accountType } from "../LocalUser/LocalUser";
 import './Estimates.css'; 
 
-export function Estimates(props) {
-  //const [users, setUsers] = useState([]);
-  const [categories, setCategories] = useState([]);
+export function Estimates() {
+  const [servicecategories, setServicecategories] = useState([]);
 
   // This fetch is for the Categories
   useEffect(() => {
     fetchCategory();
   }, []);
   useEffect(() => {
-    console.log(categories);
-  }, [categories]);
+    console.log(servicecategories);
+  }, [servicecategories]);
 
   const fetchCategory = async () => {
-    const response = await axios(`${API_BASE_URL}serviceCategories`);
-    setCategories(response.data);
+    const response = await axios(`${API_BASE_URL}servicecategories/`);
+    setServicecategories(response.data);
   };
 
   // Creating the table for Invoices
-  let serviceCategories = [];
-  for (const [i, category] of categories.entries()) {
-    if (category.serviceType === accountType) {
-      serviceCategories.push(
-        <Form.Group controlId={category.serviceDescription}>
+  let categoryTable = [];
+  for (let i in servicecategories) {
+    if (accountType === servicecategories[i].customerType) {
+      let categories = []
+      for (let j in servicecategories[i].services) {
+        categories.push(
           <Form.Check 
             className="mb-2" 
             style={{fontSize: "14px"}}
-            type="checkbox" label={category.serviceDescription} />
+            type="checkbox" label={servicecategories[i].services[j]} 
+          />
+        )
+      }
+      categoryTable.push(
+        <Form.Group controlId={servicecategories[i].customerType}>
+          {categories}
         </Form.Group>
       );
     }
@@ -54,17 +60,16 @@ export function Estimates(props) {
             className="d-flex justify-content-center align-items-center mb-4 border-0"
             id="bchead"
           >
-
             {fName}'s Estimate
-              </Card.Header>
+          </Card.Header>
 
           <Card.Body className="mx-auto" id="bcbody">
             <Card.Title className="mb-3" id="bctitle">
                 <strong>{accountType}</strong> Services
             </Card.Title>
+          
             <Form className="ml-3" id="form">
-              {serviceCategories}
-
+              {categoryTable}
               <Button 
                 className="p-2 mt-2"
                 variant="dark"
@@ -75,8 +80,8 @@ export function Estimates(props) {
                 SUBMIT
               </Button>
             </Form>
-
           </Card.Body>
+          
           <DeskFooter />
         </Card>
       </BrowserView>
@@ -86,21 +91,21 @@ export function Estimates(props) {
           src={HeaderLogo}
           className="d-flex w-100 mx-auto justify-content-center"
         />
-
         <Card className="border-0" id="mcrd">
           <Card.Header
             className="d-flex justify-content-center align-items-center text-white"
             id="mchead"
           >
             {fName}'s Estimate
-              </Card.Header>
+          </Card.Header>
 
           <Card.Body id="mcbody">
           <Card.Title className="mb-3" id="mctitle">
               <strong>{accountType}</strong> Services
           </Card.Title>
+          
           <Form className="ml-3">
-            {serviceCategories}
+            {categoryTable}
             <Button 
               className="p-2 mt-2"
               variant="dark"
@@ -111,10 +116,8 @@ export function Estimates(props) {
               SUBMIT
             </Button>
           </Form>
-
           </Card.Body>
         </Card>
-
         <MobileNavBar active ="estimates" />
       </MobileView>
     </>

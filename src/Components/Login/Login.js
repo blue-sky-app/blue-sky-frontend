@@ -25,11 +25,6 @@ export function Login() {
         console.log(users);
     }, [users]);
 
-    useEffect(() => {
-        //console.log(email);
-        //console.log(accountType);
-    })
-
     const fetchUser = async () => {
         const response = await axios(`${API_BASE_URL}users/`);
         setUsers(response.data);
@@ -39,12 +34,12 @@ export function Login() {
         let tID = setTimeout(function () {
             window.location.href = '/home';
             window.clearTimeout(tID);		// clear time out.
-        }, 2000);
+        });
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        sessionStorage.clear();
+        sessionStorage.clear(); 
         for (const [i, user] of users.entries()) {
             console.log(i, user);
             if (emailValue.value === user.email) {
@@ -54,6 +49,8 @@ export function Login() {
                     userArray.push({"localLname": user.lastName});
                     userArray.push({"localEmail": user.email});
                     userArray.push({"localAccountType": user.accountType});
+                    userArray.push({"localInvoices": user.invoices});
+                    userArray.push({"localBlueBucks": user.blueBucks});
                     sessionStorage.setItem('localUser', JSON.stringify(userArray));
                     console.log(sessionStorage.getItem('localUser'));
                     redirect();

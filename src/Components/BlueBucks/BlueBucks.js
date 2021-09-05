@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import React from "react";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -9,70 +7,32 @@ import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
-import { fName, email } from "../LocalUser/LocalUser";
+import { fName, blueBucks  } from "../LocalUser/LocalUser";
 import './BlueBucks.css';
 
-export function BlueBucks(props) {
-    //const [users, setUsers] = useState([]);
-    const [tables, setTables] = useState([]);
-    //const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
-    //const userId = userArray[0].localUser
+export function BlueBucks() {
+    let bb_table = []; 
 
-    // This fetch is for the FirstName
-    /*useEffect(() => {
-        fetchUser();
-    }, []);
-    useEffect(() => {
-        console.log(users);
-    }, [users]);
-
-    const fetchUser = async () => {
-        const response = await axios(`${API_BASE_URL}user/${userId}`); //3, 4, 9
-        setUsers(response.data);
-    };*/
-
-    // This fetch is for the table of transactions
-    useEffect(() => {
-        fetchTable();
-    }, []);
-    useEffect(() => {
-        console.log(tables);
-    }, [tables]);
-
-    const fetchTable = async () => {
-        const response = await axios(`${API_BASE_URL}bb_hist`);
-        setTables(response.data);
-    };
-    
-    // Creating the table for BlueBucks
-    let bb_table = [];
-    for (const [i, table] of tables.entries()) {
-        if (table.email === email) {
-            let date = JSON.stringify(table.date);
-            let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(1, 5)}`;
-            bb_table.push(
-                <tr style={{ textAlign: "center" }}>
-                    <td>{table.transaction_type}</td>
-                    <td>{table.amount}</td>
-                    <td>{newDate}</td>
-                </tr>
-       
-            );
-        }
+    for (let i in blueBucks) {
+        let date = JSON.stringify(blueBucks[i].date);
+        let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(1, 5)}`;
+        bb_table.push(
+            <tr style={{ textAlign: "center" }}>
+                <td>{blueBucks[i].transactionType}</td>
+                <td>{blueBucks[i].amount}</td>
+                <td>{newDate}</td>
+            </tr>
+        );
     }
 
     // Calculation for the Current Balance
     let earned = 0;
-    for (const [i, table] of tables.entries()) {
-        if (table.email === email && table.transaction_type === "Earned") {
-            earned += table.amount;
-        }
-    }
-
     let redeemed = 0;
-    for (const [i, table] of tables.entries()) {
-        if (table.email === email && table.transaction_type === "Redeemed") {
-            redeemed += table.amount;
+    for (let i in blueBucks) {
+        if (blueBucks[i].transactionType === "Earned") {
+            earned += blueBucks[i].amount;
+        } else {
+            redeemed += blueBucks[i].amount;
         }
     }
 

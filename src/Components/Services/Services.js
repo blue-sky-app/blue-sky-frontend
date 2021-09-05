@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import React from "react";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -9,54 +7,31 @@ import Image from "react-bootstrap/Image";
 import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
-import { fName, userId } from "../LocalUser/LocalUser";
+import { fName, invoices } from "../LocalUser/LocalUser";
 import './Services.css'; 
 
 export function Services() {
-  //const [users, setUsers] = useState([]);
-  const [invoices, setInvoices] = useState([]);
-  //const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
-  //const userId = userArray[0].localUser
-
-  // This fetch is for the FirstName
-  /*useEffect(() => {
-    fetchUser();
-  }, []);
-  useEffect(() => {
-    console.log(users);
-  }, [users]);*/
-
-  /*const fetchUser = async () => {
-    const response = await axios(`${API_BASE_URL}user/${userId}`);
-    setUsers(response.data);
-  };*/
-
-  // This fetch is for the invoice data
-  useEffect(() => {
-    fetchInvoice();
-  }, [])
-  useEffect(() => {
-    console.log(invoices)
-  }, [invoices])
-
-  const fetchInvoice = async () => {
-    const response = await axios(`${API_BASE_URL}invoices`);
-    setInvoices(response.data)
-  }
-
   // Creating the table for Invoices
   let invoiceInputs = [];
-  for (const [i, invoice] of invoices.entries()) {
-    if (invoice.userId === userId) {
-      let date = JSON.stringify(invoice.date);
+
+  for (let i in invoices) {
+      let date = JSON.stringify(invoices[i].date);
       let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(1, 5)}`;
+      let updatedServices = [];
+      for (let j in invoices[i].services) {
+        updatedServices.push(
+          <tr className="mx-auto" style={{background: "rgba(0, 0, 0, 0", borderStyle: "hidden"}} >
+            <td>{invoices[i].services[j]}</td>
+          </tr>
+        )
+      }
       invoiceInputs.push(
-        <tr style={{ fontSize: "11px", textAlign: "center" }}>
-          <td>{newDate}</td>
-          <td>${invoice.amount}</td>
+        <tr style={{ fontSize: "11px", alignItems: "center"}}>
+          <td className="align-self-center">{newDate}</td>
+          <td>${invoices[i].invoiceAmount}</td>
+          <td>{updatedServices}</td>
         </tr>
       );
-    }
   }
 
   // posting No Service Info for users with no services
@@ -77,9 +52,8 @@ export function Services() {
             className="d-flex justify-content-center align-items-center mb-4 border-0"
             id="cardh"
           >
-
             {fName}'s Service History
-              </Card.Header>
+          </Card.Header>
 
           <Card.Body className="mx-auto w-50">
             <div class="tableFixHead">
@@ -88,6 +62,7 @@ export function Services() {
                 <tr>
                   <th>Date</th>
                   <th>Amount</th>
+                  <th>Services</th>
                 </tr>
               </thead>
               <tbody id="tbdy">
@@ -121,6 +96,7 @@ export function Services() {
                 <tr>
                   <th>Date</th>
                   <th>Amount</th>
+                  <th>Services</th>
                 </tr>
               </thead>
               <tbody id="tbdy">

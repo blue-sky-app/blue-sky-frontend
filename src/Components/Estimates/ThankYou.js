@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import React from "react";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -12,23 +10,6 @@ import { fName, email } from "../LocalUser/LocalUser";
 import './Estimates.css'; 
 
 export function ThankYou() {
-    /*const [users, setUsers] = useState([]);
-    const userArray = sessionStorage.getItem('localUser') ? JSON.parse(sessionStorage.getItem('localUser')) : [];
-    const userId = userArray[0].localUser*/
-
-    // This fetch is for the FirstName
-    /*useEffect(() => {
-        fetchUser();
-    }, []);
-    useEffect(() => {
-        console.log(users);
-    }, [users]);
-
-    const fetchUser = async () => {
-        const response = await axios(`${API_BASE_URL}user/${userId}`);
-        setUsers(response.data);
-    };*/
-
     return (
         <>
             <BrowserView>
@@ -38,9 +19,7 @@ export function ThankYou() {
                         className="d-flex justify-content-center align-items-center mb-4 border-0"
                         id="bchead"
                     >
-
                         Thank You {fName}!
-
                     </Card.Header>
 
                     <Card.Body id="tybbody">
@@ -66,9 +45,7 @@ export function ThankYou() {
                         className="d-flex justify-content-center align-items-center text-white"
                         id="mchead"
                     >
-                        
                         Thank You {fName}!
-                
                     </Card.Header>
                     <Card.Body id="mcbody">
                         <Card.Title className="mb-3 text-center" id="mctitle">
