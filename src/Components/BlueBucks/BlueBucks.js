@@ -38,6 +38,14 @@ export function BlueBucks() {
 
     let currentBalance = earned - redeemed;
 
+    if (bb_table.length === 0) {
+        bb_table.push(
+          <tr style={{ fontSize: "11px", textAlign: "center" }}>
+            <td colspan="3">No Blue Bucks</td>
+          </tr>
+        );
+      }
+
     return (
         <>
             <BrowserView>

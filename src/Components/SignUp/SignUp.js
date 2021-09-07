@@ -13,12 +13,12 @@ import './SignUp.css';
 function SignUp(props) {
     const [state, setState] = useState({
         email: "",
-        firstName: "",
+        firstName: "", 
         lastName: "",
         accountType: "",
         newPassword: "",
         confirmPassword: "",
-        successMessage: null,
+        message: null,
     });
 
     const handleChange = (e) => {
@@ -30,13 +30,13 @@ function SignUp(props) {
     };
 
     const redirectToSuccess = () => {
-        props.updateTitle("Success");
+        //props.updateTitle("Success");
         props.history.push("/signUpSuccess");
     };
 
     const sendDetailsToServer = () => {
         if (state.email.length && state.newPassword.length) {
-            props.showError(null);
+            //props.showError(null);
             const payload = {
                 firstName: state.firstName,
                 lastName: state.lastName,
@@ -44,28 +44,37 @@ function SignUp(props) {
                 accountType: state.accountType,
                 password: state.newPassword,
                 confirmPassword: state.confirmPassword,
-                successMessage: null,
+                message: null,
             };
             axios
-                .post(API_BASE_URL + "user/", payload)
+                .post(API_BASE_URL + "users/", payload)
                 .then(function (response) {
                     if (response.status === 200) {
                         setState((prevState) => ({
                             ...prevState,
-                            successMessage:
+                            message:
                                 "Registration successful. Redirecting to Log In",
                         }));
                         redirectToSuccess();
-                        props.showError(null);
+                        //props.showError(null);
+                        setState((prevState) => ({
+                            ...prevState,
+                            message:
+                                null,
+                            }));
                     } else {
-                        props.showError("Some error ocurred");
+                        //props.showError("Some error ocurred");
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         } else {
-            props.showError("Please enter valid username and password");
+            setState((prevState) => ({
+                ...prevState,
+                message:
+                    "Please enter valid email and password",
+                }));
         }
     };
 
@@ -74,7 +83,11 @@ function SignUp(props) {
         if (state.newPassword === state.confirmPassword) {
             sendDetailsToServer();
         } else {
-            props.showError("Passwords do not match");
+            setState((prevState) => ({
+                ...prevState,
+                message:
+                "Passwords do not match",
+                }));
         }
     };
 
@@ -82,7 +95,7 @@ function SignUp(props) {
         <>
             <BrowserView>
             <div className="d-flex flex-column mx-auto" id="bckgrnd">
-
+​
                 <div className="img-fluid mt-5">
                     <Image id="img" src={BlueSkyLogo} />
                 </div>
@@ -91,6 +104,13 @@ function SignUp(props) {
                             SERVING CENTRAL FLORIDA
                         </p>
                     </div><br/>
+                    <div
+                        className="alert alert-success"
+                        style={{ display: state.message ? "block" : "none", textAlign: state.message ? "center" : ""}}
+                        role="alert"
+                    >
+                        {state.message}
+                    </div>
                     <div className="w-50 mx-auto" id="form">
                         <Form>
                             <Form.Label
@@ -168,13 +188,6 @@ function SignUp(props) {
                             </Button>
                         </Form>
                     </div>
-                    <div
-                        className="alert alert-success mt-2"
-                        style={{ display: state.successMessage ? "block" : "none" }}
-                        role="alert"
-                    >
-                        {state.successMessage}
-                    </div>
                     <div className="mt-2 mb-5 w-50 mx-auto" id="form">
                         <Button
                             href="/login"
@@ -187,7 +200,7 @@ function SignUp(props) {
                     </div>
                 </div>
             </BrowserView>
-
+​
             <MobileView>
             <div className="d-flex flex-column mx-auto" id="bckgrnd">
                     <div className="wrapper">
@@ -199,6 +212,12 @@ function SignUp(props) {
                             SERVING CENTRAL FLORIDA
                         </p>
                     </div><br/>
+                    <div
+                        style={{ display: state.message ? "block" : "none", textAlign: state.message ? "center" : ""}}
+                        role="alert"
+                    >
+                        <mark>{state.message}</mark>
+                    </div>
                     <div className="w-75 mx-auto" id="form">
                         <Form>
                             <Form.Label
@@ -275,13 +294,6 @@ function SignUp(props) {
                                 SUBMIT
                             </Button>
                         </Form>
-                    </div>
-                    <div
-                        className="alert alert-success mt-2"
-                        style={{ display: state.successMessage ? "block" : "none" }}
-                        role="alert"
-                    >
-                        {state.successMessage}
                     </div>
                     <div className="mt-2 mb-5 w-75 mx-auto" id="form">
                         <Button

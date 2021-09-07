@@ -55,35 +55,35 @@ export function BrowserNavBar(props) {
             id="wfnt"
           >
             HOME
-                    </Nav.Link>
+          </Nav.Link>
           <Nav.Link
             style={estimates}
             href="/estimates"
             id="wfnt"
           >
             ESTIMATE
-                    </Nav.Link>
+          </Nav.Link>
           <Nav.Link
             style={services}
             href="/services"
             id="wfnt"
           >
             SERVICES
-                    </Nav.Link>
+          </Nav.Link>
           <Nav.Link
             style={blueBucks}
             href="/blueBucks"
             id="wfnt"
           >
             BLUE BUCKS
-                    </Nav.Link>
+          </Nav.Link>
           <Nav.Link
             href="/login"
             id="wfnt"
             onClick={logOut}
           >
             LOG OUT
-                    </Nav.Link>
+          </Nav.Link>
         </Nav>
       </Navbar>
     </>

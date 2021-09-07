@@ -12,6 +12,7 @@ import ImageThree from "../Images/heroes.jpeg";
 import ImageFour from "../Images/pressurewash.jpeg";
 import ImageFive from "../Images/sidewalk.jpg";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
+import { News } from "./News"
 import './Home.css';
 
 export function Home() {
@@ -33,12 +34,7 @@ export function Home() {
             <Card.Text
               className="text-center w-75 mx-auto"> 
               <div id="news">
-                <div>
-                  <strong>LASTEST NEWS or DEALS HERE</strong>
-                  <br />
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor.
-                </div>
+                <News />
               </div>
             </Card.Text>
               <div className="d-flex justify-content-center" id="buttons">
