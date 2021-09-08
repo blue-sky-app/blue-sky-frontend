@@ -7,7 +7,7 @@ import {
   faCalculator,
   faBuilding,
   faMoneyBillWaveAlt,
-  faSignOutAlt,
+  faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
 import { ContactUs } from "../ContactUs/ContactUs";
 import './NavBar.css';
@@ -26,10 +26,6 @@ export function MobileNavBar(props) {
     setIconColor(props.active);
   }
 
-  const logOut = () => {
-    sessionStorage.clear();
-  };
-
   switch (iconColor) {
     case "home":
       var home = iconStyle;
@@ -47,6 +43,9 @@ export function MobileNavBar(props) {
       var blueBucks = iconStyle;
       break;
 
+    case "moreMenu":
+      var moreMenu = iconStyle;
+      break;
     // no default
   }
 
@@ -115,17 +114,19 @@ export function MobileNavBar(props) {
               Blue Bucks
             </Navbar.Text>
           </Navbar.Brand>
-          <Navbar.Brand href="/" className="d-flex flex-column" onClick={logOut}>
+          <Navbar.Brand href="/moreMenu" className="d-flex flex-column">
             <FontAwesomeIcon
               className="mx-auto"
+              style={moreMenu}
               id="icon"
-              icon={faSignOutAlt}
+              icon={faEllipsisH}
             />
             <Navbar.Text
               className="text-center h-25 pt-0"
               id="txt"
+              style={moreMenu}
             >
-              Log Out
+              More
             </Navbar.Text>
           </Navbar.Brand>
         </Container>

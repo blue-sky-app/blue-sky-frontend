@@ -25,6 +25,15 @@ export function BlueBucks() {
         );
     }
 
+    // posting No Service Info for users with no services
+    if (bb_table.length === 0) {
+        bb_table.push(
+        <tr style={{ fontSize: "11px", textAlign: "center" }}>
+            <td colspan="3">No Blue Bucks</td>
+        </tr>
+    );
+  }
+
     // Calculation for the Current Balance
     let earned = 0;
     let redeemed = 0;
@@ -37,14 +46,6 @@ export function BlueBucks() {
     }
 
     let currentBalance = earned - redeemed;
-
-    if (bb_table.length === 0) {
-        bb_table.push(
-          <tr style={{ fontSize: "11px", textAlign: "center" }}>
-            <td colspan="3">No Blue Bucks</td>
-          </tr>
-        );
-      }
 
     return (
         <>

@@ -40,6 +40,10 @@ export function BrowserNavBar(props) {
       var blueBucks = navStyle;
       break;
 
+    case "profile":
+      var profile = navStyle;
+      break;
+
     // no default
   }
 
@@ -76,6 +80,13 @@ export function BrowserNavBar(props) {
             id="wfnt"
           >
             BLUE BUCKS
+          </Nav.Link>
+          <Nav.Link
+            style={profile}
+            href="/profile"
+            id="wfnt"
+          >
+            PROFILE
           </Nav.Link>
           <Nav.Link
             href="/login"

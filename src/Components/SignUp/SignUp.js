@@ -13,7 +13,7 @@ import './SignUp.css';
 function SignUp(props) {
     const [state, setState] = useState({
         email: "",
-        firstName: "", 
+        firstName: "",
         lastName: "",
         accountType: "",
         newPassword: "",
@@ -95,7 +95,7 @@ function SignUp(props) {
         <>
             <BrowserView>
             <div className="d-flex flex-column mx-auto" id="bckgrnd">
-​
+
                 <div className="img-fluid mt-5">
                     <Image id="img" src={BlueSkyLogo} />
                 </div>
@@ -200,7 +200,7 @@ function SignUp(props) {
                     </div>
                 </div>
             </BrowserView>
-​
+
             <MobileView>
             <div className="d-flex flex-column mx-auto" id="bckgrnd">
                     <div className="wrapper">

@@ -8,6 +8,8 @@ import { Estimates } from "./Components/Estimates/Estimates";
 import { Services } from "./Components/Services/Services";
 import { ThankYou } from "./Components/Estimates/ThankYou";
 import { SignUpSuccess } from "./Components/SignUp/SignUpSuccess";
+import { Profile } from "./Components/Profile/Profile"
+import { MoreMenu } from "./Components/MoreMenu/MoreMenu";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
   return (
       <BrowserRouter>
         <Switch>
+            <Route path="/moreMenu" component={MoreMenu} />
+            <Route path="/profile" component={Profile} />
             <Route path="/signUpSuccess" component={SignUpSuccess} />
             <Route path="/thankYou" component={ThankYou} />
             <Route path="/services" component={Services} />

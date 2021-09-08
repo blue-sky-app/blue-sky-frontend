@@ -11,15 +11,14 @@ import ImageTwo from "../Images/hero2.jpg";
 import ImageThree from "../Images/heroes.jpeg";
 import ImageFour from "../Images/pressurewash.jpeg";
 import ImageFive from "../Images/sidewalk.jpg";
+import { newsHeadline, newsText } from "../LocalUser/LocalUser";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
-import { News } from "./News"
 import './Home.css';
 
 export function Home() {
-
-    const picArray = [ImageOne, ImageTwo, ImageThree, ImageFour, ImageFive];
-    const randIndex = Math.floor(Math.random() * picArray.length);
-    const selPicture = picArray[randIndex];
+  const picArray = [ImageOne, ImageTwo, ImageThree, ImageFour, ImageFive];
+  const randIndex = Math.floor(Math.random() * picArray.length);
+  const selPicture = picArray[randIndex];
 
   return (
     <>
@@ -34,7 +33,10 @@ export function Home() {
             <Card.Text
               className="text-center w-75 mx-auto"> 
               <div id="news">
-                <News />
+                <div>
+                  <strong>{newsHeadline}</strong>
+                  <br /> {newsText}
+                </div>
               </div>
             </Card.Text>
               <div className="d-flex justify-content-center" id="buttons">
@@ -53,7 +55,7 @@ export function Home() {
                   id="btn"
                   variant="dark"
                   href="/services"
-            >
+                >
                   REPEAT A SERVICE
                 </Button>
                 </div>
@@ -78,10 +80,10 @@ export function Home() {
               className="text-center w-75 mr-1 ml-1"
               id="ctext"
             >
-              <strong>LASTEST NEWS or DEALS HERE</strong>
-              <br />
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor.
+              <div>
+                <strong>{newsHeadline}</strong>
+                <br /> {newsText}
+              </div>
             </Card.Text>
           </Card.Header>
 

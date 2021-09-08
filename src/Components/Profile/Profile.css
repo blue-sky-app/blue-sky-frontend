@@ -1,0 +1,118 @@
+@media all and (min-width: 480px) {
+
+    .card {
+        border-radius: 0px !important;
+    }
+
+    #cardh {
+        background-color: #0a7ebd;
+        height: 40px;
+        font-weight: bold;
+        color: white;
+        font-size: 20px;
+    }
+
+    #bcbody { 
+        overflow-y: auto;
+        min-height: 55vh; 
+        max-height: 60vh;
+    }
+
+    #ctitle {
+        font-size: 18px;
+    }
+
+    #form {
+        max-width: 250px;
+      }
+    
+      Form.Control {
+        font-size: 18px;
+      }
+    
+      #btn {
+        font-size: 14px; 
+        font-weight: bold;
+    }
+
+    #error {
+        font-size: 10px;
+        color: red;
+        text-align: center;
+    }
+}
+
+@media all and (max-width: 1366px) {
+
+    .card {
+        border-radius: 0px !important;
+    }
+
+    #cardh {
+        background-color: #0a7ebd;
+        height: 40px;
+        font-weight: bold;
+        color: white;
+        font-size: 20px;
+        border-radius: 0 !important;
+    }
+
+    #pcrd {
+        height: 71.5vh;
+    }
+
+    #mchead {
+        background-color: #0a7ebd;
+        height: 40px;
+        font-weight: bold;
+        border-radius: 0 !important;
+    }
+
+    #ctitle {
+        font-size: 16px;
+    }
+
+    #form {
+        max-width: 250px;
+      }
+    
+      Form.Control {
+        font-size: 18px;
+      }
+    
+      .btn {
+        font-weight: bold !important;
+      }
+
+      #crdbody{
+        overflow-y: auto;
+      }
+
+      #error {
+        font-size: 14px;
+        color: red;
+        text-align: center;
+    }
+
+}
+
+@media all and (min-height: 700px) {
+
+    .tableFixHead {
+        overflow-y: auto;
+        height: 60vh;
+    }
+
+    #pcrd {
+        height: 75vh;
+    }
+
+}
+
+@media all and (min-height: 800px) {
+
+    #pcrd {
+        height: 71.5vh;
+    }
+
+}

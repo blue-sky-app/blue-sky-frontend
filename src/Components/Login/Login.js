@@ -14,10 +14,12 @@ export function Login() {
     const [users, setUsers] = useState([]);
     const emailValue = document.getElementById('email');
     const passwordValue = document.getElementById('password');
+    const [news, setNews] = useState([]);
     
     // Constant for storing user data in session
     const userArray = [];
 
+    // user Fetch
     useEffect(() => {
         fetchUser();
     }, []);
@@ -30,12 +32,18 @@ export function Login() {
         setUsers(response.data);
     };
 
-    const redirect = () => {
-        let tID = setTimeout(function () {
-            window.location.href = '/home';
-            window.clearTimeout(tID);		// clear time out.
-        });
-    }
+    // news article Fetch
+    useEffect(() => {
+        fetchNews();
+      }, []);
+      useEffect(() => {
+        console.log(news);
+      }, [news]);
+    
+      const fetchNews = async () => {
+        const response = await axios(`${API_BASE_URL}news/`);
+        setNews(response.data);
+      };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,19 +52,33 @@ export function Login() {
             console.log(i, user);
             if (emailValue.value === user.email) {
                 if (passwordValue.value === user.password) {
-                    userArray.push({"localId": user.id});
-                    userArray.push({"localFname": user.firstName});
-                    userArray.push({"localLname": user.lastName});
-                    userArray.push({"localEmail": user.email});
-                    userArray.push({"localAccountType": user.accountType});
-                    userArray.push({"localInvoices": user.invoices});
-                    userArray.push({"localBlueBucks": user.blueBucks});
-                    sessionStorage.setItem('localUser', JSON.stringify(userArray));
-                    console.log(sessionStorage.getItem('localUser'));
-                    redirect();
+                    userArray.push({
+                        "localId": user._id,
+                        "localFname": user.firstName,
+                        "localLname": user.lastName,
+                        "localEmail": user.email,
+                        "localAccountType": user.accountType,
+                        "localInvoices": user.invoices,
+                        "localBlueBucks": user.blueBucks
+                    });
+                    
                 }
             }
         }
+        
+        for (let i in news) {
+            if (userArray[0].localAccountType === news[i].customerType) {
+                userArray.push({
+                    "localNewsHeadline": news[i].headline,
+                    "localNewsText": news[i].text
+                });
+            }
+        }
+                
+        sessionStorage.setItem('localUser', JSON.stringify(userArray));
+        console.log(sessionStorage.getItem('localUser'));
+        window.location.href = '/home';
+
     };
 
     return (
@@ -169,7 +191,3 @@ export function Login() {
         </>
     );
 }
-
-/*Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-  }*/
