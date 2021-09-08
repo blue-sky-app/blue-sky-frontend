@@ -36,14 +36,14 @@ export function Login() {
     useEffect(() => {
         fetchNews();
       }, []);
-      useEffect(() => {
-        console.log(news);
-      }, [news]);
+    useEffect(() => {
+    console.log(news);
+    }, [news]);
     
-      const fetchNews = async () => {
-        const response = await axios(`${API_BASE_URL}news/`);
-        setNews(response.data);
-      };
+    const fetchNews = async () => {
+    const response = await axios(`${API_BASE_URL}news/`);
+    setNews(response.data);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,24 +61,24 @@ export function Login() {
                         "localInvoices": user.invoices,
                         "localBlueBucks": user.blueBucks
                     });
-                    
+                    var login = true;
                 }
             }
         }
         
-        for (let i in news) {
-            if (userArray[0].localAccountType === news[i].customerType) {
-                userArray.push({
-                    "localNewsHeadline": news[i].headline,
-                    "localNewsText": news[i].text
-                });
+        if (login) {
+            for (let i in news) {
+                if (userArray[0].localAccountType === news[i].customerType) {
+                    userArray.push({
+                        "localNewsHeadline": news[i].headline,
+                        "localNewsText": news[i].text
+                    });
+                }
             }
+            sessionStorage.setItem('localUser', JSON.stringify(userArray));
+            console.log(sessionStorage.getItem('localUser'));
+            window.location.href = '/home';
         }
-                
-        sessionStorage.setItem('localUser', JSON.stringify(userArray));
-        console.log(sessionStorage.getItem('localUser'));
-        window.location.href = '/home';
-
     };
 
     return (

@@ -26,7 +26,7 @@ export function Home() {
         <BrowserNavBar active ="home"/>
         <Card className="border-0 mx-auto">
           <Card.Header
-            className="flex-row mt-3 mb-3 border-0"
+            className="flex-row mt-3 mb-3 ml-3 mr-3 border-0"
             id="background"
             style={{ backgroundImage: `url(${selPicture})`}}
           >

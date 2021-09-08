@@ -40,6 +40,11 @@
         color: red;
         text-align: center;
     }
+
+    ::placeholder {
+        font-style: italic;
+        color: lightgrey !important;
+      }
 }
 
 @media all and (max-width: 1366px) {
@@ -58,7 +63,7 @@
     }
 
     #pcrd {
-        height: 71.5vh;
+        height: 75vh;
     }
 
     #mchead {

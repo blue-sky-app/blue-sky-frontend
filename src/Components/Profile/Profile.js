@@ -15,6 +15,7 @@ import './Profile.css';
 
 export function Profile() { 
     const [accountOption, setAccountOption] = useState();
+    const [news, setNews] = useState([]);
     const [state, setState] = useState({
         userId: userId,
         email: email,
@@ -27,6 +28,7 @@ export function Profile() {
         confirmPassword: "",
         message: null,
     });
+
     const userArray = [];
     
     useEffect( () => {
@@ -39,6 +41,18 @@ export function Profile() {
         console.log(state.confirmPassword);
         console.log(state.message);
     })
+
+    useEffect(() => {
+        fetchNews();
+      }, []);
+    useEffect(() => {
+    console.log(news);
+    }, [news]);
+
+    const fetchNews = async () => {
+        const response = await axios(`${API_BASE_URL}news/`);
+        setNews(response.data);
+        };
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -77,8 +91,16 @@ export function Profile() {
                     "localEmail": state.email,
                     "localAccountType": state.accountType,
                     "localInvoices": state.invoices,
-                    "localBlueBucks": userArray.blueBucks
-            });
+                    "localBlueBucks": state.blueBucks
+                });
+                for (let i in news) {
+                    if (state.accountType === news[i].customerType) {
+                        userArray.push({
+                            "localNewsHeadline": news[i].headline,
+                            "localNewsText": news[i].text
+                        });
+                    }
+                }
                 sessionStorage.setItem('localUser', JSON.stringify(userArray));
                 console.log(sessionStorage.getItem('localUser'))
     }
@@ -136,8 +158,6 @@ export function Profile() {
             setAccountOption("Commercial")
         }
     }, []);
-
-    
 
     return (
         <>
@@ -247,13 +267,6 @@ export function Profile() {
                   </Card.Header>
     
               <Card.Body id="crdbody">
-                    <div
-                        className="mb-2" 
-                        style={{ display: state.message ? "block" : "none", textAlign: state.message ? "center" : ""}}
-                        role="alert"
-                    >
-                        <mark>{state.message}</mark>
-                    </div>
                     <div className="w-75 mx-auto" id="form">
                         <Form>
                             <Form.Group size="lg" controlId="firstName">
@@ -308,8 +321,13 @@ export function Profile() {
                                     onChange={handleChange}
                                 />
                             </Form.Group>
-                            <br />
-                            <div id="error"></div>
+                            <div
+                                className="mb-2" 
+                                style={{ display: state.message ? "block" : "none", textAlign: state.message ? "center" : ""}}
+                                role="alert"
+                            >
+                                <mark>{state.message}</mark>
+                            </div>
                             <Button onClick={handleUpdate}
                                 id="btn"
                                 variant="dark"
@@ -327,6 +345,5 @@ export function Profile() {
             <MobileNavBar active ="moreMenu" />
           </MobileView>
         </>
-      );
-    
-}
+    );
+} 
