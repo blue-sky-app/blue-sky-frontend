@@ -10,11 +10,11 @@ import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
-import { fName, accountType } from "../LocalUser/LocalUser";
+import { fName, lName, email, accountType } from "../LocalUser/LocalUser";
 import './Estimates.css'; 
 
 export function Estimates() {
-  const [servicecategories, setServicecategories] = useState([]);
+  const [servicecategories, setServicecategories] = useState([]);    
 
   // This fetch is for the Categories
   useEffect(() => {
@@ -29,7 +29,20 @@ export function Estimates() {
     setServicecategories(response.data);
   };
 
-  // Creating the table for Invoices
+  const estimateServiceArray = [];
+
+  const handleChange = (e)  => {
+    let isChecked = e.target.checked;
+    let checkedName = e.target.name;
+
+    if (isChecked === true){
+      estimateServiceArray.push(checkedName)
+    }
+
+    console.log(estimateServiceArray)
+  }
+  
+  // Creating the table for Estimates
   let categoryTable = [];
   for (let i in servicecategories) {
     if (accountType === servicecategories[i].customerType) {
@@ -39,7 +52,9 @@ export function Estimates() {
           <Form.Check 
             className="mb-2" 
             style={{fontSize: "14px"}}
-            type="checkbox" label={servicecategories[i].services[j]} 
+            type="checkbox" label={servicecategories[i].services[j]}
+            name={servicecategories[i].services[j]}
+            onChange={handleChange}
           />
         )
       }
@@ -49,6 +64,27 @@ export function Estimates() {
         </Form.Group>
       );
     }
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const estimateInput = {
+      email: email,
+      firstName: fName,
+      lastName: lName,
+      accountType: accountType,
+      services: estimateServiceArray,
+    };
+    axios.post(API_BASE_URL + "estimates/", estimateInput)
+        .then((res) => {
+            if (res.status === 200) {
+              window.location.href = '/thankYou';
+            } 
+          console.log(res.data)
+        })
+        .catch((error) => {
+            console.log(error);
+        });
   }
 
   return (
@@ -70,11 +106,11 @@ export function Estimates() {
           
             <Form className="ml-3" id="form">
               {categoryTable}
-              <Button 
+              <Button
+                onClick={onSubmit}
                 className="p-2 mt-2"
                 variant="dark"
                 id="btn"
-                href="/thankYou"
                 type="submit"
               >
                 SUBMIT

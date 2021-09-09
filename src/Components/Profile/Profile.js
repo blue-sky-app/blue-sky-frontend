@@ -71,38 +71,38 @@ export function Profile() {
 
     const sendDetailsToServer = (info) => {
         axios
-                .put(API_BASE_URL + "User/" + userId, info)
-                .then(function (response) {
-                    if (response.status === 200) {
-                        setState((prevState) => ({
-                            ...prevState,
-                            message:
-                                "Update successful",
-                        }));
-                    } 
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-                userArray.push({
-                    "localId": state.userId,
-                    "localFname": state.firstName,
-                    "localLname": state.lastName,
-                    "localEmail": state.email,
-                    "localAccountType": state.accountType,
-                    "localInvoices": state.invoices,
-                    "localBlueBucks": state.blueBucks
-                });
-                for (let i in news) {
-                    if (state.accountType === news[i].customerType) {
-                        userArray.push({
-                            "localNewsHeadline": news[i].headline,
-                            "localNewsText": news[i].text
-                        });
-                    }
+            .put(API_BASE_URL + "User/" + userId, info)
+            .then(function (response) {
+                if (response.status === 200) {
+                    setState((prevState) => ({
+                        ...prevState,
+                        message:
+                            "Update successful",
+                    }));
+                } 
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            userArray.push({
+                "localId": state.userId,
+                "localFname": state.firstName,
+                "localLname": state.lastName,
+                "localEmail": state.email,
+                "localAccountType": state.accountType,
+                "localInvoices": state.invoices,
+                "localBlueBucks": state.blueBucks
+            });
+            for (let i in news) {
+                if (state.accountType === news[i].customerType) {
+                    userArray.push({
+                        "localNewsHeadline": news[i].headline,
+                        "localNewsText": news[i].text
+                    });
                 }
-                sessionStorage.setItem('localUser', JSON.stringify(userArray));
-                console.log(sessionStorage.getItem('localUser'))
+            }
+            sessionStorage.setItem('localUser', JSON.stringify(userArray));
+            console.log(sessionStorage.getItem('localUser'))
     }
     
     const updateUser = () => {
