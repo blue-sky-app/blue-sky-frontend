@@ -143,6 +143,7 @@ export function Estimates() {
           <Form className="ml-3">
             {categoryTable}
             <Button 
+              onClick={onSubmit}
               className="p-2 mt-2"
               variant="dark"
               id="mbtn" 
