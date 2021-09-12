@@ -11,6 +11,11 @@ import ImageTwo from "../Images/hero2.jpg";
 import ImageThree from "../Images/heroes.jpeg";
 import ImageFour from "../Images/pressurewash.jpeg";
 import ImageFive from "../Images/sidewalk.jpg";
+import mImageOne from "../Images/mHero1.jpg";
+import mImageTwo from "../Images/mHero2.jpg";
+import mImageThree from "../Images/mHero3.jpeg";
+import mImageFour from "../Images/mHero4.jpeg";
+import mImageFive from "../Images/hero.jpg";
 import { newsHeadline, newsText } from "../LocalUser/LocalUser";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import './Home.css';
@@ -19,6 +24,9 @@ export function Home() {
   const picArray = [ImageOne, ImageTwo, ImageThree, ImageFour, ImageFive];
   const randIndex = Math.floor(Math.random() * picArray.length);
   const selPicture = picArray[randIndex];
+
+  const mPicArray = [mImageOne, mImageTwo, mImageThree, mImageFour, mImageFive];
+  const mSelPicture = mPicArray[randIndex];
 
   return (
     <>
@@ -89,6 +97,7 @@ export function Home() {
 
           <div
             className="d-flex mx-auto justify-content-center border border-dark border-3"
+            style={{backgroundImage: `url("${mSelPicture}")`}}
             id="image"
           ></div>
 

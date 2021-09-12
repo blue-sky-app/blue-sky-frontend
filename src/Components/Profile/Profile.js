@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import { API_BASE_URL, fetchUser, fetchNews } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -12,9 +12,11 @@ import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, lName, email, accountType, userId, invoices, blueBucks } from "../LocalUser/LocalUser";
 import './Profile.css'; 
+import { Message } from "../Message/Message.js";
 
 export function Profile() { 
     const [accountOption, setAccountOption] = useState();
+    const [users, setUsers] = useState([]);
     const [news, setNews] = useState([]);
     const [state, setState] = useState({
         userId: userId,
@@ -26,9 +28,11 @@ export function Profile() {
         blueBucks: blueBucks,
         newPassword: "",
         confirmPassword: "",
-        message: null,
+        display: false,
+        type: "",
+        message: ""
     });
-
+    
     const userArray = [];
     
     useEffect( () => {
@@ -39,20 +43,29 @@ export function Profile() {
         console.log(state.accountType);
         console.log(state.newPassword);
         console.log(state.confirmPassword);
-        console.log(state.message);
     })
 
     useEffect(() => {
-        fetchNews();
+        fetchNews().then(setNews);
       }, []);
     useEffect(() => {
     console.log(news);
     }, [news]);
 
-    const fetchNews = async () => {
+    useEffect(() => {
+        console.log(state.email);
+        }, [state.email]);
+
+    useEffect(() => {
+        if(state.email !== email){
+            fetchUser().then(setUsers);
+        }
+    }, [state.email])
+
+    /*const fetchNews = async () => {
         const response = await axios(`${API_BASE_URL}news/`);
         setNews(response.data);
-        };
+        };*/
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -71,38 +84,63 @@ export function Profile() {
 
     const sendDetailsToServer = (info) => {
         axios
-            .put(API_BASE_URL + "User/" + userId, info)
-            .then(function (response) {
-                if (response.status === 200) {
+                .put(API_BASE_URL + "User/" + userId, info)
+                .then(function (response) {
+                    if (response.status === 200) {
+                        setState((prevState) => ({
+                            ...prevState,
+                            display: true,
+                            type: "success",
+                            message: "update"
+                        }));
+                    } 
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                userArray.push({
+                    "localId": state.userId,
+                    "localFname": state.firstName,
+                    "localLname": state.lastName,
+                    "localEmail": state.email,
+                    "localAccountType": state.accountType,
+                    "localInvoices": state.invoices,
+                    "localBlueBucks": state.blueBucks
+                });
+                for (let i in news) {
+                    if (state.accountType === news[i].customerType) {
+                        userArray.push({
+                            "localNewsHeadline": news[i].headline,
+                            "localNewsText": news[i].text
+                        });
+                    }
+                }
+                sessionStorage.setItem('localUser', JSON.stringify(userArray));
+                console.log(sessionStorage.getItem('localUser'))
+    }
+
+    const checkEmailDup = () => {
+        var duplicate;
+        if (state.email !== email) {
+            for (let i in users) {
+                if (state.email === users[i].email) { 
+                    duplicate = true;
                     setState((prevState) => ({
                         ...prevState,
-                        message:
-                            "Update successful",
+                        display: true,
+                        type: "fail",
+                        message: "duplicate"
                     }));
-                } 
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-            userArray.push({
-                "localId": state.userId,
-                "localFname": state.firstName,
-                "localLname": state.lastName,
-                "localEmail": state.email,
-                "localAccountType": state.accountType,
-                "localInvoices": state.invoices,
-                "localBlueBucks": state.blueBucks
-            });
-            for (let i in news) {
-                if (state.accountType === news[i].customerType) {
-                    userArray.push({
-                        "localNewsHeadline": news[i].headline,
-                        "localNewsText": news[i].text
-                    });
+                    return
                 }
+                else {
+                    duplicate = false;
+                }       
             }
-            sessionStorage.setItem('localUser', JSON.stringify(userArray));
-            console.log(sessionStorage.getItem('localUser'))
+        }
+        if (!duplicate) {
+            updateUser();
+        }
     }
     
     const updateUser = () => {
@@ -118,7 +156,7 @@ export function Profile() {
             sendDetailsToServer(payload);
             console.log(state.newPassword);
         } 
-        else if (!state.newPassword.length && state.firstName.length && state.lastName.length && state.email.length) {
+        else if (!state.newPassword.length && state.firstName.length && state.lastName.length && state.email.length && !state.duplicate) {
             payload = {
                 firstName: state.firstName,
                 lastName: state.lastName,
@@ -130,22 +168,28 @@ export function Profile() {
         else {
             setState((prevState) => ({
                 ...prevState,
-                message:
-                    "Please make sure no required fields are left blank",
+                display: true,
+                type: "fail",
+                message: "required"
             }));
         }
     };
 
     const handleUpdate = (e) => {
         e.preventDefault();
+        setState((prevState) => ({
+            ...prevState,
+            message: ""
+        }));
         if (state.newPassword === state.confirmPassword) {
-            updateUser();
+            checkEmailDup();
         } 
         else {
             setState((prevState) => ({
                 ...prevState,
-                message:
-                "Passwords do not match",
+                display: true,
+                type: "fail",
+                message: "password"
                 }));
         }
     };
@@ -158,6 +202,8 @@ export function Profile() {
             setAccountOption("Commercial")
         }
     }, []);
+
+    
 
     return (
         <>
@@ -172,13 +218,6 @@ export function Profile() {
               </Card.Header>
     
               <Card.Body className="mx-auto w-50" id="bcbody">
-                    <div
-                        className="alert alert-success"
-                        style={{ display: state.message ? "block" : "none", textAlign: state.message ? "center" : ""}}
-                        role="alert"
-                    >
-                        {state.message}
-                    </div>
                     <div className="w-50 mx-auto" id="form">
                         <Form>
                             <Form.Group size="lg" controlId="firstName">
@@ -187,6 +226,7 @@ export function Profile() {
                                     defaultValue={fName}
                                     placeholder={fName}
                                     onChange={handleChange}
+                                    required
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="lastName">
@@ -195,6 +235,7 @@ export function Profile() {
                                     defaultValue={lName}
                                     placeholder={lName}
                                     onChange={handleChange}
+                                    required
                                 />
                             </Form.Group>
                             <Form.Group>
@@ -213,6 +254,7 @@ export function Profile() {
                                     defaultValue={email}
                                     placeholder={email}
                                     onChange={handleChange}
+                                    required
                                 />
                             </Form.Group>
                             <Form.Group size="lg" controlId="newPassword">
@@ -234,8 +276,7 @@ export function Profile() {
                                     onChange={handleChange}
                                 />
                             </Form.Group>
-                            <br />
-                            <div id="error"></div>
+                            <Message device="browser" display={state.display} type={state.type} message={state.message}/>
                             <Button onClick={handleUpdate}
                                 id="btn"
                                 variant="dark"
@@ -321,13 +362,7 @@ export function Profile() {
                                     onChange={handleChange}
                                 />
                             </Form.Group>
-                            <div
-                                className="mb-2" 
-                                style={{ display: state.message ? "block" : "none", textAlign: state.message ? "center" : ""}}
-                                role="alert"
-                            >
-                                <mark>{state.message}</mark>
-                            </div>
+                            <Message device="mobile" display={state.display} type={state.type} message={state.message}/>
                             <Button onClick={handleUpdate}
                                 id="btn"
                                 variant="dark"
@@ -345,5 +380,6 @@ export function Profile() {
             <MobileNavBar active ="moreMenu" />
           </MobileView>
         </>
-    );
-} 
+      );
+    
+}

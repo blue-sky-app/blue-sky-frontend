@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 //import PropTypes from 'prop-types';
-import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+//import axios from "axios";
+import { fetchUser, fetchNews } from "../API/Api.js";
 import { BrowserView, MobileView } from "react-device-detect";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
+import { Message } from "../Message/Message.js";
 import './Login.css'; 
 
 export function Login() {
@@ -15,35 +16,40 @@ export function Login() {
     const emailValue = document.getElementById('email');
     const passwordValue = document.getElementById('password');
     const [news, setNews] = useState([]);
+    const [state, setState] = useState({
+        display: false,
+        type: "",
+        message: ""
+    });
     
     // Constant for storing user data in session
     const userArray = [];
 
     // user Fetch
     useEffect(() => {
-        fetchUser();
+        fetchUser().then(setUsers);
     }, []);
     useEffect(() => {
         console.log(users);
     }, [users]);
 
-    const fetchUser = async () => {
+    /*const fetchUser = async () => {
         const response = await axios(`${API_BASE_URL}users/`);
         setUsers(response.data);
-    };
+    };*/
 
     // news article Fetch
     useEffect(() => {
-        fetchNews();
+        fetchNews().then(setNews);
       }, []);
     useEffect(() => {
     console.log(news);
     }, [news]);
     
-    const fetchNews = async () => {
+    /*const fetchNews = async () => {
     const response = await axios(`${API_BASE_URL}news/`);
     setNews(response.data);
-    };
+    };*/
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,6 +69,20 @@ export function Login() {
                     });
                     var login = true;
                 }
+                else if (passwordValue.value !== user.password) {
+                    setState(() => ({
+                        display: true,
+                        type: "fail",
+                        message: "loginFail"
+                    }));
+                }
+            }
+            else if(emailValue.value !== user.email){
+                setState(() => ({
+                    display: true,
+                    type: "fail",
+                    message: "loginFail"
+                }));
             }
         }
         
@@ -73,6 +93,11 @@ export function Login() {
                         "localNewsHeadline": news[i].headline,
                         "localNewsText": news[i].text
                     });
+                    setState(() => ({
+                        display: true,
+                        type: "success",
+                        message: "loginSuccess"
+                    }));
                 }
             }
             sessionStorage.setItem('localUser', JSON.stringify(userArray));
@@ -113,8 +138,8 @@ export function Login() {
                                     // onChange={(e) => setPassword(e.target.value)}
                                 />
                             </Form.Group>
-                            <p id="invalid"></p>
                             <br />
+                            <Message device="browser" display={state.display} type={state.type} message={state.message}/>
                             <Button onClick={handleSubmit}
                                 id="loginButton"
                                 block
@@ -149,7 +174,9 @@ export function Login() {
                             SERVING CENTRAL FLORIDA
                         </p>
                     </div>
+                    
                     <div className="mt-5 w-75 mx-auto" id="form">
+                    <Message device="mobile" display={state.display} type={state.type} message={state.message}/>
                         <Form>
                             <Form.Group size="lg" controlId="email">
                                 <Form.Control

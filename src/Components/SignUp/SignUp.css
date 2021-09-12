@@ -27,6 +27,14 @@
       font-size: 14px;
   }
 
+  #success {
+    font-weight: bold; 
+    color: #0a7ebd;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+  }
+
   #form {
       max-width: 350px;
     }
@@ -48,8 +56,9 @@
 
     #bckgrnd {
     background-image: linear-gradient(to bottom, #b1ddf2, #e6f2ff);
-    height: 100vh;
+    min-height: 100vh;
     min-width: 100%;
+    overflow-y: auto;
   }
 
   .wrapper {
@@ -63,6 +72,15 @@
     left: 0;
     right: 0;
     font-size: clamp(14px, 1.5vw, 22px);
+  }
+
+  #success {
+    font-weight: bold; 
+    color: #0a7ebd;
+    left: 0;
+    right: 0;
+    font-size: clamp(14px, 1.5vw, 22px);
+    padding-top: 40px;
   }
 
   img {

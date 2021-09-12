@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
@@ -6,11 +6,13 @@ import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
-import { API_BASE_URL } from "../API/Api";
+import { API_BASE_URL, fetchUser } from "../API/Api";
 import { withRouter } from "react-router-dom";
+import { Message } from "../Message/Message";
 import './SignUp.css';
 
 function SignUp(props) {
+    const [users, setUsers] = useState([]);
     const [state, setState] = useState({
         email: "",
         firstName: "",
@@ -18,8 +20,14 @@ function SignUp(props) {
         accountType: "",
         newPassword: "",
         confirmPassword: "",
-        message: null,
+        display: false,
+        type: "",
+        message: ""
     });
+
+    useEffect(() => {
+        fetchUser().then(setUsers);
+        }, [state.email])
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -30,13 +38,11 @@ function SignUp(props) {
     };
 
     const redirectToSuccess = () => {
-        //props.updateTitle("Success");
         props.history.push("/signUpSuccess");
     };
 
     const sendDetailsToServer = () => {
-        if (state.email.length && state.newPassword.length) {
-            //props.showError(null);
+        if (state.email.length && state.newPassword.length && state.firstName.length && state.lastName.length && state.accountType.length) {
             const payload = {
                 firstName: state.firstName,
                 lastName: state.lastName,
@@ -52,9 +58,10 @@ function SignUp(props) {
                     if (response.status === 200) {
                         setState((prevState) => ({
                             ...prevState,
-                            message:
-                                "Registration successful. Redirecting to Log In",
-                        }));
+                            display: true,
+                            type: "success",
+                            message: "signupSuccess"
+                            }));
                         redirectToSuccess();
                         //props.showError(null);
                         setState((prevState) => ({
@@ -72,21 +79,47 @@ function SignUp(props) {
         } else {
             setState((prevState) => ({
                 ...prevState,
-                message:
-                    "Please enter valid email and password",
+                display: true,
+                type: "fail",
+                message: "required"
                 }));
         }
     };
 
+    const checkEmailDup = () => {
+        var duplicate;
+        for (let i in users) {
+            if (state.email === users[i].email) { 
+                duplicate = true;
+                setState((prevState) => ({
+                    ...prevState,
+                    display: true,
+                    type: "fail",
+                    message: "duplicate"
+                }));
+                return
+            }
+            else {
+                duplicate = false;
+            }
+        }       
+            
+        if (!duplicate) {
+            sendDetailsToServer();
+        }
+        
+    }
+
     const handleSubmitClick = (e) => {
         e.preventDefault();
         if (state.newPassword === state.confirmPassword) {
-            sendDetailsToServer();
+            checkEmailDup();
         } else {
             setState((prevState) => ({
                 ...prevState,
-                message:
-                "Passwords do not match",
+                display: true,
+                type: "fail",
+                message: "password"
                 }));
         }
     };
@@ -104,13 +137,6 @@ function SignUp(props) {
                             SERVING CENTRAL FLORIDA
                         </p>
                     </div><br/>
-                    <div
-                        className="alert alert-success"
-                        style={{ display: state.message ? "block" : "none", textAlign: state.message ? "center" : ""}}
-                        role="alert"
-                    >
-                        {state.message}
-                    </div>
                     <div className="w-50 mx-auto" id="form">
                         <Form>
                             <Form.Label
@@ -177,6 +203,7 @@ function SignUp(props) {
                                     onChange={handleChange}
                                 />
                             </Form.Group>
+                            <Message device="browser" display={state.display} type={state.type} message={state.message}/>
                             <Button
                                 href="/home"
                                 block
@@ -212,12 +239,6 @@ function SignUp(props) {
                             SERVING CENTRAL FLORIDA
                         </p>
                     </div><br/>
-                    <div
-                        style={{ display: state.message ? "block" : "none", textAlign: state.message ? "center" : ""}}
-                        role="alert"
-                    >
-                        <mark>{state.message}</mark>
-                    </div>
                     <div className="w-75 mx-auto" id="form">
                         <Form>
                             <Form.Label
@@ -284,6 +305,7 @@ function SignUp(props) {
                                     onChange={handleChange}
                                 />
                             </Form.Group>
+                            <Message device="mobile" display={state.display} type={state.type} message={state.message}/>
                             <Button
                                 href="/home"
                                 block
