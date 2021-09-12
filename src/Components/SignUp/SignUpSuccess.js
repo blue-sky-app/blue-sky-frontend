@@ -49,7 +49,7 @@ export function SignUpSuccess() {
                         SERVING CENTRAL FLORIDA
                     </p>
                     <br/>
-                    <p className="mt-1 w-80 mx-auto text-center" id="text">
+                    <p className="mt-1 w-80 mx-auto text-center" id="success">
                         Success! Thank you for Signing up with Blue Sky!          
                     </p>
                 </div>

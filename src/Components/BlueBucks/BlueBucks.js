@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -8,9 +8,15 @@ import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, blueBucks  } from "../LocalUser/LocalUser";
+import { restrictPage } from "../API/Api";
 import './BlueBucks.css';
 
 export function BlueBucks() {
+
+    useEffect(() => {
+        restrictPage();
+    }, []);
+
     let bb_table = []; 
 
     for (let i in blueBucks) {

@@ -34,11 +34,11 @@
 @media all and (max-width: 1366px) {
 
     #image {
-        background-image: url("../Images/hero.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         min-height: 35vh;
         min-width: 100vw;
+        border: 0 !important;
     }
 
     #header {
