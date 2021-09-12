@@ -53,26 +53,26 @@ export function Admin() {
   let estimateInputs = [];
 
   for (let i in estimates) {
-      let date = JSON.stringify(estimates[i].created_date);
-      let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(1, 5)}`;
-      let updatedServices = [];
-      for (let j in estimates[i].services) {
-        updatedServices.push(
-          <tr className="mx-auto" style={{background: "rgba(0, 0, 0, 0", borderStyle: "hidden"}} >
-            <td>{estimates[i].services[j]}</td>
-          </tr>
-        )
-      }
-      estimateInputs.push(
-        <tr style={{ fontSize: "11px", alignItems: "center"}}>
-            <td className="align-self-center">{newDate}</td>
-            <td className="align-self-center">{estimates[i].email}</td>
-            <td className="align-self-center">{estimates[i].firstName}</td>
-            <td className="align-self-center">{estimates[i].lastName}</td>
-            <td className="align-self-center">{estimates[i].accountType}</td>
-            <td>{updatedServices}</td>
+    let date = JSON.stringify(estimates[i].created_date);
+    let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(1, 5)}`;
+    let updatedServices = [];
+    for (let j in estimates[i].services) {
+      updatedServices.push(
+        <tr className="mx-auto" style={{background: "rgba(0, 0, 0, 0", borderStyle: "hidden"}} >
+          <td>{estimates[i].services[j]}</td>
         </tr>
-      );
+      )
+    }
+    estimateInputs.push(
+      <tr style={{ fontSize: "11px", alignItems: "center"}}>
+          <td className="align-self-center">{newDate}</td>
+          <td className="align-self-center">{estimates[i].email}</td>
+          <td className="align-self-center">{estimates[i].firstName}</td>
+          <td className="align-self-center">{estimates[i].lastName}</td>
+          <td className="align-self-center">{estimates[i].accountType}</td>
+          <td>{updatedServices}</td>
+      </tr>
+    );
   }
 
   // posting No Service Info for users with no services
@@ -84,41 +84,16 @@ export function Admin() {
     );
   }
 
-  
   let searchResults = [];
 
   const handleChange = (e)  => {
     setInputValue(e.target.value)
   }
 
-//   const userSearchDisplay = () => {
-//     for (let i in users) {
-//       if (inputValue === users[i].email || inputValue === users[i].lastName) {
-//         searchResults.push(
-//           <tr>
-//             <td>{users[i].firstName}</td>
-//             <td>{users[i].lastName}</td>
-//             <td>{users[i].email}</td>
-//             <td>{users[i].services}</td>
-//             <td>{users[i].blueBucks}</td>
-//           </tr>    
-//         )
-
-//       } else {
-//         searchResults.push(
-//           <tr>
-//             <td>No Results</td>
-//           </tr>
-//         )}
-//     }
-
-// }
-// console.log(inputValue);
-
   const onSubmit = (e) => {
     e.preventDefault();
     for (let i in users) {
-      if (inputValue === users[i].email) {
+      if (inputValue === users[i].email || inputValue === users[i].lastName || inputValue === users[i].firstName) {
 
         // Services/Invoices Info
         let updatedServices = [];
@@ -156,19 +131,18 @@ export function Admin() {
           )
         }
         searchResults.push(
-          <tr>
-            <td>{users[i].firstName}</td>
-            <td>{users[i].lastName}</td>
-            <td>{users[i].email}</td>
-            <td>{updatedServices}</td>
-            <td>{updatedBlueBucks}</td>
-          </tr>    
+              <tr>
+                <td>{users[i].firstName}</td>
+                <td>{users[i].lastName}</td>
+                <td>{users[i].email}</td>
+                <td>{updatedServices}</td>
+                <td>{updatedBlueBucks}</td>
+              </tr> 
         )
       }
     }
     setUserSearch(searchResults)
   }  
-
 
   return (
     <>
@@ -222,14 +196,14 @@ export function Admin() {
                         SEARCH
                       </Button>
                     </InputGroup>
-                    <Table striped bordered hover size="sm">
+                    <Table striped bordered hover size="sm" className="mt-2">
                       <thead>
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Service History</th>
-                            <th>Blue Bucks</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email</th>
+                          <th>Service History</th>
+                          <th>Blue Bucks</th>
                         </tr>
                       </thead>
                       <tbody id="tbdy">{userSearch}</tbody>
@@ -261,7 +235,6 @@ export function Admin() {
           <Card.Title className="mb-3" id="mctitle">
           </Card.Title>
           
-
           </Card.Body>
         </Card>
         <MobileNavBar active ="estimates" />
