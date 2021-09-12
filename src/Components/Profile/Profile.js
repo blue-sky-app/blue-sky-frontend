@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_BASE_URL, fetchUser, fetchNews } from "../API/Api.js";
+import { API_BASE_URL, fetchUser, fetchNews, restrictPage } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -35,6 +35,10 @@ export function Profile() {
     
     const userArray = [];
     
+    useEffect(() => {
+        restrictPage();
+    }, []);
+
     useEffect( () => {
         console.log(userId);
         console.log(state.email);

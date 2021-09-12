@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -18,6 +18,7 @@ import mImageFour from "../Images/mHero4.jpeg";
 import mImageFive from "../Images/hero.jpg";
 import { newsHeadline, newsText } from "../LocalUser/LocalUser";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
+import { restrictPage } from "../API/Api";
 import './Home.css';
 
 export function Home() {
@@ -27,6 +28,10 @@ export function Home() {
 
   const mPicArray = [mImageOne, mImageTwo, mImageThree, mImageFour, mImageFive];
   const mSelPicture = mPicArray[randIndex];
+
+  useEffect(() => {
+    restrictPage();
+}, []);
 
   return (
     <>

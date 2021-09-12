@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -8,9 +8,15 @@ import Table from "react-bootstrap/Table";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, invoices } from "../LocalUser/LocalUser";
+import { restrictPage } from "../API/Api";
 import './Services.css'; 
 
 export function Services() {
+
+  useEffect(() => {
+    restrictPage();
+  }, []);
+
   // Creating the table for Invoices
   let invoiceInputs = [];
 

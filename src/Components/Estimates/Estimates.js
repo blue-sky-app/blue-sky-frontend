@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import { API_BASE_URL, restrictPage } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -14,7 +14,11 @@ import { fName, lName, email, accountType } from "../LocalUser/LocalUser";
 import './Estimates.css'; 
 
 export function Estimates() {
-  const [servicecategories, setServicecategories] = useState([]);    
+  const [servicecategories, setServicecategories] = useState([]); 
+  
+  useEffect(() => {
+    restrictPage();
+  }, []);
 
   // This fetch is for the Categories
   useEffect(() => {
