@@ -24,13 +24,13 @@
 
     #form {
         max-width: 250px;
-      }
+    }
     
-      Form.Control {
+    Form.Control {
         font-size: 18px;
-      }
+    }
     
-      #btn {
+    #btn {
         font-size: 14px; 
         font-weight: bold;
     }
