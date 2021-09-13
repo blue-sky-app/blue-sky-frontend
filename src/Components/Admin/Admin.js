@@ -15,7 +15,6 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
-import { fName, lName, email, accountType } from "../LocalUser/LocalUser";
 import './Admin.css'; 
 
 export function Admin() {
