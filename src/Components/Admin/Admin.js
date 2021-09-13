@@ -5,6 +5,7 @@ import { AdminSearchUsers } from "./AdminSearchUsers";
 import { AdminEstimates } from "./AdminEstimates";
 import { AdminNews } from "./AdminNews";
 import { AdminCategories } from "./AdminCategories";
+import { AdminDashboard } from "./AdminDashboard";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Tabs from "react-bootstrap/Tabs";
@@ -27,9 +28,10 @@ export function Admin() {
           >
             Admin Console
           </Card.Header>
-          <Card.Body className="w-100">
+          <Card.Body className="mx-auto w-75">
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
                 <Tab eventKey="dashboard" title="Dashboard">
+                  <AdminDashboard />
                 </Tab>
                 <Tab eventKey="estimates" title="Estimates">
                   <AdminEstimates />
