@@ -4,6 +4,7 @@ import { BrowserView, MobileView } from "react-device-detect";
 import { AdminSearchUsers } from "./AdminSearchUsers";
 import { AdminEstimates } from "./AdminEstimates";
 import { AdminNews } from "./AdminNews";
+import { AdminCategories } from "./AdminCategories";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
 import Tabs from "react-bootstrap/Tabs";
@@ -37,6 +38,7 @@ export function Admin() {
                   <AdminSearchUsers />
                 </Tab>
                 <Tab eventKey="categories" title="Categories">
+                  <AdminCategories />
                 </Tab>
                 <Tab eventKey="news" title="News">
                   <AdminNews />
