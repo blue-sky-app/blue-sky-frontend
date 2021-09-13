@@ -13,6 +13,7 @@ export function AdminSearchUsers() {
   const [inputValue, setInputValue] = useState([]);
   const [userSearch, setUserSearch] = useState([]);
  
+
   // This fetch is for the Users
   useEffect(() => {
     fetchUsers();
@@ -73,12 +74,12 @@ export function AdminSearchUsers() {
           )
         }
         searchResults.push(
-              <tr>
-                <td>{users[i].firstName}</td>
-                <td>{users[i].lastName}</td>
-                <td>{users[i].email}</td>
-                <td>{updatedServices}</td>
-                <td>{updatedBlueBucks}</td>
+              <tr style={{ fontSize: "11px", alignItems: "center"}}> 
+                <td className="align-self-center">{users[i].firstName}</td>
+                <td className="align-self-center">{users[i].lastName}</td>
+                <td className="align-self-center">{users[i].email}</td>
+                <td className="align-self-center">{updatedServices}</td>
+                <td className="align-self-center">{updatedBlueBucks}</td>
               </tr> 
         )
       }
@@ -87,10 +88,11 @@ export function AdminSearchUsers() {
   }  
 
   return (
+    <>
     <Form className="ml-3" id="form">
         <InputGroup>
             <FormControl
-                placeholder="Email or Last Name"
+                placeholder="Email or Name"
                 aria-label="Recipient's Info"
                 type="search"
                 onChange={handleChange}
@@ -98,7 +100,7 @@ export function AdminSearchUsers() {
             
             <Button
                 onClick={onSubmit}
-                className="p-2"
+                className="ml-2 p-2"
                 variant="dark"
                 id="btn"
                 type="submit"
@@ -107,20 +109,23 @@ export function AdminSearchUsers() {
             </Button>
         </InputGroup>
         
-        <Table striped bordered hover size="sm" className="mt-2">
-            <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Service History</th>
-                <th>Blue Bucks</th>
-            </tr>
-            </thead>
-            <tbody id="tbdy">{userSearch}</tbody>
-        </Table>
+
 
     </Form>
-
+        <Table striped bordered hover size="sm" className="mt-2">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Service History</th>
+            <th>Blue Bucks</th>
+        </tr>
+        </thead>
+        <tbody id="tbdy">
+          {userSearch}
+        </tbody>
+    </Table>
+    </>
   );
 }

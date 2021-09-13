@@ -47,7 +47,7 @@ export function AdminCategories() {
     }
 
   return (
-    <Table striped bordered hover size="sm">
+    <Table striped bordered hover size="sm" className="mx-auto w-25">
         {categoriesTable}
     </Table>
   );
