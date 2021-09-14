@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../API/Api.js";
-import Table from "react-bootstrap/Table";
-import './Admin.css'; 
+import { Table } from "react-bootstrap";
+import "./Admin.css";
 
 export function AdminCategories() {
   const [categories, setCategories] = useState([]);
@@ -22,33 +22,33 @@ export function AdminCategories() {
 
   let categoriesTable = [];
 
-    for (let i in categories) {
+  for (let i in categories) {
     let categoryItems = [];
-        for (let j in categories[i].services) {
-            categoryItems.push(
-                <tr className="mx-auto" style={{background: "rgba(0, 0, 0, 0", borderStyle: "hidden"}} >
-                    <td className="align-self-center">{categories[i].services[j]}</td>
-                </tr>
-
-            )
-        }
-        categoriesTable.push(
-            <>
-                <thead>
-                    <tr>
-                        <th>{categories[i].customerType}</th>
-                    </tr>
-                </thead>
-                <tbody id="tbdy">
-                    {categoryItems}
-                </tbody>
-            </>
-        );
+    for (let j in categories[i].services) {
+      categoryItems.push(
+        <tr
+          className="mx-auto"
+          style={{ background: "rgba(0, 0, 0, 0", borderStyle: "hidden" }}
+        >
+          <td className="align-self-center">{categories[i].services[j]}</td>
+        </tr>
+      );
     }
+    categoriesTable.push(
+      <>
+        <thead>
+          <tr>
+            <th>{categories[i].customerType}</th>
+          </tr>
+        </thead>
+        <tbody id="tbdy">{categoryItems}</tbody>
+      </>
+    );
+  }
 
   return (
     <Table striped bordered hover size="sm" className="mx-auto w-25">
-        {categoriesTable}
+      {categoriesTable}
     </Table>
   );
 }

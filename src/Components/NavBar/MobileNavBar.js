@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
+import { Navbar, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -10,12 +9,12 @@ import {
   faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
 import { ContactUs } from "../ContactUs/ContactUs";
-import './NavBar.css';
+import "./NavBar.css";
 
 export function MobileNavBar(props) {
-  const [iconColor, setIconColor] = useState('');
+  const [iconColor, setIconColor] = useState("");
   let iconStyle = {
-    color: "#014388"
+    color: "#014388",
   };
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export function MobileNavBar(props) {
 
   const getState = () => {
     setIconColor(props.active);
-  }
+  };
 
   switch (iconColor) {
     case "home":
