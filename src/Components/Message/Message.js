@@ -49,22 +49,39 @@ export function Message(props) {
   }
 
   //set div text based on type of message from parent componenet
-  if (message === "loginFail") {
-    var notice =
-      "The Email or Passcode you entered does not match our records.";
-  } else if (message === "update") {
-    notice = "Update successful.";
-  } else if (message === "required") {
-    notice = "Please make sure no required fields are left blank.";
-  } else if (message === "password") {
-    notice = "Passwords do not match";
-  } else if (message === "signupSuccess") {
-    notice = "Registration successful. Redirecting to Log In.";
-  } else if (message === "loginSuccess") {
-    notice = "Login successful.";
-  } else if (message === "duplicate") {
-    notice = "This email is already in use with another account.";
-  }
+  switch (message) {
+    case "loginFail":
+        var notice = "The Email or Passcode you entered does not match our records.";
+        break;
+
+    case "update":
+        notice = "Update successful.";
+        break;
+    
+    case "required":
+        notice = "Please make sure no required fields are left blank."
+        break;
+
+    case "password":
+        notice = "Passwords do not match."
+        break;
+
+    case "signupSuccess":
+        notice = "Registration successful. Redirecting to Log In."
+        break; 
+        
+    case "loginSuccess":
+        notice = "Login successful."
+        break; 
+
+    case "duplicate":
+        notice = "This email is already in use with another account."
+        break;
+
+    case "noService":
+        notice = "Please make at least one selection."
+    // no default
+}
 
   return (
     <div className={className} style={messageStyle} role="alert">
