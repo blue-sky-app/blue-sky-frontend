@@ -4,18 +4,15 @@ import { API_BASE_URL, restrictPage } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
-import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
+import { Card, Form, Image, Button } from "react-bootstrap";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, lName, email, accountType } from "../LocalUser/LocalUser";
-import './Estimates.css'; 
+import "./Estimates.css";
 
 export function Estimates() {
-  const [servicecategories, setServicecategories] = useState([]); 
-  
+  const [servicecategories, setServicecategories] = useState([]);
+
   useEffect(() => {
     restrictPage();
   }, []);
@@ -35,17 +32,6 @@ export function Estimates() {
 
   const estimateServiceArray = [];
 
-  /*const handleChange = (e)  => {
-    let isChecked = e.target.checked;
-    let checkedName = e.target.name;
-
-    if (isChecked === true){
-      estimateServiceArray.push(checkedName)
-    }
-
-    console.log(estimateServiceArray)
-  }*/
-  
   // Creating the table for Estimates
   let categoryTable = [];
   let categories = [];
@@ -58,15 +44,16 @@ export function Estimates() {
     if (accountType === servicecategories[i].customerType) {
       for (let j in servicecategories[i].services) {
         categories.push(
-          <Form.Group controlId= {servID++}>
-          <Form.Check 
-            className="mb-2" 
-            style={{fontSize: "14px"}}
-            type="checkbox" label={servicecategories[i].services[j]}
-            name={servicecategories[i].services[j]}
-
-          /></Form.Group>
-        )
+          <Form.Group controlId={servID++}>
+            <Form.Check
+              className="mb-2"
+              style={{ fontSize: "14px" }}
+              type="checkbox"
+              label={servicecategories[i].services[j]}
+              name={servicecategories[i].services[j]}
+            />
+          </Form.Group>
+        );
       }
       categoryTable.push(
         <Form className="ml-3" id="form">
@@ -79,12 +66,12 @@ export function Estimates() {
   const onSubmit = (e) => {
     e.preventDefault();
     let checkID = 1;
-    for(let i=0; i < categories.length; i++) {
-      if(document.getElementById(checkID+i).checked) {
-        estimateServiceArray.push(document.getElementById(checkID+i).name)
+    for (let i = 0; i < categories.length; i++) {
+      if (document.getElementById(checkID + i).checked) {
+        estimateServiceArray.push(document.getElementById(checkID + i).name);
       }
     }
-    console.log(estimateServiceArray)
+    console.log(estimateServiceArray);
     const estimateInput = {
       email: email,
       firstName: fName,
@@ -92,22 +79,23 @@ export function Estimates() {
       accountType: accountType,
       services: estimateServiceArray,
     };
-    axios.post(API_BASE_URL + "estimates/", estimateInput)
-        .then((res) => {
-            if (res.status === 200) {
-              window.location.href = '/thankYou';
-            } 
-          console.log(res.data)
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-  }
+    axios
+      .post(API_BASE_URL + "estimates/", estimateInput)
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.href = "/thankYou";
+        }
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <>
       <BrowserView>
-        <BrowserNavBar active ="estimates"/>
+        <BrowserNavBar active="estimates" />
         <Card className="border-0 w-100 mx-auto">
           <Card.Header
             className="d-flex justify-content-center align-items-center mb-4 border-0"
@@ -118,9 +106,9 @@ export function Estimates() {
 
           <Card.Body className="mx-auto" id="bcbody">
             <Card.Title className="mb-3" id="bctitle">
-                <strong>{accountType}</strong> Services
+              <strong>{accountType}</strong> Services
             </Card.Title>
-          
+
             <div>
               {categoryTable}
               <Button
@@ -134,7 +122,7 @@ export function Estimates() {
               </Button>
             </div>
           </Card.Body>
-          
+
           <DeskFooter />
         </Card>
       </BrowserView>
@@ -153,26 +141,26 @@ export function Estimates() {
           </Card.Header>
 
           <Card.Body id="mcbody">
-          <Card.Title className="mb-3" id="mctitle">
+            <Card.Title className="mb-3" id="mctitle">
               <strong>{accountType}</strong> Services
-          </Card.Title>
-          
-          <Form className="ml-3">
-            {categoryTable}
-            <Button 
-              onClick={onSubmit}
-              className="p-2 mt-2"
-              variant="dark"
-              id="mbtn" 
-              href="/thankYou"
-              type="submit"
-            >
-              SUBMIT
-            </Button>
-          </Form>
+            </Card.Title>
+
+            <Form className="ml-3">
+              {categoryTable}
+              <Button
+                onClick={onSubmit}
+                className="p-2 mt-2"
+                variant="dark"
+                id="mbtn"
+                href="/thankYou"
+                type="submit"
+              >
+                SUBMIT
+              </Button>
+            </Form>
           </Card.Body>
         </Card>
-        <MobileNavBar active ="estimates" />
+        <MobileNavBar active="estimates" />
       </MobileView>
     </>
   );

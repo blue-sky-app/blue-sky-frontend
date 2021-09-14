@@ -14,9 +14,6 @@ import { Admin } from "./Components/Admin/Admin";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  //const [title, updateTitle] = useState(null);
-  //const [errorMessage, updateErrorMessage] = useState(null);
-
   return (
     <BrowserRouter>
       <Switch>

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import Image from "react-bootstrap/Image";
+import { Navbar, Nav, Image } from "react-bootstrap";
 import BlueSkyLogo from "../Images/topLogoBar.png";
-import './NavBar.css';
+import "./NavBar.css";
 
 export function BrowserNavBar(props) {
-  const [navColor, setNavColor] = useState('');
+  const [navColor, setNavColor] = useState("");
   let navStyle = {
-    color: "white"
+    color: "white",
   };
 
   useEffect(() => {
@@ -17,7 +15,7 @@ export function BrowserNavBar(props) {
 
   const getState = () => {
     setNavColor(props.active);
-  }
+  };
 
   const logOut = () => {
     sessionStorage.clear();
@@ -53,46 +51,22 @@ export function BrowserNavBar(props) {
 
       <Navbar id="bckgnd">
         <Nav className="mx-auto">
-          <Nav.Link
-            style={home}
-            href="/home"
-            id="wfnt"
-          >
+          <Nav.Link style={home} href="/home" id="wfnt">
             HOME
           </Nav.Link>
-          <Nav.Link
-            style={estimates}
-            href="/estimates"
-            id="wfnt"
-          >
+          <Nav.Link style={estimates} href="/estimates" id="wfnt">
             ESTIMATE
           </Nav.Link>
-          <Nav.Link
-            style={services}
-            href="/services"
-            id="wfnt"
-          >
+          <Nav.Link style={services} href="/services" id="wfnt">
             SERVICES
           </Nav.Link>
-          <Nav.Link
-            style={blueBucks}
-            href="/blueBucks"
-            id="wfnt"
-          >
+          <Nav.Link style={blueBucks} href="/blueBucks" id="wfnt">
             BLUE BUCKS
           </Nav.Link>
-          <Nav.Link
-            style={profile}
-            href="/profile"
-            id="wfnt"
-          >
+          <Nav.Link style={profile} href="/profile" id="wfnt">
             PROFILE
           </Nav.Link>
-          <Nav.Link
-            href="/login"
-            id="wfnt"
-            onClick={logOut}
-          >
+          <Nav.Link href="/login" id="wfnt" onClick={logOut}>
             LOG OUT
           </Nav.Link>
         </Nav>
