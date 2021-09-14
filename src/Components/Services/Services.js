@@ -26,13 +26,12 @@ export function Services() {
       let updatedServices = [];
       for (let j in invoices[i].services) {
         updatedServices.push(
-          <tr className="mx-auto" style={{background: "rgba(0, 0, 0, 0", borderStyle: "hidden"}} >
-            <td>{invoices[i].services[j]}</td>
-          </tr>
+          <div>{invoices[i].services[j]}</div>
+          
         )
       }
       invoiceInputs.push(
-        <tr style={{ fontSize: "11px", alignItems: "center"}}>
+        <tr style={{ fontSize: "12px", alignItems: "center"}}>
           <td className="align-self-center">{newDate}</td>
           <td>${invoices[i].invoiceAmount}</td>
           <td>{updatedServices}</td>
@@ -43,7 +42,7 @@ export function Services() {
   // posting No Service Info for users with no services
   if (invoiceInputs.length === 0) {
     invoiceInputs.push(
-      <tr style={{ fontSize: "11px", textAlign: "center" }}>
+      <tr style={{ fontSize: "12px", textAlign: "center" }}>
         <td colspan="3">No Service History</td>
       </tr>
     );

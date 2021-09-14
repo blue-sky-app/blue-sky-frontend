@@ -35,7 +35,7 @@ export function Estimates() {
 
   const estimateServiceArray = [];
 
-  const handleChange = (e)  => {
+  /*const handleChange = (e)  => {
     let isChecked = e.target.checked;
     let checkedName = e.target.name;
 
@@ -44,34 +44,47 @@ export function Estimates() {
     }
 
     console.log(estimateServiceArray)
-  }
+  }*/
   
   // Creating the table for Estimates
   let categoryTable = [];
+  let categories = [];
+  useEffect(() => {
+    console.log(categories);
+  });
+
+  let servID = 1;
   for (let i in servicecategories) {
     if (accountType === servicecategories[i].customerType) {
-      let categories = []
       for (let j in servicecategories[i].services) {
         categories.push(
+          <Form.Group controlId= {servID++}>
           <Form.Check 
             className="mb-2" 
             style={{fontSize: "14px"}}
             type="checkbox" label={servicecategories[i].services[j]}
             name={servicecategories[i].services[j]}
-            onChange={handleChange}
-          />
+
+          /></Form.Group>
         )
       }
       categoryTable.push(
-        <Form.Group controlId={servicecategories[i].customerType}>
+        <Form className="ml-3" id="form">
           {categories}
-        </Form.Group>
+        </Form>
       );
     }
   }
 
   const onSubmit = (e) => {
     e.preventDefault();
+    let checkID = 1;
+    for(let i=0; i < categories.length; i++) {
+      if(document.getElementById(checkID+i).checked) {
+        estimateServiceArray.push(document.getElementById(checkID+i).name)
+      }
+    }
+    console.log(estimateServiceArray)
     const estimateInput = {
       email: email,
       firstName: fName,
@@ -108,7 +121,7 @@ export function Estimates() {
                 <strong>{accountType}</strong> Services
             </Card.Title>
           
-            <Form className="ml-3" id="form">
+            <div>
               {categoryTable}
               <Button
                 onClick={onSubmit}
@@ -119,7 +132,7 @@ export function Estimates() {
               >
                 SUBMIT
               </Button>
-            </Form>
+            </div>
           </Card.Body>
           
           <DeskFooter />

@@ -29,6 +29,11 @@
         font-weight: bold; 
         box-shadow: 0px 0px 6px #006666;
     }
+
+    #btn:active {
+        box-shadow: none;
+    }
+
 }
 
 @media all and (max-width: 1366px) {
@@ -77,6 +82,10 @@
         font-size: 12px; 
         font-weight: bold; 
         box-shadow: 1px 1px 3px #013636;
+    }
+
+    #btn:active {
+        box-shadow: none;
     }
 }
 
