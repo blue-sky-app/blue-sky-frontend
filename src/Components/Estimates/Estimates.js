@@ -8,10 +8,16 @@ import { Card, Form, Image, Button } from "react-bootstrap";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, lName, email, accountType } from "../LocalUser/LocalUser";
+import { Message } from "../Message/Message.js";
 import "./Estimates.css";
 
 export function Estimates() {
   const [servicecategories, setServicecategories] = useState([]);
+  const [state, setState] = useState({
+    display: false,
+    type: "",
+    message: ""
+  });
 
   useEffect(() => {
     restrictPage();
@@ -65,11 +71,19 @@ export function Estimates() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let checkID = 1;
-    for (let i = 0; i < categories.length; i++) {
-      if (document.getElementById(checkID + i).checked) {
-        estimateServiceArray.push(document.getElementById(checkID + i).name);
+    for(let i=0; i < categories.length; i++) {
+      let ele = document.getElementById(i+1);
+      if(ele.checked) {
+        estimateServiceArray.push(ele.name);
       }
+    }
+    if(estimateServiceArray.length === 0) {
+      setState(() => ({
+        display: true,
+        type: "fail",
+        message: "noService"
+      }));
+      return;
     }
     console.log(estimateServiceArray);
     const estimateInput = {
@@ -111,6 +125,7 @@ export function Estimates() {
 
             <div>
               {categoryTable}
+              <Message device="browser" display={state.display} type={state.type} message={state.message}/>
               <Button
                 onClick={onSubmit}
                 className="p-2 mt-2"
@@ -147,6 +162,7 @@ export function Estimates() {
 
             <Form className="ml-3">
               {categoryTable}
+              <Message device="mobile" display={state.display} type={state.type} message={state.message}/>
               <Button
                 onClick={onSubmit}
                 className="p-2 mt-2"
