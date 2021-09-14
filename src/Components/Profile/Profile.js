@@ -160,7 +160,7 @@ export function Profile() {
     ) {
       var payload = {
         firstName: state.firstName,
-        lastName: state.firstName,
+        lastName: state.lastName,
         email: state.email,
         accountType: state.accountType,
         password: state.newPassword,
