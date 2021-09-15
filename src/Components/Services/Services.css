@@ -21,12 +21,12 @@
         text-align: center;
     }
 
-    .tableFixHead {
+    .tableFixHd {
         overflow-y: auto;
         height: 60vh;
     }
 
-    .tableFixHead thead th {
+    .tableFixHd thead th {
         position: sticky;
         top: 0;
     }
@@ -98,12 +98,12 @@
         font-size: 12px;
     }
 
-    .tableFixHead {
+    .tableFixHd {
         overflow-y: auto;
-        height: 40vh;
+        height: 55vh;
     }
 
-    .tableFixHead thead th {
+    .tableFixHd thead th {
         position: sticky;
         top: 0;
     }
@@ -138,9 +138,9 @@
 
 @media all and (min-height: 600px) {
 
-    .tableFixHead {
+    .tableFixHd {
         overflow-y: auto;
-        height: 45vh;
+        height: 60vh;
     }
 
     #mcrd {
@@ -151,7 +151,7 @@
 
 @media all and (min-height: 700px) {
 
-    .tableFixHead {
+    .tableFixHd {
         overflow-y: auto;
         height: 60vh;
     }
@@ -164,7 +164,7 @@
 
 @media all and (min-height: 800px) {
 
-    .tableFixHead {
+    .tableFixHd {
         overflow-y: auto;
         height: 58vh;
     }

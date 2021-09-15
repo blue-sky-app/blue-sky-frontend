@@ -146,7 +146,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="email"
                   value={state.email}
-                  placeholder="Email"
+                  placeholder="Email - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -155,7 +155,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="text"
                   value={state.firstName}
-                  placeholder="First Name"
+                  placeholder="First Name - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -164,7 +164,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="text"
                   value={state.lastName}
-                  placeholder="Last Name"
+                  placeholder="Last Name - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -186,7 +186,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="password"
                   value={state.newPassword}
-                  placeholder="New Password"
+                  placeholder="Password - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -195,7 +195,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="password"
                   value={state.confirmPassword}
-                  placeholder="Confirm Password"
+                  placeholder="Confirm Password - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -243,7 +243,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="email"
                   value={state.email}
-                  placeholder="Email"
+                  placeholder="Email - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -252,7 +252,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="text"
                   value={state.firstName}
-                  placeholder="First Name"
+                  placeholder="First Name - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -261,7 +261,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="text"
                   value={state.lastName}
-                  placeholder="Last Name"
+                  placeholder="Last Name - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -283,7 +283,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="password"
                   value={state.newPassword}
-                  placeholder="New Password"
+                  placeholder="Password - required"
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -292,7 +292,7 @@ function SignUp(props) {
                   className="fcontrol"
                   type="password"
                   value={state.confirmPassword}
-                  placeholder="Confirm Password"
+                  placeholder="Confirm Password - required"
                   onChange={handleChange}
                 />
               </Form.Group>
