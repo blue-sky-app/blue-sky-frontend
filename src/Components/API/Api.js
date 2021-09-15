@@ -1,8 +1,8 @@
 import axios from "axios";
 import { newsHeadline } from "../LocalUser/LocalUser";
 
-const API_BASE_URL = "http://localhost:4000/";
-// export const API_BASE_URL = 'https://blueskyapi.herokuapp.com/';
+// const API_BASE_URL = "http://localhost:4000/";
+const API_BASE_URL = "https://blueskyapiv2.herokuapp.com/";
 
 const fetchUser = async () => {
   const response = await axios(`${API_BASE_URL}users/`);
