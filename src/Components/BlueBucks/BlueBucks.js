@@ -44,7 +44,8 @@ export function BlueBucks() {
   let earned = 0;
   let redeemed = 0;
   for (let i in blueBucks) {
-    if (blueBucks[i].transactionType === "Earned") {
+    let bucks = blueBucks[i].transactionType;
+    if (bucks === "Earned" || bucks === "Referral") {
       earned += blueBucks[i].amount;
     } else {
       redeemed += blueBucks[i].amount;
