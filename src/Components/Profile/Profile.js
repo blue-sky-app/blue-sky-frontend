@@ -237,7 +237,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     defaultValue={fName}
-                    placeholder={fName}
+                    placeholder={fName + " - required"}
                     onChange={handleChange}
                     required
                   />
@@ -246,7 +246,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     defaultValue={lName}
-                    placeholder={lName}
+                    placeholder={lName + " - required"}
                     onChange={handleChange}
                     required
                   />
@@ -265,7 +265,7 @@ export function Profile() {
                   <Form.Control
                     type="email"
                     defaultValue={email}
-                    placeholder={email}
+                    placeholder={email + " - required"}
                     onChange={handleChange}
                     required
                   />
@@ -333,7 +333,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     defaultValue={fName}
-                    placeholder={fName}
+                    placeholder={fName + " - required"}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -341,7 +341,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     defaultValue={lName}
-                    placeholder={lName}
+                    placeholder={lName + " - required"}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -357,7 +357,7 @@ export function Profile() {
                   <Form.Control
                     type="email"
                     defaultValue={email}
-                    placeholder={email}
+                    placeholder={email + "- required"}
                     onChange={handleChange}
                   />
                 </Form.Group>
