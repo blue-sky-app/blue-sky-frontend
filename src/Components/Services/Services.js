@@ -90,7 +90,7 @@ export function Services() {
           </Card.Header>
 
           <Card.Body id="crdbody">
-            <div className="tableFixHead">
+            <div className="tableFixHd">
               <Table striped bordered hover size="sm">
                 <thead>
                   <tr>

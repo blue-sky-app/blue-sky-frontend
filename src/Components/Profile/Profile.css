@@ -103,11 +103,6 @@
 
 @media all and (min-height: 700px) {
 
-    .tableFixHead {
-        overflow-y: auto;
-        height: 60vh;
-    }
-
     #pcrd {
         height: 75vh;
     }
