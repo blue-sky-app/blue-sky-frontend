@@ -43,10 +43,13 @@ export function BlueBucks() {
   // Calculation for the Current Balance
   let earned = 0;
   let redeemed = 0;
+  let referral = 0;
   for (let i in blueBucks) {
     let bucks = blueBucks[i].transactionType;
-    if (bucks === "Earned" || bucks === "Referral") {
+    if (bucks === "Earned") {
       earned += blueBucks[i].amount;
+    } else if (bucks === "Referral") {
+      referral += blueBucks[i].amount;
     } else {
       redeemed += blueBucks[i].amount;
     }
@@ -61,7 +64,7 @@ export function BlueBucks() {
 
         <Card className="border-0 w-100 mx-auto">
           <Card.Header
-            className="d-flex justify-content-center align-items-center mb-4 border-0"
+            className="d-flex justify-content-center align-items-center mb-2 border-0"
             id="cardh"
           >
             {fName}'s Blue Bucks History
@@ -70,6 +73,9 @@ export function BlueBucks() {
           <Card.Body className="mx-auto w-50">
             <Card.Title id="ctitle">
               Current Balance: <strong>{currentBalance}</strong>
+            </Card.Title>
+            <Card.Title id="ctitle">
+              Referral Total: <strong>{referral}</strong>
             </Card.Title>
             <div className="tableFixHead">
               <Table striped bordered hover size="sm">
@@ -109,6 +115,9 @@ export function BlueBucks() {
           <Card.Body id="crdbody">
             <Card.Title id="ctitle">
               Current Balance: <strong>{currentBalance}</strong>
+            </Card.Title>
+            <Card.Title id="ctitle">
+              Referral Total: <strong>{referral}</strong>
             </Card.Title>
             <div className="tableFixHead">
               <Table striped bordered hover size="sm">

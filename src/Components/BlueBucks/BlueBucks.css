@@ -1,179 +1,171 @@
 @media all and (min-width: 480px) {
+  .card {
+    border-radius: 0px !important;
+  }
 
-    .card {
-        border-radius: 0px !important;
-    }
+  #cardh {
+    background-color: #fff;
+    height: 40px;
+    font-weight: bold;
+    color: #0a7ebd;
+    font-size: 20px;
+  }
 
-    #cardh {
-        background-color: #FFF;
-        height: 40px;
-        font-weight: bold;
-        color: #0a7ebd;
-        font-size: 20px;
-    }
+  #ctitle {
+    font-size: 18px;
+  }
 
-    #ctitle {
-        font-size: 18px;
-    }
+  #tbdy {
+    font-size: 14px;
+    text-align: center;
+  }
 
-    #tbdy {
-        font-size: 14px; 
-        text-align: center;
-    }
+  .tableFixHead {
+    overflow-y: auto;
+    height: 60vh;
+  }
 
-    .tableFixHead {
-        overflow-y: auto;
-        height: 60vh;
-    }
+  .tableFixHead thead th {
+    position: sticky;
+    top: 0;
+  }
 
-    .tableFixHead thead th {
-        position: sticky;
-        top: 0;
-    }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
+  th,
+  td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+  }
 
-    th, td {
-        padding: 8px 16px;
-        border: 1px solid #ccc;
-    }
+  th {
+    background: #434444;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+  }
 
-    th {
-        background: #434444;
-        color: white;
-        font-size: 16px;
-        text-align: center;
-    }
+  thead {
+    text-align: center;
+  }
 
-    thead {
-        text-align: center;
-    }
-
-    tbody {
-        font-size: 14px; 
-        text-align: center;
-    }
-
+  tbody {
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
 @media all and (max-width: 1366px) {
+  .card {
+    border-radius: 0px !important;
+  }
 
-    .card {
-        border-radius: 0px !important;
-    }
+  #mcrd {
+    height: 71.5vh;
+  }
 
-    #mcrd {
-        height: 71.5vh;
-    }
+  #cardh {
+    background-color: #fff;
+    height: 40px;
+    font-weight: bold;
+    color: #0a7ebd;
+    font-size: 20px;
+  }
 
-    #cardh {
-        background-color: #FFF;
-        height: 40px;
-        font-weight: bold;
-        color: #0a7ebd;
-        font-size: 20px;
-    }
+  #mchead {
+    background-color: #0a7ebd;
+    height: 40px;
+    font-weight: bold;
+  }
 
-    #mchead {
-        background-color: #0a7ebd;
-        height: 40px;
-        font-weight: bold;
-    }
+  #ctitle {
+    font-size: 16px;
+  }
 
-    #ctitle {
-        font-size: 16px;
-    }
+  #tbdy {
+    font-size: 12px;
+    text-align: center;
+  }
 
-    #tbdy {
-        font-size: 12px; 
-        text-align: center;
-    }
+  #earned {
+    font-size: 12px;
+  }
 
-    #earned {
-        font-size: 12px;
-    }
+  .tableFixHead {
+    overflow-y: auto;
+    height: 40vh;
+  }
 
-    .tableFixHead {
-        overflow-y: auto;
-        height: 40vh;
-    }
+  .tableFixHead thead th {
+    position: sticky;
+    top: 0;
+  }
 
-    .tableFixHead thead th {
-        position: sticky;
-        top: 0;
-    }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
+  th,
+  td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+  }
 
-    th, td {
-        padding: 8px 16px;
-        border: 1px solid #ccc;
-    }
+  th {
+    background: #434444;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+  }
 
-    th {
-        background: #434444;
-        color: white;
-        font-size: 16px;
-        text-align: center;
-    }
+  thead {
+    text-align: center;
+  }
 
-    thead {
-        text-align: center;
-    }
-
-    tbody {
-        font-size: 14px; 
-        text-align: center;
-    }
-
+  tbody {
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
 @media all and (min-height: 600px) {
+  .tableFixHead {
+    overflow-y: auto;
+    height: 50vh;
+  }
 
-    .tableFixHead {
-        overflow-y: auto;
-        height: 50vh;
-    }
-
-        #crdbody {
-        min-height: 60vh;
-        max-height: 64vh;
-    } 
-
+  #crdbody {
+    min-height: 60vh;
+    max-height: 64vh;
+  }
 }
 
 @media all and (min-height: 700px) {
+  .tableFixHead {
+    overflow-y: auto;
+    height: 56vh;
+  }
 
-    .tableFixHead {
-        overflow-y: auto;
-        height: 56vh;
-    }
-
-    #crdbody {
-        max-height: 64vh;
-    } 
-
+  #crdbody {
+    max-height: 64vh;
+  }
 }
 
 @media all and (min-height: 800px) {
+  .tableFixHead {
+    overflow-y: auto;
+    height: 52vh;
+  }
 
-    .tableFixHead {
-        overflow-y: auto;
-        height: 52vh;
-    }
+  #crdbody {
+    max-height: 75vh;
+  }
 
-    #crdbody {
-        max-height: 75vh;
-    } 
-
-    #mcrd {
-        height: 75vh;
-    }
-
+  #mcrd {
+    height: 75vh;
+  }
 }
