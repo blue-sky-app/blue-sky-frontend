@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
-import { Card, Image, Table } from "react-bootstrap";
+import { Card, Image, Table, Button } from "react-bootstrap";
 import HeaderLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, invoices } from "../LocalUser/LocalUser";
@@ -24,6 +24,10 @@ export function Services() {
       5
     )}`;
     let updatedServices = [];
+
+    // if (invoices[i].date >)
+    console.log(invoices[i].date);
+
     for (let j in invoices[i].services) {
       updatedServices.push(<div>{invoices[i].services[j]}</div>);
     }
@@ -32,6 +36,11 @@ export function Services() {
         <td className="align-self-center">{newDate}</td>
         <td>${invoices[i].invoiceAmount}</td>
         <td>{updatedServices}</td>
+        <td>
+          <Button variant="secondary" size="sm">
+            Repeat
+          </Button>
+        </td>
       </tr>
     );
   }
@@ -65,6 +74,7 @@ export function Services() {
                     <th>Date</th>
                     <th>Amount</th>
                     <th>Services</th>
+                    <th>Repeat</th>
                   </tr>
                 </thead>
                 <tbody id="tbdy">{invoiceInputs}</tbody>
@@ -97,6 +107,7 @@ export function Services() {
                     <th>Date</th>
                     <th>Amount</th>
                     <th>Services</th>
+                    <th>Repeat</th>
                   </tr>
                 </thead>
                 <tbody id="tbdy">{invoiceInputs}</tbody>
