@@ -83,7 +83,7 @@ export function Message(props) {
         break;
 
     case "emailFormat":
-        notice = "The email you entered is not in the correct format. Ex. 'example@example.com'"
+        notice = "The email you entered is not in the correct format. (Ex. 'example@example.com')"
         break;
     // no default
 }
