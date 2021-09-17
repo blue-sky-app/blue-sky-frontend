@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import MetaTags from "react-meta-tags";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
@@ -32,16 +33,125 @@ export function Services() {
     for (let j in invoices[i].services) {
       updatedServices.push(<div>{invoices[i].services[j]}</div>);
     }
+
+    // Button Logic
+    let buttonInput = [];
+    const year = parseInt(
+      newDate.charAt(6) +
+        newDate.charAt(7) +
+        newDate.charAt(8) +
+        newDate.charAt(9)
+    );
+    const month = parseInt(newDate.charAt(0) + newDate.charAt(1));
+    const day = parseInt(newDate.charAt(3) + newDate.charAt(4));
+
+    let monthCount = 0;
+
+    switch (month) {
+      case 1:
+        monthCount = 0;
+        break;
+      case 2:
+        monthCount = 31;
+        break;
+      case 3:
+        monthCount = 59;
+        break;
+      case 4:
+        monthCount = 90;
+        break;
+      case 5:
+        monthCount = 120;
+        break;
+      case 6:
+        monthCount = 151;
+        break;
+      case 7:
+        monthCount = 181;
+        break;
+      case 8:
+        monthCount = 212;
+        break;
+      case 9:
+        monthCount = 243;
+        break;
+      case 10:
+        monthCount = 273;
+        break;
+      case 11:
+        monthCount = 304;
+        break;
+      case 12:
+        monthCount = 334;
+        break;
+      default:
+      // nothing
+    }
+    const inputDate = year * 365 + monthCount + day;
+    const currentDate = new Date();
+
+    let newMonth = 0;
+    switch (currentDate.getMonth() + 1) {
+      case 1:
+        newMonth = 0;
+        break;
+      case 2:
+        newMonth = 31;
+        break;
+      case 3:
+        newMonth = 59;
+        break;
+      case 4:
+        newMonth = 90;
+        break;
+      case 5:
+        newMonth = 120;
+        break;
+      case 6:
+        newMonth = 151;
+        break;
+      case 7:
+        newMonth = 181;
+        break;
+      case 8:
+        newMonth = 212;
+        break;
+      case 9:
+        newMonth = 243;
+        break;
+      case 10:
+        newMonth = 273;
+        break;
+      case 11:
+        newMonth = 304;
+        break;
+      case 12:
+        newMonth = 334;
+        break;
+      default:
+      // nothing
+    }
+
+    const today =
+      currentDate.getFullYear() * 365 + newMonth + currentDate.getDate();
+    console.log(inputDate);
+    console.log(today);
+
+    if (today - inputDate > 180) {
+      buttonInput.push(<Link to="/estimates">New Estimate</Link>);
+    } else {
+      buttonInput.push(
+        <Button variant="secondary" size="sm">
+          Repeat
+        </Button>
+      );
+    }
     invoiceInputs.push(
       <tr style={{ fontSize: "12px", alignItems: "center" }}>
         <td className="align-self-center">{newDate}</td>
         <td>${invoices[i].invoiceAmount}</td>
         <td>{updatedServices}</td>
-        <td>
-          <Button variant="secondary" size="sm">
-            Repeat
-          </Button>
-        </td>
+        <td>{buttonInput}</td>
       </tr>
     );
   }
