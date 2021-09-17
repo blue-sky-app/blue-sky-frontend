@@ -24,6 +24,7 @@ import {
 } from "../LocalUser/LocalUser";
 import { Message } from "../Message/Message.js";
 import "./Profile.css";
+import validator from "validator";
 
 export function Profile() {
   const [accountOption, setAccountOption] = useState();
@@ -133,17 +134,28 @@ export function Profile() {
     var duplicate;
     if (state.email !== email) {
       for (let i in users) {
-        if (state.email === users[i].email) {
-          duplicate = true;
+        if (validator.isEmail(state.email)) {
+          if (state.email === users[i].email) {
+            duplicate = true;
+            setState((prevState) => ({
+              ...prevState,
+              display: true,
+              type: "fail",
+              message: "duplicate",
+            }));
+            return;
+          } else {
+            duplicate = false;
+          }
+        }
+        else {
           setState((prevState) => ({
             ...prevState,
             display: true,
             type: "fail",
-            message: "duplicate",
+            message: "emailFormat",
           }));
           return;
-        } else {
-          duplicate = false;
         }
       }
     }

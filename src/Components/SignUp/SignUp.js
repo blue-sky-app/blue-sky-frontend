@@ -6,6 +6,7 @@ import BlueSkyLogo from "../Images/loginLogo.png";
 import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import { API_BASE_URL, fetchUser } from "../API/Api";
 import { withRouter } from "react-router-dom";
+import validator from "validator";
 import { Message } from "../Message/Message";
 import "./SignUp.css";
 
@@ -90,17 +91,28 @@ function SignUp(props) {
   const checkEmailDup = () => {
     var duplicate;
     for (let i in users) {
-      if (state.email === users[i].email) {
-        duplicate = true;
+      if (validator.isEmail(state.email)) {
+        if (state.email === users[i].email) {
+          duplicate = true;
+          setState((prevState) => ({
+            ...prevState,
+            display: true,
+            type: "fail",
+            message: "duplicate",
+          }));
+          return;
+        } else {
+          duplicate = false;
+        }
+      }
+      else {
         setState((prevState) => ({
           ...prevState,
           display: true,
           type: "fail",
-          message: "duplicate",
+          message: "emailFormat",
         }));
         return;
-      } else {
-        duplicate = false;
       }
     }
 
