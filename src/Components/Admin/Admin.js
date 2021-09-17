@@ -1,4 +1,5 @@
 import React from "react";
+import MetaTags from "react-meta-tags";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { AdminSearchUsers } from "./AdminSearchUsers";
@@ -13,6 +14,16 @@ import "./Admin.css";
 export function Admin() {
   return (
     <>
+      <MetaTags>
+        <title>Blue Sky | Admin</title>
+        <meta
+          name="Blue Sky Services"
+          content="Welcome to Blue Sky, we are your go to for Commercial and Residential cleaning!"
+        />
+        <meta property="og:title" content="Blue Sky Admin" />
+        <meta property="og:image" content="../Images/Header.png" />
+      </MetaTags>
+
       <BrowserView>
         <Image
           src={HeaderLogo}

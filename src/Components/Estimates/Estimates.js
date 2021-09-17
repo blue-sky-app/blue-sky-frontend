@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MetaTags from "react-meta-tags";
 import axios from "axios";
 import { API_BASE_URL, restrictPage } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
@@ -16,7 +17,7 @@ export function Estimates() {
   const [state, setState] = useState({
     display: false,
     type: "",
-    message: ""
+    message: "",
   });
 
   useEffect(() => {
@@ -71,17 +72,17 @@ export function Estimates() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    for(let i=0; i < categories.length; i++) {
-      let ele = document.getElementById(i+1);
-      if(ele.checked) {
+    for (let i = 0; i < categories.length; i++) {
+      let ele = document.getElementById(i + 1);
+      if (ele.checked) {
         estimateServiceArray.push(ele.name);
       }
     }
-    if(estimateServiceArray.length === 0) {
+    if (estimateServiceArray.length === 0) {
       setState(() => ({
         display: true,
         type: "fail",
-        message: "noService"
+        message: "noService",
       }));
       return;
     }
@@ -108,6 +109,16 @@ export function Estimates() {
 
   return (
     <>
+      <MetaTags>
+        <title>Blue Sky | Estimates</title>
+        <meta
+          name="Blue Sky Estimates"
+          content="Welcome to Blue Sky, we are your go to for Commercial and Residential cleaning!"
+        />
+        <meta property="og:title" content="Blue Sky Estimates" />
+        <meta property="og:image" content="../Images/Header.png" />
+      </MetaTags>
+
       <BrowserView>
         <BrowserNavBar active="estimates" />
         <Card className="border-0 w-100 mx-auto">
@@ -125,7 +136,12 @@ export function Estimates() {
 
             <div>
               {categoryTable}
-              <Message device="browser" display={state.display} type={state.type} message={state.message}/>
+              <Message
+                device="browser"
+                display={state.display}
+                type={state.type}
+                message={state.message}
+              />
               <Button
                 onClick={onSubmit}
                 className="p-2 mt-2"
@@ -162,7 +178,12 @@ export function Estimates() {
 
             <Form className="ml-3">
               {categoryTable}
-              <Message device="mobile" display={state.display} type={state.type} message={state.message}/>
+              <Message
+                device="mobile"
+                display={state.display}
+                type={state.type}
+                message={state.message}
+              />
               <Button
                 onClick={onSubmit}
                 className="p-2 mt-2"

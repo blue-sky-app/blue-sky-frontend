@@ -1,4 +1,5 @@
 import React from "react";
+import MetaTags from "react-meta-tags";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -11,6 +12,16 @@ import "./Estimates.css";
 export function ThankYou() {
   return (
     <>
+      <MetaTags>
+        <title>Blue Sky | Thanks!</title>
+        <meta
+          name="Blue Sky Thanks"
+          content="Welcome to Blue Sky, we are your go to for Commercial and Residential cleaning!"
+        />
+        <meta property="og:title" content="Blue Sky Thanks" />
+        <meta property="og:image" content="../Images/Header.png" />
+      </MetaTags>
+
       <BrowserView>
         <BrowserNavBar active="estimates" />
         <Card className="border-0 w-100 mx-auto">

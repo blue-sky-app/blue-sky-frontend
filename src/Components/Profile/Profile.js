@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MetaTags from "react-meta-tags";
 import axios from "axios";
 import {
   API_BASE_URL,
@@ -220,6 +221,16 @@ export function Profile() {
 
   return (
     <>
+      <MetaTags>
+        <title>Blue Sky | Profile</title>
+        <meta
+          name="Blue Sky Profile"
+          content="Welcome to Blue Sky, we are your go to for Commercial and Residential cleaning!"
+        />
+        <meta property="og:title" content="Blue Sky Profile" />
+        <meta property="og:image" content="../Images/Header.png" />
+      </MetaTags>
+
       <BrowserView>
         <BrowserNavBar active="profile" />
         <Card className="border-0 w-100 mx-auto">
