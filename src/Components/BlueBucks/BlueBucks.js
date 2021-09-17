@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import MetaTags from "react-meta-tags";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -59,6 +60,16 @@ export function BlueBucks() {
 
   return (
     <>
+      <MetaTags>
+        <title>Blue Sky | Blue Bucks</title>
+        <meta
+          name="Blue Sky Blue Bucks"
+          content="Welcome to Blue Sky, we are your go to for Commercial and Residential cleaning!"
+        />
+        <meta property="og:title" content="Blue Sky Blue Bucks" />
+        <meta property="og:image" content="../Images/Header.png" />
+      </MetaTags>
+
       <BrowserView>
         <BrowserNavBar active="blueBucks" />
 
