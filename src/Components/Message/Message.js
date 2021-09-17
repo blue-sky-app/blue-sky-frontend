@@ -80,6 +80,11 @@ export function Message(props) {
 
     case "noService":
         notice = "Please make at least one selection."
+        break;
+
+    case "emailFormat":
+        notice = "The email you entered is not in the correct format. (Ex. 'example@example.com')"
+        break;
     // no default
 }
 

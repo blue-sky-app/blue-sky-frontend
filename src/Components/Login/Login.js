@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-//import PropTypes from 'prop-types';
-//import axios from "axios";
 import { fetchUser, fetchNews } from "../API/Api.js";
 import { BrowserView, MobileView } from "react-device-detect";
 import Form from "react-bootstrap/Form";
@@ -90,7 +88,14 @@ export function Login() {
       }
       sessionStorage.setItem("localUser", JSON.stringify(userArray));
       console.log(sessionStorage.getItem("localUser"));
-      window.location.href = "/home";
+
+      //TEMPORARY --hard coding admin check on email--
+      if (userArray[0].localEmail === "seth@blueforu.com") {
+        window.location.href = "/admin"
+      }
+      else {
+        window.location.href = "/home";
+      }
     }
   };
 
@@ -111,13 +116,12 @@ export function Login() {
           <div className="w-50 mx-auto" id="form">
             <Form>
               <Form.Group size="lg" controlId="email">
-                <Form.Control type="email" placeholder="Email" id="email" />
+                <Form.Control type="email" placeholder="Email"/>
               </Form.Group>
               <Form.Group size="lg" controlId="password">
                 <Form.Control
                   type="password"
                   placeholder="Password"
-                  id="password"
                 />
               </Form.Group>
               <br />
@@ -169,7 +173,6 @@ export function Login() {
               <Form.Group size="lg" controlId="password">
                 <Form.Control type="password" placeholder="Password" />
               </Form.Group>
-              <p id="invalid"></p>
               <br />
               <Button
                 onClick={handleSubmit}
