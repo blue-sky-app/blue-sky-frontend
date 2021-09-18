@@ -3,12 +3,32 @@
 
   /*set div after "<BrowserView>" to this id*/
   #bckgrnd {
-    background-image: url("../Images/DesktopLoginBackground.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-image: linear-gradient(to bottom, #007bc2, #e6f2ff);
     min-height: 100vh;
     min-width: 100%;
   }
+
+  .clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../Images/clouds.png");
+    animation: animate 60s linear infinite;
+  }
+  @keyframes animate
+  {
+    0%
+    {
+      background-position: 0px;
+    }
+    100%
+    {
+      background-position: -3094px;
+    }
+  }
+
 
   .wrapper {
     position: relative;

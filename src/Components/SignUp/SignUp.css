@@ -1,9 +1,7 @@
 @media all and (min-width: 480px) {
 
   #bckgrnd {
-      background-image: url("../Images/DesktopLoginBackground.png");
-      background-repeat: no-repeat;
-      background-size: cover;
+      background-image: linear-gradient(to bottom, #57cdff, #e6f2ff);
       min-height: 100vh;
       min-width: 100%;
   }
