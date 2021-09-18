@@ -1,7 +1,7 @@
 @media all and (min-width: 480px) {
 
   #bckgrnd {
-      background-image: linear-gradient(to bottom, #57cdff, #e6f2ff);
+      background-image: linear-gradient(to bottom, #49b7e8, #e6f2ff);
       min-height: 100vh;
       min-width: 100%;
   }
