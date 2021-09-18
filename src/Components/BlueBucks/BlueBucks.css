@@ -11,8 +11,12 @@
     font-size: 20px;
   }
 
-  #ctitle {
+  #btitle {
     font-size: 18px;
+  }
+
+  #rtitle {
+    font-size: 14px;
   }
 
   #tbdy {
@@ -63,8 +67,8 @@
     border-radius: 0px !important;
   }
 
-  #mcrd {
-    height: 71.5vh;
+  #bcrd {
+    height: 75vh;
   }
 
   #cardh {
@@ -81,8 +85,12 @@
     font-weight: bold;
   }
 
-  #ctitle {
-    font-size: 16px;
+  #btitle {
+    font-size: 18px;
+  }
+
+  #rtitle {
+    font-size: 14px;
   }
 
   #tbdy {
@@ -90,8 +98,8 @@
     text-align: center;
   }
 
-  #earned {
-    font-size: 12px;
+  #bbearned {
+    font-size: 14px;
   }
 
   .tableFixHead {
@@ -135,22 +143,21 @@
 @media all and (min-height: 600px) {
   .tableFixHead {
     overflow-y: auto;
-    height: 50vh;
+    height: 45vh;
   }
 
-  #crdbody {
-    min-height: 60vh;
-    max-height: 64vh;
+  #brdbody {
+    height: 60vh;
   }
 }
 
 @media all and (min-height: 700px) {
   .tableFixHead {
     overflow-y: auto;
-    height: 56vh;
+    height: 48vh;
   }
 
-  #crdbody {
+  #brdbody {
     max-height: 64vh;
   }
 }
@@ -158,14 +165,22 @@
 @media all and (min-height: 800px) {
   .tableFixHead {
     overflow-y: auto;
-    height: 52vh;
+    height: 55vh;
   }
 
-  #crdbody {
+  #brdbody {
     max-height: 75vh;
   }
 
-  #mcrd {
-    height: 75vh;
+  #bcrd {
+    height: 80vh;
   }
+}
+
+@media all and (max-height: 570px) {
+
+  #bcrd {
+    height: 71.5vh;
+  }
+
 }

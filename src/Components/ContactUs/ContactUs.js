@@ -6,7 +6,7 @@ import "./ContactUs.css";
 export function ContactUs() {
   return (
     <div
-      className="d-flex justify-content-center align-items-center"
+      className="d-flex pt-2 justify-content-center align-items-center"
       id="bckclr"
     >
       <p id="contact">Got Questions? Call us at 1-844-992-5326</p>
