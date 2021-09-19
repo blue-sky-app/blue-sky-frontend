@@ -10,7 +10,7 @@ import { Card, Image, Tabs, Tab } from "react-bootstrap";
 import HeaderLogo from "../Images/topLogoBar.png";
 import "./Admin.css";
 
-export function Admin() {
+export function UpdateUser() {
   return (
     <>
       <BrowserView>
@@ -25,29 +25,7 @@ export function Admin() {
           >
             Admin Console
           </Card.Header>
-          <Card.Body className="mx-auto w-75">
-            <Tabs
-              defaultActiveKey="profile"
-              id="uncontrolled-tab-example"
-              className="mb-3"
-            >
-              <Tab eventKey="dashboard" title="Dashboard">
-                <AdminDashboard />
-              </Tab>
-              <Tab eventKey="estimates" title="Estimates">
-                <AdminEstimates />
-              </Tab>
-              <Tab eventKey="searchUsers" title="Search Users">
-                <AdminSearchUsers />
-              </Tab>
-              <Tab eventKey="categories" title="Categories">
-                <AdminCategories />
-              </Tab>
-              <Tab eventKey="news" title="News">
-                <AdminNews />
-              </Tab>
-            </Tabs>
-          </Card.Body>
+          <Card.Title>Update User</Card.Title>
         </Card>
       </BrowserView>
 
