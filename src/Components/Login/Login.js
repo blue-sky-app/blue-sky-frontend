@@ -103,49 +103,50 @@ export function Login() {
     <>
       <BrowserView>
         <div className="d-flex flex-column mx-auto" id="bckgrnd">
-          <div className="img-fluid mt-5">
-            <Image id="img" src={BlueSkyLogo} />
-          </div>
-
-          <div>
-            <p className="mt-1 w-80 mx-auto text-center" id="text">
-              SERVING CENTRAL FLORIDA
-            </p>
-          </div>
-          <br />
-          <div className="w-50 mx-auto" id="form">
-            <Form>
-              <Form.Group size="lg" controlId="email">
-                <Form.Control type="email" placeholder="Email"/>
-              </Form.Group>
-              <Form.Group size="lg" controlId="password">
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
+          <div className="clouds">
+            <div className="img-fluid mt-5">
+              <Image id="img" src={BlueSkyLogo} />
+            </div>
+            <div>
+              <p className="mt-1 w-80 mx-auto text-center" id="text">
+                SERVING CENTRAL FLORIDA
+              </p>
+            </div>
+            <br />
+            <div className="w-50 mx-auto" id="form">
+              <Form>
+                <Form.Group size="lg" controlId="email">
+                  <Form.Control type="email" placeholder="Email"/>
+                </Form.Group>
+                <Form.Group size="lg" controlId="password">
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                  />
+                </Form.Group>
+                <br />
+                <Message
+                  device="browser"
+                  display={state.display}
+                  type={state.type}
+                  message={state.message}
                 />
-              </Form.Group>
-              <br />
-              <Message
-                device="browser"
-                display={state.display}
-                type={state.type}
-                message={state.message}
-              />
-              <Button
-                onClick={handleSubmit}
-                id="loginButton"
-                block
-                size="md"
-                type="submit"
-              >
-                LOGIN
+                <Button
+                  onClick={handleSubmit}
+                  id="loginButton"
+                  block
+                  size="md"
+                  type="submit"
+                >
+                  LOGIN
+                </Button>
+              </Form>
+            </div>
+            <div className="mt-3 mb-5 w-50 mx-auto" id="form">
+              <Button href="/signUp" variant="secondary" block size="md">
+                SIGN UP
               </Button>
-            </Form>
-          </div>
-          <div className="mt-3 mb-5 w-50 mx-auto" id="form">
-            <Button href="/signUp" variant="secondary" block size="md">
-              SIGN UP
-            </Button>
+            </div>
           </div>
         </div>
       </BrowserView>
