@@ -1,9 +1,11 @@
 @media all and (min-width: 480px) {
 
+  /*replace #218acf with #49b7e8 for a higher contrast with logo and lighter background color*/
   #bckgrnd {
-      background-image: linear-gradient(to bottom, #49b7e8, #e6f2ff);
-      min-height: 100vh;
+      background-image: linear-gradient(to bottom, #218acf, #e6f2ff);
+      background-size: cover;
       min-width: 100%;
+      overflow: hidden;
   }
 
   #img{
@@ -33,7 +35,7 @@
     font-size: 14px;
   }
 
-  #form {
+  #sform {
       max-width: 350px;
     }
 
@@ -52,11 +54,12 @@
 
 @media all and (max-width: 480px) {
 
-    #bckgrnd {
-    background-image: linear-gradient(to bottom, #b1ddf2, #e6f2ff);
+  #bckgrnd {
+    background-image: linear-gradient(to bottom, #218acf, #f0f7fc);
+    background-size: cover;
     min-height: 100vh;
-    min-width: 100%;
-    overflow-y: auto;
+    width: 100%;
+    overflow-y: scroll;
   }
 
   .wrapper {
@@ -85,7 +88,7 @@
    width: 100%; 
   }
 
-  #form {
+  #sform {
     max-width: 250px;
   }
 
