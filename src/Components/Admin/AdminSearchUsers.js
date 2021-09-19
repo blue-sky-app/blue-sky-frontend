@@ -6,7 +6,7 @@ import "./Admin.css";
 
 export function AdminSearchUsers() {
   const [users, setUsers] = useState([]);
-  const [inputValue, setInputValue] = useState([]);
+  const [inputValue, setInputValue] = useState(null);
   const [userSearch, setUserSearch] = useState([]);
 
   // This fetch is for the Users
@@ -32,9 +32,15 @@ export function AdminSearchUsers() {
     e.preventDefault();
     for (let i in users) {
       if (
-        inputValue === users[i].email ||
-        inputValue === users[i].lastName ||
-        inputValue === users[i].firstName
+        inputValue === null ||
+        inputValue === "" ||
+        inputValue.toLowerCase() === users[i].email.toLowerCase() ||
+        inputValue.toLowerCase() === users[i].lastName.toLowerCase() ||
+        inputValue.toLowerCase() === users[i].firstName.toLowerCase() ||
+        inputValue.toLowerCase() ===
+          users[i].firstName.toLowerCase() +
+            " " +
+            users[i].lastName.toLowerCase()
       ) {
         // Services/Invoices Info
         let updatedServices = [];
@@ -87,12 +93,17 @@ export function AdminSearchUsers() {
           );
         }
         searchResults.push(
-          <tr style={{ fontSize: "11px", alignItems: "center" }}>
-            <td className="align-self-center">{users[i].firstName}</td>
-            <td className="align-self-center">{users[i].lastName}</td>
-            <td className="align-self-center">{users[i].email}</td>
-            <td className="align-self-center">{updatedServices}</td>
-            <td className="align-self-center">{updatedBlueBucks}</td>
+          <tr style={{ fontSize: "11px" }}>
+            <td>{users[i].firstName}</td>
+            <td>{users[i].lastName}</td>
+            <td>{users[i].email}</td>
+            <td>{updatedServices}</td>
+            <td>{updatedBlueBucks}</td>
+            <td>
+              <Button variant="secondary" size="sm">
+                Edit
+              </Button>
+            </td>
           </tr>
         );
       }
@@ -130,6 +141,7 @@ export function AdminSearchUsers() {
             <th>Email</th>
             <th>Service History</th>
             <th>Blue Bucks</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody id="tbdy">{userSearch}</tbody>
