@@ -108,6 +108,9 @@ export function Login() {
               <Image id="img" src={BlueSkyLogo} />
             </div>
             <div>
+              <p className="mt-1 w-80 mx-auto text-center" id="ltext">
+                RESIDENTIAL & COMMERCIAL CLEANING
+              </p>
               <p className="mt-1 w-80 mx-auto text-center" id="text">
                 SERVING CENTRAL FLORIDA
               </p>
@@ -153,11 +156,19 @@ export function Login() {
 
       <MobileView>
         <div className="d-flex flex-column mx-auto" id="bckgrnd">
+        <div className="clouds">
           <div className="wrapper">
-            <Image src={MobileBlueSkyLogo} className="image-fluid" />
+          <div className="img-fluid">
+              <Image className="d-flex flex-column mx-auto" id="mimg" src={BlueSkyLogo} />
+            </div>
+            <div className="logo-text">
+            <p className="mt-1 w-80 mx-auto text-center" id="ltext">
+                RESIDENTIAL & COMMERCIAL CLEANING
+              </p><br/>
             <p className="mt-3 w-80 mx-auto text-center" id="text">
               SERVING CENTRAL FLORIDA
             </p>
+            </div>
           </div>
 
           <div className="mt-5 w-75 mx-auto" id="form">
@@ -190,6 +201,7 @@ export function Login() {
             <Button href="/signUp" variant="secondary" block size="md">
               SIGN UP
             </Button>
+          </div>
           </div>
         </div>
       </MobileView>

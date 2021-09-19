@@ -144,6 +144,9 @@ function SignUp(props) {
               <Image id="img" src={BlueSkyLogo} />
             </div>
             <div>
+            <p className="mt-1 w-80 mx-auto text-center" id="ltext">
+                RESIDENTIAL & COMMERCIAL CLEANING
+              </p>
               <p className="mt-1 w-80 mx-auto text-center" id="text">
                 SERVING CENTRAL FLORIDA
               </p>
@@ -240,97 +243,108 @@ function SignUp(props) {
 
       <MobileView>
         <div className="d-flex flex-column mx-auto" id="bckgrnd">
-          <div className="wrapper">
-            <Image src={MobileBlueSkyLogo} className="image-fluid" />
-            <p className="mt-3 w-80 mx-auto text-center" id="text">
-              SERVING CENTRAL FLORIDA
-            </p>
-          </div>
-          <br />
-          <div className="w-75 mx-auto" id="form">
-            <Form>
-              <Form.Label className="mt-1" id="flabel">
-                REGISTER NEW USER
-              </Form.Label>
-              <Form.Group size="lg" controlId="email" className="mb-1">
-                <Form.Control
-                  className="fcontrol"
-                  type="email"
-                  value={state.email}
-                  placeholder="Email - required"
-                  onChange={handleChange}
+          <div>
+          <div className="clouds">
+            <div className="wrapper">
+            <div className="img-fluid">
+                <Image className="d-flex flex-column mx-auto" id="mimg" src={BlueSkyLogo} />
+              </div>
+              <div className="logo-text">
+              <p className="mt-1 w-80 mx-auto text-center" id="ltext">
+                  RESIDENTIAL & COMMERCIAL CLEANING
+                </p><br/>
+              <p className="mt-3 w-80 mx-auto text-center" id="text">
+                SERVING CENTRAL FLORIDA
+              </p>
+              </div>
+            </div>
+            <br />
+            <div className="w-75 mx-auto" id="sform">
+              <Form>
+                <Form.Label className="mt-1" id="flabel">
+                  REGISTER NEW USER
+                </Form.Label>
+                <Form.Group size="lg" controlId="email" className="mb-1">
+                  <Form.Control
+                    className="fcontrol"
+                    type="email"
+                    value={state.email}
+                    placeholder="Email - required"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="firstName" className="mb-1">
+                  <Form.Control
+                    className="fcontrol"
+                    type="text"
+                    value={state.firstName}
+                    placeholder="First Name - required"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="lastName" className="mb-1">
+                  <Form.Control
+                    className="fcontrol"
+                    type="text"
+                    value={state.lastName}
+                    placeholder="Last Name - required"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="accountType" className="mb-1">
+                  <Form.Control
+                    as="select"
+                    className="fcontrol"
+                    type="text"
+                    value={state.accountType}
+                    onChange={handleChange}
+                  >
+                    <option>Choose Service Type</option>
+                    <option>Commercial</option>
+                    <option>Residential</option>
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group size="lg" controlId="newPassword" className="mb-1">
+                  <Form.Control
+                    className="fcontrol"
+                    type="password"
+                    value={state.newPassword}
+                    placeholder="Password - required"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="confirmPassword">
+                  <Form.Control
+                    className="fcontrol"
+                    type="password"
+                    value={state.confirmPassword}
+                    placeholder="Confirm Password - required"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Message
+                  device="mobile"
+                  display={state.display}
+                  type={state.type}
+                  message={state.message}
                 />
-              </Form.Group>
-              <Form.Group size="lg" controlId="firstName" className="mb-1">
-                <Form.Control
-                  className="fcontrol"
-                  type="text"
-                  value={state.firstName}
-                  placeholder="First Name - required"
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group size="lg" controlId="lastName" className="mb-1">
-                <Form.Control
-                  className="fcontrol"
-                  type="text"
-                  value={state.lastName}
-                  placeholder="Last Name - required"
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group size="lg" controlId="accountType" className="mb-1">
-                <Form.Control
-                  as="select"
-                  className="fcontrol"
-                  type="text"
-                  value={state.accountType}
-                  onChange={handleChange}
+                <Button
+                  href="/home"
+                  block
+                  size="md"
+                  type="submit"
+                  onClick={handleSubmitClick}
                 >
-                  <option>Choose Service Type</option>
-                  <option>Commercial</option>
-                  <option>Residential</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group size="lg" controlId="newPassword" className="mb-1">
-                <Form.Control
-                  className="fcontrol"
-                  type="password"
-                  value={state.newPassword}
-                  placeholder="Password - required"
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group size="lg" controlId="confirmPassword">
-                <Form.Control
-                  className="fcontrol"
-                  type="password"
-                  value={state.confirmPassword}
-                  placeholder="Confirm Password - required"
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Message
-                device="mobile"
-                display={state.display}
-                type={state.type}
-                message={state.message}
-              />
-              <Button
-                href="/home"
-                block
-                size="md"
-                type="submit"
-                onClick={handleSubmitClick}
-              >
-                SUBMIT
+                  SUBMIT
+                </Button>
+              </Form>
+            </div>
+            <div className="mt-2 mb-3 w-75 mx-auto" id="sform">
+              <Button href="/login" variant="secondary" block size="md">
+                LOGIN
               </Button>
-            </Form>
+            </div>
           </div>
-          <div className="mt-2 mb-5 w-75 mx-auto" id="form">
-            <Button href="/login" variant="secondary" block size="md">
-              LOGIN
-            </Button>
           </div>
         </div>
       </MobileView>
