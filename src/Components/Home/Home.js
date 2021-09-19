@@ -95,7 +95,7 @@ export function Home() {
             className="d-flex justify-content-center align-items-center text-white"
             id="header"
           >
-            <Card.Text className="text-center w-75 mr-1 ml-1" id="ctext">
+            <Card.Text className="text-center mr-1 ml-1" id="ctext">
               <div>
                 <strong>{newsHeadline}</strong>
                 <br /> {newsText}
@@ -110,19 +110,19 @@ export function Home() {
           ></div>
 
           <Card.Body
-            className="d-flex flex-column justify-content-center align-items-center"
+            className="d-flex p-1 pt-3 flex-column justify-content-center align-items-center"
             id="cardbody"
           >
             <Card.Text className="text-center mr-3 ml-3 mb-1" id="blueyou">
               WHAT CAN BLUE DO FOR YOU?
             </Card.Text>
-            <Card.Text className="mr-3 ml-3 mt-2 text-center" id="estimates">
+            <Card.Text className="mr-2 ml-2 mt-2 text-center" id="estimates">
               All estimates and proposals are guaranteed for six months and are
               completed free of charge
             </Card.Text>
           </Card.Body>
           <Card.Body
-            className="d-flex justify-content-center align-items-center"
+            className="d-flex justify-content-center"
             id="cardbody"
           >
             <Button

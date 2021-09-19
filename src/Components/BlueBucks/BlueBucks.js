@@ -82,11 +82,11 @@ export function BlueBucks() {
           </Card.Header>
 
           <Card.Body className="mx-auto w-50">
-            <Card.Title id="ctitle">
+            <Card.Title id="btitle">
               Current Balance: <strong>{currentBalance}</strong>
             </Card.Title>
-            <Card.Title id="ctitle">
-              Referral Total: <strong>{referral}</strong>
+            <Card.Title id="rtitle">
+              Referral Total: {referral}
             </Card.Title>
             <div className="tableFixHead">
               <Table striped bordered hover size="sm">
@@ -115,7 +115,7 @@ export function BlueBucks() {
           className="d-flex w-100 mx-auto justify-content-center"
         />
 
-        <Card className="border-0" id="mcrd">
+        <Card className="border-0" id="bcrd">
           <Card.Header
             className="d-flex justify-content-center align-items-center text-white"
             id="mchead"
@@ -123,15 +123,15 @@ export function BlueBucks() {
             {fName}'s Blue Bucks History
           </Card.Header>
 
-          <Card.Body id="crdbody">
-            <Card.Title id="ctitle">
+          <Card.Body id="brdbody">
+            <Card.Title id="btitle">
               Current Balance: <strong>{currentBalance}</strong>
             </Card.Title>
-            <Card.Title id="ctitle">
-              Referral Total: <strong>{referral}</strong>
+            <Card.Title id="rtitle">
+              Referral Total: {referral}
             </Card.Title>
             <div className="tableFixHead">
-              <Table striped bordered hover size="sm">
+              <Table striped bordered hover size="sm" id="mbbtable">
                 <thead>
                   <tr>
                     <th>Transaction Type</th>
@@ -143,7 +143,7 @@ export function BlueBucks() {
               </Table>
             </div>
           </Card.Body>
-          <Card.Text className="text-center mr-3 ml-3 mb-1" id="earned">
+          <Card.Text className="text-center mr-3 ml-3 mb-1" id="bbearned">
             Blue Bucks are earned through special promotions and upon payment of
             services and can be redeemed for future service discounts.
           </Card.Text>
