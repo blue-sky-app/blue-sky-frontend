@@ -2,25 +2,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../API/Api.js";
 import { Table, Form, InputGroup, FormControl, Button } from "react-bootstrap";
+import { fetchUser } from "../API/Api.js";
+import Modal from "../Modal/Modal.js";
 import "./Admin.css";
 
 export function AdminSearchUsers() {
   const [users, setUsers] = useState([]);
   const [inputValue, setInputValue] = useState(null);
   const [userSearch, setUserSearch] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   // This fetch is for the Users
   useEffect(() => {
-    fetchUsers();
+    fetchUser().then(setUsers);
   }, []);
   useEffect(() => {
     console.log(users);
   }, [users]);
-
-  const fetchUsers = async () => {
-    const response = await axios(`${API_BASE_URL}users/`);
-    setUsers(response.data);
-  };
 
   let searchResults = [];
 
@@ -100,7 +98,7 @@ export function AdminSearchUsers() {
             <td>{updatedServices}</td>
             <td>{updatedBlueBucks}</td>
             <td>
-              <Button variant="secondary" size="sm">
+              <Button onClick={()=>setIsOpen(true)} variant="secondary" size="sm">
                 Edit
               </Button>
             </td>
@@ -113,6 +111,63 @@ export function AdminSearchUsers() {
 
   return (
     <>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+            <h5>
+              Update User
+            </h5>
+              <Form>
+                <Form.Group size="lg" controlId="firstName">
+                  <Form.Control
+                    type="text"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="lastName">
+                  <Form.Control
+                    type="text"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control
+                    as="select"
+                  >
+                    <option value="accountType">accountType</option>
+                    <option value="accountType">accountType</option>
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group size="lg" controlId="email">
+                  <Form.Control
+                    type="email"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="newPassword">
+                  <Form.Text id="passwordHelpBlock" muted>
+                    Leave blank to keep your current password.
+                  </Form.Text>
+                  <Form.Control
+                    type="password"
+                    placeholder="new password"
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="confirmPassword">
+                  <Form.Control
+                    type="password"
+                    placeholder="confirm password"
+                  />
+                </Form.Group>
+                <Button
+                  id="btn"
+                  variant="dark"
+                  block
+                  size="md"
+                  type="submit"
+                >
+                  UPDATE
+                </Button>
+              </Form>
+    </Modal>
       <Form className="ml-3" id="form">
         <InputGroup>
           <FormControl
