@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import BlueSkyLogo from "../Images/loginLogo.png";
-import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import { Message } from "../Message/Message.js";
 import "./Login.css";
 
