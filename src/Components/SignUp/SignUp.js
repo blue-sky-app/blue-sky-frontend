@@ -190,7 +190,7 @@ function SignUp(props) {
                     value={state.accountType}
                     onChange={handleChange}
                   >
-                    <option>Choose Service Type</option>
+                    <option value="">Choose Service Type</option>
                     <option>Commercial</option>
                     <option>Residential</option>
                   </Form.Control>
@@ -306,7 +306,7 @@ function SignUp(props) {
                       value={state.accountType}
                       onChange={handleChange}
                     >
-                      <option>Choose Service Type</option>
+                      <option value="">Choose Service Type</option>
                       <option>Commercial</option>
                       <option>Residential</option>
                     </Form.Control>
