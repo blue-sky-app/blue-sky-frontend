@@ -4,7 +4,7 @@ import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Card, Image, Button } from "react-bootstrap";
-import HeaderLogo from "../Images/topLogoBar.png";
+import HeaderLogo from "../Images/mTopLogoBar.png";
 import ImageOne from "../Images/hero1.jpg";
 import ImageTwo from "../Images/hero2.jpg";
 import ImageThree from "../Images/heroes.jpeg";

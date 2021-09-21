@@ -4,7 +4,7 @@ import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Card, Image } from "react-bootstrap";
-import HeaderLogo from "../Images/topLogoBar.png";
+import HeaderLogo from "../Images/mTopLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, email } from "../LocalUser/LocalUser";
 import "./Estimates.css";

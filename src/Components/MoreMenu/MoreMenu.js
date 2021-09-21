@@ -1,6 +1,6 @@
 import React from "react";
 import { NavDropdown, Image, Nav } from "react-bootstrap";
-import HeaderLogo from "../Images/topLogoBar.png";
+import HeaderLogo from "../Images/mTopLogoBar.png";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import "../NavBar/NavBar.css";
 
