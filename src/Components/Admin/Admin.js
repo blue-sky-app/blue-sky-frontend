@@ -27,7 +27,7 @@ export function Admin() {
           </Card.Header>
           <Card.Body className="mx-auto w-75">
             <Tabs
-              defaultActiveKey="profile"
+              defaultActiveKey="dashboard"
               id="uncontrolled-tab-example"
               className="mb-3"
             >
