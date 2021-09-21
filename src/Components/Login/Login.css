@@ -56,6 +56,7 @@
 
   #img{
     width: 300px;
+    display: block;
     margin-left: auto;
     margin-right: auto;
   }
@@ -68,6 +69,10 @@
     object-fit: scale-down;
   }
 
+  img {
+   width: 100%; 
+  }
+
   #form {
     max-width: 250px;
   }
@@ -78,27 +83,6 @@
 
   .btn {
     font-weight: bold !important;
-  }
-
-  .Alogo {
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    animation: updown 2s ease-in-out infinite !important;
-  }
-
-  @keyframes updown {
-    0% {
-      transform: translateY(-4px);
-    }
-  
-    50% {
-      transform: translateY(4px);
-    }
-  
-    100% {
-      transform: translateY(-4px);
-    }
   }
 }
 
