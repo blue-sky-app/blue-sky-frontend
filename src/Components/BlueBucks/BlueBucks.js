@@ -4,7 +4,7 @@ import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Card, Image, Table } from "react-bootstrap";
-import HeaderLogo from "../Images/mTopLogoBar.png";
+import BlueSkyLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, blueBucks } from "../LocalUser/LocalUser";
 import { restrictPage } from "../API/Api";
@@ -110,10 +110,11 @@ export function BlueBucks() {
       </BrowserView>
 
       <MobileView>
-        <Image
-          src={HeaderLogo}
-          className="d-flex w-100 mx-auto justify-content-center"
-        />
+        <div className="bgheader">
+          <div className="cloudyHeader">
+            <Image src={BlueSkyLogo} id="wdth" />
+          </div>
+        </div>
 
         <Card className="border-0" id="bcrd">
           <Card.Header
