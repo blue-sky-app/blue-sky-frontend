@@ -11,14 +11,12 @@ import { SignUpSuccess } from "./Components/SignUp/SignUpSuccess";
 import { Profile } from "./Components/Profile/Profile";
 import { MoreMenu } from "./Components/MoreMenu/MoreMenu";
 import { Admin } from "./Components/Admin/Admin";
-import { UpdateUser } from "./Components/Admin/UpdateUser";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/updateUser" component={UpdateUser} />
         <Route path="/admin" component={Admin} />
         <Route path="/moreMenu" component={MoreMenu} />
         <Route path="/profile" component={Profile} />
