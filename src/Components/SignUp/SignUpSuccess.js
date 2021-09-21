@@ -11,9 +11,9 @@ export function SignUpSuccess() {
       <BrowserView>
         <div className="d-flex flex-column mx-auto" id="bckgrnd">
           <div className="clouds">
-            <div className="img-fluid mt-5">
-              <Image id="img" src={BlueSkyLogo} />
-            </div>
+              <div className="Alogo mt-5">
+                <Image id="img" src={BlueSkyLogo} />
+              </div>
             <div>
               <p className="mt-1 w-80 mx-auto text-center" id="text">
                 SERVING CENTRAL FLORIDA
