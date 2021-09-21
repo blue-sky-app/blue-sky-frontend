@@ -49,8 +49,8 @@ export function BrowserNavBar(props) {
     <>
       <div className="bgheader">
         <div className="cloudyHeader">
-        <Image src={BlueSkyLogo} id="wdth" />
-      </div>
+          <Image src={BlueSkyLogo} id="wdth" />
+        </div>
       </div>
       <Navbar id="bckgnd">
         <Nav className="mx-auto">
