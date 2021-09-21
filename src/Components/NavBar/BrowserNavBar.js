@@ -47,8 +47,11 @@ export function BrowserNavBar(props) {
 
   return (
     <>
-      <Image src={BlueSkyLogo} id="wdth" />
-
+      <div className="bgheader">
+        <div className="cloudyHeader">
+        <Image src={BlueSkyLogo} id="wdth" />
+      </div>
+      </div>
       <Navbar id="bckgnd">
         <Nav className="mx-auto">
           <Nav.Link style={home} href="/home" id="wfnt">
