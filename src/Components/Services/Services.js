@@ -160,7 +160,7 @@ export function Services() {
   if (invoiceInputs.length === 0) {
     invoiceInputs.push(
       <tr style={{ fontSize: "12px", textAlign: "center" }}>
-        <td colspan="3">No Service History</td>
+        <td colspan="4">No Service History</td>
       </tr>
     );
   }
