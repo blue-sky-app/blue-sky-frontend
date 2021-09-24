@@ -56,7 +56,7 @@
     
     @keyframes moveRightToLeft
         {
-            0%   { right: -60%; }
+            0%   { right: -65%; }
             80% { right: 1%; }
             90% {right: -1%}
             100% {right: 0%}
