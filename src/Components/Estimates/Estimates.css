@@ -38,10 +38,10 @@
         position: relative;
         border: 5px solid #0a7ebd;
         border-radius: 50%;
-        height: 150px;
-        width: 150px;
+        height: 200px;
+        width: 200px;
         text-align: center;
-        padding: 35px 0;
+        padding: 45px 0;
         margin: 30px auto;
         animation: roll 3s ease-in-out, moveRightToLeft 3s ease-in-out ;
     }
@@ -64,7 +64,7 @@
 
     #thanksText {
         font-family: "Lucida Handwriting", Arial Sans-serif;
-        font-size: 1.5em;
+        font-size: 2em;
         font-weight: bold;
     }
 
