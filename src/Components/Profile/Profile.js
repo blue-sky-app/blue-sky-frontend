@@ -95,7 +95,7 @@ export function Profile() {
 
   const sendDetailsToServer = (info) => {
     axios
-      .put(API_BASE_URL + "User/" + userId, info)
+      .put(API_BASE_URL + "/User/" + userId, info)
       .then(function (response) {
         if (response.status === 200) {
           setState((prevState) => ({

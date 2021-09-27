@@ -57,7 +57,7 @@ function SignUp(props) {
         message: null,
       };
       axios
-        .post(API_BASE_URL + "users/", payload)
+        .post(API_BASE_URL + "/users/", payload)
         .then(function (response) {
           if (response.status === 200) {
             setState((prevState) => ({

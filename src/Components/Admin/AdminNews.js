@@ -18,7 +18,7 @@ export function AdminNews() {
   }, [news]);
 
   const fetchNews = async () => {
-    const response = await axios(`${API_BASE_URL}news/`);
+    const response = await axios(`${API_BASE_URL}/news/`);
     setNews(response.data);
   };
 

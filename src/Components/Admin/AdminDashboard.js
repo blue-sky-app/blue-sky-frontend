@@ -18,7 +18,7 @@ export function AdminDashboard() {
   }, [estimates]);
 
   const fetchEstimates = async () => {
-    const response = await axios(`${API_BASE_URL}estimates/`);
+    const response = await axios(`${API_BASE_URL}/estimates/`);
     setEstimates(response.data);
   };
 
