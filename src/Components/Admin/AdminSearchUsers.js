@@ -40,9 +40,6 @@ export function AdminSearchUsers() {
         filterItems(users[i].email.toLowerCase(), inputValue) ||
         filterItems(users[i].lastName.toLowerCase(), inputValue) ||
         filterItems(users[i].firstName.toLowerCase(), inputValue) ||
-        inputValue.toLowerCase() === users[i].email.toLowerCase() ||
-        inputValue.toLowerCase() === users[i].lastName.toLowerCase() ||
-        inputValue.toLowerCase() === users[i].firstName.toLowerCase() ||
         inputValue.toLowerCase() ===
           users[i].firstName.toLowerCase() +
             " " +
