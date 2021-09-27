@@ -11,12 +11,12 @@ export function AdminSearchUsers() {
   const [isOpen, setIsOpen] = useState(false);
 
   // This fetch is for the Users
-  useEffect(() => {
+  /*useEffect(() => {
     fetchUser().then(setUsers);
   }, []);
   useEffect(() => {
     console.log(users);
-  }, [users]);
+  }, [users]);*/
 
   let searchResults = [];
 
@@ -24,12 +24,22 @@ export function AdminSearchUsers() {
     setInputValue(e.target.value);
   };
 
+  const filterItems = (el, query) => {
+    if (el.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
+      return true;
+    }
+  }
+  
   const onSubmit = (e) => {
+    fetchUser().then(setUsers);
     e.preventDefault();
     for (let i in users) {
       if (
         inputValue === null ||
         inputValue === "" ||
+        filterItems(users[i].email.toLowerCase(), inputValue) ||
+        filterItems(users[i].lastName.toLowerCase(), inputValue) ||
+        filterItems(users[i].firstName.toLowerCase(), inputValue) ||
         inputValue.toLowerCase() === users[i].email.toLowerCase() ||
         inputValue.toLowerCase() === users[i].lastName.toLowerCase() ||
         inputValue.toLowerCase() === users[i].firstName.toLowerCase() ||
