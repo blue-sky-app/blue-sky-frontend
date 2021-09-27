@@ -11,12 +11,12 @@ export function AdminSearchUsers() {
   const [isOpen, setIsOpen] = useState(false);
 
   // This fetch is for the Users
-  /*useEffect(() => {
+  useEffect(() => {
     fetchUser().then(setUsers);
   }, []);
   useEffect(() => {
     console.log(users);
-  }, [users]);*/
+  }, [users]);
 
   let searchResults = [];
 
@@ -31,7 +31,6 @@ export function AdminSearchUsers() {
   }
   
   const onSubmit = (e) => {
-    fetchUser().then(setUsers);
     e.preventDefault();
     for (let i in users) {
       if (
