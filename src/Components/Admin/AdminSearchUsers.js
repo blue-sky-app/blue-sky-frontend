@@ -24,6 +24,7 @@ export function AdminSearchUsers() {
     setInputValue(e.target.value);
   };
 
+  // Allows partial strings in search
   const filterItems = (el, query) => {
     if (el.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
       return true;
