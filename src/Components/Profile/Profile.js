@@ -51,6 +51,7 @@ export function Profile() {
     restrictPage();
   }, []);
 
+  // Get news
   useEffect(() => {
     fetchNews().then(setNews);
   }, []);
@@ -62,12 +63,14 @@ export function Profile() {
     console.log(state.email);
   }, [state.email]);
 
+  // If email is changed, this fetches all user's emails for duplication check
   useEffect(() => {
     if (state.email !== email) {
       fetchUser().then(setUsers);
     }
   }, [state.email]);
 
+  // Sets state of profile items by grabbing form field control id and matching it with const
   const handleChange = (e) => {
     const { id, value } = e.target;
     setState((prevState) => ({
@@ -76,6 +79,7 @@ export function Profile() {
     }));
   };
 
+  // Sets account type based on selection
   const handleSelect = (e) => {
     setState((prevState) => ({
       ...prevState,
@@ -83,6 +87,8 @@ export function Profile() {
     }));
   };
 
+  // Sends updated user info array to server to update db
+  // Also updates local session storage to match updated details
   const sendDetailsToServer = (info) => {
     axios
       .put(API_BASE_URL + "User/" + userId, info)
@@ -108,6 +114,7 @@ export function Profile() {
       localInvoices: state.invoices,
       localBlueBucks: state.blueBucks,
     });
+
     for (let i in news) {
       if (state.accountType === news[i].customerType) {
         userArray.push({
@@ -120,6 +127,7 @@ export function Profile() {
     console.log(sessionStorage.getItem("localUser"));
   };
 
+  // Check if updated email already exists in db, then calls updateUser function
   const checkEmailDup = () => {
     var duplicate;
     if (state.email !== email) {
@@ -154,6 +162,7 @@ export function Profile() {
     }
   };
 
+  // Checks if all required fields have values before calling server update function
   const updateUser = () => {
     if (
       state.newPassword.length &&
@@ -175,8 +184,7 @@ export function Profile() {
       !state.newPassword.length &&
       state.firstName.length &&
       state.lastName.length &&
-      state.email.length &&
-      !state.duplicate
+      state.email.length
     ) {
       payload = {
         firstName: state.firstName,
@@ -195,6 +203,7 @@ export function Profile() {
     }
   };
 
+  // Checks password values to ensure they match, then calls email check 
   const handleUpdate = (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -213,6 +222,7 @@ export function Profile() {
     }
   };
 
+  // Sets default value of account type for form dropdown
   useEffect(() => {
     if (accountType === "Commercial") {
       setAccountOption("Residential");
