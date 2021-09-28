@@ -31,12 +31,12 @@ export function AdminEstimates() {
     let updatedServices = [];
     for (let j in estimates[i].services) {
       updatedServices.push(
-        <tr
+        <div
           className="mx-auto"
           style={{ background: "rgba(0, 0, 0, 0", borderStyle: "hidden" }}
         >
-          <td>{estimates[i].services[j]}</td>
-        </tr>
+          {estimates[i].services[j]}
+        </div>
       );
     }
     estimateInputs.push(
@@ -55,7 +55,7 @@ export function AdminEstimates() {
   if (estimateInputs.length === 0) {
     estimateInputs.push(
       <tr style={{ fontSize: "11px", textAlign: "center" }}>
-        <td colspan="3">No Estimates Available</td>
+        <td colSpan="3">No Estimates Available</td>
       </tr>
     );
   }
