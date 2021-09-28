@@ -5,7 +5,7 @@ import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Card, Image, Table, Button } from "react-bootstrap";
-import HeaderLogo from "../Images/topLogoBar.png";
+import BlueSkyLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, invoices } from "../LocalUser/LocalUser";
 import { restrictPage } from "../API/Api";
@@ -160,7 +160,7 @@ export function Services() {
   if (invoiceInputs.length === 0) {
     invoiceInputs.push(
       <tr style={{ fontSize: "12px", textAlign: "center" }}>
-        <td colspan="3">No Service History</td>
+        <td colspan="4">No Service History</td>
       </tr>
     );
   }
@@ -207,10 +207,11 @@ export function Services() {
       </BrowserView>
 
       <MobileView>
-        <Image
-          src={HeaderLogo}
-          className="d-flex w-100 mx-auto justify-content-center"
-        />
+        <div className="bgheader">
+          <div className="cloudyHeader">
+            <Image src={BlueSkyLogo} id="wdth" />
+          </div>
+        </div>
 
         <Card className="border-0" id="mcrd">
           <Card.Header

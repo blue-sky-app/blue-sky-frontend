@@ -4,7 +4,7 @@ import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Card, Image } from "react-bootstrap";
-import HeaderLogo from "../Images/topLogoBar.png";
+import BlueSkyLogo from "../Images/topLogoBar.png";
 import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, email } from "../LocalUser/LocalUser";
 import "./Estimates.css";
@@ -43,10 +43,11 @@ export function ThankYou() {
       </BrowserView>
 
       <MobileView>
-        <Image
-          src={HeaderLogo}
-          className="d-flex w-100 mx-auto justify-content-center"
-        />
+        <div className="bgheader">
+          <div className="cloudyHeader">
+            <Image src={BlueSkyLogo} id="wdth" />
+          </div>
+        </div>
 
         <Card className="border-0" id="mcrd">
           <Card.Header

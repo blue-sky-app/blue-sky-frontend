@@ -5,6 +5,30 @@
     background-color:#FFF;
 }
 
+.bgheader {
+    background-color: #49a2dd;
+    min-width: 100%;
+}
+
+.cloudyHeader {
+    position: relative;
+    min-width: 100%;
+    background: url("../Images/clouds.png");
+    animation: animate 60s linear infinite;
+    overflow-y: scroll;
+  }
+  @keyframes animate
+  {
+    0%
+    {
+      background-position: 0px;
+    }
+    100%
+    {
+      background-position: -3094px;
+    }
+  }
+
 #navMore {
     width: 100%;
     min-height: 90vh; 

@@ -1,6 +1,6 @@
 import React from "react";
 import { NavDropdown, Image, Nav } from "react-bootstrap";
-import HeaderLogo from "../Images/topLogoBar.png";
+import BlueSkyLogo from "../Images/topLogoBar.png";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import "../NavBar/NavBar.css";
 
@@ -11,10 +11,11 @@ export function MoreMenu() {
 
   return (
     <div id="navMore">
-      <Image
-        src={HeaderLogo}
-        className="d-flex w-100 mx-auto justify-content-center"
-      />
+        <div className="bgheader">
+          <div className="cloudyHeader">
+            <Image src={BlueSkyLogo} id="wdth" />
+          </div>
+        </div>
       <Nav defaultActiveKey="/home" className="flex-column">
         <Nav.Link href="/profile" id="navMoreText" className="mt-2">
           Profile

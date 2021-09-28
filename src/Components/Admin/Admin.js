@@ -7,7 +7,7 @@ import { AdminNews } from "./AdminNews";
 import { AdminCategories } from "./AdminCategories";
 import { AdminDashboard } from "./AdminDashboard";
 import { Card, Image, Tabs, Tab } from "react-bootstrap";
-import HeaderLogo from "../Images/topLogoBar.png";
+import HeaderLogo from "../Images/mTopLogoBar.png";
 import "./Admin.css";
 
 export function Admin() {
