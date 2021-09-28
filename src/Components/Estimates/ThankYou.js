@@ -29,7 +29,7 @@ export function ThankYou() {
             className="d-flex justify-content-center align-items-center mb-4 border-0"
             id="bchead"
           >
-            Thank You {fName}!
+            We Appreciate Your Business, {fName}!
           </Card.Header>
 
           <Card.Body id="tybbody">
@@ -37,6 +37,8 @@ export function ThankYou() {
               Your estimate will be reviewed by one of our technicians and you
               will receive a quote via email to <strong>{email}</strong>
             </Card.Title>
+            <div className="thanks" id="thanksText">Thank You!</div>
+            <div className="tcontact" id="thanksText">We will contact you shortly...</div>
           </Card.Body>
           <DeskFooter />
         </Card>
@@ -61,6 +63,8 @@ export function ThankYou() {
               Your estimate will be reviewed by one of our technicians and you
               will receive a quote via email to <strong>{email}</strong>
             </Card.Title>
+            <div className="thanks" id="thanksText">Thank You!</div>
+            <div className="tcontact" id="thanksText">We will contact you shortly...</div>
           </Card.Body>
         </Card>
 

@@ -24,15 +24,22 @@ export function AdminSearchUsers() {
     setInputValue(e.target.value);
   };
 
+  // Allows partial strings in search
+  const filterItems = (el, query) => {
+    if (el.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
+      return true;
+    }
+  }
+  
   const onSubmit = (e) => {
     e.preventDefault();
     for (let i in users) {
       if (
         inputValue === null ||
         inputValue === "" ||
-        inputValue.toLowerCase() === users[i].email.toLowerCase() ||
-        inputValue.toLowerCase() === users[i].lastName.toLowerCase() ||
-        inputValue.toLowerCase() === users[i].firstName.toLowerCase() ||
+        filterItems(users[i].email.toLowerCase(), inputValue) ||
+        filterItems(users[i].lastName.toLowerCase(), inputValue) ||
+        filterItems(users[i].firstName.toLowerCase(), inputValue) ||
         inputValue.toLowerCase() ===
           users[i].firstName.toLowerCase() +
             " " +
