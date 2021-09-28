@@ -22,6 +22,7 @@ export function AdminSearchUsers() {
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
+    onSubmit();
   };
 
   // Allows partial strings in search
@@ -32,7 +33,7 @@ export function AdminSearchUsers() {
   }
   
   const onSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     for (let i in users) {
       if (
         inputValue === null ||
@@ -171,16 +172,7 @@ export function AdminSearchUsers() {
             type="search"
             onChange={handleChange}
           />
-
-          <Button
-            onClick={onSubmit}
-            className="ml-2 p-2"
-            variant="dark"
-            id="btn"
-            type="submit"
-          >
-            SEARCH
-          </Button>
+          
         </InputGroup>
       </Form>
       <Table striped bordered hover size="sm" className="mt-2">
