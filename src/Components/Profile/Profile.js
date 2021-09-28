@@ -51,16 +51,6 @@ export function Profile() {
     restrictPage();
   }, []);
 
-  useEffect(() => {
-    console.log(userId);
-    console.log(state.email);
-    console.log(state.firstName);
-    console.log(state.lastName);
-    console.log(state.accountType);
-    console.log(state.newPassword);
-    console.log(state.confirmPassword);
-  });
-
   // Get news
   useEffect(() => {
     fetchNews().then(setNews);
