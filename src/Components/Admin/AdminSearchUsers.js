@@ -6,7 +6,7 @@ import "./Admin.css";
 
 export function AdminSearchUsers() {
   const [users, setUsers] = useState([]);
-  const [inputValue, setInputValue] = useState(null);
+  //const [inputValue, setInputValue] = useState(null);
   const [userSearch, setUserSearch] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,11 +19,11 @@ export function AdminSearchUsers() {
   }, [users]);
 
   let searchResults = [];
+  var inputValue = "";
 
   const handleChange = (e) => {
-    setInputValue(e.target.value);
-    onSearch();
-  };
+    inputValue = e.target.value;
+    onSearch()};
 
   // Allows partial strings in search
   const filterItems = (el, query) => {
@@ -34,6 +34,7 @@ export function AdminSearchUsers() {
   
   const onSubmit = (e) => {
     e.preventDefault();
+    inputValue = document.getElementById('userSearch').value
     onSearch();
   }
 
@@ -174,7 +175,8 @@ export function AdminSearchUsers() {
             placeholder="Email or Name"
             aria-label="User Search"
             type="search"
-            onChange={handleChange}
+            id="userSearch"
+            onChange = {handleChange}
           />
 
           <Button
