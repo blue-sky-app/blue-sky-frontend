@@ -22,6 +22,7 @@ export function AdminSearchUsers() {
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
+    onSearch();
   };
 
   // Allows partial strings in search
@@ -33,6 +34,10 @@ export function AdminSearchUsers() {
   
   const onSubmit = (e) => {
     e.preventDefault();
+    onSearch();
+  }
+
+  const onSearch = (e) => {
     for (let i in users) {
       if (
         inputValue === null ||
