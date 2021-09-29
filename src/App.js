@@ -27,8 +27,7 @@ function App() {
         <Route path="/blueBucks" component={BlueBucks} />
         <Route path="/home" component={Home} />
         <Route path="/signUp">
-          <SignUp /*showError={updateErrorMessage} updateTitle={updateTitle}*/
-          />
+          <SignUp />
         </Route>
         <Route path="/" component={Login} />
       </Switch>
