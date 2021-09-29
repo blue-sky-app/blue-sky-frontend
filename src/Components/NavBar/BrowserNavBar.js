@@ -45,9 +45,13 @@ export function BrowserNavBar(props) {
     // no default
   }
 
+  const returnHome = () => {
+    window.location.href = "/home"
+  }
+
   return (
     <>
-      <div className="bgheader">
+      <div onClick={returnHome} className="bgheader">
         <div className="cloudyHeader">
           <Image src={BlueSkyLogo} id="wdth" />
         </div>
