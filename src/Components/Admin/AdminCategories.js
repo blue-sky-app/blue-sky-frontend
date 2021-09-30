@@ -18,7 +18,7 @@ export function AdminCategories() {
   }, [categories]);
 
   const fetchCategories = async () => {
-    const response = await axios(`${API_BASE_URL}servicecategories/`);
+    const response = await axios(`${API_BASE_URL}/servicecategories/`);
     setCategories(response.data);
   };
 

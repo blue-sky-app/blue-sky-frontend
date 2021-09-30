@@ -33,7 +33,7 @@ export function Estimates() {
   }, [servicecategories]);
 
   const fetchCategory = async () => {
-    const response = await axios(`${API_BASE_URL}servicecategories/`);
+    const response = await axios(`${API_BASE_URL}/servicecategories/`);
     setServicecategories(response.data);
   };
 
@@ -95,7 +95,7 @@ export function Estimates() {
       services: estimateServiceArray,
     };
     axios
-      .post(API_BASE_URL + "estimates/", estimateInput)
+      .post(API_BASE_URL + "/estimates/", estimateInput)
       .then((res) => {
         if (res.status === 200) {
           window.location.href = "/thankYou";
