@@ -31,16 +31,21 @@ export function AdminEstimates() {
     let updatedServices = [];
     for (let j in estimates[i].services) {
       updatedServices.push(
-        <div className="mx-auto">{estimates[i].services[j]}</div>
+        <div
+          className="mx-auto"
+          style={{ background: "rgba(0, 0, 0, 0", borderStyle: "hidden" }}
+        >
+          {estimates[i].services[j]}
+        </div>
       );
     }
     estimateInputs.push(
-      <tr id="tableFont">
-        <td>{newDate}</td>
-        <td>{estimates[i].email}</td>
-        <td>{estimates[i].firstName}</td>
-        <td>{estimates[i].lastName}</td>
-        <td>{estimates[i].accountType}</td>
+      <tr style={{ fontSize: "11px", alignItems: "center" }}>
+        <td className="align-self-center">{newDate}</td>
+        <td className="align-self-center">{estimates[i].email}</td>
+        <td className="align-self-center">{estimates[i].firstName}</td>
+        <td className="align-self-center">{estimates[i].lastName}</td>
+        <td className="align-self-center">{estimates[i].accountType}</td>
         <td>{updatedServices}</td>
       </tr>
     );
@@ -49,7 +54,7 @@ export function AdminEstimates() {
   // posting No Service Info for users with no services
   if (estimateInputs.length === 0) {
     estimateInputs.push(
-      <tr id="tableFont">
+      <tr style={{ fontSize: "11px", textAlign: "center" }}>
         <td colSpan="3">No Estimates Available</td>
       </tr>
     );

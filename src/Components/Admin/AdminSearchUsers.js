@@ -48,6 +48,14 @@ export function AdminSearchUsers() {
     onSearch();
   };
 
+  const inputRef = React.useRef(null)
+
+  const refreshData = () => {
+    fetchUser().then(setUsers);
+    inputValue = document.getElementById("userSearch").value;
+    onSearch();
+  }
+
   // Get values for user form from <td> elements in row
   const getUserValues = (ui, fn, ln, at, em) => {
     setIsOpen(true);
@@ -76,7 +84,7 @@ export function AdminSearchUsers() {
   };
 
   //This provides the search function and table data population
-  const onSearch = (e) => {
+  const onSearch = () => {
     for (let i in users) {
       if (
         inputValue === null ||
@@ -135,7 +143,7 @@ export function AdminSearchUsers() {
         };
 
         searchResults.push(
-          <tr id={[i]} id="tableFont">
+          <tr id={[i]}>
             <td id={[i] + 0 + "d"}>{users[i].firstName}</td>
             <td id={[i] + 1 + "d"}>{users[i].lastName}</td>
             <td id={[i] + 2 + "d"}>{users[i].email}</td>
@@ -176,12 +184,16 @@ export function AdminSearchUsers() {
       );
     }
     setUserSearch(searchResults);
+    console.log(userSearch)
   };
+
+  
 
   return (
     <>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
         <UpdateUser
+          refreshData={refreshData}
           userId={userState.userId}
           fName={userState.firstName}
           lName={userState.lastName}
@@ -200,6 +212,7 @@ export function AdminSearchUsers() {
           />
 
           <Button
+            ref={inputRef}
             onClick={onSubmit}
             className="ml-2 p-2"
             variant="dark"

@@ -69,6 +69,7 @@ export function UpdateUser(props) {
             type: "success",
             message: "update",
           }));
+          props.refreshData();
         }
       })
       .catch(function (error) {
