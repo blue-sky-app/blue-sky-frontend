@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Form, InputGroup, FormControl, Button } from "react-bootstrap";
 import { fetchUser } from "../API/Api.js";
 import Modal from "../Modal/Modal.js";
+import { UpdateUser } from "../Forms/UpdateUser.js";
 import "./Admin.css";
 
 export function AdminSearchUsers() {
@@ -9,6 +10,15 @@ export function AdminSearchUsers() {
   //const [inputValue, setInputValue] = useState(null);
   const [userSearch, setUserSearch] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [userState, setUserState] = useState({
+      userId: "",
+      firstName: "",
+      lastName: "",
+      accountType: "",
+      email: "",
+      newPassword: "",
+      confirmPassword: ""
+  });
 
   // This fetch is for the Users
   useEffect(() => {
@@ -38,6 +48,33 @@ export function AdminSearchUsers() {
     onSearch();
   }
 
+  // Get values for user form from <td> elements in row
+  const getUserValues = (ui,fn,ln,at,em) => {
+    setIsOpen(true);
+    setUserState((prevState) => ({
+      ...prevState,
+      userId: ui,
+      firstName: fn,
+      lastName: ln,
+      accountType: at,
+      email: em
+    }))
+    console.log(ui,fn,ln,at,em);
+  }
+
+  useEffect (() => {
+    console.log(userState.firstName, userState.lastName);
+  }, [userState.firstName, userState.lastName]);
+
+  // get user db id on selecting from table
+  const getUserId = (email) => {
+    for (const [i, user] of users.entries()) {
+      if(email === user.email) {
+        return user._id
+      }
+  }}
+
+  //This provides the search function and table data population
   const onSearch = (e) => {
     for (let i in users) {
       if (
@@ -101,16 +138,22 @@ export function AdminSearchUsers() {
             </tr>
           );
         }
+        const getTD = (td) => {
+          return document.getElementById(td).innerText
+        }
+
         searchResults.push(
-          <tr style={{ fontSize: "11px" }}>
-            <td>{users[i].firstName}</td>
-            <td>{users[i].lastName}</td>
-            <td>{users[i].email}</td>
-            <td>{updatedServices}</td>
-            <td>{updatedBlueBucks}</td>
+          <tr id={[i]} style={{ fontSize: "11px" }}>
+            <td id={[i]+0+"d"}>{users[i].firstName}</td>
+            <td id={[i]+1+"d"}>{users[i].lastName}</td>
+            <td id={[i]+2+"d"}>{users[i].email}</td>
+            <td id={[i]+3+"d"}>{users[i].accountType}</td>
+            <td id={[i]+4+"d"}>{updatedServices}</td>
+            <td id={[i]+5+"d"}>{updatedBlueBucks}</td>
             <td>
-              <Button
-                onClick={() => setIsOpen(true)}
+              <Button id={[i]+"b"}
+                onClick={() => {getUserValues(getUserId(getTD([i]+2+"d")), getTD([i]+0+"d"), getTD([i]+1+"d"), 
+                  getTD([i]+3+"d"), getTD([i]+2+"d"))}}
                 variant="secondary"
                 size="sm"
               >
@@ -138,36 +181,8 @@ export function AdminSearchUsers() {
   return (
     <>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <h5>Update User</h5>
-        <Form>
-          <Form.Group size="lg" controlId="firstName">
-            <Form.Control type="text" required />
-          </Form.Group>
-          <Form.Group size="lg" controlId="lastName">
-            <Form.Control type="text" required />
-          </Form.Group>
-          <Form.Group>
-            <Form.Control as="select">
-              <option value="accountType">accountType</option>
-              <option value="accountType">accountType</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group size="lg" controlId="email">
-            <Form.Control type="email" required />
-          </Form.Group>
-          <Form.Group size="lg" controlId="newPassword">
-            <Form.Text id="passwordHelpBlock" muted>
-              Leave blank to keep your current password.
-            </Form.Text>
-            <Form.Control type="password" placeholder="new password" />
-          </Form.Group>
-          <Form.Group size="lg" controlId="confirmPassword">
-            <Form.Control type="password" placeholder="confirm password" />
-          </Form.Group>
-          <Button id="btn" variant="dark" block size="md" type="submit">
-            UPDATE
-          </Button>
-        </Form>
+        <UpdateUser userId={userState.userId} fName={userState.firstName} lName={userState.lastName}
+           accountType={userState.accountType} email={userState.email}/>
       </Modal>
       <Form className="ml-3" id="form">
         <InputGroup>
@@ -190,12 +205,13 @@ export function AdminSearchUsers() {
           </Button>
         </InputGroup>
       </Form>
-      <Table striped bordered hover size="sm" className="mt-2">
+      <Table striped bordered hover size="sm" className="mt-2" id="searchResults">
         <thead>
           <tr>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
+            <th>Account Type</th>
             <th>Service History</th>
             <th>Blue Bucks</th>
             <th>Edit</th>
