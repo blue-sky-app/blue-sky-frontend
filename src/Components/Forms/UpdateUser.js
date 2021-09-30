@@ -60,7 +60,7 @@ export function UpdateUser(props) {
   // Sends updated user info array to server to update db
   const sendDetailsToServer = (info) => {
     axios
-      .put(API_BASE_URL + "User/" + state.userId, info)
+      .put(API_BASE_URL + "/User/" + state.userId, info)
       .then(function (response) {
         if (response.status === 200) {
           setState((prevState) => ({
