@@ -7,17 +7,16 @@ import "./Admin.css";
 
 export function AdminSearchUsers() {
   const [users, setUsers] = useState([]);
-  //const [inputValue, setInputValue] = useState(null);
   const [userSearch, setUserSearch] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [userState, setUserState] = useState({
-      userId: "",
-      firstName: "",
-      lastName: "",
-      accountType: "",
-      email: "",
-      newPassword: "",
-      confirmPassword: ""
+    userId: "",
+    firstName: "",
+    lastName: "",
+    accountType: "",
+    email: "",
+    newPassword: "",
+    confirmPassword: "",
   });
 
   // This fetch is for the Users
@@ -33,23 +32,24 @@ export function AdminSearchUsers() {
 
   const handleChange = (e) => {
     inputValue = e.target.value;
-    onSearch()};
+    onSearch();
+  };
 
   // Allows partial strings in search
   const filterItems = (el, query) => {
     if (el.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
       return true;
     }
-  }
-  
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    inputValue = document.getElementById('userSearch').value
+    inputValue = document.getElementById("userSearch").value;
     onSearch();
-  }
+  };
 
   // Get values for user form from <td> elements in row
-  const getUserValues = (ui,fn,ln,at,em) => {
+  const getUserValues = (ui, fn, ln, at, em) => {
     setIsOpen(true);
     setUserState((prevState) => ({
       ...prevState,
@@ -57,22 +57,23 @@ export function AdminSearchUsers() {
       firstName: fn,
       lastName: ln,
       accountType: at,
-      email: em
-    }))
-    console.log(ui,fn,ln,at,em);
-  }
+      email: em,
+    }));
+    console.log(ui, fn, ln, at, em);
+  };
 
-  useEffect (() => {
+  useEffect(() => {
     console.log(userState.firstName, userState.lastName);
   }, [userState.firstName, userState.lastName]);
 
   // get user db id on selecting from table
   const getUserId = (email) => {
     for (const [i, user] of users.entries()) {
-      if(email === user.email) {
-        return user._id
+      if (email === user.email) {
+        return user._id;
       }
-  }}
+    }
+  };
 
   //This provides the search function and table data population
   const onSearch = (e) => {
@@ -103,15 +104,9 @@ export function AdminSearchUsers() {
             );
           }
           updatedServices.push(
-            <tr
-              className="mx-auto"
-              style={{ background: "rgba(0, 0, 0, 0", borderStyle: "hidden" }}
-            >
+            <tr className="mx-auto" id="adminRow">
               <td>{invoicesNewDate}</td>
-              <tr
-                className="mx-auto"
-                style={{ background: "rgba(0, 0, 0, 0", borderStyle: "hidden" }}
-              >
+              <tr className="mx-auto" id="adminRow">
                 {serviceCategories}
               </tr>
               <td>${users[i].invoices[j].invoiceAmount}</td>
@@ -128,10 +123,7 @@ export function AdminSearchUsers() {
             11
           )}/${bBDate.slice(1, 5)}`;
           updatedBlueBucks.push(
-            <tr
-              className="mx-auto"
-              style={{ background: "rgba(0, 0, 0, 0", borderStyle: "hidden" }}
-            >
+            <tr className="mx-auto" id="adminRow">
               <td>{bBNewDate}</td>
               <td>{users[i].blueBucks[k].amount}</td>
               <td>{users[i].blueBucks[k].transactionType}</td>
@@ -139,21 +131,29 @@ export function AdminSearchUsers() {
           );
         }
         const getTD = (td) => {
-          return document.getElementById(td).innerText
-        }
+          return document.getElementById(td).innerText;
+        };
 
         searchResults.push(
-          <tr id={[i]} style={{ fontSize: "11px" }}>
-            <td id={[i]+0+"d"}>{users[i].firstName}</td>
-            <td id={[i]+1+"d"}>{users[i].lastName}</td>
-            <td id={[i]+2+"d"}>{users[i].email}</td>
-            <td id={[i]+3+"d"}>{users[i].accountType}</td>
-            <td id={[i]+4+"d"}>{updatedServices}</td>
-            <td id={[i]+5+"d"}>{updatedBlueBucks}</td>
+          <tr id={[i]} id="tableFont">
+            <td id={[i] + 0 + "d"}>{users[i].firstName}</td>
+            <td id={[i] + 1 + "d"}>{users[i].lastName}</td>
+            <td id={[i] + 2 + "d"}>{users[i].email}</td>
+            <td id={[i] + 3 + "d"}>{users[i].accountType}</td>
+            <td id={[i] + 4 + "d"}>{updatedServices}</td>
+            <td id={[i] + 5 + "d"}>{updatedBlueBucks}</td>
             <td>
-              <Button id={[i]+"b"}
-                onClick={() => {getUserValues(getUserId(getTD([i]+2+"d")), getTD([i]+0+"d"), getTD([i]+1+"d"), 
-                  getTD([i]+3+"d"), getTD([i]+2+"d"))}}
+              <Button
+                id={[i] + "b"}
+                onClick={() => {
+                  getUserValues(
+                    getUserId(getTD([i] + 2 + "d")),
+                    getTD([i] + 0 + "d"),
+                    getTD([i] + 1 + "d"),
+                    getTD([i] + 3 + "d"),
+                    getTD([i] + 2 + "d")
+                  );
+                }}
                 variant="secondary"
                 size="sm"
               >
@@ -167,10 +167,10 @@ export function AdminSearchUsers() {
 
     if (searchResults.length === 0) {
       searchResults.push(
-        <tr style={{ fontSize: "12px", textAlign: "center" }}>
-          <td colspan="6">
-            Search Again...ensure you are searching for Full Name, First, Last,
-            or Email.
+        <tr id="tableFont">
+          <td colspan="7">
+            Search Again...ensure you are searching for Full Name, First Name,
+            Last Name, or Email.
           </td>
         </tr>
       );
@@ -181,8 +181,13 @@ export function AdminSearchUsers() {
   return (
     <>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <UpdateUser userId={userState.userId} fName={userState.firstName} lName={userState.lastName}
-           accountType={userState.accountType} email={userState.email}/>
+        <UpdateUser
+          userId={userState.userId}
+          fName={userState.firstName}
+          lName={userState.lastName}
+          accountType={userState.accountType}
+          email={userState.email}
+        />
       </Modal>
       <Form className="ml-3" id="form">
         <InputGroup>
@@ -191,7 +196,7 @@ export function AdminSearchUsers() {
             aria-label="User Search"
             type="search"
             id="userSearch"
-            onChange = {handleChange}
+            onChange={handleChange}
           />
 
           <Button
@@ -205,7 +210,14 @@ export function AdminSearchUsers() {
           </Button>
         </InputGroup>
       </Form>
-      <Table striped bordered hover size="sm" className="mt-2" id="searchResults">
+      <Table
+        striped
+        bordered
+        hover
+        size="sm"
+        className="mt-2"
+        id="searchResults"
+      >
         <thead>
           <tr>
             <th>First Name</th>
