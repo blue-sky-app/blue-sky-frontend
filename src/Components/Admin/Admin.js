@@ -10,11 +10,10 @@ import { AdminNews } from "./AdminNews";
 import { AdminCategories } from "./AdminCategories";
 import { Card, Button, Image, Tabs, Tab } from "react-bootstrap";
 import HeaderLogo from "../Images/mTopLogoBar.png";
-import "./Admin.css";
+// import "./Admin.css";
 
 export function Admin() {
   const [key, setKey] = useState(1);
-
   const [estimates, setEstimates] = useState([]);
   const [users, setUsers] = useState([]);
 
