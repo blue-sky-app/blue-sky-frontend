@@ -25,10 +25,6 @@ export function UpdateUser(props) {
     message: "",
   });
 
-  useEffect(() => {
-    console.log(state.userId, state.firstName);
-  }, [state.userId, state.firstName]);
-
   // If email is changed, this fetches all user's emails for duplication check
   useEffect(() => {
     if (state.email !== props.email) {
@@ -53,10 +49,6 @@ export function UpdateUser(props) {
     }));
   };
 
-  useEffect(() => {
-    console.log(state.accountType);
-  }, [state.accountType]);
-
   // Sends updated user info array to server to update db
   const sendDetailsToServer = (info) => {
     axios
@@ -69,6 +61,7 @@ export function UpdateUser(props) {
             type: "success",
             message: "update",
           }));
+          props.refreshData();
         }
       })
       .catch(function (error) {
