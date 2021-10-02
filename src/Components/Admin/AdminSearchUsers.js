@@ -47,7 +47,6 @@ export function AdminSearchUsers() {
 
   const refreshData = () => {
     fetchUser().then(setUsers); 
-    inputValue = document.getElementById("userSearch").value;
     onSearch();
     console.log("I'm working!")
   }
@@ -80,6 +79,7 @@ export function AdminSearchUsers() {
 
   //This provides the search function and table data population
   const onSearch = () => {
+    inputValue = document.getElementById("userSearch").value;
     for (let i in users) {
       if (
         inputValue === null ||
@@ -185,7 +185,7 @@ export function AdminSearchUsers() {
 
   return (
     <>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal search={onSearch} open={isOpen} onClose={() => setIsOpen(false)}>
         <UpdateUser
           refreshData={refreshData}
           userId={userState.userId}
