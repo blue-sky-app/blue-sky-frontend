@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import axios from "axios";
 import { Form, Image, Button } from "react-bootstrap";
@@ -28,11 +28,26 @@ function SignUp(props) {
   }, [state.email]);
 
   const handleChange = (e) => {
+    capitalizeNames();
     const { id, value } = e.target;
     setState((prevState) => ({
       ...prevState,
       [id]: value,
     }));
+  };
+
+  // Capitalize first letter of Names
+  const capitalizeNames = () => {
+    const capitalFirstLetter = (str) => {
+      let newString = str.charAt(0).toUpperCase() + str.slice(1);
+      return newString;
+    }
+    setState((prevState) => ({
+      ...prevState,
+      firstName: capitalFirstLetter(state.firstName),
+      lastName: capitalFirstLetter(state.lastName),
+    }))
+    console.log(state.firstName)
   };
 
   const redirectToSuccess = () => {

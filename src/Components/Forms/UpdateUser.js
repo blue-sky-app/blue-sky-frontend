@@ -25,10 +25,6 @@ export function UpdateUser(props) {
     message: "",
   });
 
-  useEffect(() => {
-    console.log(state.userId, state.firstName);
-  }, [state.userId, state.firstName]);
-
   // If email is changed, this fetches all user's emails for duplication check
   useEffect(() => {
     if (state.email !== props.email) {
@@ -53,10 +49,6 @@ export function UpdateUser(props) {
     }));
   };
 
-  useEffect(() => {
-    console.log(state.accountType);
-  }, [state.accountType]);
-
   // Sends updated user info array to server to update db
   const sendDetailsToServer = (info) => {
     axios
@@ -69,6 +61,27 @@ export function UpdateUser(props) {
             type: "success",
             message: "update",
           }));
+          props.refreshData();
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const sendDeleteRequest = (e) => {
+    e.preventDefault();
+    axios
+      .delete(API_BASE_URL + "/User/" + state.userId)
+      .then(function (response) {
+        if (response.status === 200) {
+          setState((prevState) => ({
+            ...prevState,
+            display: true,
+            type: "success",
+            message: "delete",
+          }));
+          props.refreshData();
         }
       })
       .catch(function (error) {
@@ -256,6 +269,16 @@ export function UpdateUser(props) {
               type="submit"
             >
               UPDATE
+            </Button>
+            <Button
+              onClick={sendDeleteRequest}
+              id="btn"
+              variant="dark"
+              block
+              size="md"
+              type="submit"
+            >
+              DELETE PROFILE
             </Button>
           </Form>
         </div>
