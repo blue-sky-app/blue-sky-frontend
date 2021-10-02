@@ -69,6 +69,26 @@ export function UpdateUser(props) {
       });
   };
 
+  const sendDeleteRequest = (e) => {
+    e.preventDefault();
+    axios
+      .delete(API_BASE_URL + "/User/" + state.userId)
+      .then(function (response) {
+        if (response.status === 200) {
+          setState((prevState) => ({
+            ...prevState,
+            display: true,
+            type: "success",
+            message: "delete",
+          }));
+          props.refreshData();
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   // Check if updated email already exists in db, then calls updateUser function
   const checkEmailDup = () => {
     var duplicate;
@@ -249,6 +269,16 @@ export function UpdateUser(props) {
               type="submit"
             >
               UPDATE
+            </Button>
+            <Button
+              onClick={sendDeleteRequest}
+              id="btn"
+              variant="dark"
+              block
+              size="md"
+              type="submit"
+            >
+              DELETE PROFILE
             </Button>
           </Form>
         </div>

@@ -47,7 +47,6 @@ export function AdminSearchUsers() {
 
   const refreshData = () => {
     fetchUser().then(setUsers); 
-    onSearch();
     console.log("I'm working!")
   }
 

@@ -57,6 +57,10 @@ export function Message(props) {
     case "update":
         notice = "Update successful.";
         break;
+
+    case "delete":
+      notice = "Delete successful.";
+      break;
     
     case "required":
         notice = "Please make sure no required fields are left blank."
