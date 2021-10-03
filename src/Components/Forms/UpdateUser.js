@@ -8,6 +8,7 @@ import { Form, Button } from "react-bootstrap";
 import { Message } from "../Message/Message.js";
 import "../Profile/Profile.css";
 import validator from "validator";
+import SuperModal from "../Modal/SuperModal.js";
 
 export function UpdateUser(props) {
   const [accountOption, setAccountOption] = useState();
@@ -24,6 +25,7 @@ export function UpdateUser(props) {
     type: "",
     message: "",
   });
+  const [isOpen, setIsOpen] = useState(false);
 
   // If email is changed, this fetches all user's emails for duplication check
   useEffect(() => {
@@ -71,6 +73,7 @@ export function UpdateUser(props) {
 
   const sendDeleteRequest = (e) => {
     e.preventDefault();
+    setIsOpen(false);
     axios
       .delete(API_BASE_URL + "/User/" + state.userId)
       .then(function (response) {
@@ -193,8 +196,25 @@ export function UpdateUser(props) {
     }
   }, [props.accountType]);
 
+  const openSuperModal = (e) => {
+    e.preventDefault();
+    setIsOpen(true);
+  }
+
   return (
     <>
+      <SuperModal open={isOpen} onClose={() => setIsOpen(false)}><p>Are you sure?</p>
+        <Button
+          onClick={sendDeleteRequest}
+          id="btn"
+          variant="dark"
+          block
+          size="md"
+          type="submit"
+        >
+          DELETE PROFILE
+        </Button>
+      </SuperModal>
       <h5>Update User</h5>
         <div className="w-100 mx-auto" id="form">
           <Form>
@@ -271,7 +291,7 @@ export function UpdateUser(props) {
               UPDATE
             </Button>
             <Button
-              onClick={sendDeleteRequest}
+              onClick={openSuperModal}
               id="btn"
               variant="dark"
               block

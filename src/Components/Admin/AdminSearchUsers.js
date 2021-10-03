@@ -184,7 +184,7 @@ export function AdminSearchUsers() {
 
   return (
     <>
-      <Modal search={onSearch} open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal tab="users" search={onSearch} open={isOpen} onClose={() => setIsOpen(false)}>
         <UpdateUser
           refreshData={refreshData}
           userId={userState.userId}
