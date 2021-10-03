@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import "./Modal.css";
 
-export default function Modal({ open, children, onClose, search }) {
+export default function Modal({ open, children, onClose, search, tab }) {
   if (!open) return null;
 
   const closeActions = () => {
     onClose();
+    if (tab === "users") {
     search()
+    }
   }
 
   return ReactDom.createPortal(
