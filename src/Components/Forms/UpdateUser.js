@@ -203,7 +203,7 @@ export function UpdateUser(props) {
 
   return (
     <>
-      <SuperModal open={isOpen} onClose={() => setIsOpen(false)}><div>Are you sure?</div>
+      <SuperModal open={isOpen} onClose={() => setIsOpen(false)}><p>Are you sure?</p>
         <Button
           onClick={sendDeleteRequest}
           id="btn"
