@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import { API_BASE_URL, headers } from "../API/Api.js";
 import { Form, Table, Button } from "react-bootstrap";
 import Modal from "../Modal/Modal.js";
 import "./Admin.css";
 
 export function AdminNews() {
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
   const [news, setNews] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   // This fetch is for the News
   useEffect(() => {
-    fetchNews();
+    fetchNews(token);
   }, []);
   useEffect(() => {
     console.log(news);
   }, [news]);
 
-  const fetchNews = async () => {
-    const response = await axios(`${API_BASE_URL}/news/`);
+  const fetchNews = async (token) => {
+    const response = await axios(`${API_BASE_URL}/news/`, headers(token));
     setNews(response.data);
   };
 

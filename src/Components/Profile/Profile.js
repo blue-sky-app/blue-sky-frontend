@@ -6,6 +6,7 @@ import {
   fetchUser,
   fetchNews,
   restrictPage,
+  headers
 } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
@@ -27,6 +28,7 @@ import "./Profile.css";
 import validator from "validator";
 
 export function Profile() {
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
   const [accountOption, setAccountOption] = useState();
   const [users, setUsers] = useState([]);
   const [news, setNews] = useState([]);
@@ -53,7 +55,7 @@ export function Profile() {
 
   // Get news
   useEffect(() => {
-    fetchNews().then(setNews);
+    fetchNews(token).then(setNews);
   }, []);
   useEffect(() => {
     console.log(news);
@@ -66,7 +68,7 @@ export function Profile() {
   // If email is changed, this fetches all user's emails for duplication check
   useEffect(() => {
     if (state.email !== email) {
-      fetchUser().then(setUsers);
+      fetchUser(token).then(setUsers);
     }
   }, [state.email]);
 
@@ -91,7 +93,7 @@ export function Profile() {
   // Also updates local session storage to match updated details
   const sendDetailsToServer = (info) => {
     axios
-      .put(API_BASE_URL + "/User/" + userId, info)
+      .put(API_BASE_URL + "/User/" + userId, info, headers(token))
       .then(function (response) {
         if (response.status === 200) {
           setState((prevState) => ({

@@ -50,7 +50,7 @@ export function Login() {
 
     if (login) {
       var userArray = [];
-      await axios.get(`${API_BASE_URL}/user/${userId}`, {headers: headers(token)}).then((res) => {
+      await axios.get(`${API_BASE_URL}/user/${userId}`, headers(token)).then((res) => {
         let user = res.data
         userArray.push({
           localId: user._id,
@@ -63,7 +63,7 @@ export function Login() {
         });
         console.log(userArray);
       });
-      let news = await fetchNews();
+      let news = await fetchNews(token);
       console.log('news: '+ news);
       for (let i in news) {
         if (userArray[0].localAccountType === news[i].customerType) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import axios from "axios";
-import { API_BASE_URL, restrictPage } from "../API/Api.js";
+import { API_BASE_URL, restrictPage, headers } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -13,6 +13,7 @@ import { Message } from "../Message/Message.js";
 import "./Estimates.css";
 
 export function Estimates() {
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
   const [servicecategories, setServicecategories] = useState([]);
   const [state, setState] = useState({
     display: false,
@@ -26,14 +27,14 @@ export function Estimates() {
 
   // This fetch is for the Categories
   useEffect(() => {
-    fetchCategory();
+    fetchCategory(token);
   }, []);
   useEffect(() => {
     console.log(servicecategories);
   }, [servicecategories]);
 
-  const fetchCategory = async () => {
-    const response = await axios(`${API_BASE_URL}/servicecategories/`);
+  const fetchCategory = async (token) => {
+    const response = await axios(`${API_BASE_URL}/servicecategories/`, headers(token));
     setServicecategories(response.data);
   };
 
@@ -95,7 +96,7 @@ export function Estimates() {
       services: estimateServiceArray,
     };
     axios
-      .post(API_BASE_URL + "/estimates/", estimateInput)
+      .post(API_BASE_URL + "/estimates/", estimateInput, headers(token))
       .then((res) => {
         if (res.status === 200) {
           window.location.href = "/thankYou";
