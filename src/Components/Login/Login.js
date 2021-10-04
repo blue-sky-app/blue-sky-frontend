@@ -1,81 +1,94 @@
 import React, { useState, useEffect } from "react";
+import { fetchUser, fetchNews } from "../API/Api.js";
 import { BrowserView, MobileView } from "react-device-detect";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import BlueSkyLogo from "../Images/loginLogo.png";
 import { Message } from "../Message/Message.js";
-import { API_BASE_URL, fetchNews, headers } from "../API/Api.js";
 import "./Login.css";
-import axios from "axios";
 
 export function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [users, setUsers] = useState([]);
+  const emailValue = document.getElementById("email");
+  const passwordValue = document.getElementById("password");
+  const [news, setNews] = useState([]);
   const [state, setState] = useState({
     display: false,
     type: "",
     message: "",
   });
 
+  // Constant for storing user data in session
+  const userArray = [];
+
+  // user Fetch
+  useEffect(() => {
+    fetchUser().then(setUsers);
+  }, []);
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
+
+  // news article Fetch
+  useEffect(() => {
+    fetchNews().then(setNews);
+  }, []);
+  useEffect(() => {
+    console.log(news);
+  }, [news]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     sessionStorage.clear();
-    var login = false;
-    var userId = '';
-    var token = '';
-    await axios
-      .post(API_BASE_URL + "/login/", {email: email, password: password})
-      .then((res) => {
-        if (res.status === 200) {
-          token = res.data.token;
-          userId = res.data.user.id;
-          login = true;
-          setState(() => ({
-            display: true,
-            type: "success",
-            message: "loginSuccess",
-          }));
-        } else {
+    for (const [i, user] of users.entries()) {
+      console.log(i, user);
+      if (emailValue.value === user.email) {
+        if (passwordValue.value === user.password) {
+          userArray.push({
+            localId: user._id,
+            localFname: user.firstName,
+            localLname: user.lastName,
+            localEmail: user.email,
+            localAccountType: user.accountType,
+            localInvoices: user.invoices,
+            localBlueBucks: user.blueBucks,
+          });
+          var login = true;
+        } else if (passwordValue.value !== user.password) {
           setState(() => ({
             display: true,
             type: "fail",
             message: "loginFail",
           }));
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      } else if (emailValue.value !== user.email) {
+        setState(() => ({
+          display: true,
+          type: "fail",
+          message: "loginFail",
+        }));
+      }
+    }
 
     if (login) {
-      var userArray = [];
-      await axios.get(`${API_BASE_URL}/user/${userId}`, {headers: headers(token)}).then((res) => {
-        let user = res.data
-        userArray.push({
-          localId: user._id,
-          localFname: user.firstName,
-          localLname: user.lastName,
-          localEmail: user.email,
-          localAccountType: user.accountType,
-          localInvoices: user.invoices,
-          localBlueBucks: user.blueBucks,
-        });
-        console.log(userArray);
-      });
-      let news = await fetchNews();
-      console.log('news: '+ news);
       for (let i in news) {
         if (userArray[0].localAccountType === news[i].customerType) {
           userArray.push({
             localNewsHeadline: news[i].headline,
             localNewsText: news[i].text,
           });
+          setState(() => ({
+            display: true,
+            type: "success",
+            message: "loginSuccess",
+          }));
         }
       }
-      sessionStorage.setItem("token", token);
       sessionStorage.setItem("localUser", JSON.stringify(userArray));
       console.log(sessionStorage.getItem("localUser"));
+
+      //TEMPORARY --hard coding admin check on email--
       if (userArray[0].localEmail === "seth@blueforu.com") {
         window.location.href = "/admin"
       }
@@ -103,19 +116,14 @@ export function Login() {
             </div>
             <br />
             <div className="w-50 mx-auto" id="form">
-              <Form onSubmit={handleSubmit}>
+              <Form>
                 <Form.Group size="lg" controlId="email">
-                  <Form.Control
-                    type="email"
-                    placeholder="Email"
-                    onChange={e => setEmail(e.target.value)}
-                  />
+                  <Form.Control type="email" placeholder="Email"/>
                 </Form.Group>
                 <Form.Group size="lg" controlId="password">
                   <Form.Control
                     type="password"
                     placeholder="Password"
-                    onChange={e => setPassword(e.target.value)}
                   />
                 </Form.Group>
                 <br />
@@ -126,6 +134,7 @@ export function Login() {
                   message={state.message}
                 />
                 <Button
+                  onClick={handleSubmit}
                   id="loginButton"
                   block
                   size="md"
