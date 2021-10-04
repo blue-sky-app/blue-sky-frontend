@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import { API_BASE_URL, headers } from "../API/Api.js";
 import { Form, Table, Button } from "react-bootstrap";
 import Modal from "../Modal/Modal.js";
 import "./Admin.css";
 
 export function AdminCategories() {
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
   const [categories, setCategories] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   // This fetch is for the Estimates
   useEffect(() => {
-    fetchCategories();
+    fetchCategories(token);
   }, []);
   useEffect(() => {
     console.log(categories);
   }, [categories]);
 
-  const fetchCategories = async () => {
-    const response = await axios(`${API_BASE_URL}/servicecategories/`);
+  const fetchCategories = async (token) => {
+    const response = await axios(`${API_BASE_URL}/servicecategories/`, headers(token));
     setCategories(response.data);
   };
 

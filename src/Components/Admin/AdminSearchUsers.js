@@ -6,6 +6,7 @@ import { UpdateUser } from "../Forms/UpdateUser.js";
 import "./Admin.css";
 
 export function AdminSearchUsers() {
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
   const [users, setUsers] = useState([]);
   const [userSearch, setUserSearch] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ export function AdminSearchUsers() {
 
   // This fetch is for the Users
   useEffect(() => {
-    fetchUser().then(setUsers);
+    fetchUser(token).then(setUsers);
   }, []);
 
   let searchResults = [];
@@ -46,7 +47,7 @@ export function AdminSearchUsers() {
   };
 
   const refreshData = () => {
-    fetchUser().then(setUsers); 
+    fetchUser(token).then(setUsers); 
     console.log("I'm working!")
   }
 

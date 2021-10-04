@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   API_BASE_URL,
-  fetchUser
+  fetchUser,
+  headers
 } from "../API/Api.js";
 import { Form, Button } from "react-bootstrap";
 import { Message } from "../Message/Message.js";
@@ -11,6 +12,7 @@ import validator from "validator";
 import SuperModal from "../Modal/SuperModal.js";
 
 export function UpdateUser(props) {
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
   const [accountOption, setAccountOption] = useState();
   const [users, setUsers] = useState([]);
   const [state, setState] = useState({
@@ -30,7 +32,7 @@ export function UpdateUser(props) {
   // If email is changed, this fetches all user's emails for duplication check
   useEffect(() => {
     if (state.email !== props.email) {
-      fetchUser().then(setUsers);
+      fetchUser(token).then(setUsers);
     }
   }, [props.email, state.email]);
 
@@ -54,7 +56,7 @@ export function UpdateUser(props) {
   // Sends updated user info array to server to update db
   const sendDetailsToServer = (info) => {
     axios
-      .put(API_BASE_URL + "/User/" + state.userId, info)
+      .put(API_BASE_URL + "/User/" + state.userId, info, headers(token))
       .then(function (response) {
         if (response.status === 200) {
           setState((prevState) => ({
@@ -75,7 +77,7 @@ export function UpdateUser(props) {
     e.preventDefault();
     setIsOpen(false);
     axios
-      .delete(API_BASE_URL + "/User/" + state.userId)
+      .delete(API_BASE_URL + "/User/" + state.userId, headers(token))
       .then(function (response) {
         if (response.status === 200) {
           setState((prevState) => ({
