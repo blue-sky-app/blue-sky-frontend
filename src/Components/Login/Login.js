@@ -139,6 +139,9 @@ export function Login() {
               <Button href="/signUp" variant="secondary" block size="md">
                 SIGN UP
               </Button>
+              <Button href="/forgotPassword" variant="secondary" block size="md">
+                FORGOT PASSWORD
+              </Button>
             </div>
           </div>
         </div>
@@ -191,6 +194,9 @@ export function Login() {
             <Button href="/signUp" variant="secondary" block size="md">
               SIGN UP
             </Button>
+            <Button href="/forgotPassword" variant="secondary" block size="md">
+                FORGOT PASSWORD
+              </Button>
           </div>
           </div>
         </div>
