@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
