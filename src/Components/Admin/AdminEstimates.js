@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import { API_BASE_URL, headers } from "../API/Api.js";
 import Table from "react-bootstrap/Table";
 import "./Admin.css";
 
 export function AdminEstimates() {
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
   const [estimates, setEstimates] = useState([]);
 
   // This fetch is for the Estimates
   useEffect(() => {
-    fetchEstimates();
+    fetchEstimates(token);
   }, []);
   useEffect(() => {
     console.log(estimates);
   }, [estimates]);
 
-  const fetchEstimates = async () => {
-    const response = await axios(`${API_BASE_URL}/estimates/`);
+  const fetchEstimates = async (token) => {
+    const response = await axios(`${API_BASE_URL}/estimates/`, headers(token));
     setEstimates(response.data);
   };
 

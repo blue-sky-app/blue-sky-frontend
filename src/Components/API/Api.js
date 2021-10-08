@@ -4,19 +4,20 @@ import axios from "axios";
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://blueskyapiv2.herokuapp.com";
 
 const headers = (token) => {
-  return {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer ' + token
+  return {headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
   }
 };
 
-const fetchUser = async () => {
-  const response = await axios(`${API_BASE_URL}/users/`);
+const fetchUser = async (token) => {
+  const response = await axios(`${API_BASE_URL}/users/`, headers(token));
   return response.data;
 };
 
-const fetchNews = async () => {
-  const response = await axios(`${API_BASE_URL}/news/`);
+const fetchNews = async (token) => {
+  const response = await axios(`${API_BASE_URL}/news/`, headers(token));
   return response.data;
 };
 
@@ -26,7 +27,7 @@ const restrictPage = async () => {
     console.log("No token detected.");
   }
   try {
-    let verified = await axios.post(`${API_BASE_URL}/validateToken`, {}, {headers: headers(token)})
+    let verified = await axios.post(`${API_BASE_URL}/validateToken`, {}, headers(token))
     if (verified.data) {
       console.log("User token verified.");
     } else {

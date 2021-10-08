@@ -23,6 +23,7 @@ function SignUp(props) {
     message: "",
   });
 
+  // TODO - shift email check logic to API to simply process
   useEffect(() => {
     fetchUser().then(setUsers);
   }, [state.email]);
