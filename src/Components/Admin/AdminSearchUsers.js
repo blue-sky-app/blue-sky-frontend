@@ -6,6 +6,7 @@ import { UpdateUser } from "../Forms/UpdateUser.js";
 import "./Admin.css";
 
 export function AdminSearchUsers() {
+  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
   const [users, setUsers] = useState([]);
   const [userSearch, setUserSearch] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -21,11 +22,8 @@ export function AdminSearchUsers() {
 
   // This fetch is for the Users
   useEffect(() => {
-    fetchUser().then(setUsers);
+    fetchUser(token).then(setUsers);
   }, []);
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
 
   let searchResults = [];
   var inputValue = "";
@@ -48,6 +46,11 @@ export function AdminSearchUsers() {
     onSearch();
   };
 
+  const refreshData = () => {
+    fetchUser(token).then(setUsers); 
+    console.log("I'm working!")
+  }
+
   // Get values for user form from <td> elements in row
   const getUserValues = (ui, fn, ln, at, em) => {
     setIsOpen(true);
@@ -59,7 +62,6 @@ export function AdminSearchUsers() {
       accountType: at,
       email: em,
     }));
-    console.log(ui, fn, ln, at, em);
   };
 
   useEffect(() => {
@@ -76,7 +78,8 @@ export function AdminSearchUsers() {
   };
 
   //This provides the search function and table data population
-  const onSearch = (e) => {
+  const onSearch = () => {
+    inputValue = document.getElementById("userSearch").value;
     for (let i in users) {
       if (
         inputValue === null ||
@@ -135,7 +138,7 @@ export function AdminSearchUsers() {
         };
 
         searchResults.push(
-          <tr id={[i]} id="tableFont">
+          <tr id={[i]}>
             <td id={[i] + 0 + "d"}>{users[i].firstName}</td>
             <td id={[i] + 1 + "d"}>{users[i].lastName}</td>
             <td id={[i] + 2 + "d"}>{users[i].email}</td>
@@ -176,12 +179,15 @@ export function AdminSearchUsers() {
       );
     }
     setUserSearch(searchResults);
+    console.log(userSearch)
   };
+
 
   return (
     <>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal tab="users" search={onSearch} open={isOpen} onClose={() => setIsOpen(false)}>
         <UpdateUser
+          refreshData={refreshData}
           userId={userState.userId}
           fName={userState.firstName}
           lName={userState.lastName}

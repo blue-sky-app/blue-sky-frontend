@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import "./Modal.css";
 
-export default function Modal({ open, children, onClose, search, tab }) {
+export default function SuperModal({ open, children, onClose, search, tab }) {
   if (!open) return null;
 
   const closeActions = () => {
