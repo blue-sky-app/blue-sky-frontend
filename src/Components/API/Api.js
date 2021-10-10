@@ -21,6 +21,11 @@ const fetchNews = async (token) => {
   return response.data;
 };
 
+const fetchCategories = async (token) => {
+  const response = await axios(`${API_BASE_URL}/servicecategories/`, headers(token));
+  return response.data;
+};
+
 const restrictPage = async () => {
   let token = sessionStorage.getItem("token");
   if (token === null) {
@@ -40,4 +45,4 @@ const restrictPage = async () => {
   }
 };
 
-export { API_BASE_URL, fetchUser, fetchNews, headers, restrictPage };
+export { API_BASE_URL, fetchUser, fetchNews, headers, restrictPage, fetchCategories };
