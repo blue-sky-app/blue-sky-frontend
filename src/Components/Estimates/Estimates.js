@@ -13,7 +13,7 @@ import { Message } from "../Message/Message.js";
 import "./Estimates.css";
 
 export function Estimates() {
-  const [token] = useState(sessionStorage.getItem('token') || '');
+  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [servicecategories, setServicecategories] = useState([]);
   const [state, setState] = useState({
     display: false,
