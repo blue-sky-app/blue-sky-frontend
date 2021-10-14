@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { API_BASE_URL, headers } from "../API/Api.js";
+import { fetchCategories } from "../API/Api.js";
 import { Form, Table, Button } from "react-bootstrap";
 import Modal from "../Modal/Modal.js";
 import "./Admin.css";
+import { UpdateCategories } from "../Forms/UpdateCategories.js";
 
 export function AdminCategories() {
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [categories, setCategories] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   // This fetch is for the Estimates
   useEffect(() => {
-    fetchCategories(token);
-  }, []);
+    fetchCategories(token).then(setCategories);
+  }, [token]);
   useEffect(() => {
     console.log(categories);
   }, [categories]);
-
-  const fetchCategories = async (token) => {
-    const response = await axios(`${API_BASE_URL}/servicecategories/`, headers(token));
-    setCategories(response.data);
-  };
 
   let categoriesTable = [];
 
@@ -49,24 +45,8 @@ export function AdminCategories() {
   return (
     <div>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <h5>Update Services</h5>
-        <Form>
-          <Form.Group>
-            <Form.Control as="select">
-              <option value="accountType">Residential</option>
-              <option value="accountType">Commercial</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group size="lg" controlId="firstName">
-            <Form.Control type="text" value="Service-name" required />
-          </Form.Group>
-          <Button id="btn" variant="dark" block size="md" type="submit">
-            ADD
-          </Button>
-          <Button id="btn" variant="dark" block size="md" type="submit">
-            DELETE
-          </Button>
-        </Form>
+        <UpdateCategories categories={categories}/>
+        
       </Modal>
       <Table striped bordered hover size="sm" className="mx-auto w-25">
         {categoriesTable}

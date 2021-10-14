@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import axios from "axios";
-import { API_BASE_URL, restrictPage, headers } from "../API/Api.js";
+import { API_BASE_URL, restrictPage, headers, fetchCategories } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -27,19 +27,16 @@ export function Estimates() {
 
   // This fetch is for the Categories
   useEffect(() => {
-    fetchCategory(token);
-  }, []);
+    fetchCategories(token).then(setServicecategories);
+  }, [token]);
   useEffect(() => {
     console.log(servicecategories);
   }, [servicecategories]);
 
-  const fetchCategory = async (token) => {
-    const response = await axios(
-      `${API_BASE_URL}/servicecategories/`,
-      headers(token)
-    );
+  /*const fetchCategory = async (token) => {
+    const response = await axios(`${API_BASE_URL}/servicecategories/`, headers(token));
     setServicecategories(response.data);
-  };
+  };*/
 
   const estimateServiceArray = [];
 

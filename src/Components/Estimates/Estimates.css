@@ -21,6 +21,7 @@
 
     #tybbody {
         height: 55vh;
+        overflow-y: auto;
     }
 
     #btn {
