@@ -66,6 +66,7 @@ export function Home() {
                   id="btn"
                   variant="dark"
                   href="/estimates"
+                  data-testid="requestQuote"
                 >
                   REQUEST A QUOTE
                 </Button>
@@ -74,6 +75,7 @@ export function Home() {
                   id="btn"
                   variant="dark"
                   href="/services"
+                  data-testid="requestService"
                 >
                   REPEAT A SERVICE
                 </Button>
@@ -122,10 +124,7 @@ export function Home() {
               completed free of charge
             </Card.Text>
           </Card.Body>
-          <Card.Body
-            className="d-flex justify-content-center"
-            id="cardbody"
-          >
+          <Card.Body className="d-flex justify-content-center" id="cardbody">
             <Button
               className="p-2 mr-2"
               variant="dark"

@@ -46,8 +46,8 @@ export function BrowserNavBar(props) {
   }
 
   const returnHome = () => {
-    window.location.href = "/home"
-  }
+    window.location.href = "/home";
+  };
 
   return (
     <>
@@ -58,22 +58,47 @@ export function BrowserNavBar(props) {
       </div>
       <Navbar id="bckgnd">
         <Nav className="mx-auto">
-          <Nav.Link style={home} href="/home" id="wfnt">
+          <Nav.Link style={home} href="/home" id="wfnt" data-testid="homeNav">
             HOME
           </Nav.Link>
-          <Nav.Link style={estimates} href="/estimates" id="wfnt">
+          <Nav.Link
+            style={estimates}
+            href="/estimates"
+            id="wfnt"
+            data-testid="estimateNav"
+          >
             ESTIMATE
           </Nav.Link>
-          <Nav.Link style={services} href="/services" id="wfnt">
+          <Nav.Link
+            style={services}
+            href="/services"
+            id="wfnt"
+            data-testid="servicesNav"
+          >
             SERVICES
           </Nav.Link>
-          <Nav.Link style={blueBucks} href="/blueBucks" id="wfnt">
+          <Nav.Link
+            style={blueBucks}
+            href="/blueBucks"
+            id="wfnt"
+            data-testid="blueBucksNav"
+          >
             BLUE BUCKS
           </Nav.Link>
-          <Nav.Link style={profile} href="/profile" id="wfnt">
+          <Nav.Link
+            style={profile}
+            href="/profile"
+            id="wfnt"
+            data-testid="profileNav"
+          >
             PROFILE
           </Nav.Link>
-          <Nav.Link href="/login" id="wfnt" onClick={logOut}>
+          <Nav.Link
+            href="/login"
+            id="wfnt"
+            data-testid="logoutNav"
+            onClick={logOut}
+          >
             LOG OUT
           </Nav.Link>
         </Nav>

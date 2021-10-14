@@ -13,7 +13,7 @@ import { Message } from "../Message/Message.js";
 import "./Estimates.css";
 
 export function Estimates() {
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   const [servicecategories, setServicecategories] = useState([]);
   const [state, setState] = useState({
     display: false,
@@ -34,7 +34,10 @@ export function Estimates() {
   }, [servicecategories]);
 
   const fetchCategory = async (token) => {
-    const response = await axios(`${API_BASE_URL}/servicecategories/`, headers(token));
+    const response = await axios(
+      `${API_BASE_URL}/servicecategories/`,
+      headers(token)
+    );
     setServicecategories(response.data);
   };
 
