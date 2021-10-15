@@ -39,6 +39,10 @@ export const updateCategories = (catId, serviceArray, token, execute) => {
   });
 }
 
+export const fetchEstimates = async (token) => {
+  const response = await axios(`${API_BASE_URL}/estimates/`, headers(token));
+  return response.data;
+};
 
 export const restrictPage = async () => {
   let token = sessionStorage.getItem("token");

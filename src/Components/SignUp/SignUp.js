@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import axios from "axios";
 import { Form, Image, Button } from "react-bootstrap";

@@ -6,7 +6,7 @@ import { UpdateUser } from "../Forms/UpdateUser.js";
 import "./Admin.css";
 
 export function AdminSearchUsers() {
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [users, setUsers] = useState([]);
   const [userSearch, setUserSearch] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,7 @@ export function AdminSearchUsers() {
   // This fetch is for the Users
   useEffect(() => {
     fetchUser(token).then(setUsers);
-  }, []);
+  }, [token]);
 
   let searchResults = [];
   var inputValue = "";
@@ -139,12 +139,12 @@ export function AdminSearchUsers() {
 
         searchResults.push(
           <tr id={[i]}>
-            <td id={[i] + 0 + "d"}>{users[i].firstName}</td>
-            <td id={[i] + 1 + "d"}>{users[i].lastName}</td>
-            <td id={[i] + 2 + "d"}>{users[i].email}</td>
-            <td id={[i] + 3 + "d"}>{users[i].accountType}</td>
-            <td id={[i] + 4 + "d"}>{updatedServices}</td>
-            <td id={[i] + 5 + "d"}>{updatedBlueBucks}</td>
+            <td key={[i] + 0 + "d"} id={[i] + 0 + "d"}>{users[i].firstName}</td>
+            <td key={[i] + 1 + "d"} id={[i] + 1 + "d"}>{users[i].lastName}</td>
+            <td key={[i] + 2 + "d"} id={[i] + 2 + "d"}>{users[i].email}</td>
+            <td key={[i] + 3 + "d"} id={[i] + 3 + "d"}>{users[i].accountType}</td>
+            <td key={[i] + 4 + "d"} id={[i] + 4 + "d"}>{updatedServices}</td>
+            <td key={[i] + 5 + "d"} id={[i] + 5 + "d"}>{updatedBlueBucks}</td>
             <td>
               <Button
                 id={[i] + "b"}

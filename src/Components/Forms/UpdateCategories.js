@@ -4,46 +4,38 @@ import { Message } from "../Message/Message.js";
 import "../Profile/Profile.css";
 import Modal from "../Modal/Modal.js";
 import { updateCategories } from "../API/Api.js";
+import { element } from "prop-types";
 
 export function UpdateCategories(props) {
 
   const [token] = useState(sessionStorage.getItem('token') || '');
-  //const [newService, setNewService] = useState("");
+  const [formCategories, setFormCategories] = useState([]);
   const [formServices, setFormServices] = useState();
   const [selectServices, setSelectServices] = useState([]);
   const [formButtons, setFormButtons] = useState('');
-  const [superContent, setSuperContent] = useState('');
+  const [modalContent, setModalContent] = useState('');
   const [sendArray, setSendArray] = useState(false);
   const [state, setState] = useState({
     catId: "",
+    action: "",
+    deleteProcess: false,
     updated: false,
     display: false,
     type: "",
     message: "",
   });
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    console.log(state.catId)
-  }, [state.catId]);
-
-  let formCategories = [];
-  let categoryType;
+  
   let newService = "";
 
-  for(let i in props.categories) {
-    formCategories.push(
-    <option value={props.categories[i].customerType}>{props.categories[i].customerType}</option>)
-  }
-
-  const handleSelect = (e) => {
-    setState((prevState) => ({
-      ...prevState,
-      display: false
-    }));
-    categoryType = e.target.value
-    buildServiceList();
-  };
+  useEffect(() => {
+    let formCategories = [];
+    for(let i in props.categories) {
+      formCategories.push(
+      <option value={props.categories[i].customerType}>{props.categories[i].customerType}</option>)
+    }
+    setFormCategories(formCategories);
+  }, [props.categories]);
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -52,7 +44,7 @@ export function UpdateCategories(props) {
       display: false
     }));
     setIsOpen(true);
-    setSuperContent(
+    setModalContent(
       <Form>
         <Form.Group size="lg" controlId="newService">
         <Form.Control
@@ -91,15 +83,16 @@ export function UpdateCategories(props) {
   }, [newService]);
 
   const updateServices = (e) => {
-    console.log(newService);
-    console.log(selectServices);
     e.preventDefault();
     var input = document.getElementById("newService").value
     const regex = /[a-zA-Z]/;
     if (regex.test(input)) {
       setSelectServices(serv => serv.concat(newService));
+      setState((prevState) => ({
+        ...prevState,
+        action: "add"
+      }));
       setSendArray(true);
-      
       document.getElementById("newService").value = "";
     }
     
@@ -119,55 +112,124 @@ export function UpdateCategories(props) {
       var servArray = {
         services: selectServices
       };
+      //sending array
+      console.log(servArray);
+      updateCategories(state.catId, servArray, token)
+      setSendArray(false);
+    }
+    if (state.action === "add") {
       setState((prevState) => ({
         ...prevState,
         display: true,
         type: "success",
         message: "serviceAdded",
       }));
-      //sending array
-      console.log(servArray);
-      setSendArray(false);
-      updateCategories(state.catId, servArray, token)
     }
-  }, [selectServices, sendArray, state.catId, token])
+
+    else if (state.action === "delete") {
+      setState((prevState) => ({
+        ...prevState,
+        display: true,
+        type: "success",
+        message: "delete",
+      }));
+    }
+
+    else if (state.action === "none") {
+      setState((prevState) => ({
+        ...prevState,
+        display: false
+      }));
+    }
+  }, [selectServices, sendArray, state.catId, token, state.action])
 
   useEffect (() => {
-    console.log(selectServices);
+    console.log(`selectServices = ${selectServices}`);
   }, [selectServices]);
 
   const handleDelete = (e) => {
     e.preventDefault();
-    setIsOpen(true);
-    setSuperContent(
-      <>
-        <p>Are you sure you want to delete <br></br> selected services?</p>
-        <Button
-                onClick={confirmDelete}
-                class="btn"
-                id="btn"
-                variant="warning"
-                block
-                size="md"
-                type="submit"
-              >
-                CONFIRM DELETE
-        </Button>
-      </>
-    )
+    setState((prevState) => ({
+      ...prevState,
+      deleteProcess: true,
+      display: false
+    }));
+    console.log(state.display);
   }
+  
+  useEffect (() => {
+    if (state.deleteProcess === true) {
+      setState(() => ({
+        display: false
+      }));
+      let newArray = [];
+      for (let i = 0; i < formServices.length; i++) {
+        let ele = document.getElementById(i + 1);
+        if (!ele.checked) {
+          newArray.push(ele.name);
+        }
+      }
+
+      if (newArray.length === formServices.length) {
+        setState(() => ({
+          display: true,
+          type: "fail",
+          message: "noService",
+        }));
+        return;
+      }
+
+      else {
+        setSelectServices(newArray);
+        setState((prevState) => ({
+          ...prevState,
+        deleteProcess: false,
+        }));
+        setIsOpen(true);
+        setModalContent(
+          <>
+            <p>Are you sure you want to delete <br></br> selected services?</p>
+            <Button
+                    onClick={confirmDelete}
+                    class="btn"
+                    id="btn"
+                    variant="warning"
+                    block
+                    size="md"
+                    type="submit"
+                  >
+                    CONFIRM DELETE
+            </Button>
+          </>
+        )
+      }
+    }
+  }, [selectServices, state.deleteProcess, formServices, state.display])
 
   const confirmDelete = (e) => {
     e.preventDefault();
     setIsOpen(false);
+    setSendArray(true);
     setState((prevState) => ({
       ...prevState,
-      display: true,
-      type: "success",
-      message: "delete",
+     action: "delete"
     }));
   }
 
+  let categoryType;
+
+  // Sets the service category based on admin selection from list
+  const handleSelect = (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      action: "none"
+    }));
+    categoryType = e.target.value
+    buildServiceList();
+  };
+
+  // Takes the category selection and matches it to category objects to pull down
+  // the correct services and build the form fields.
   const buildServiceList = () => {
     let services = [];
     let selectServices = [];
@@ -239,17 +301,32 @@ export function UpdateCategories(props) {
     setFormButtons(buttons);
   }
 
+  const clearMessage = () => {
+    setState((prevState) => ({
+      ...prevState,
+      display: false,
+      message: ""
+    }));
+  }
+
 
   return(
     <>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} tab={"categories"} submit={props.refreshData}>
+      <Modal 
+        open={isOpen} 
+        onClose={() => setIsOpen(false)} 
+        tab={"categories"} 
+        submit={props.refreshData} 
+        clear={clearMessage}
+      >
         <Message
               device="browser"
               display={state.display}
               type={state.type}
               message={state.message}
         />
-        {superContent}</Modal>
+        {modalContent}
+      </Modal>
       <h5>Update Services</h5>
       <Form>
             <Form.Group>

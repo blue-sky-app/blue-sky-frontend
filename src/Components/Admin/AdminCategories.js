@@ -44,7 +44,6 @@ export function AdminCategories() {
 
   const refreshData = () => {
     fetchCategories(token).then(setCategories); 
-    console.log("I'm working!")
   }
 
   return (

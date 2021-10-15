@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import "./Modal.css";
 
-export default function Modal({ open, children, onClose, search, tab, submit }) {
+export default function Modal({ open, children, onClose, search, tab, submit, clear }) {
   if (!open) return null;
 
   const closeActions = () => {
@@ -11,7 +11,8 @@ export default function Modal({ open, children, onClose, search, tab, submit }) 
       search()
     }
     else if (tab === "categories") {
-      submit()
+      submit();
+      clear();
     }
   }
 
