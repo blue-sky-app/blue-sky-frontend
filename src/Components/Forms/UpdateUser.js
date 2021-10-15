@@ -12,7 +12,7 @@ import validator from "validator";
 import Modal from "../Modal/Modal.js";
 
 export function UpdateUser(props) {
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [accountOption, setAccountOption] = useState();
   const [users, setUsers] = useState([]);
   const [state, setState] = useState({
@@ -34,7 +34,7 @@ export function UpdateUser(props) {
     if (state.email !== props.email) {
       fetchUser(token).then(setUsers);
     }
-  }, [props.email, state.email]);
+  }, [props.email, state.email, token]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
   const handleChange = (e) => {

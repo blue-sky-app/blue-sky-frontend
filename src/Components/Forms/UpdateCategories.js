@@ -8,10 +8,12 @@ import { updateCategories } from "../API/Api.js";
 export function UpdateCategories(props) {
 
   const [token] = useState(sessionStorage.getItem('token') || '');
+  //const [newService, setNewService] = useState("");
   const [formServices, setFormServices] = useState();
   const [selectServices, setSelectServices] = useState([]);
   const [formButtons, setFormButtons] = useState('');
   const [superContent, setSuperContent] = useState('');
+  const [sendArray, setSendArray] = useState(false);
   const [state, setState] = useState({
     catId: "",
     updated: false,
@@ -83,6 +85,11 @@ export function UpdateCategories(props) {
     console.log(newService)
   }, [newService]);
 
+  //test
+  useEffect(() => {
+    console.log(newService)
+  }, [newService]);
+
   const updateServices = (e) => {
     console.log(newService);
     console.log(selectServices);
@@ -91,16 +98,8 @@ export function UpdateCategories(props) {
     const regex = /[a-zA-Z]/;
     if (regex.test(input)) {
       setSelectServices(serv => serv.concat(newService));
-      setState((prevState) => ({
-        ...prevState,
-        updated: true,
-      }));
-      setState((prevState) => ({
-        ...prevState,
-        display: true,
-        type: "success",
-        message: "serviceAdded",
-      }));
+      setSendArray(true);
+      
       document.getElementById("newService").value = "";
     }
     
@@ -114,25 +113,24 @@ export function UpdateCategories(props) {
     }
   }
 
-  const submitServiceArray = () => {
-    if (state.updated === true) {
+  useEffect (() => {
+    if (sendArray === true) {
       console.log(selectServices);
       var servArray = {
         services: selectServices
       };
-      sendDetailsToServer(servArray);
+      setState((prevState) => ({
+        ...prevState,
+        display: true,
+        type: "success",
+        message: "serviceAdded",
+      }));
+      //sending array
+      console.log(servArray);
+      setSendArray(false);
+      updateCategories(state.catId, servArray, token)
     }
-    setState((prevState) => ({
-      ...prevState,
-      updated: false,
-      display: false
-    }));
-  }
-  
-  const sendDetailsToServer = (serviceArray) => {
-    console.log(serviceArray);
-    updateCategories(state.catId, serviceArray, token, props.refreshData)
-  };
+  }, [selectServices, sendArray, state.catId, token])
 
   useEffect (() => {
     console.log(selectServices);
@@ -244,7 +242,7 @@ export function UpdateCategories(props) {
 
   return(
     <>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)} submit={submitServiceArray} tab={"categories"} >
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} tab={"categories"} submit={props.refreshData}>
         <Message
               device="browser"
               display={state.display}
