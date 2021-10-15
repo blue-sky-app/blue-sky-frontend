@@ -66,6 +66,18 @@ export function Message(props) {
         notice = "Please make sure no required fields are left blank."
         break;
 
+    case "serviceAdded":
+      notice = "Service successfully added."
+      break;
+
+    case "blank":
+        notice = "Please enter a service name."
+        break;
+
+    case "serviceDup":
+      notice = "This service already exists."
+      break;
+
     case "password":
         notice = "Passwords do not match."
         break;
@@ -89,9 +101,6 @@ export function Message(props) {
     case "emailFormat":
         notice = "The email you entered is not in the correct format. (Ex. 'example@example.com')"
         break;
-
-    case "serviceAdded":
-        notice = "Service successfully added."
     // no default
 }
 

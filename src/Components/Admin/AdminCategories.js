@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { fetchCategories } from "../API/Api.js";
-import { Form, Table, Button } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import Modal from "../Modal/Modal.js";
 import "./Admin.css";
 import { UpdateCategories } from "../Forms/UpdateCategories.js";
@@ -42,10 +42,16 @@ export function AdminCategories() {
     );
   }
 
+  const refreshData = () => {
+    fetchCategories(token).then(setCategories); 
+    console.log("I'm working!")
+  }
+
   return (
     <div>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <UpdateCategories categories={categories}/>
+
+        <UpdateCategories categories={categories} refreshData={refreshData}/>
         
       </Modal>
       <Table striped bordered hover size="sm" className="mx-auto w-25">

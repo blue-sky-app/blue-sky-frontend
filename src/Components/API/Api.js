@@ -26,6 +26,20 @@ const fetchCategories = async (token) => {
   return response.data;
 };
 
+export const updateCategories = (catId, serviceArray, token, execute) => {
+  axios
+  .put(`${API_BASE_URL}/serviceCategory/` + catId, serviceArray, headers(token))
+  .then(function (response) {
+    if (response.status === 200) {
+      return execute;
+    }
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
 const restrictPage = async () => {
   let token = sessionStorage.getItem("token");
   if (token === null) {

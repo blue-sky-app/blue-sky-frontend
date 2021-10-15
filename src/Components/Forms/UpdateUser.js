@@ -9,7 +9,7 @@ import { Form, Button } from "react-bootstrap";
 import { Message } from "../Message/Message.js";
 import "../Profile/Profile.css";
 import validator from "validator";
-import SuperModal from "../Modal/SuperModal.js";
+import Modal from "../Modal/Modal.js";
 
 export function UpdateUser(props) {
   const [token, setToken] = useState(sessionStorage.getItem('token') || '');
@@ -34,7 +34,7 @@ export function UpdateUser(props) {
     if (state.email !== props.email) {
       fetchUser(token).then(setUsers);
     }
-  }, [props.email, state.email, token]);
+  }, [props.email, state.email]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
   const handleChange = (e) => {
@@ -205,18 +205,18 @@ export function UpdateUser(props) {
 
   return (
     <>
-      <SuperModal open={isOpen} onClose={() => setIsOpen(false)}><p>Are you sure?</p>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)}><p>Are you sure?</p>
         <Button
           onClick={sendDeleteRequest}
           id="btn"
-          variant="warning"
+          variant="dark"
           block
           size="md"
           type="submit"
         >
-          CONFIRM DELETE PROFILE
+          DELETE PROFILE
         </Button>
-      </SuperModal>
+      </Modal>
       <h5>Update User</h5>
         <div className="w-100 mx-auto" id="form">
           <Form>
@@ -295,7 +295,7 @@ export function UpdateUser(props) {
             <Button
               onClick={openSuperModal}
               id="btn"
-              variant="danger"
+              variant="dark"
               block
               size="md"
               type="submit"

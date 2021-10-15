@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import {
-  API_BASE_URL,
-  fetchUser,
-  headers
-} from "../API/Api.js";
 import { Form, Button } from "react-bootstrap";
 import { Message } from "../Message/Message.js";
 import "../Profile/Profile.css";
-import SuperModal from "../Modal/SuperModal.js";
+import Modal from "../Modal/Modal.js";
+import { updateCategories } from "../API/Api.js";
 
 export function UpdateCategories(props) {
 
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
-  const [categories, setCategories] = useState([]);
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [formServices, setFormServices] = useState();
+  const [selectServices, setSelectServices] = useState([]);
   const [formButtons, setFormButtons] = useState('');
   const [superContent, setSuperContent] = useState('');
   const [state, setState] = useState({
-    newService: "",
+    catId: "",
+    updated: false,
     display: false,
     type: "",
     message: "",
@@ -26,16 +22,16 @@ export function UpdateCategories(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setCategories(props.categories)
-    console.log(categories)
-  }, [props.categories, categories]);
+    console.log(state.catId)
+  }, [state.catId]);
 
   let formCategories = [];
   let categoryType;
+  let newService = "";
 
-  for(let i in categories) {
+  for(let i in props.categories) {
     formCategories.push(
-    <option value={categories[i].customerType}>{categories[i].customerType}</option>)
+    <option value={props.categories[i].customerType}>{props.categories[i].customerType}</option>)
   }
 
   const handleSelect = (e) => {
@@ -45,11 +41,14 @@ export function UpdateCategories(props) {
     }));
     categoryType = e.target.value
     buildServiceList();
-    console.log(categoryType)
   };
 
   const handleAdd = (e) => {
     e.preventDefault();
+    setState((prevState) => ({
+      ...prevState,
+      display: false
+    }));
     setIsOpen(true);
     setSuperContent(
       <Form>
@@ -62,7 +61,7 @@ export function UpdateCategories(props) {
               />
         </Form.Group>
         <Button
-              onClick={submitAdd}
+              onClick={updateServices}
               id="btn"
               variant="dark"
               block
@@ -76,23 +75,68 @@ export function UpdateCategories(props) {
   }
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      [id]: value,
-    }));
+    const { value } = e.target;
+    newService = value;
   };
 
-  const submitAdd = (e) => {
+  useEffect(() => {
+    console.log(newService)
+  }, [newService]);
+
+  const updateServices = (e) => {
+    console.log(newService);
+    console.log(selectServices);
     e.preventDefault();
-    setIsOpen(false);
+    var input = document.getElementById("newService").value
+    const regex = /[a-zA-Z]/;
+    if (regex.test(input)) {
+      setSelectServices(serv => serv.concat(newService));
+      setState((prevState) => ({
+        ...prevState,
+        updated: true,
+      }));
+      setState((prevState) => ({
+        ...prevState,
+        display: true,
+        type: "success",
+        message: "serviceAdded",
+      }));
+      document.getElementById("newService").value = "";
+    }
+    
+    else {
+      setState((prevState) => ({
+        ...prevState,
+        display: true,
+        type: "fail",
+        message: "blank",
+      }));
+    }
+  }
+
+  const submitServiceArray = () => {
+    if (state.updated === true) {
+      console.log(selectServices);
+      var servArray = {
+        services: selectServices
+      };
+      sendDetailsToServer(servArray);
+    }
     setState((prevState) => ({
       ...prevState,
-      display: true,
-      type: "success",
-      message: "serviceAdded",
+      updated: false,
+      display: false
     }));
   }
+  
+  const sendDetailsToServer = (serviceArray) => {
+    console.log(serviceArray);
+    updateCategories(state.catId, serviceArray, token, props.refreshData)
+  };
+
+  useEffect (() => {
+    console.log(selectServices);
+  }, [selectServices]);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -128,21 +172,43 @@ export function UpdateCategories(props) {
 
   const buildServiceList = () => {
     let services = [];
+    let selectServices = [];
     let servId=1;
-    for(let i in categories) {
-      if(categories[i].customerType === categoryType) {
-        for(let j in categories[i].services){
-          services.push(
-            <Form.Group controlId={servId++}>
-            <Form.Check
-              className="mb-2 ml-2"
-              style={{ fontSize: "14px" }}
-              type="checkbox"
-              label={categories[i].services[j]}
-              name={categories[i].services[j]}
-            />
-            </Form.Group>
-          )
+    for(let i in props.categories) {
+      if(props.categories[i].customerType === categoryType) {
+        setState((prevState) => ({
+          ...prevState,
+          catId: props.categories[i]._id
+        }));
+        for(let j in props.categories[i].services){
+          if (categoryType==="Residential") {
+            selectServices.push(props.categories[i].services[j]);
+            services.push(
+              <Form.Group controlId={servId++} key={servId + "res"}>
+              <Form.Check
+                className="mb-2 ml-2"
+                style={{ fontSize: "14px" }}
+                type="checkbox"
+                label={props.categories[i].services[j]}
+                name={props.categories[i].services[j]}
+              />
+              </Form.Group>
+            );
+          }
+          else if (categoryType ==="Commercial") {
+            selectServices.push(props.categories[i].services[j]);
+            services.push(
+              <Form.Group controlId={servId++} key={servId + "com"}>
+              <Form.Check
+                className="mb-2 ml-2"
+                style={{ fontSize: "14px" }}
+                type="checkbox"
+                label={props.categories[i].services[j]}
+                name={props.categories[i].services[j]}
+              />
+              </Form.Group>
+            )
+          }
         } 
         showButtons(true) 
       }
@@ -152,7 +218,7 @@ export function UpdateCategories(props) {
       }
     }
     setFormServices(services);
-    console.log(formServices)
+    setSelectServices(selectServices);
   };
 
   const showButtons = (state) => {
@@ -161,7 +227,7 @@ export function UpdateCategories(props) {
       buttons =
       <>
         <Button id="btn" variant="dark" block size="md" type="submit" onClick={handleAdd}>
-          ADD
+          ADD NEW SERVICE(S)
         </Button>
         <Button id="btn" variant="danger" block size="md" type="submit" onClick={handleDelete}>
           DELETE SELECTED
@@ -178,7 +244,14 @@ export function UpdateCategories(props) {
 
   return(
     <>
-      <SuperModal open={isOpen} onClose={() => setIsOpen(false)}>{superContent}</SuperModal>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)} submit={submitServiceArray} tab={"categories"} >
+        <Message
+              device="browser"
+              display={state.display}
+              type={state.type}
+              message={state.message}
+        />
+        {superContent}</Modal>
       <h5>Update Services</h5>
       <Form>
             <Form.Group>
