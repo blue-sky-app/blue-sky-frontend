@@ -36,12 +36,6 @@ export function Login() {
             type: "success",
             message: "loginSuccess",
           }));
-        } else {
-          setState(() => ({
-            display: true,
-            type: "fail",
-            message: "loginFail",
-          }));
         }
       })
       .catch((error) => {
@@ -83,6 +77,14 @@ export function Login() {
       } else {
         window.location.href = "/home";
       }
+    }
+
+    else {
+      setState(() => ({
+        display: true,
+        type: "fail",
+        message: "loginFail",
+      }));
     }
   };
 
