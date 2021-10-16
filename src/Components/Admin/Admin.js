@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE_URL, fetchUser, headers } from "../API/Api.js";
+import { fetchUser, fetchEstimates } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { AdminSearchUsers } from "./AdminSearchUsers";
@@ -12,31 +11,20 @@ import HeaderLogo from "../Images/mTopLogoBar.png";
 // import "./Admin.css";
 
 export function Admin() {
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [key, setKey] = useState(1);
   const [estimates, setEstimates] = useState([]);
   const [users, setUsers] = useState([]);
 
   // This fetch is for the Estimates
   useEffect(() => {
-    fetchEstimates(token);
-  }, []);
-  useEffect(() => {
-    console.log(estimates);
-  }, [estimates]);
-
-  const fetchEstimates = async (token) => {
-    const response = await axios(`${API_BASE_URL}/estimates/`, headers(token));
-    setEstimates(response.data);
-  };
+    fetchEstimates(token).then(setEstimates);
+  }, [token]);
 
   // user Fetch
   useEffect(() => {
     fetchUser(token).then(setUsers);
-  }, []);
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
+  }, [token]);
 
   const totalEstimates = estimates.length;
   const totalUsers = users.length;
