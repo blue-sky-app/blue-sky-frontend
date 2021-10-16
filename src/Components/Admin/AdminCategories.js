@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { fetchCategories } from "../API/Api.js";
 import { Table, Button } from "react-bootstrap";
 import Modal from "../Modal/Modal.js";

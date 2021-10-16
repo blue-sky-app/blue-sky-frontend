@@ -14,8 +14,12 @@ export function UpdateCategories(props) {
   const [formButtons, setFormButtons] = useState('');
   const [modalContent, setModalContent] = useState('');
   const [sendArray, setSendArray] = useState(false);
-  const [state, setState] = useState({
+  const [deleteServices, setDeleteServices] = useState([]);
+  const [catState, setCatState] = useState({
     catId: "",
+    catType: "",
+  });
+  const [state, setState] = useState({
     action: "",
     deleteProcess: false,
     updated: false,
@@ -108,39 +112,47 @@ export function UpdateCategories(props) {
   useEffect (() => {
     if (sendArray === true) {
       console.log(selectServices);
-      var servArray = {
-        services: selectServices
-      };
+      console.log(deleteServices);
+      var servArray = {};
+    
+      if (state.action === "add") {
+        servArray = {
+          services: selectServices
+        };
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "success",
+          message: "serviceAdded",
+        }));
+      }
+
+      else if (state.action === "delete") {
+        servArray = {
+          services: deleteServices
+        };
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "success",
+          message: "delete",
+        }));
+        setSelectServices(deleteServices);
+      }
+
+      else if (state.action === "none") {
+        setState((prevState) => ({
+          ...prevState,
+          display: false
+        }));
+      }
       //sending array
       console.log(servArray);
-      updateCategories(state.catId, servArray, token)
+      updateCategories(catState.catId, servArray, token)
+      props.refreshData();
       setSendArray(false);
     }
-    if (state.action === "add") {
-      setState((prevState) => ({
-        ...prevState,
-        display: true,
-        type: "success",
-        message: "serviceAdded",
-      }));
-    }
-
-    else if (state.action === "delete") {
-      setState((prevState) => ({
-        ...prevState,
-        display: true,
-        type: "success",
-        message: "delete",
-      }));
-    }
-
-    else if (state.action === "none") {
-      setState((prevState) => ({
-        ...prevState,
-        display: false
-      }));
-    }
-  }, [selectServices, sendArray, state.catId, token, state.action])
+  }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, props])
 
   useEffect (() => {
     console.log(`selectServices = ${selectServices}`);
@@ -156,6 +168,7 @@ export function UpdateCategories(props) {
     console.log(state.display);
   }
   
+  // Creates new service array based on user select for delete
   useEffect (() => {
     if (state.deleteProcess === true) {
       setState(() => ({
@@ -168,7 +181,6 @@ export function UpdateCategories(props) {
           newArray.push(ele.name);
         }
       }
-
       if (newArray.length === formServices.length) {
         setState(() => ({
           display: true,
@@ -177,9 +189,8 @@ export function UpdateCategories(props) {
         }));
         return;
       }
-
       else {
-        setSelectServices(newArray);
+        setDeleteServices(newArray);
         setState((prevState) => ({
           ...prevState,
         deleteProcess: false,
@@ -203,8 +214,9 @@ export function UpdateCategories(props) {
         )
       }
     }
-  }, [selectServices, state.deleteProcess, formServices, state.display])
+  }, [selectServices, state.deleteProcess, formServices, state.display, state.catType])
 
+  // Handles "Confirm Delete" button press by closing modal and calling fetch function
   const confirmDelete = (e) => {
     e.preventDefault();
     setIsOpen(false);
@@ -219,64 +231,76 @@ export function UpdateCategories(props) {
 
   // Sets the service category based on admin selection from list
   const handleSelect = (e) => {
-    setState((prevState) => ({
-      ...prevState,
+    setState(() => ({
       action: "none"
     }));
     categoryType = e.target.value
     buildServiceList();
   };
 
-  // Takes the category selection and matches it to category objects to pull down
-  // the correct services and build the form fields.
-  const buildServiceList = () => {
+  // Changes formServices list based on user edits to update form
+  useEffect(() => {
+    console.log(selectServices);
+    console.log(catState.catType);
     let services = [];
-    let selectServices = [];
     let servId=1;
+    for (let i in selectServices) {
+      if (catState.catType === "Residential") {
+        services.push(
+          <Form.Group controlId={servId++} key={servId + "res"}>
+          <Form.Check
+            className="mb-2 ml-2"
+            style={{ fontSize: "14px" }}
+            type="checkbox"
+            label={selectServices[i]}
+            name={selectServices[i]}
+          />
+          </Form.Group>
+        );
+      }
+      else if (catState.catType ==="Commercial") {
+        services.push(
+          <Form.Group controlId={servId++} key={servId + "com"}>
+          <Form.Check
+            className="mb-2 ml-2"
+            style={{ fontSize: "14px" }}
+            type="checkbox"
+            label={selectServices[i]}
+            name={selectServices[i]}
+          />
+          </Form.Group>
+        )
+      }
+    } 
+    setFormServices(services);
+  }, [selectServices, catState.catType])
+
+  // Takes the category selection and matches it to category objects to pull down
+  // the correct services.
+  const buildServiceList = () => {
+    let selectServices = [];
+      setCatState((prevState) => ({
+        ...prevState,
+        catType: categoryType
+      }));
+
     for(let i in props.categories) {
       if(props.categories[i].customerType === categoryType) {
-        setState((prevState) => ({
+        setCatState((prevState) => ({
           ...prevState,
           catId: props.categories[i]._id
         }));
         for(let j in props.categories[i].services){
-          if (categoryType==="Residential") {
             selectServices.push(props.categories[i].services[j]);
-            services.push(
-              <Form.Group controlId={servId++} key={servId + "res"}>
-              <Form.Check
-                className="mb-2 ml-2"
-                style={{ fontSize: "14px" }}
-                type="checkbox"
-                label={props.categories[i].services[j]}
-                name={props.categories[i].services[j]}
-              />
-              </Form.Group>
-            );
-          }
-          else if (categoryType ==="Commercial") {
-            selectServices.push(props.categories[i].services[j]);
-            services.push(
-              <Form.Group controlId={servId++} key={servId + "com"}>
-              <Form.Check
-                className="mb-2 ml-2"
-                style={{ fontSize: "14px" }}
-                type="checkbox"
-                label={props.categories[i].services[j]}
-                name={props.categories[i].services[j]}
-              />
-              </Form.Group>
-            )
-          }
-        } 
-        showButtons(true) 
-      }
-      else if(categoryType === "accountType"){
-        services = [];
-        showButtons(false)
+        }  
       }
     }
-    setFormServices(services);
+    if (categoryType === "Residential" || categoryType === "Commercial") {
+      showButtons(true);
+    }
+    else {
+      showButtons(false);
+    }
     setSelectServices(selectServices);
   };
 

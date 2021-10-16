@@ -205,7 +205,7 @@ export function UpdateUser(props) {
 
   return (
     <>
-      <Modal open={isOpen} onClose={() => setIsOpen(false)}><p>Are you sure?</p>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)}><p>Are you sure you want <br></br> to delete this profile?</p>
         <Button
           onClick={sendDeleteRequest}
           id="btn"

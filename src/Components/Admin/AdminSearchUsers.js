@@ -195,10 +195,10 @@ export function AdminSearchUsers() {
           email={userState.email}
         />
       </Modal>
-      <Form className="ml-3" id="form">
+      <Form className="ml-3" id="bform">
         <InputGroup>
           <FormControl
-            placeholder="Email or Name"
+            placeholder="Leave blank to search all"
             aria-label="User Search"
             type="search"
             id="userSearch"
