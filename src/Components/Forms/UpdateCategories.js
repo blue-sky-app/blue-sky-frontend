@@ -18,6 +18,7 @@ export function UpdateCategories(props) {
   const [catState, setCatState] = useState({
     catId: "",
     catType: "",
+    refresh: props.refreshData
   });
   const [state, setState] = useState({
     action: "",
@@ -155,9 +156,13 @@ export function UpdateCategories(props) {
     }
   }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, props])
 
+
   useEffect(() => {
-    props.refreshData();
-  }, [selectServices, props])
+    if (sendArray === false){
+      console.log(catState.refresh)
+      return catState.refresh;
+    }
+  }, [sendArray, catState.refresh])
 
   useEffect (() => {
     console.log(`selectServices = ${selectServices}`);
@@ -208,7 +213,7 @@ export function UpdateCategories(props) {
             <p>Are you sure you want to delete <br></br> selected service(s)?</p>
             <Button
                     onClick={confirmDelete}
-                    class="btn"
+                    className="btn"
                     id="btn"
                     variant="warning"
                     block
