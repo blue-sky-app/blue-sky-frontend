@@ -77,15 +77,6 @@ export function UpdateCategories(props) {
     newService = value;
   };
 
-  useEffect(() => {
-    console.log(newService)
-  }, [newService]);
-
-  //test
-  useEffect(() => {
-    console.log(newService)
-  }, [newService]);
-
   const updateServices = (e) => {
     e.preventDefault();
     var input = document.getElementById("newService").value
@@ -110,10 +101,14 @@ export function UpdateCategories(props) {
     }
   }
 
+  // Formats selectedServices array and sends its values to the db
   useEffect (() => {
     if (sendArray === true) {
-      console.log(selectServices);
-      console.log(deleteServices);
+      if (selectServices.includes("Other")) {
+        let newArray = selectServices;
+        newArray.push(newArray.splice(newArray.indexOf("Other"), 1)[0]);
+        setSelectServices(newArray);
+      }
       var servArray = {};
     
       if (state.action === "add") {
@@ -150,23 +145,19 @@ export function UpdateCategories(props) {
         }));
       }
       //sending array
-      console.log(servArray);
       updateCategories(catState.catId, servArray, token)
       setSendArray(false);
     }
   }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, props])
 
-
+  // fetches new data from db to update parent component services list 
   useEffect(() => {
     if (sendArray === false){
-      console.log(catState.refresh)
       return catState.refresh;
     }
   }, [sendArray, catState.refresh])
 
-  useEffect (() => {
-    console.log(`selectServices = ${selectServices}`);
-  }, [selectServices]);
+
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -175,7 +166,6 @@ export function UpdateCategories(props) {
       deleteProcess: true,
       display: false
     }));
-    console.log(state.display);
   }
   
   // Creates new service array based on user select for delete
@@ -252,8 +242,7 @@ export function UpdateCategories(props) {
 
   // Changes formServices list based on user edits to update form
   useEffect(() => {
-    console.log(selectServices);
-    console.log(catState.catType);
+    console.log(`select = ${selectServices}`)
     let services = [];
     let servId=1;
     for (let i in selectServices) {
