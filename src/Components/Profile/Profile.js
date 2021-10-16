@@ -28,7 +28,7 @@ import "./Profile.css";
 import validator from "validator";
 
 export function Profile() {
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [accountOption, setAccountOption] = useState();
   const [users, setUsers] = useState([]);
   const [news, setNews] = useState([]);
@@ -56,7 +56,8 @@ export function Profile() {
   // Get news
   useEffect(() => {
     fetchNews(token).then(setNews);
-  }, []);
+  }, [token]);
+
   useEffect(() => {
     console.log(news);
   }, [news]);
@@ -70,7 +71,21 @@ export function Profile() {
     if (state.email !== email) {
       fetchUser(token).then(setUsers);
     }
-  }, [state.email]);
+  }, [state.email, token]);
+
+  // Capitalize first letter of Names
+  useEffect(() => {
+    const capitalFirstLetter = (str) => {
+      let newString = str.charAt(0).toUpperCase() + str.slice(1);
+      return newString;
+    }
+    setState((prevState) => ({
+      ...prevState,
+      firstName: capitalFirstLetter(state.firstName),
+      lastName: capitalFirstLetter(state.lastName),
+    }))
+    console.log(state.firstName)
+  }, [state.firstName, state.lastName]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
   const handleChange = (e) => {
@@ -261,7 +276,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="firstName">
                   <Form.Control
                     type="text"
-                    defaultValue={fName}
+                    value={state.firstName}
                     placeholder={fName + " - required"}
                     onChange={handleChange}
                     required
@@ -270,7 +285,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="lastName">
                   <Form.Control
                     type="text"
-                    defaultValue={lName}
+                    value={state.lastName}
                     placeholder={lName + " - required"}
                     onChange={handleChange}
                     required
@@ -355,20 +370,22 @@ export function Profile() {
           <Card.Body id="crdbody">
             <div className="w-75 mx-auto" id="form">
               <Form>
-                <Form.Group size="lg" controlId="firstName">
+              <Form.Group size="lg" controlId="firstName">
                   <Form.Control
                     type="text"
-                    defaultValue={fName}
+                    value={state.firstName}
                     placeholder={fName + " - required"}
                     onChange={handleChange}
+                    required
                   />
                 </Form.Group>
                 <Form.Group size="lg" controlId="lastName">
                   <Form.Control
                     type="text"
-                    defaultValue={lName}
+                    value={state.lastName}
                     placeholder={lName + " - required"}
                     onChange={handleChange}
+                    required
                   />
                 </Form.Group>
                 <Form.Group>

@@ -29,7 +29,6 @@ function SignUp(props) {
   }, [state.email]);
 
   const handleChange = (e) => {
-    capitalizeNames();
     const { id, value } = e.target;
     setState((prevState) => ({
       ...prevState,
@@ -38,7 +37,7 @@ function SignUp(props) {
   };
 
   // Capitalize first letter of Names
-  const capitalizeNames = () => {
+  useEffect(() => {
     const capitalFirstLetter = (str) => {
       let newString = str.charAt(0).toUpperCase() + str.slice(1);
       return newString;
@@ -49,7 +48,7 @@ function SignUp(props) {
       lastName: capitalFirstLetter(state.lastName),
     }))
     console.log(state.firstName)
-  };
+  }, [state.firstName, state.lastName]);
 
   const redirectToSuccess = () => {
     props.history.push("/signUpSuccess");

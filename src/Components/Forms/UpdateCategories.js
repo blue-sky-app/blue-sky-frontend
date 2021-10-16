@@ -4,7 +4,6 @@ import { Message } from "../Message/Message.js";
 import "../Profile/Profile.css";
 import Modal from "../Modal/Modal.js";
 import { updateCategories } from "../API/Api.js";
-import { element } from "prop-types";
 
 export function UpdateCategories(props) {
 
@@ -25,8 +24,6 @@ export function UpdateCategories(props) {
     message: "",
   });
   const [isOpen, setIsOpen] = useState(false);
-  
-  let newService = "";
 
   useEffect(() => {
     let formCategories = [];
@@ -67,6 +64,8 @@ export function UpdateCategories(props) {
       </Form>
     );
   }
+
+  let newService = "";
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -188,7 +187,7 @@ export function UpdateCategories(props) {
         setIsOpen(true);
         setModalContent(
           <>
-            <p>Are you sure you want to delete <br></br> selected services?</p>
+            <p>Are you sure you want to delete <br></br> selected service(s)?</p>
             <Button
                     onClick={confirmDelete}
                     class="btn"
@@ -296,7 +295,6 @@ export function UpdateCategories(props) {
     }
     else if(!state){
       buttons = "";
-      console.log("working")
     }
     setFormButtons(buttons);
   }
