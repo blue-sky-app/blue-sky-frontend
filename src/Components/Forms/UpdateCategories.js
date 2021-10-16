@@ -121,6 +121,7 @@ export function UpdateCategories(props) {
         };
         setState((prevState) => ({
           ...prevState,
+          action: "none",
           display: true,
           type: "success",
           message: "serviceAdded",
@@ -133,6 +134,7 @@ export function UpdateCategories(props) {
         };
         setState((prevState) => ({
           ...prevState,
+          action: "none",
           display: true,
           type: "success",
           message: "delete",
@@ -149,10 +151,13 @@ export function UpdateCategories(props) {
       //sending array
       console.log(servArray);
       updateCategories(catState.catId, servArray, token)
-      props.refreshData();
       setSendArray(false);
     }
   }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, props])
+
+  useEffect(() => {
+    props.refreshData();
+  }, [selectServices, props])
 
   useEffect (() => {
     console.log(`selectServices = ${selectServices}`);
@@ -172,7 +177,8 @@ export function UpdateCategories(props) {
   useEffect (() => {
     if (state.deleteProcess === true) {
       setState(() => ({
-        display: false
+        display: false,
+        deleteProcess: false
       }));
       let newArray = [];
       for (let i = 0; i < formServices.length; i++) {
@@ -184,6 +190,7 @@ export function UpdateCategories(props) {
       if (newArray.length === formServices.length) {
         setState(() => ({
           display: true,
+          deleteProcess: false,
           type: "fail",
           message: "noService",
         }));
