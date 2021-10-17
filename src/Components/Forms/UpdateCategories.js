@@ -184,8 +184,9 @@ export function UpdateCategories(props) {
       console.log(servArray);
       updateCategories(catState.catId, servArray, token)
       setSendArray(false);
+      return catState.refresh
     }
-  }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, serviceCheck])
+  }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, serviceCheck, catState.refresh])
 
   // fetches new data from db to update parent component services list 
   useEffect(() => {
@@ -304,7 +305,7 @@ export function UpdateCategories(props) {
       }
       else if (catState.catType ==="Commercial") {
         services.push(
-          <Form.Group controlId={selectServices[i]} key={selectServices[i] + " com"}>
+          <Form.Group controlId={selectServices[i]} key={selectServices[i] + (keyNum++) + " com"}>
           <Form.Check
             className="mb-2 ml-2"
             style={{ fontSize: "14px" }}
