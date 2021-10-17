@@ -88,7 +88,6 @@ export function UpdateCategories(props) {
       if (selectServices.includes(serviceCheck)) {
         setState((prevState) => ({
           ...prevState,
-          action: "dup",
           display: true,
           type: "fail",
           message: "serviceDup"
@@ -114,9 +113,7 @@ export function UpdateCategories(props) {
   const updateServices = (e) => {
     e.preventDefault();
     console.log(state.action)
-    if (state.action === "dup") {
-      return
-    }
+    
     var input = document.getElementById("newService").value
     const regex = /[a-zA-Z]/;
     if (regex.test(input)) {
