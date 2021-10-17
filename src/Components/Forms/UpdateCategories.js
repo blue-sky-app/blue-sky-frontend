@@ -187,16 +187,16 @@ export function UpdateCategories(props) {
       console.log(servArray);
       updateCategories(catState.catId, servArray, token)
       setSendArray(false);
-      return catState.refresh
     }
   }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, serviceCheck, catState.refresh])
 
   // fetches new data from db to update parent component services list 
   useEffect(() => {
-    if (sendArray === true){
+    
+      console.log("change")
       return catState.refresh;
-    }
-  }, [sendArray, catState.refresh])
+    
+  }, [catState.refresh, sendArray])
 
 
 
@@ -386,7 +386,7 @@ export function UpdateCategories(props) {
         open={isOpen} 
         onClose={() => setIsOpen(false)} 
         tab={"categories"} 
-        submit={props.refreshData} 
+        //submit={props.refreshData} 
         clear={clearMessage}
       >
         <Message

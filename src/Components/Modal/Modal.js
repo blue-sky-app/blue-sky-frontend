@@ -11,7 +11,7 @@ export default function Modal({ open, children, onClose, search, tab, submit, cl
       search()
     }
     else if (tab === "categories") {
-      submit();
+      //submit();
       clear();
     }
   }
