@@ -78,7 +78,10 @@ export function UpdateCategories(props) {
   const handleChange = (e) => {
     const { value } = e.target;
     newService = value;
-    setServiceCheck(newService);
+    // Capitalize first letter in each word
+    const finalValue = newService.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    newService = finalValue;
+    setServiceCheck(finalValue);
     setCheckServStat(true);
   };
 
