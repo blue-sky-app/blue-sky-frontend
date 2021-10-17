@@ -144,12 +144,12 @@ export function UpdateCategories(props) {
         newArray.push(newArray.splice(newArray.indexOf("Other"), 1)[0]);
       }
       let uniqueArr = [...new Set(newArray)];
-        setSelectServices(uniqueArr);
+      setSelectServices(uniqueArr);
       var servArray = {};
 
       if (state.action === "add") {
         servArray = {
-          services: selectServices
+          services: uniqueArr
         };
         setState((prevState) => ({
           ...prevState,
