@@ -43,7 +43,6 @@ export function Message(props) {
       color: textColor,
       borderRadius: "0px",
     };
-    console.log(messageStyle);
   } else {
     messageStyle = { display: "none" };
   }
