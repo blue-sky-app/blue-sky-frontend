@@ -189,7 +189,13 @@ export function Services() {
 
           <Card.Body className="mx-auto w-50">
             <div className="tableFixHead">
-              <Table striped bordered hover size="sm">
+              <Table
+                striped
+                bordered
+                hover
+                size="sm"
+                data-testid="servicesTable"
+              >
                 <thead>
                   <tr>
                     <th>Date</th>

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import axios from "axios";
-import { API_BASE_URL, restrictPage, headers, fetchCategories } from "../API/Api.js";
+import {
+  API_BASE_URL,
+  restrictPage,
+  headers,
+  fetchCategories,
+} from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -145,6 +150,7 @@ export function Estimates() {
                 variant="dark"
                 id="btn"
                 type="submit"
+                data-testid="estimateSubmit"
               >
                 SUBMIT
               </Button>

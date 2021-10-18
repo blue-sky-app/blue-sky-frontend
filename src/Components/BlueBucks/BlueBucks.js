@@ -82,14 +82,20 @@ export function BlueBucks() {
           </Card.Header>
 
           <Card.Body className="mx-auto w-50">
-            <Card.Title id="btitle">
+            <Card.Title id="btitle" data-testid="currentBalance">
               Current Balance: <strong>{currentBalance}</strong>
             </Card.Title>
-            <Card.Title id="rtitle">
-              Referral Total: {referral}
+            <Card.Title id="rtitle" data-testid="referralBalance">
+              Referral Total: <strong>{referral}</strong>
             </Card.Title>
             <div className="tableFixHead">
-              <Table striped bordered hover size="sm">
+              <Table
+                striped
+                bordered
+                hover
+                size="sm"
+                data-testid="blueBucksTable"
+              >
                 <thead>
                   <tr>
                     <th>Transaction Type</th>
@@ -128,9 +134,7 @@ export function BlueBucks() {
             <Card.Title id="btitle">
               Current Balance: <strong>{currentBalance}</strong>
             </Card.Title>
-            <Card.Title id="rtitle">
-              Referral Total: {referral}
-            </Card.Title>
+            <Card.Title id="rtitle">Referral Total: {referral}</Card.Title>
             <div className="tableFixHead">
               <Table striped bordered hover size="sm" id="mbbtable">
                 <thead>
