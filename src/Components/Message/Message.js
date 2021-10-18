@@ -50,58 +50,60 @@ export function Message(props) {
   //set div text based on type of message from parent componenet
   switch (message) {
     case "loginFail":
-        var notice = "The Email or Passcode you entered does not match our records.";
-        break;
+      var notice =
+        "The Email or Passcode you entered does not match our records.";
+      break;
 
     case "update":
-        notice = "Update successful.";
-        break;
+      notice = "Update successful.";
+      break;
 
     case "delete":
       notice = "Delete successful.";
       break;
-    
+
     case "required":
-        notice = "Please make sure no required fields are left blank."
-        break;
+      notice = "Please make sure no required fields are left blank.";
+      break;
 
     case "serviceAdded":
-      notice = "Service successfully added."
+      notice = "Service successfully added.";
       break;
 
     case "blank":
-        notice = "Please enter a service name."
-        break;
+      notice = "Please enter a service name.";
+      break;
 
     case "serviceDup":
-      notice = "This service already exists."
+      notice = "This service already exists.";
       break;
 
     case "password":
-        notice = "Passwords do not match."
-        break;
+      notice = "Passwords do not match.";
+      break;
 
     case "signupSuccess":
-        notice = "Registration successful. Redirecting to Log In."
-        break; 
-        
+      notice = "Registration successful. Redirecting to Log In.";
+      break;
+
     case "loginSuccess":
-        notice = "Login successful."
-        break; 
+      notice = "Login successful.";
+      break;
 
     case "duplicate":
-        notice = "This email is already in use with another account."
-        break;
+      notice = "This email is already in use with another account.";
+      break;
 
     case "noService":
-        notice = "Please make at least one selection."
-        break;
+      notice = "Please make at least one selection.";
+      break;
 
     case "emailFormat":
-        notice = "The email you entered is not in the correct format. (Ex. 'example@example.com')"
-        break;
+      notice =
+        "The email you entered is not in the correct format. (Ex. 'example@example.com')";
+      break;
     // no default
-}
+  }
 
   return (
     <div className={className} style={messageStyle} role="alert">

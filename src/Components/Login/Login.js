@@ -77,9 +77,7 @@ export function Login() {
       } else {
         window.location.href = "/home";
       }
-    }
-
-    else {
+    } else {
       setState(() => ({
         display: true,
         type: "fail",
@@ -199,13 +197,20 @@ export function Login() {
                   block
                   size="md"
                   type="button"
+                  data-testid="loginButton"
                 >
                   LOGIN
                 </Button>
               </Form>
             </div>
             <div className="mt-3 mb-5 w-75 mx-auto" id="form">
-              <Button href="/signUp" variant="secondary" block size="md">
+              <Button
+                href="/signUp"
+                variant="secondary"
+                block
+                size="md"
+                data-testid="signupButton"
+              >
                 SIGN UP
               </Button>
             </div>

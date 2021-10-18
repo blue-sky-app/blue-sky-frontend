@@ -52,7 +52,7 @@ export function Home() {
             style={{ backgroundImage: `url(${selPicture})` }}
           >
             <Card.Text className="text-center w-75 mx-auto">
-              <div id="news">
+              <div id="news" data-testid="news">
                 <div>
                   <strong>{newsHeadline}</strong>
                   <br /> {newsText}
