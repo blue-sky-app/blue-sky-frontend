@@ -106,7 +106,7 @@ export function Estimates() {
       if (ele.checked) {
         if (ele.name === "Other") {
           if (otherValue !== "") {
-          estimateServiceArray.push(otherValue)
+          estimateServiceArray.push("Other: " + otherValue)
           }
           else {
             setState(() => ({
