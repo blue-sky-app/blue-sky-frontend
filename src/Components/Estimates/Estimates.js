@@ -223,6 +223,7 @@ export function Estimates() {
 
             <Form className="ml-3">
               {categoryTable}
+              {textField}
               <Message
                 device="mobile"
                 display={state.display}
