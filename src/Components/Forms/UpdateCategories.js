@@ -55,7 +55,7 @@ export function UpdateCategories(props) {
         <Form.Group size="lg" controlId="newService">
         <Form.Control
                 type="text"
-                placeholder="Enter new service name."
+                placeholder="Enter new service name"
                 onChange={handleChange}
                 required
               />
