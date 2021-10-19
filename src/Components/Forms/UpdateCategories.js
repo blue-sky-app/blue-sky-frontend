@@ -32,6 +32,7 @@ export function UpdateCategories(props) {
   });
   const [isOpen, setIsOpen] = useState(false);
 
+  // Sets category selected by user to display correct service list
   useEffect(() => {
     let formCategories = [];
     for(let i in props.categories) {
@@ -41,6 +42,7 @@ export function UpdateCategories(props) {
     setFormCategories(formCategories);
   }, [props.categories]);
 
+  //Provides form in modal when "Add Service" button is pressed.
   const handleAdd = (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -53,7 +55,7 @@ export function UpdateCategories(props) {
         <Form.Group size="lg" controlId="newService">
         <Form.Control
                 type="text"
-                placeholder="Enter new service name."
+                placeholder="Enter new service name"
                 onChange={handleChange}
                 required
               />
@@ -109,10 +111,8 @@ export function UpdateCategories(props) {
     }
   }, [selectServices, serviceCheck, checkServStat])
 
-  useEffect(() => {
-    console.log(state.action)
-  }, [state.action])
-
+  // Handles "Submit" button for adding new services. 
+  // Checks if input field is still blank before submitting new service
   const updateServices = (e) => {
     e.preventDefault();
     console.log(state.action)
@@ -183,7 +183,7 @@ export function UpdateCategories(props) {
           display: false
         }));
       }
-      //sending array
+      // Sends array
       console.log(servArray);
       updateCategories(catState.catId, servArray, token)
       setSendArray(false);
@@ -192,14 +192,11 @@ export function UpdateCategories(props) {
 
   // fetches new data from db to update parent component services list 
   useEffect(() => {
-    
       console.log("change")
       return catState.refresh;
-    
   }, [catState.refresh, sendArray])
 
-
-
+  // Opens modal to confirm delete when "Delete" button is pressed.
   const handleDelete = (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -257,7 +254,7 @@ export function UpdateCategories(props) {
         )
       }
     }
-  }, [selectServices, state.deleteProcess, formServices, state.display, state.catType])
+  }, [selectServices, state.deleteProcess, formServices, state.display])
 
   // Handles "Confirm Delete" button press by closing modal and calling fetch function
   const confirmDelete = (e) => {

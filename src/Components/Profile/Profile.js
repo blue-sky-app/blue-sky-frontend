@@ -277,7 +277,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.firstName}
-                    placeholder={fName + " - required"}
+                    placeholder={"First Name (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -286,7 +286,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.lastName}
-                    placeholder={lName + " - required"}
+                    placeholder={"Last Name (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -305,7 +305,7 @@ export function Profile() {
                   <Form.Control
                     type="email"
                     defaultValue={email}
-                    placeholder={email + " - required"}
+                    placeholder={"Email (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -374,7 +374,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.firstName}
-                    placeholder={fName + " - required"}
+                    placeholder={"First Name (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -383,7 +383,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.lastName}
-                    placeholder={lName + " - required"}
+                    placeholder={"Last Name (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -400,7 +400,7 @@ export function Profile() {
                   <Form.Control
                     type="email"
                     defaultValue={email}
-                    placeholder={email + "- required"}
+                    placeholder={"Email (required)"}
                     onChange={handleChange}
                   />
                 </Form.Group>

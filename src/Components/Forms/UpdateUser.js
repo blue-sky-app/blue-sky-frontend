@@ -209,12 +209,12 @@ export function UpdateUser(props) {
         <Button
           onClick={sendDeleteRequest}
           id="btn"
-          variant="dark"
+          variant="warning"
           block
           size="md"
           type="submit"
         >
-          DELETE PROFILE
+          CONFIRM DELETE
         </Button>
       </Modal>
       <h5>Update User</h5>
@@ -295,7 +295,7 @@ export function UpdateUser(props) {
             <Button
               onClick={openSuperModal}
               id="btn"
-              variant="dark"
+              variant="danger"
               block
               size="md"
               type="submit"

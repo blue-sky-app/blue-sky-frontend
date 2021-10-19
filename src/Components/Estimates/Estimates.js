@@ -20,6 +20,8 @@ import "./Estimates.css";
 export function Estimates() {
   const [token] = useState(sessionStorage.getItem("token") || "");
   const [servicecategories, setServicecategories] = useState([]);
+  const [textField, setTextField] = useState("");
+  const [otherValue, setOtherValue] = useState("");
   const [state, setState] = useState({
     display: false,
     type: "",
@@ -35,21 +37,14 @@ export function Estimates() {
     fetchCategories(token).then(setServicecategories);
   }, [token]);
 
-  useEffect(() => {
-    console.log(servicecategories);
-  }, [servicecategories]);
-
   const estimateServiceArray = [];
 
   // Creating the table for Estimates
   let categoryTable = [];
   let categories = [];
-  useEffect(() => {
-    console.log(categories);
-  });
-
-  let servID = 1;
+  
   for (let i in servicecategories) {
+    let servID = 1;
     if (accountType === servicecategories[i].customerType) {
       for (let j in servicecategories[i].services) {
         categories.push(
@@ -60,6 +55,9 @@ export function Estimates() {
               type="checkbox"
               label={servicecategories[i].services[j]}
               name={servicecategories[i].services[j]}
+              onClick = {(e) => {
+                inspectElement(e);
+              }}
             />
           </Form.Group>
         );
@@ -72,12 +70,56 @@ export function Estimates() {
     }
   }
 
+  const inspectElement = (e) => {
+    let ele = e.target;
+    if (ele.name === "Other") {
+      if (ele.checked) {
+        setTextField(
+          <Form.Group size="lg" controlId="otherText">
+            <Form.Control
+              className="mb-2 ml-2"
+              style={{ fontSize: "14px", width:"75%"}}
+              as="textarea"
+              rows={3}
+              defaultValue = {otherValue}
+              maxLength="100"
+              placeholder="(Required) Please describe needed service."
+              name={otherValue}
+              onChange={(e) => setOtherValue(e.target.value)}
+            />
+          </Form.Group>
+        )
+      }
+      else {
+        setTextField("");
+        setState(() => ({
+          display: false
+        }));
+      }
+    }
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     for (let i = 0; i < categories.length; i++) {
       let ele = document.getElementById(i + 1);
       if (ele.checked) {
-        estimateServiceArray.push(ele.name);
+        if (ele.name === "Other") {
+          if (otherValue !== "") {
+          estimateServiceArray.push("Other: " + otherValue)
+          }
+          else {
+            setState(() => ({
+              display: true,
+              type: "fail",
+              message: "required",
+            }));
+            return;
+          }
+        }
+        else {
+          estimateServiceArray.push(ele.name);
+        }
       }
     }
     if (estimateServiceArray.length === 0) {
@@ -88,7 +130,6 @@ export function Estimates() {
       }));
       return;
     }
-    console.log(estimateServiceArray);
     const estimateInput = {
       email: email,
       firstName: fName,
@@ -102,7 +143,6 @@ export function Estimates() {
         if (res.status === 200) {
           window.location.href = "/thankYou";
         }
-        console.log(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -138,6 +178,7 @@ export function Estimates() {
 
             <div>
               {categoryTable}
+              {textField}
               <Message
                 device="browser"
                 display={state.display}
@@ -182,6 +223,7 @@ export function Estimates() {
 
             <Form className="ml-3">
               {categoryTable}
+              {textField}
               <Message
                 device="mobile"
                 display={state.display}
