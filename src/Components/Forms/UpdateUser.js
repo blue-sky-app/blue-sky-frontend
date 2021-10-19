@@ -214,7 +214,7 @@ export function UpdateUser(props) {
           size="md"
           type="submit"
         >
-          DELETE PROFILE
+          CONFIRM DELETE
         </Button>
       </Modal>
       <h5>Update User</h5>
