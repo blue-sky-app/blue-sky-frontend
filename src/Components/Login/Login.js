@@ -64,6 +64,7 @@ export function Login() {
       for (let i in news) {
         if (userArray[0].localAccountType === news[i].customerType) {
           userArray.push({
+            localNewsId: news[i]._id,
             localNewsHeadline: news[i].headline,
             localNewsText: news[i].text,
           });

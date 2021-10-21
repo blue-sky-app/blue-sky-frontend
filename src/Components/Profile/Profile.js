@@ -6,7 +6,7 @@ import {
   fetchUser,
   fetchNews,
   restrictPage,
-  headers
+  headers,
 } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
@@ -28,7 +28,7 @@ import "./Profile.css";
 import validator from "validator";
 
 export function Profile() {
-  const [token] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem("token") || "");
   const [accountOption, setAccountOption] = useState();
   const [users, setUsers] = useState([]);
   const [news, setNews] = useState([]);
@@ -78,13 +78,13 @@ export function Profile() {
     const capitalFirstLetter = (str) => {
       let newString = str.charAt(0).toUpperCase() + str.slice(1);
       return newString;
-    }
+    };
     setState((prevState) => ({
       ...prevState,
       firstName: capitalFirstLetter(state.firstName),
       lastName: capitalFirstLetter(state.lastName),
-    }))
-    console.log(state.firstName)
+    }));
+    console.log(state.firstName);
   }, [state.firstName, state.lastName]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
@@ -162,8 +162,7 @@ export function Profile() {
           } else {
             duplicate = false;
           }
-        }
-        else {
+        } else {
           setState((prevState) => ({
             ...prevState,
             display: true,
@@ -220,7 +219,7 @@ export function Profile() {
     }
   };
 
-  // Checks password values to ensure they match, then calls email check 
+  // Checks password values to ensure they match, then calls email check
   const handleUpdate = (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -276,6 +275,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="firstName">
                   <Form.Control
                     type="text"
+                    data-testid="firstName"
                     value={state.firstName}
                     placeholder={fName + " - required"}
                     onChange={handleChange}
@@ -285,6 +285,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="lastName">
                   <Form.Control
                     type="text"
+                    data-testid="lastName"
                     value={state.lastName}
                     placeholder={lName + " - required"}
                     onChange={handleChange}
@@ -294,6 +295,7 @@ export function Profile() {
                 <Form.Group>
                   <Form.Control
                     as="select"
+                    data-testid="customerType"
                     defaultValue={accountType}
                     onChange={handleSelect}
                   >
@@ -304,6 +306,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="email">
                   <Form.Control
                     type="email"
+                    data-testid="email"
                     defaultValue={email}
                     placeholder={email + " - required"}
                     onChange={handleChange}
@@ -316,6 +319,7 @@ export function Profile() {
                   </Form.Text>
                   <Form.Control
                     type="password"
+                    data-testid="password"
                     defaultValue={state.newPassword}
                     placeholder="new password"
                     onChange={handleChange}
@@ -324,6 +328,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="confirmPassword">
                   <Form.Control
                     type="password"
+                    data-testid="confirmPassword"
                     defaultValue={state.confirmPassword}
                     placeholder="confirm password"
                     onChange={handleChange}
@@ -338,6 +343,7 @@ export function Profile() {
                 <Button
                   onClick={handleUpdate}
                   id="btn"
+                  data-testid="profileUpdate"
                   variant="dark"
                   block
                   size="md"
@@ -370,7 +376,7 @@ export function Profile() {
           <Card.Body id="crdbody">
             <div className="w-75 mx-auto" id="form">
               <Form>
-              <Form.Group size="lg" controlId="firstName">
+                <Form.Group size="lg" controlId="firstName">
                   <Form.Control
                     type="text"
                     value={state.firstName}
