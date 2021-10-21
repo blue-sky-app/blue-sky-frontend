@@ -151,6 +151,7 @@ export function UpdateNews(props) {
       }))
   }, [accountType])
 
+  // Sends data to db and closes modal on "CONFIRM UPDATE"
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
     var payload = {
