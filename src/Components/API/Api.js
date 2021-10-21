@@ -39,6 +39,19 @@ export const updateCategories = (catId, serviceArray, token, execute) => {
   });
 }
 
+export const updateNewsData = (newsId, info, token, execute) => {
+  axios
+  .put(`${API_BASE_URL}/News/` + newsId, info, headers(token))
+  .then(function (response) {
+    if (response.status === 200) {
+      return execute;
+    }
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
 export const fetchEstimates = async (token) => {
   const response = await axios(`${API_BASE_URL}/estimates/`, headers(token));
   return response.data;
