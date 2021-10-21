@@ -32,7 +32,7 @@ export function UpdateCategories(props) {
   });
   const [isOpen, setIsOpen] = useState(false);
 
-  // Sets category selected by user to display correct service list
+  // Sets category options for user to select
   useEffect(() => {
     let formCategories = [];
     for(let i in props.categories) {
@@ -42,7 +42,7 @@ export function UpdateCategories(props) {
     setFormCategories(formCategories);
   }, [props.categories]);
 
-  //Provides form in modal when "Add Service" button is pressed.
+  // Provides form in second modal when "Add Service" button is pressed.
   const handleAdd = (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -275,7 +275,7 @@ export function UpdateCategories(props) {
 
   let categoryType;
 
-  // Sets the service category based on admin selection from list
+  // Sets the service list based on admin selection from category type
   const handleSelect = (e) => {
     setState(() => ({
       action: "none"
@@ -321,7 +321,7 @@ export function UpdateCategories(props) {
   }, [selectServices, catState.catType])
 
   // Takes the category selection and matches it to category objects to pull down
-  // the correct services.
+  //    the correct services.
   const buildServiceList = () => {
     let selectServices = [];
       setCatState((prevState) => ({
@@ -349,6 +349,7 @@ export function UpdateCategories(props) {
     setSelectServices(selectServices);
   };
 
+  // Displays the buttons when a valid category is selected
   const showButtons = (state) => {
     let buttons;
     if(state) {
@@ -368,6 +369,7 @@ export function UpdateCategories(props) {
     setFormButtons(buttons);
   }
 
+  // Clears message component when a modal is closed
   const clearMessage = () => {
     setState((prevState) => ({
       ...prevState,
@@ -383,7 +385,6 @@ export function UpdateCategories(props) {
         open={isOpen} 
         onClose={() => setIsOpen(false)} 
         tab={"categories"} 
-        //submit={props.refreshData} 
         clear={clearMessage}
       >
         <Message
@@ -398,10 +399,10 @@ export function UpdateCategories(props) {
       <Form>
             <Form.Group>
               <Form.Control 
-              as="select"
-              className="fcontrol"
-              type="text"
-              onChange={handleSelect}
+                as="select"
+                className="fcontrol"
+                type="text"
+                onChange={handleSelect}
               >
                 <option value="accountType">Choose a Service Category</option>
                 {formCategories}
