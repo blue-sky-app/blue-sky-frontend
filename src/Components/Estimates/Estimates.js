@@ -77,8 +77,8 @@ export function Estimates() {
         setTextField(
           <Form.Group size="lg" controlId="otherText">
             <Form.Control
-              className="mb-2 ml-2"
-              style={{ fontSize: "14px", width:"75%"}}
+              className="mb-2"
+              style={{ fontSize: "14px"}}
               as="textarea"
               rows={3}
               defaultValue = {otherValue}
@@ -172,30 +172,39 @@ export function Estimates() {
           </Card.Header>
 
           <Card.Body className="mx-auto" id="bcbody">
-            <Card.Title className="mb-3" id="bctitle">
+            <Card.Title className="mb-3 text-center" id="bctitle">
               <strong>{accountType}</strong> Services
             </Card.Title>
-
-            <div>
-              {categoryTable}
-              {textField}
-              <Message
-                device="browser"
-                display={state.display}
-                type={state.type}
-                message={state.message}
-              />
-              <Button
-                onClick={onSubmit}
-                className="p-2 mt-2"
-                variant="dark"
-                id="btn"
-                type="submit"
-                data-testid="estimateSubmit"
-              >
-                SUBMIT
-              </Button>
-            </div>
+            <Form className="align-content-center">
+              <div style={{display:"block", textAlign:"center"}}>
+                <div style={{display:"inline-block", textAlign:"left", width:"100%"}}>
+                {categoryTable}
+                </div>
+              </div>
+              <div style={{width:"200px"}}>
+                {textField}
+              </div>
+              <div className="mx-auto" style={{maxWidth:"200px"}}>
+                <Message
+                  device="browser"
+                  display={state.display}
+                  type={state.type}
+                  message={state.message}
+                />
+              </div>
+              <div style={{display:"block", textAlign:"center", width:"100%"}}>
+                <Button
+                  onClick={onSubmit}
+                  className="p-2 mt-2"
+                  variant="dark"
+                  id="btn"
+                  type="submit"
+                  data-testid="estimateSubmit"
+                >
+                  SUBMIT
+                </Button>
+              </div>
+            </Form>
           </Card.Body>
 
           <DeskFooter />
@@ -216,8 +225,8 @@ export function Estimates() {
             {fName}'s Estimate
           </Card.Header>
 
-          <Card.Body id="mcbody">
-            <Card.Title className="mb-3" id="mctitle">
+          <Card.Body className="pl-5 pr-5" id="mcbody">
+            <Card.Title className="mb-3 ml-3" id="mctitle">
               <strong>{accountType}</strong> Services
             </Card.Title>
 
