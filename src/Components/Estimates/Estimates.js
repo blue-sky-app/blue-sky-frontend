@@ -176,8 +176,8 @@ export function Estimates() {
               <strong>{accountType}</strong> Services
             </Card.Title>
             <Form className="align-content-center">
-              <div style={{display:"block", textAlign:"center"}}>
-                <div style={{display:"inline-block", textAlign:"left", width:"100%"}}>
+              <div className="d-block text-center">
+                <div className="d-inline-block text-left w-100">
                 {categoryTable}
                 </div>
               </div>
@@ -192,7 +192,7 @@ export function Estimates() {
                   message={state.message}
                 />
               </div>
-              <div style={{display:"block", textAlign:"center", width:"100%"}}>
+              <div className="d-block text-center w-100">
                 <Button
                   onClick={onSubmit}
                   className="p-2 mt-2"
