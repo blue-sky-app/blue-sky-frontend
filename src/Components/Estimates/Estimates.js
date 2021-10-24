@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
-import axios from "axios";
-import {
-  API_BASE_URL,
-  restrictPage,
-  headers,
-  fetchCategories,
-} from "../API/Api.js";
+import { restrictPage, fetchCategories, postEstimate } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -39,7 +33,7 @@ export function Estimates() {
 
   const estimateServiceArray = [];
 
-  // Creating the table for Estimates
+  // Builds the table for Estimates from fetched data
   let categoryTable = [];
   let categories = [];
   
@@ -70,6 +64,9 @@ export function Estimates() {
     }
   }
 
+  // Checks form elements for any named "Other" then detects if it is checked...
+  //  ... If element is checked, it creates a text area for user entry.
+  // This also removes any notifications when "Other" field is unchecked by user.
   const inspectElement = (e) => {
     let ele = e.target;
     if (ele.name === "Other") {
@@ -99,6 +96,9 @@ export function Estimates() {
     }
   }
 
+  // Handles actions when user presses "Submit" button. These include checking...
+  //  ... to ensure a text value exists if "Other" is checked, displaying correct...
+  //  ... notifications, and sending date to Db if there are no errors.
   const onSubmit = (e) => {
     e.preventDefault();
     for (let i = 0; i < categories.length; i++) {
@@ -137,16 +137,7 @@ export function Estimates() {
       accountType: accountType,
       services: estimateServiceArray,
     };
-    axios
-      .post(API_BASE_URL + "/estimates/", estimateInput, headers(token))
-      .then((res) => {
-        if (res.status === 200) {
-          window.location.href = "/thankYou";
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    postEstimate(estimateInput, token);
   };
 
   return (

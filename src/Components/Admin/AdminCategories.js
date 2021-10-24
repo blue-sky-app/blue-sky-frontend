@@ -11,14 +11,12 @@ export function AdminCategories() {
   const [categoriesTable, setcategoriesTable] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  // This fetch is for the Estimates
+  // This fetches available Services for each category from the Db
   useEffect(() => {
     fetchCategories(token).then(setCategories);
   }, [token]);
-  useEffect(() => {
-    console.log(categories);
-  }, [categories]);
 
+  // Builds the table using data fetched from the Db, updates when "category" state changes
   useEffect(() => {
     let categoriesArray = [];
     for (let i in categories) {
@@ -44,6 +42,7 @@ export function AdminCategories() {
     setcategoriesTable(categoriesArray)
   }, [categories])
 
+  // Performs another fetch when called to refresh the table data on page
   const refreshData = () => {
     fetchCategories(token).then(setCategories); 
     console.log("refreshed")

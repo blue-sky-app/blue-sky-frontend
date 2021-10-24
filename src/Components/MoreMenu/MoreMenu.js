@@ -5,6 +5,8 @@ import { MobileNavBar } from "../NavBar/MobileNavBar";
 import "../NavBar/NavBar.css";
 
 export function MoreMenu() {
+  
+  // Clears ssession storage when "logout" button is pressed
   const logOut = () => {
     sessionStorage.clear();
   };

@@ -53,18 +53,10 @@ export function Profile() {
     restrictPage();
   }, []);
 
-  // Get news
+  // Fetch news from Db
   useEffect(() => {
     fetchNews(token).then(setNews);
   }, [token]);
-
-  useEffect(() => {
-    console.log(news);
-  }, [news]);
-
-  useEffect(() => {
-    console.log(state.email);
-  }, [state.email]);
 
   // If email is changed, this fetches all user's emails for duplication check
   useEffect(() => {

@@ -128,7 +128,6 @@ export function UpdateCategories(props) {
       setSendArray(true);
       document.getElementById("newService").value = "";
     }
-    
     else {
       setState((prevState) => ({
         ...prevState,
@@ -162,7 +161,6 @@ export function UpdateCategories(props) {
           message: "serviceAdded",
         }));
       }
-
       else if (state.action === "delete") {
         servArray = {
           services: deleteServices
@@ -176,14 +174,13 @@ export function UpdateCategories(props) {
         }));
         setSelectServices(deleteServices);
       }
-
       else if (state.action === "none") {
         setState((prevState) => ({
           ...prevState,
           display: false
         }));
       }
-      // Sends array
+      // Sends array to Db
       console.log(servArray);
       updateCategories(catState.catId, servArray, token)
       setSendArray(false);
@@ -267,6 +264,8 @@ export function UpdateCategories(props) {
     }));
   }
 
+  // Double-checks to make sure "selectServices" array always matches "deleteServices" array...
+  // ... when a delete action is occurring so form list is always up to date after delete. 
   useEffect(() => {
     if (state.action === "delete") {
       setSelectServices(deleteServices);
