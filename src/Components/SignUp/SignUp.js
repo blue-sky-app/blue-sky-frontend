@@ -23,11 +23,12 @@ function SignUp(props) {
     message: "",
   });
 
-  // TODO - shift email check logic to API to simply process
+  // Fetches existing users data for checks
   useEffect(() => {
     fetchUser().then(setUsers);
   }, [state.email]);
 
+  // Takes user inputs to set account data for checks against Db data and to POST if no errors
   const handleChange = (e) => {
     const { id, value } = e.target;
     setState((prevState) => ({
@@ -50,10 +51,12 @@ function SignUp(props) {
     console.log(state.firstName)
   }, [state.firstName, state.lastName]);
 
+  // redirects to "SignUp Success" page
   const redirectToSuccess = () => {
     props.history.push("/signUpSuccess");
   };
 
+  // Performs .post operation from array details to Db
   const sendDetailsToServer = () => {
     if (
       state.email.length &&
@@ -102,6 +105,7 @@ function SignUp(props) {
     }
   };
 
+  // Checks against Db for email already existing
   const checkEmailDup = () => {
     var duplicate;
     for (let i in users) {
@@ -134,6 +138,7 @@ function SignUp(props) {
     }
   };
 
+  // Handles "Submit" button click by first making sure user password matches confirm field
   const handleSubmitClick = (e) => {
     e.preventDefault();
     if (state.newPassword === state.confirmPassword) {

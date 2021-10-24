@@ -5,6 +5,7 @@ import "./Modal.css";
 export default function Modal({ open, children, onClose, search, tab, clear }) {
   if (!open) return null;
 
+  // Specifies close actions passed from props when modal is closed
   const closeActions = () => {
     onClose();
     if (tab === "users") {

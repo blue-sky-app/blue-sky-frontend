@@ -17,6 +17,7 @@ export function MobileNavBar(props) {
     color: "#014388",
   };
 
+  // Gets state when component loads or refreshes to determine which page is active
   useEffect(() => {
     getState();
   });
@@ -25,6 +26,7 @@ export function MobileNavBar(props) {
     setIconColor(props.active);
   };
 
+  // Changes selected button style to display as active
   switch (iconColor) {
     case "home":
       var home = iconStyle;

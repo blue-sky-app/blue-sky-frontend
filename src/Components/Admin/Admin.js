@@ -21,7 +21,7 @@ export function Admin() {
     fetchEstimates(token).then(setEstimates);
   }, [token]);
 
-  // user Fetch
+  // Fetch USer data from Db
   useEffect(() => {
     fetchUser(token).then(setUsers);
   }, [token]);
@@ -29,6 +29,7 @@ export function Admin() {
   const totalEstimates = estimates.length;
   const totalUsers = users.length;
 
+  // Stores tab key to set active tab on Admin screen
   const handleSelect = (e, key) => {
     e.preventDefault();
     setKey(key);

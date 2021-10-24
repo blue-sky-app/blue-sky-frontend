@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Image, Button } from "react-bootstrap";
 import BlueSkyLogo from "../Images/loginLogo.png";
-import MobileBlueSkyLogo from "../Images/mobileLoginHeader.png";
 import "./SignUp.css";
 
 export function SignUpSuccess() {

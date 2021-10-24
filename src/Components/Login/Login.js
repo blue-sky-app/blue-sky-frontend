@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/Image";
@@ -18,6 +18,8 @@ export function Login() {
     message: "",
   });
 
+  // Handles actions when user presses the "Submit" button such as checking login credentials...
+  //  ... against Db, getting valid token and storing user details in session storage if fetched successfully.
   const handleSubmit = async (e) => {
     e.preventDefault();
     sessionStorage.clear();
@@ -41,7 +43,7 @@ export function Login() {
       .catch((error) => {
         console.log(error);
       });
-
+    
     if (login) {
       var userArray = [];
       await axios
@@ -110,6 +112,7 @@ export function Login() {
                     data-testid="email"
                     type="email"
                     placeholder="Email"
+                    // sets "email" state to user entered value
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </Form.Group>
@@ -118,6 +121,7 @@ export function Login() {
                     data-testid="password"
                     type="password"
                     placeholder="Password"
+                    // sets "password" state to user entered value
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>

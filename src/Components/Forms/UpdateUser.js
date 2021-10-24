@@ -73,6 +73,7 @@ export function UpdateUser(props) {
       });
   };
 
+  // Performs .delete operation through API to Db to remove user profile
   const sendDeleteRequest = (e) => {
     e.preventDefault();
     setIsOpen(false);

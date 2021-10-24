@@ -36,7 +36,7 @@ export function UpdateNews(props) {
     setFormCategories(newsCategories);
   }, [props.news]);
 
-  // fetches new data from db to update parent component news 
+  // Fetches new data from db to update parent component news after each operation
   useEffect(() => {
     if (!refreshData) {
       console.log("change")
@@ -44,8 +44,9 @@ export function UpdateNews(props) {
     }
   }, [updatedNews.refresh, refreshData])
 
+  // Handles "Update" button click to open confirm modal and makes sure required fields...
+  //  ... are completed.
   useEffect(() => {
-    // Handles "Update" button click to open confirm modal
     const handleUpdate = (e) => {
       setRefreshData(false);
       e.preventDefault();
@@ -134,6 +135,7 @@ export function UpdateNews(props) {
       }
     }
 
+    // Shows or hides buttons by checking for valid category selection
     if (accountType === "Residential" || accountType === "Commercial") {
       showButtons(true);
     }
