@@ -11,6 +11,7 @@ import {
 import { ContactUs } from "../ContactUs/ContactUs";
 import "./NavBar.css";
 
+// Provides the bottom nav bar for the mobile view
 export function MobileNavBar(props) {
   const [iconColor, setIconColor] = useState("");
   let iconStyle = {

@@ -5,6 +5,7 @@ import Modal from "../Modal/Modal.js";
 import "./Admin.css";
 import { UpdateCategories } from "../Forms/UpdateCategories.js";
 
+// Provides categories tab content for admin console
 export function AdminCategories() {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [categories, setCategories] = useState([]);
@@ -45,7 +46,6 @@ export function AdminCategories() {
   // Performs another fetch when called to refresh the table data on page
   const refreshData = () => {
     fetchCategories(token).then(setCategories); 
-    console.log("refreshed")
   }
 
   return (

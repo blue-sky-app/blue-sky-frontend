@@ -5,6 +5,7 @@ import Modal from "../Modal/Modal.js";
 import { UpdateNews } from "../Forms/UpdateNews.js";
 import "./Admin.css";
 
+// Provides news tab content for admin console
 export function AdminNews() {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [news, setNews] = useState([]);

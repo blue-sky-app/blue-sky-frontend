@@ -10,6 +10,7 @@ import { Card, Button, Image, Tabs, Tab } from "react-bootstrap";
 import HeaderLogo from "../Images/mTopLogoBar.png";
 // import "./Admin.css";
 
+// Provides admin console page
 export function Admin() {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [key, setKey] = useState(1);

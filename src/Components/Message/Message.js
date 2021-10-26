@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+// Provides notice functionality to display status messages on user operations throughout site
 export function Message(props) {
   const [message, setMessage] = useState("");
   const [display, setDisplay] = useState("");

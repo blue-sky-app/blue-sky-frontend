@@ -9,6 +9,7 @@ import validator from "validator";
 import { Message } from "../Message/Message";
 import "./SignUp.css";
 
+// Provides the signup page
 function SignUp(props) {
   const [users, setUsers] = useState([]);
   const [state, setState] = useState({
@@ -48,7 +49,6 @@ function SignUp(props) {
       firstName: capitalFirstLetter(state.firstName),
       lastName: capitalFirstLetter(state.lastName),
     }))
-    console.log(state.firstName)
   }, [state.firstName, state.lastName]);
 
   // redirects to "SignUp Success" page

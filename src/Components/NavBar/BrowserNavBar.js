@@ -3,6 +3,7 @@ import { Navbar, Nav, Image } from "react-bootstrap";
 import BlueSkyLogo from "../Images/topLogoBar.png";
 import "./NavBar.css";
 
+// Provides the nav bar for browser view
 export function BrowserNavBar(props) {
   const [navColor, setNavColor] = useState("");
   let navStyle = {

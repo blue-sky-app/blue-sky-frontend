@@ -11,6 +11,7 @@ import { fName, invoices } from "../LocalUser/LocalUser";
 import { restrictPage } from "../API/Api";
 import "./Services.css";
 
+// Provides the services page
 export function Services() {
   useEffect(() => {
     restrictPage();

@@ -5,6 +5,7 @@ import "../Profile/Profile.css";
 import Modal from "../Modal/Modal.js";
 import { updateCategories } from "../API/Api.js";
 
+// Provides edit form for admin categories tab
 export function UpdateCategories(props) {
 
   const [token] = useState(sessionStorage.getItem('token') || '');
@@ -42,7 +43,7 @@ export function UpdateCategories(props) {
     setFormCategories(formCategories);
   }, [props.categories]);
 
-  // Provides form in second modal when "Add Service" button is pressed.
+  // Provides "Add" form in second modal when "Add Service" button is pressed.
   const handleAdd = (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -115,7 +116,6 @@ export function UpdateCategories(props) {
   // Checks if input field is still blank before submitting new service
   const updateServices = (e) => {
     e.preventDefault();
-    console.log(state.action)
     
     var input = document.getElementById("newService").value
     const regex = /[a-zA-Z]/;
@@ -181,7 +181,6 @@ export function UpdateCategories(props) {
         }));
       }
       // Sends array to Db
-      console.log(servArray);
       updateCategories(catState.catId, servArray, token)
       setSendArray(false);
     }
@@ -189,7 +188,6 @@ export function UpdateCategories(props) {
 
   // fetches new data from db to update parent component services list 
   useEffect(() => {
-      console.log("change")
       return catState.refresh;
   }, [catState.refresh, sendArray])
 
@@ -285,7 +283,6 @@ export function UpdateCategories(props) {
 
   // Changes formServices list based on user edits to update form
   useEffect(() => {
-    console.log(`select = ${selectServices}`)
     let keyNum = 0;
     let services = [];
     for (let i in selectServices) {

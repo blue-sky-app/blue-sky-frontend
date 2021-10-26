@@ -5,6 +5,7 @@ import { updateNewsData } from "../API/Api.js";
 import "../Profile/Profile.css";
 import Modal from "../Modal/Modal.js";
 
+// Provides edit form for admin news tab
 export function UpdateNews(props) {
 
   const [token] = useState(sessionStorage.getItem('token') || '');
@@ -39,7 +40,6 @@ export function UpdateNews(props) {
   // Fetches new data from db to update parent component news after each operation
   useEffect(() => {
     if (!refreshData) {
-      console.log("change")
       return updatedNews.refresh;
     }
   }, [updatedNews.refresh, refreshData])

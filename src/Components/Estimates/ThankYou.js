@@ -9,6 +9,7 @@ import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { fName, email } from "../LocalUser/LocalUser";
 import "./Estimates.css";
 
+// Provides thank you page after submitting an estimate
 export function ThankYou() {
   return (
     <>

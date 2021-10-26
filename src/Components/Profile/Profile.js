@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
-import axios from "axios";
 import {
-  API_BASE_URL,
   fetchUser,
   fetchNews,
   restrictPage,
-  headers
+  updateUser
 } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
@@ -27,6 +25,7 @@ import { Message } from "../Message/Message.js";
 import "./Profile.css";
 import validator from "validator";
 
+// Provides the profile page
 export function Profile() {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [accountOption, setAccountOption] = useState();
@@ -76,7 +75,6 @@ export function Profile() {
       firstName: capitalFirstLetter(state.firstName),
       lastName: capitalFirstLetter(state.lastName),
     }))
-    console.log(state.firstName)
   }, [state.firstName, state.lastName]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
@@ -96,24 +94,20 @@ export function Profile() {
     }));
   };
 
-  // Sends updated user info array to server to update db
+  // Sends updated user info array (parameter) to server to update db
   // Also updates local session storage to match updated details
   const sendDetailsToServer = (info) => {
-    axios
-      .put(API_BASE_URL + "/User/" + userId, info, headers(token))
-      .then(function (response) {
-        if (response.status === 200) {
-          setState((prevState) => ({
-            ...prevState,
-            display: true,
-            type: "success",
-            message: "update",
-          }));
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const successMsg = () => {
+      setState((prevState) => ({
+        ...prevState,
+        display: true,
+        type: "success",
+        message: "update",
+      }));
+    }
+    updateUser(state.userId, info, token, successMsg())
+
+    // Updates session storage to match updated info sent to Db
     userArray.push({
       localId: state.userId,
       localFname: state.firstName,
@@ -123,7 +117,6 @@ export function Profile() {
       localInvoices: state.invoices,
       localBlueBucks: state.blueBucks,
     });
-
     for (let i in news) {
       if (state.accountType === news[i].customerType) {
         userArray.push({
@@ -133,7 +126,6 @@ export function Profile() {
       }
     }
     sessionStorage.setItem("localUser", JSON.stringify(userArray));
-    console.log(sessionStorage.getItem("localUser"));
   };
 
   // Check if updated email already exists in db, then calls updateUser function
@@ -167,12 +159,12 @@ export function Profile() {
       }
     }
     if (!duplicate) {
-      updateUser();
+      updateProfile();
     }
   };
 
   // Checks if all required fields have values before calling server update function
-  const updateUser = () => {
+  const updateProfile = () => {
     if (
       state.newPassword.length &&
       state.firstName.length &&
@@ -188,7 +180,6 @@ export function Profile() {
         confirmPassword: state.confirmPassword,
       };
       sendDetailsToServer(payload);
-      console.log(state.newPassword);
     } else if (
       !state.newPassword.length &&
       state.firstName.length &&

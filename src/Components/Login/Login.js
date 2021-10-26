@@ -9,6 +9,7 @@ import { API_BASE_URL, fetchNews, headers } from "../API/Api.js";
 import "./Login.css";
 import axios from "axios";
 
+// Provides login page
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -59,10 +60,8 @@ export function Login() {
             localInvoices: user.invoices,
             localBlueBucks: user.blueBucks,
           });
-          console.log(userArray);
         });
       let news = await fetchNews(token);
-      console.log("news: " + news);
       for (let i in news) {
         if (userArray[0].localAccountType === news[i].customerType) {
           userArray.push({
@@ -73,7 +72,6 @@ export function Login() {
       }
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("localUser", JSON.stringify(userArray));
-      console.log(sessionStorage.getItem("localUser"));
       if (userArray[0].localEmail === "seth@blueforu.com") {
         window.location.href = "/admin";
       } else {

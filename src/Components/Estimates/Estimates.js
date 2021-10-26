@@ -11,6 +11,7 @@ import { fName, lName, email, accountType } from "../LocalUser/LocalUser";
 import { Message } from "../Message/Message.js";
 import "./Estimates.css";
 
+// Provides estimates page
 export function Estimates() {
   const [token] = useState(sessionStorage.getItem("token") || "");
   const [servicecategories, setServicecategories] = useState([]);

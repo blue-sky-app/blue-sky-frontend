@@ -11,6 +11,7 @@ import "../Profile/Profile.css";
 import validator from "validator";
 import Modal from "../Modal/Modal.js";
 
+// Provides edit form for search users tab
 export function UpdateUser(props) {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [accountOption, setAccountOption] = useState();
@@ -147,7 +148,6 @@ export function UpdateUser(props) {
         confirmPassword: state.confirmPassword,
       };
       sendDetailsToServer(payload);
-      console.log(state.newPassword);
     } else if (
       !state.newPassword.length &&
       state.firstName.length &&
