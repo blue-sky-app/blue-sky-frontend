@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchUser, fetchEstimates } from "../API/Api.js";
+import { fetchUsers, fetchEstimates } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { AdminSearchUsers } from "./AdminSearchUsers";
@@ -23,7 +23,7 @@ export function Admin() {
 
   // Fetch USer data from Db
   useEffect(() => {
-    fetchUser(token).then(setUsers);
+    fetchUsers(token).then(setUsers);
   }, [token]);
 
   const totalEstimates = estimates.length;

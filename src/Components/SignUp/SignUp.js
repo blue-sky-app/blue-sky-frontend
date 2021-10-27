@@ -3,14 +3,13 @@ import { BrowserView, MobileView } from "react-device-detect";
 import axios from "axios";
 import { Form, Image, Button } from "react-bootstrap";
 import BlueSkyLogo from "../Images/loginLogo.png";
-import { API_BASE_URL, fetchUser } from "../API/Api";
+import { API_BASE_URL, userExistsByEmail } from "../API/Api";
 import { withRouter } from "react-router-dom";
 import validator from "validator";
 import { Message } from "../Message/Message";
 import "./SignUp.css";
 
 function SignUp(props) {
-  const [users, setUsers] = useState([]);
   const [state, setState] = useState({
     email: "",
     firstName: "",
@@ -22,11 +21,6 @@ function SignUp(props) {
     type: "",
     message: "",
   });
-
-  // Fetches existing users data for checks
-  useEffect(() => {
-    fetchUser().then(setUsers);
-  }, [state.email]);
 
   // Takes user inputs to set account data for checks against Db data and to POST if no errors
   const handleChange = (e) => {
@@ -105,52 +99,38 @@ function SignUp(props) {
     }
   };
 
-  // Checks against Db for email already existing
-  const checkEmailDup = () => {
-    var duplicate;
-    for (let i in users) {
+  // Handles "Submit" button click by first making sure user password matches confirm field
+  const handleSubmitClick = async (e) => {
+    e.preventDefault();
+    if (state.newPassword === state.confirmPassword) {
       if (validator.isEmail(state.email)) {
-        if (state.email === users[i].email) {
-          duplicate = true;
+        if (! await userExistsByEmail(state.email)) {
           setState((prevState) => ({
             ...prevState,
-            display: true,
-            type: "fail",
-            message: "duplicate",
+            display: false
           }));
-          return;
-        } else {
-          duplicate = false;
+          sendDetailsToServer();
         }
-      } else {
         setState((prevState) => ({
           ...prevState,
           display: true,
           type: "fail",
-          message: "emailFormat",
+          message: "duplicate",
         }));
-        return;
       }
-    }
-
-    if (!duplicate) {
-      sendDetailsToServer();
-    }
-  };
-
-  // Handles "Submit" button click by first making sure user password matches confirm field
-  const handleSubmitClick = (e) => {
-    e.preventDefault();
-    if (state.newPassword === state.confirmPassword) {
-      checkEmailDup();
-    } else {
       setState((prevState) => ({
         ...prevState,
         display: true,
         type: "fail",
-        message: "password",
+        message: "emailFormat",
       }));
     }
+    setState((prevState) => ({
+      ...prevState,
+      display: true,
+      type: "fail",
+      message: "password",
+    }));
   };
 
   return (
