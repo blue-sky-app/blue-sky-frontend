@@ -12,9 +12,15 @@ export const headers = (token) => {
   }
 };
 
-// Fetches user data from Db with .get oprtation.
+// Returns true if email exists, false if it doesn't
+export const userExistsByEmail = async (email) => {
+  const response = await axios(`${API_BASE_URL}/userExists/`, {params: {email: email}});
+  return response.data.userExists;
+};
+
+// Fetches user data from Db with .get oprtation
 // Receives JWT token as a parameter to validate request.
-export const fetchUser = async (token) => {
+export const fetchUsers = async (token) => {
   const response = await axios(`${API_BASE_URL}/users/`, headers(token));
   return response.data;
 };

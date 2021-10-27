@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   API_BASE_URL,
-  fetchUser,
+  userExistsByEmail,
   headers
 } from "../API/Api.js";
 import { Form, Button } from "react-bootstrap";
@@ -15,7 +15,6 @@ import Modal from "../Modal/Modal.js";
 export function UpdateUser(props) {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [accountOption, setAccountOption] = useState();
-  const [users, setUsers] = useState([]);
   const [state, setState] = useState({
     userId: props.userId,
     email: props.email,
@@ -29,13 +28,6 @@ export function UpdateUser(props) {
     message: "",
   });
   const [isOpen, setIsOpen] = useState(false);
-
-  // If email is changed, this fetches all user's emails for duplication check
-  useEffect(() => {
-    if (state.email !== props.email) {
-      fetchUser(token).then(setUsers);
-    }
-  }, [props.email, state.email, token]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
   const handleChange = (e) => {
@@ -96,41 +88,6 @@ export function UpdateUser(props) {
       });
   };
 
-  // Check if updated email already exists in db, then calls updateUser function
-  const checkEmailDup = () => {
-    var duplicate;
-    if (state.email !== props.email) {
-      for (let i in users) {
-        if (validator.isEmail(state.email)) {
-          if (state.email === users[i].email) {
-            duplicate = true;
-            setState((prevState) => ({
-              ...prevState,
-              display: true,
-              type: "fail",
-              message: "duplicate",
-            }));
-            return;
-          } else {
-            duplicate = false;
-          }
-        }
-        else {
-          setState((prevState) => ({
-            ...prevState,
-            display: true,
-            type: "fail",
-            message: "emailFormat",
-          }));
-          return;
-        }
-      }
-    }
-    if (!duplicate) {
-      updateUser();
-    }
-  };
-
   // Checks if all required fields have values before calling server update function
   const updateUser = () => {
     if (
@@ -172,22 +129,42 @@ export function UpdateUser(props) {
   };
 
   // Checks password values to ensure they match, then calls email check 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     setState((prevState) => ({
       ...prevState,
       message: "",
     }));
-    if (state.newPassword === state.confirmPassword) {
-      checkEmailDup();
-    } else {
+    if (state.newPassword !== state.confirmPassword) {
       setState((prevState) => ({
         ...prevState,
         display: true,
         type: "fail",
         message: "password",
       }));
+      return;
     }
+    if (state.email !== props.email) {
+      if (! validator.isEmail(state.email)) {
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "fail",
+          message: "emailFormat",
+        }));
+        return;
+      }
+      if (await userExistsByEmail(state.email)) {
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "fail",
+          message: "duplicate",
+        }));
+        return;
+      }
+    }
+    updateUser();
   };
 
   // Sets default value of account type for form dropdown

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Form, InputGroup, FormControl, Button } from "react-bootstrap";
-import { fetchUser } from "../API/Api.js";
+import { fetchUsers } from "../API/Api.js";
 import Modal from "../Modal/Modal.js";
 import { UpdateUser } from "../Forms/UpdateUser.js";
 import "./Admin.css";
@@ -23,7 +23,7 @@ export function AdminSearchUsers() {
 
   // This fetch is for the Users
   useEffect(() => {
-    fetchUser(token).then(setUsers);
+    fetchUsers(token).then(setUsers);
   }, [token]);
 
   let searchResults = [];
@@ -48,7 +48,7 @@ export function AdminSearchUsers() {
   };
 
   const refreshData = () => {
-    fetchUser(token).then(setUsers); 
+    fetchUsers(token).then(setUsers);
   }
 
   // Get values for user form from <td> elements in row
