@@ -50,6 +50,10 @@ function SignUp(props) {
     props.history.push("/signUpSuccess");
   };
 
+  const successMsg = () => {
+    
+  }
+
   // Performs .post operation from array details to Db
   const sendDetailsToServer = () => {
     if (
@@ -72,23 +76,18 @@ function SignUp(props) {
         .post(API_BASE_URL + "/users/", payload)
         .then(function (response) {
           if (response.status === 200) {
-            setState((prevState) => ({
-              ...prevState,
-              display: true,
-              type: "success",
-              message: "signupSuccess",
-            }));
             redirectToSuccess();
-            setState((prevState) => ({
-              ...prevState,
-              message: null,
-            }));
-          } else {
-          }
+          } 
         })
         .catch(function (error) {
           console.log(error);
         });
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "success",
+          message: "signupSuccess",
+        }));
     } else {
       setState((prevState) => ({
         ...prevState,
@@ -111,26 +110,32 @@ function SignUp(props) {
           }));
           sendDetailsToServer();
         }
+        else {
+          setState((prevState) => ({
+            ...prevState,
+            display: true,
+            type: "fail",
+            message: "duplicate",
+          }));
+        }
+      }
+      else {
         setState((prevState) => ({
           ...prevState,
           display: true,
           type: "fail",
-          message: "duplicate",
+          message: "emailFormat",
         }));
-      }
+      } 
+    }
+    else {
       setState((prevState) => ({
         ...prevState,
         display: true,
         type: "fail",
-        message: "emailFormat",
+        message: "password",
       }));
     }
-    setState((prevState) => ({
-      ...prevState,
-      display: true,
-      type: "fail",
-      message: "password",
-    }));
   };
 
   return (
