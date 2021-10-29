@@ -83,10 +83,11 @@ export function AdminSearchUsers() {
         filterItems(users[i].email.toLowerCase(), inputValue) ||
         filterItems(users[i].lastName.toLowerCase(), inputValue) ||
         filterItems(users[i].firstName.toLowerCase(), inputValue) ||
-        inputValue.toLowerCase() ===
+        filterItems(
           users[i].firstName.toLowerCase() +
             " " +
-            users[i].lastName.toLowerCase()
+            users[i].lastName.toLowerCase(), inputValue
+        )
       ) {
         // Services/Invoices Info
         let updatedServices = [];
