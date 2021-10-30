@@ -5,6 +5,7 @@ import Modal from "../Modal/Modal.js";
 import { UpdateUser } from "../Forms/UpdateUser.js";
 import "./Admin.css";
 
+// Provides search user tab content for admin console
 export function AdminSearchUsers() {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [users, setUsers] = useState([]);
@@ -63,10 +64,6 @@ export function AdminSearchUsers() {
     }));
   };
 
-  useEffect(() => {
-    console.log(userState.firstName, userState.lastName);
-  }, [userState.firstName, userState.lastName]);
-
   // get user db id on selecting from table
   const getUserId = (email) => {
     for (const [i, user] of users.entries()) {
@@ -86,10 +83,11 @@ export function AdminSearchUsers() {
         filterItems(users[i].email.toLowerCase(), inputValue) ||
         filterItems(users[i].lastName.toLowerCase(), inputValue) ||
         filterItems(users[i].firstName.toLowerCase(), inputValue) ||
-        inputValue.toLowerCase() ===
+        filterItems(
           users[i].firstName.toLowerCase() +
             " " +
-            users[i].lastName.toLowerCase()
+            users[i].lastName.toLowerCase(), inputValue
+        )
       ) {
         // Services/Invoices Info
         let updatedServices = [];
@@ -178,7 +176,6 @@ export function AdminSearchUsers() {
       );
     }
     setUserSearch(searchResults);
-    console.log(userSearch)
   };
 
 

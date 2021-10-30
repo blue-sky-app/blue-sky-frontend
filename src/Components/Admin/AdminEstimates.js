@@ -3,6 +3,7 @@ import { fetchEstimates } from "../API/Api.js";
 import Table from "react-bootstrap/Table";
 import "./Admin.css";
 
+// Provides estimates tab content for admin console
 export function AdminEstimates() {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [estimates, setEstimates] = useState([]);

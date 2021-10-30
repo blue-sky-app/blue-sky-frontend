@@ -4,6 +4,7 @@ import { Image, Button } from "react-bootstrap";
 import BlueSkyLogo from "../Images/loginLogo.png";
 import "./SignUp.css";
 
+// Provides sign up success page when sign up executes successfully
 export function SignUpSuccess() {
   return (
     <>
