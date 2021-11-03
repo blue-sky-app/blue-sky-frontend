@@ -11,12 +11,14 @@ import {
 import { ContactUs } from "../ContactUs/ContactUs";
 import "./NavBar.css";
 
+// Provides the bottom nav bar for the mobile view
 export function MobileNavBar(props) {
   const [iconColor, setIconColor] = useState("");
   let iconStyle = {
     color: "#014388",
   };
 
+  // Gets state when component loads or refreshes to determine which page is active
   useEffect(() => {
     getState();
   });
@@ -25,6 +27,7 @@ export function MobileNavBar(props) {
     setIconColor(props.active);
   };
 
+  // Changes selected button style to display as active
   switch (iconColor) {
     case "home":
       var home = iconStyle;

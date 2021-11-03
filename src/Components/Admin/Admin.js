@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchUsers, fetchEstimates } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { AdminSearchUsers } from "./AdminSearchUsers";
 import { AdminEstimates } from "./AdminEstimates";
 import { AdminNews } from "./AdminNews";
 import { AdminCategories } from "./AdminCategories";
-import { AdminDashboard } from "./AdminDashboard";
-import { Card, Image, Tabs, Tab } from "react-bootstrap";
+import { Card, Button, Image, Tabs, Tab } from "react-bootstrap";
 import HeaderLogo from "../Images/mTopLogoBar.png";
-import "./Admin.css";
+// import "./Admin.css";
 
+// Provides admin console page
 export function Admin() {
+  const [token] = useState(sessionStorage.getItem('token') || '');
+  const [key, setKey] = useState(1);
+  const [estimates, setEstimates] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  // This fetch is for the Estimates
+  useEffect(() => {
+    fetchEstimates(token).then(setEstimates);
+  }, [token]);
+
+  // Fetch USer data from Db
+  useEffect(() => {
+    fetchUsers(token).then(setUsers);
+  }, [token]);
+
+  const totalEstimates = estimates.length;
+  const totalUsers = users.length;
+
+  // Stores tab key to set active tab on Admin screen
+  const handleSelect = (e, key) => {
+    e.preventDefault();
+    setKey(key);
+  };
+
   return (
     <>
       <BrowserView>
@@ -25,25 +50,46 @@ export function Admin() {
           >
             Admin Console
           </Card.Header>
-          <Card.Body className="mx-auto w-75">
+          <Card.Body className="mx-auto w-75 ">
             <Tabs
-              defaultActiveKey="dashboard"
-              id="uncontrolled-tab-example"
+              activeKey={key}
+              id="tabs"
               className="mb-3"
+              onSelect={(k) => setKey(k)}
             >
-              <Tab eventKey="dashboard" title="Dashboard">
-                <AdminDashboard />
+              <Tab eventKey={1} title="Dashboard">
+                <Card.Body className="border w-25 mx-auto mb-2">
+                  <Card.Title className="text-center">
+                    <Button
+                      variant="success"
+                      onClick={(e) => handleSelect(e, 3)}
+                    >
+                      <strong>{totalUsers}</strong>
+                    </Button>
+                  </Card.Title>
+                  <Card.Text className="text-center">Total Customers</Card.Text>
+                </Card.Body>
+                <Card.Body className="border w-25 mx-auto">
+                  <Card.Title className="text-center">
+                    <Button onClick={(e) => handleSelect(e, 2)}>
+                      <strong>{totalEstimates}</strong>
+                    </Button>
+                  </Card.Title>
+                  <Card.Text className="text-center">
+                    Estimates Needing Review
+                  </Card.Text>
+                </Card.Body>
               </Tab>
-              <Tab eventKey="estimates" title="Estimates">
+              <Tab eventKey={2} title="Estimates">
                 <AdminEstimates />
               </Tab>
-              <Tab eventKey="searchUsers" title="Search Users">
+              <Tab eventKey={3} title="Search Users">
                 <AdminSearchUsers />
               </Tab>
-              <Tab eventKey="categories" title="Categories">
+              <Tab eventKey={4} title="Categories">
                 <AdminCategories />
               </Tab>
-              <Tab eventKey="news" title="News">
+              <Tab eventKey={5} title="News">
                 <AdminNews />
               </Tab>
             </Tabs>

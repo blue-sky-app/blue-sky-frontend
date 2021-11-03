@@ -3,14 +3,14 @@ import { BrowserView, MobileView } from "react-device-detect";
 import axios from "axios";
 import { Form, Image, Button } from "react-bootstrap";
 import BlueSkyLogo from "../Images/loginLogo.png";
-import { API_BASE_URL, fetchUser } from "../API/Api";
+import { API_BASE_URL, userExistsByEmail } from "../API/Api";
 import { withRouter } from "react-router-dom";
 import validator from "validator";
 import { Message } from "../Message/Message";
 import "./SignUp.css";
 
+// Provides the signup page
 function SignUp(props) {
-  const [users, setUsers] = useState([]);
   const [state, setState] = useState({
     email: "",
     firstName: "",
@@ -23,10 +23,7 @@ function SignUp(props) {
     message: "",
   });
 
-  useEffect(() => {
-    fetchUser().then(setUsers);
-  }, [state.email]);
-
+  // Takes user inputs to set account data for checks against Db data and to POST if no errors
   const handleChange = (e) => {
     const { id, value } = e.target;
     setState((prevState) => ({
@@ -35,10 +32,29 @@ function SignUp(props) {
     }));
   };
 
+  // Capitalize first letter of Names
+  useEffect(() => {
+    const capitalFirstLetter = (str) => {
+      let newString = str.charAt(0).toUpperCase() + str.slice(1);
+      return newString;
+    }
+    setState((prevState) => ({
+      ...prevState,
+      firstName: capitalFirstLetter(state.firstName),
+      lastName: capitalFirstLetter(state.lastName),
+    }))
+  }, [state.firstName, state.lastName]);
+
+  // redirects to "SignUp Success" page
   const redirectToSuccess = () => {
     props.history.push("/signUpSuccess");
   };
 
+  const successMsg = () => {
+    
+  }
+
+  // Performs .post operation from array details to Db
   const sendDetailsToServer = () => {
     if (
       state.email.length &&
@@ -57,26 +73,21 @@ function SignUp(props) {
         message: null,
       };
       axios
-        .post(API_BASE_URL + "users/", payload)
+        .post(API_BASE_URL + "/users/", payload)
         .then(function (response) {
           if (response.status === 200) {
-            setState((prevState) => ({
-              ...prevState,
-              display: true,
-              type: "success",
-              message: "signupSuccess",
-            }));
             redirectToSuccess();
-            setState((prevState) => ({
-              ...prevState,
-              message: null,
-            }));
-          } else {
-          }
+          } 
         })
         .catch(function (error) {
           console.log(error);
         });
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "success",
+          message: "signupSuccess",
+        }));
     } else {
       setState((prevState) => ({
         ...prevState,
@@ -87,43 +98,37 @@ function SignUp(props) {
     }
   };
 
-  const checkEmailDup = () => {
-    var duplicate;
-    for (let i in users) {
+  // Handles "Submit" button click by first making sure user password matches confirm field
+  const handleSubmitClick = async (e) => {
+    e.preventDefault();
+    if (state.newPassword === state.confirmPassword) {
       if (validator.isEmail(state.email)) {
-        if (state.email === users[i].email) {
-          duplicate = true;
+        if (! await userExistsByEmail(state.email)) {
+          setState((prevState) => ({
+            ...prevState,
+            display: false
+          }));
+          sendDetailsToServer();
+        }
+        else {
           setState((prevState) => ({
             ...prevState,
             display: true,
             type: "fail",
             message: "duplicate",
           }));
-          return;
-        } else {
-          duplicate = false;
         }
-      } else {
+      }
+      else {
         setState((prevState) => ({
           ...prevState,
           display: true,
           type: "fail",
           message: "emailFormat",
         }));
-        return;
-      }
+      } 
     }
-
-    if (!duplicate) {
-      sendDetailsToServer();
-    }
-  };
-
-  const handleSubmitClick = (e) => {
-    e.preventDefault();
-    if (state.newPassword === state.confirmPassword) {
-      checkEmailDup();
-    } else {
+    else {
       setState((prevState) => ({
         ...prevState,
         display: true,

@@ -11,6 +11,7 @@ import { fName, invoices } from "../LocalUser/LocalUser";
 import { restrictPage } from "../API/Api";
 import "./Services.css";
 
+// Provides the services page
 export function Services() {
   useEffect(() => {
     restrictPage();
@@ -27,14 +28,12 @@ export function Services() {
     )}`;
     let updatedServices = [];
 
-    // if (invoices[i].date >)
-    console.log(invoices[i].date);
-
     for (let j in invoices[i].services) {
       updatedServices.push(<div>{invoices[i].services[j]}</div>);
     }
 
-    // Button Logic
+    // Button Logic to determine if service is within 6 month period or not to...
+    //  ... display correct button on each row.
     let buttonInput = [];
     const year = parseInt(
       newDate.charAt(6) +
@@ -134,18 +133,18 @@ export function Services() {
 
     const today =
       currentDate.getFullYear() * 365 + newMonth + currentDate.getDate();
-    console.log(inputDate);
-    console.log(today);
 
     if (today - inputDate > 180) {
       buttonInput.push(<Link to="/estimates">New Estimate</Link>);
-    } else {
+    } 
+    else {
       buttonInput.push(
         <Button variant="secondary" size="sm">
           Repeat
         </Button>
       );
     }
+
     invoiceInputs.push(
       <tr style={{ fontSize: "12px", alignItems: "center" }}>
         <td className="align-self-center">{newDate}</td>
@@ -156,7 +155,7 @@ export function Services() {
     );
   }
 
-  // posting No Service Info for users with no services
+  // posting "No Service Info" for users with no services
   if (invoiceInputs.length === 0) {
     invoiceInputs.push(
       <tr style={{ fontSize: "12px", textAlign: "center" }}>
@@ -189,7 +188,13 @@ export function Services() {
 
           <Card.Body className="mx-auto w-50">
             <div className="tableFixHead">
-              <Table striped bordered hover size="sm">
+              <Table
+                striped
+                bordered
+                hover
+                size="sm"
+                data-testid="servicesTable"
+              >
                 <thead>
                   <tr>
                     <th>Date</th>

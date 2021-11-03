@@ -20,6 +20,7 @@ import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { restrictPage } from "../API/Api";
 import "./Home.css";
 
+// Provides home page
 export function Home() {
   const picArray = [ImageOne, ImageTwo, ImageThree, ImageFour, ImageFive];
   const randIndex = Math.floor(Math.random() * picArray.length);
@@ -52,7 +53,7 @@ export function Home() {
             style={{ backgroundImage: `url(${selPicture})` }}
           >
             <Card.Text className="text-center w-75 mx-auto">
-              <div id="news">
+              <div id="news" data-testid="news">
                 <div>
                   <strong>{newsHeadline}</strong>
                   <br /> {newsText}
@@ -66,6 +67,7 @@ export function Home() {
                   id="btn"
                   variant="dark"
                   href="/estimates"
+                  data-testid="requestQuote"
                 >
                   REQUEST A QUOTE
                 </Button>
@@ -74,6 +76,7 @@ export function Home() {
                   id="btn"
                   variant="dark"
                   href="/services"
+                  data-testid="requestService"
                 >
                   REPEAT A SERVICE
                 </Button>
@@ -122,10 +125,7 @@ export function Home() {
               completed free of charge
             </Card.Text>
           </Card.Body>
-          <Card.Body
-            className="d-flex justify-content-center"
-            id="cardbody"
-          >
+          <Card.Body className="d-flex justify-content-center" id="cardbody">
             <Button
               className="p-2 mr-2"
               variant="dark"

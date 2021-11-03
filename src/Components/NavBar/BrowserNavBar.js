@@ -3,12 +3,14 @@ import { Navbar, Nav, Image } from "react-bootstrap";
 import BlueSkyLogo from "../Images/topLogoBar.png";
 import "./NavBar.css";
 
+// Provides the nav bar for browser view
 export function BrowserNavBar(props) {
   const [navColor, setNavColor] = useState("");
   let navStyle = {
     color: "white",
   };
 
+  // Gets state when component loads or refreshes to determine which page is active
   useEffect(() => {
     getState();
   });
@@ -17,10 +19,12 @@ export function BrowserNavBar(props) {
     setNavColor(props.active);
   };
 
+  // Clears ssession storage when "logout" button is pressed
   const logOut = () => {
     sessionStorage.clear();
   };
 
+  // Changes selected button style to display as active
   switch (navColor) {
     case "home":
       var home = navStyle;
@@ -45,31 +49,61 @@ export function BrowserNavBar(props) {
     // no default
   }
 
+  // Returns to "Home" page
+  const returnHome = () => {
+    window.location.href = "/home";
+  };
+
   return (
     <>
-      <div className="bgheader">
+      <div onClick={returnHome} className="bgheader">
         <div className="cloudyHeader">
           <Image src={BlueSkyLogo} id="wdth" />
         </div>
       </div>
       <Navbar id="bckgnd">
         <Nav className="mx-auto">
-          <Nav.Link style={home} href="/home" id="wfnt">
+          <Nav.Link style={home} href="/home" id="wfnt" data-testid="homeNav">
             HOME
           </Nav.Link>
-          <Nav.Link style={estimates} href="/estimates" id="wfnt">
+          <Nav.Link
+            style={estimates}
+            href="/estimates"
+            id="wfnt"
+            data-testid="estimateNav"
+          >
             ESTIMATE
           </Nav.Link>
-          <Nav.Link style={services} href="/services" id="wfnt">
+          <Nav.Link
+            style={services}
+            href="/services"
+            id="wfnt"
+            data-testid="servicesNav"
+          >
             SERVICES
           </Nav.Link>
-          <Nav.Link style={blueBucks} href="/blueBucks" id="wfnt">
+          <Nav.Link
+            style={blueBucks}
+            href="/blueBucks"
+            id="wfnt"
+            data-testid="blueBucksNav"
+          >
             BLUE BUCKS
           </Nav.Link>
-          <Nav.Link style={profile} href="/profile" id="wfnt">
+          <Nav.Link
+            style={profile}
+            href="/profile"
+            id="wfnt"
+            data-testid="profileNav"
+          >
             PROFILE
           </Nav.Link>
-          <Nav.Link href="/login" id="wfnt" onClick={logOut}>
+          <Nav.Link
+            href="/login"
+            id="wfnt"
+            data-testid="logoutNav"
+            onClick={logOut}
+          >
             LOG OUT
           </Nav.Link>
         </Nav>

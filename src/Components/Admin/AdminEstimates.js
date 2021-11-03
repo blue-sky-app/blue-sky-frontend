@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE_URL } from "../API/Api.js";
+import { fetchEstimates } from "../API/Api.js";
 import Table from "react-bootstrap/Table";
 import "./Admin.css";
 
+// Provides estimates tab content for admin console
 export function AdminEstimates() {
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [estimates, setEstimates] = useState([]);
 
-  // This fetch is for the Estimates
+  // This fetches the Estimates data from Db
   useEffect(() => {
-    fetchEstimates();
-  }, []);
-  useEffect(() => {
-    console.log(estimates);
-  }, [estimates]);
+    fetchEstimates(token).then(setEstimates);
+  }, [token]);
 
-  const fetchEstimates = async () => {
-    const response = await axios(`${API_BASE_URL}estimates/`);
-    setEstimates(response.data);
-  };
+  const estimateInputs = [];
 
-  let estimateInputs = [];
-
+  // Builds Estimates table from data fetched from Db
   for (let i in estimates) {
     let date = JSON.stringify(estimates[i].created_date);
     let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(
@@ -31,31 +25,26 @@ export function AdminEstimates() {
     let updatedServices = [];
     for (let j in estimates[i].services) {
       updatedServices.push(
-        <tr
-          className="mx-auto"
-          style={{ background: "rgba(0, 0, 0, 0", borderStyle: "hidden" }}
-        >
-          <td>{estimates[i].services[j]}</td>
-        </tr>
+        <div className="mx-auto">{estimates[i].services[j]}</div>
       );
     }
     estimateInputs.push(
-      <tr style={{ fontSize: "11px", alignItems: "center" }}>
-        <td className="align-self-center">{newDate}</td>
-        <td className="align-self-center">{estimates[i].email}</td>
-        <td className="align-self-center">{estimates[i].firstName}</td>
-        <td className="align-self-center">{estimates[i].lastName}</td>
-        <td className="align-self-center">{estimates[i].accountType}</td>
+      <tr id="tableFont">
+        <td>{newDate}</td>
+        <td>{estimates[i].email}</td>
+        <td>{estimates[i].firstName}</td>
+        <td>{estimates[i].lastName}</td>
+        <td>{estimates[i].accountType}</td>
         <td>{updatedServices}</td>
       </tr>
     );
   }
 
-  // posting No Service Info for users with no services
+  // posting "No Service Info" if no estimates are awaiting review
   if (estimateInputs.length === 0) {
     estimateInputs.push(
-      <tr style={{ fontSize: "11px", textAlign: "center" }}>
-        <td colspan="3">No Estimates Available</td>
+      <tr id="tableFont">
+        <td colSpan="3">No Estimates Available</td>
       </tr>
     );
   }

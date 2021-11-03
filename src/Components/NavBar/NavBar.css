@@ -10,12 +10,16 @@
     min-width: 100%;
 }
 
+.bgheader:hover {
+    cursor:pointer;
+   }
+
 .cloudyHeader {
     position: relative;
     min-width: 100%;
     background: url("../Images/clouds.png");
     animation: animate 60s linear infinite;
-    overflow-y: scroll;
+    overflow-y: hidden;
   }
   @keyframes animate
   {

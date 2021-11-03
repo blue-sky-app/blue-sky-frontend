@@ -13,6 +13,7 @@ import { MoreMenu } from "./Components/MoreMenu/MoreMenu";
 import { Admin } from "./Components/Admin/Admin";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// This app uses the BrowserRouter api to navigate between component pages/views
 function App() {
   return (
     <BrowserRouter>
@@ -27,8 +28,7 @@ function App() {
         <Route path="/blueBucks" component={BlueBucks} />
         <Route path="/home" component={Home} />
         <Route path="/signUp">
-          <SignUp /*showError={updateErrorMessage} updateTitle={updateTitle}*/
-          />
+          <SignUp />
         </Route>
         <Route path="/" component={Login} />
       </Switch>
