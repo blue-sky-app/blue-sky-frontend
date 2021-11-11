@@ -197,7 +197,7 @@ export function Profile() {
         return;
       }
     }
-    updateUser();
+    updateProfile();
   };
 
   // Sets default value of account type for form dropdown
