@@ -1,3 +1,4 @@
+// Author(s): Dan, Sam
 import React, { useState, useEffect } from "react";
 import { fetchUsers, fetchEstimates } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
@@ -7,7 +8,10 @@ import { AdminEstimates } from "./AdminEstimates";
 import { AdminNews } from "./AdminNews";
 import { AdminCategories } from "./AdminCategories";
 import { Card, Button, Image, Tabs, Tab } from "react-bootstrap";
+import { email } from "../LocalUser/LocalUser.js";
 import HeaderLogo from "../Images/mTopLogoBar.png";
+import { BrowserNavBar } from "../NavBar/BrowserNavBar.js";
+import { DeskFooter } from "../DeskFooter/DeskFooter.js";
 // import "./Admin.css";
 
 // Provides admin console page
@@ -16,6 +20,10 @@ export function Admin() {
   const [key, setKey] = useState(1);
   const [estimates, setEstimates] = useState([]);
   const [users, setUsers] = useState([]);
+
+  if (email !== "seth@blueforu.com") {
+    window.location.href = "/login";
+  }
 
   // This fetch is for the Estimates
   useEffect(() => {
@@ -39,10 +47,7 @@ export function Admin() {
   return (
     <>
       <BrowserView>
-        <Image
-          src={HeaderLogo}
-          className="d-flex w-100 mx-auto justify-content-center"
-        />
+        <BrowserNavBar/>
         <Card className="border-0">
           <Card.Header
             className="d-flex justify-content-center align-items-center mb-1 border-0"
@@ -50,11 +55,11 @@ export function Admin() {
           >
             Admin Console
           </Card.Header>
-          <Card.Body className="mx-auto w-75 ">
+          <Card.Body className="mx-auto w-75 min-vh-100">
             <Tabs
               activeKey={key}
               id="tabs"
-              className="mb-3"
+              className="mb-3 justify-content-center"
               onSelect={(k) => setKey(k)}
             >
               <Tab eventKey={1} title="Dashboard">
@@ -94,6 +99,7 @@ export function Admin() {
               </Tab>
             </Tabs>
           </Card.Body>
+          <DeskFooter />
         </Card>
       </BrowserView>
 

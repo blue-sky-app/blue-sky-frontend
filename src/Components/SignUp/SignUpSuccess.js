@@ -1,3 +1,4 @@
+// Author(s): Dan, Sam
 import React from "react";
 import { BrowserView, MobileView } from "react-device-detect";
 import { Image, Button } from "react-bootstrap";

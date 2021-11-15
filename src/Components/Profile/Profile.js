@@ -1,7 +1,7 @@
+// Author(s): Sam
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import {
-  API_BASE_URL,
   userExistsByEmail,
   fetchNews,
   restrictPage,
@@ -187,7 +187,9 @@ export function Profile() {
         }));
         return;
       }
+      // Author(s): Asish
       if (await userExistsByEmail(state.email)) {
+      //
         setState((prevState) => ({
           ...prevState,
           display: true,
