@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
-import axios from "axios";
-import {
-  API_BASE_URL,
-  restrictPage,
-  headers,
-  fetchCategories,
-} from "../API/Api.js";
+import { restrictPage, fetchCategories, postEstimate } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
@@ -17,9 +11,12 @@ import { fName, lName, email, accountType } from "../LocalUser/LocalUser";
 import { Message } from "../Message/Message.js";
 import "./Estimates.css";
 
+// Provides estimates page
 export function Estimates() {
   const [token] = useState(sessionStorage.getItem("token") || "");
   const [servicecategories, setServicecategories] = useState([]);
+  const [textField, setTextField] = useState("");
+  const [otherValue, setOtherValue] = useState("");
   const [state, setState] = useState({
     display: false,
     type: "",
@@ -35,21 +32,14 @@ export function Estimates() {
     fetchCategories(token).then(setServicecategories);
   }, [token]);
 
-  useEffect(() => {
-    console.log(servicecategories);
-  }, [servicecategories]);
-
   const estimateServiceArray = [];
 
-  // Creating the table for Estimates
+  // Builds the table for Estimates from fetched data
   let categoryTable = [];
   let categories = [];
-  useEffect(() => {
-    console.log(categories);
-  });
-
-  let servID = 1;
+  
   for (let i in servicecategories) {
+    let servID = 1;
     if (accountType === servicecategories[i].customerType) {
       for (let j in servicecategories[i].services) {
         categories.push(
@@ -60,6 +50,9 @@ export function Estimates() {
               type="checkbox"
               label={servicecategories[i].services[j]}
               name={servicecategories[i].services[j]}
+              onClick = {(e) => {
+                inspectElement(e);
+              }}
             />
           </Form.Group>
         );
@@ -72,12 +65,62 @@ export function Estimates() {
     }
   }
 
+  // Checks form elements for any named "Other" then detects if it is checked...
+  //  ... If element is checked, it creates a text area for user entry.
+  // This also removes any notifications when "Other" field is unchecked by user.
+  const inspectElement = (e) => {
+    let ele = e.target;
+    if (ele.name === "Other") {
+      if (ele.checked) {
+        setTextField(
+          <Form.Group size="lg" controlId="otherText">
+            <Form.Control
+              className="mb-2"
+              style={{ fontSize: "14px"}}
+              as="textarea"
+              rows={3}
+              defaultValue = {otherValue}
+              maxLength="100"
+              placeholder="(Required) Please describe needed service."
+              name={otherValue}
+              onChange={(e) => setOtherValue(e.target.value)}
+            />
+          </Form.Group>
+        )
+      }
+      else {
+        setTextField("");
+        setState(() => ({
+          display: false
+        }));
+      }
+    }
+  }
+
+  // Handles actions when user presses "Submit" button. These include checking...
+  //  ... to ensure a text value exists if "Other" is checked, displaying correct...
+  //  ... notifications, and sending date to Db if there are no errors.
   const onSubmit = (e) => {
     e.preventDefault();
     for (let i = 0; i < categories.length; i++) {
       let ele = document.getElementById(i + 1);
       if (ele.checked) {
-        estimateServiceArray.push(ele.name);
+        if (ele.name === "Other") {
+          if (otherValue !== "") {
+          estimateServiceArray.push("Other: " + otherValue)
+          }
+          else {
+            setState(() => ({
+              display: true,
+              type: "fail",
+              message: "required",
+            }));
+            return;
+          }
+        }
+        else {
+          estimateServiceArray.push(ele.name);
+        }
       }
     }
     if (estimateServiceArray.length === 0) {
@@ -88,7 +131,6 @@ export function Estimates() {
       }));
       return;
     }
-    console.log(estimateServiceArray);
     const estimateInput = {
       email: email,
       firstName: fName,
@@ -96,17 +138,7 @@ export function Estimates() {
       accountType: accountType,
       services: estimateServiceArray,
     };
-    axios
-      .post(API_BASE_URL + "/estimates/", estimateInput, headers(token))
-      .then((res) => {
-        if (res.status === 200) {
-          window.location.href = "/thankYou";
-        }
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    postEstimate(estimateInput, token);
   };
 
   return (
@@ -132,29 +164,39 @@ export function Estimates() {
           </Card.Header>
 
           <Card.Body className="mx-auto" id="bcbody">
-            <Card.Title className="mb-3" id="bctitle">
+            <Card.Title className="mb-3 text-center" id="bctitle">
               <strong>{accountType}</strong> Services
             </Card.Title>
-
-            <div>
-              {categoryTable}
-              <Message
-                device="browser"
-                display={state.display}
-                type={state.type}
-                message={state.message}
-              />
-              <Button
-                onClick={onSubmit}
-                className="p-2 mt-2"
-                variant="dark"
-                id="btn"
-                type="submit"
-                data-testid="estimateSubmit"
-              >
-                SUBMIT
-              </Button>
-            </div>
+            <Form className="align-content-center">
+              <div className="d-block text-center">
+                <div className="d-inline-block text-left w-100">
+                {categoryTable}
+                </div>
+              </div>
+              <div style={{width:"200px"}}>
+                {textField}
+              </div>
+              <div className="mx-auto" style={{maxWidth:"200px"}}>
+                <Message
+                  device="browser"
+                  display={state.display}
+                  type={state.type}
+                  message={state.message}
+                />
+              </div>
+              <div className="d-block text-center w-100">
+                <Button
+                  onClick={onSubmit}
+                  className="p-2 mt-2"
+                  variant="dark"
+                  id="btn"
+                  type="submit"
+                  data-testid="estimateSubmit"
+                >
+                  SUBMIT
+                </Button>
+              </div>
+            </Form>
           </Card.Body>
 
           <DeskFooter />
@@ -175,13 +217,14 @@ export function Estimates() {
             {fName}'s Estimate
           </Card.Header>
 
-          <Card.Body id="mcbody">
-            <Card.Title className="mb-3" id="mctitle">
+          <Card.Body className="pl-5 pr-5" id="mcbody">
+            <Card.Title className="mb-3 ml-3" id="mctitle">
               <strong>{accountType}</strong> Services
             </Card.Title>
 
             <Form className="ml-3">
               {categoryTable}
+              {textField}
               <Message
                 device="mobile"
                 display={state.display}

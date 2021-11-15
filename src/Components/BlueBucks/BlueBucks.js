@@ -10,6 +10,7 @@ import { fName, blueBucks } from "../LocalUser/LocalUser";
 import { restrictPage } from "../API/Api";
 import "./BlueBucks.css";
 
+// Provides bluebucks page
 export function BlueBucks() {
   useEffect(() => {
     restrictPage();

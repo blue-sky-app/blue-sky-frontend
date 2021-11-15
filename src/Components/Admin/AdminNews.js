@@ -1,65 +1,45 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE_URL, headers } from "../API/Api.js";
-import { Form, Table, Button } from "react-bootstrap";
+import { fetchNews } from "../API/Api.js";
+import { Table, Button } from "react-bootstrap";
 import Modal from "../Modal/Modal.js";
+import { UpdateNews } from "../Forms/UpdateNews.js";
 import "./Admin.css";
 
+// Provides news tab content for admin console
 export function AdminNews() {
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [news, setNews] = useState([]);
+  const [newsTable, setNewsTable] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   // This fetch is for the News
   useEffect(() => {
-    fetchNews(token);
-  }, []);
+    fetchNews(token).then(setNews);
+  }, [token]);
+
   useEffect(() => {
-    console.log(news);
-  }, [news]);
+    let newsInputs = [];
+    for (let i in news) {
+      newsInputs.push(
+        <tr id="tableFont">
+          <td key={news[i].customerType} className="align-self-center">{news[i].customerType}</td>
+          <td key={`${news[i].customerType} headline`} className="align-self-center">{news[i].headline}</td>
+          <td key={`${news[i].customerType} text`} className="align-self-center">{news[i].text}</td>
+        </tr>
+      );
+    }
+    setNewsTable(newsInputs)
+  }, [news])
 
-  const fetchNews = async (token) => {
-    const response = await axios(`${API_BASE_URL}/news/`, headers(token));
-    setNews(response.data);
-  };
-
-  let newsInputs = [];
-
-  for (let i in news) {
-    newsInputs.push(
-      <tr id="tableFont">
-        <td className="align-self-center">{news[i].customerType}</td>
-        <td className="align-self-center">{news[i].headline}</td>
-        <td className="align-self-center">{news[i].text}</td>
-      </tr>
-    );
+  const refreshData = () => {
+    fetchNews(token).then(setNews); 
+    console.log("refreshed")
   }
 
   return (
     <div>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <h5>Update News</h5>
-        <Form>
-          <Form.Group>
-            <Form.Control as="select">
-              <option value="accountType">Residential</option>
-              <option value="accountType">Commercial</option>
-            </Form.Control>
-          </Form.Group>
-          <Form.Group size="lg" controlId="firstName">
-            <Form.Control
-              as="textarea"
-              value="Some news text here about some great happenings at Blue Sky!"
-              required
-            />
-          </Form.Group>
-          <Button id="btn" variant="dark" block size="md" type="submit">
-            ADD
-          </Button>
-          <Button id="btn" variant="dark" block size="md" type="submit">
-            DELETE
-          </Button>
-        </Form>
+        <UpdateNews news={news} refreshData={refreshData}/>
       </Modal>
       <Table striped bordered hover size="sm">
         <thead>
@@ -69,7 +49,7 @@ export function AdminNews() {
             <th>Text</th>
           </tr>
         </thead>
-        <tbody id="tbdy">{newsInputs}</tbody>
+        <tbody id="tbdy">{newsTable}</tbody>
       </Table>
       <div className="d-flex justify-content-center">
         <Button onClick={() => setIsOpen(true)} variant="secondary" size="sm">

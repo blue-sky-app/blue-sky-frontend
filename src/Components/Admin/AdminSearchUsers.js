@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Table, Form, InputGroup, FormControl, Button } from "react-bootstrap";
-import { fetchUser } from "../API/Api.js";
+import { fetchUsers } from "../API/Api.js";
 import Modal from "../Modal/Modal.js";
 import { UpdateUser } from "../Forms/UpdateUser.js";
 import "./Admin.css";
 
+// Provides search user tab content for admin console
 export function AdminSearchUsers() {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [users, setUsers] = useState([]);
@@ -22,7 +23,7 @@ export function AdminSearchUsers() {
 
   // This fetch is for the Users
   useEffect(() => {
-    fetchUser(token).then(setUsers);
+    fetchUsers(token).then(setUsers);
   }, [token]);
 
   let searchResults = [];
@@ -47,8 +48,7 @@ export function AdminSearchUsers() {
   };
 
   const refreshData = () => {
-    fetchUser(token).then(setUsers); 
-    console.log("I'm working!")
+    fetchUsers(token).then(setUsers);
   }
 
   // Get values for user form from <td> elements in row
@@ -63,10 +63,6 @@ export function AdminSearchUsers() {
       email: em,
     }));
   };
-
-  useEffect(() => {
-    console.log(userState.firstName, userState.lastName);
-  }, [userState.firstName, userState.lastName]);
 
   // get user db id on selecting from table
   const getUserId = (email) => {
@@ -87,10 +83,11 @@ export function AdminSearchUsers() {
         filterItems(users[i].email.toLowerCase(), inputValue) ||
         filterItems(users[i].lastName.toLowerCase(), inputValue) ||
         filterItems(users[i].firstName.toLowerCase(), inputValue) ||
-        inputValue.toLowerCase() ===
+        filterItems(
           users[i].firstName.toLowerCase() +
             " " +
-            users[i].lastName.toLowerCase()
+            users[i].lastName.toLowerCase(), inputValue
+        )
       ) {
         // Services/Invoices Info
         let updatedServices = [];
@@ -179,7 +176,6 @@ export function AdminSearchUsers() {
       );
     }
     setUserSearch(searchResults);
-    console.log(userSearch)
   };
 
 

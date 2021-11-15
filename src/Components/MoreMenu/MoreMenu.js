@@ -4,7 +4,10 @@ import BlueSkyLogo from "../Images/topLogoBar.png";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import "../NavBar/NavBar.css";
 
+// Provides the menu for mobile when user selects the "More" button
 export function MoreMenu() {
+  
+  // Clears ssession storage when "logout" button is pressed
   const logOut = () => {
     sessionStorage.clear();
   };

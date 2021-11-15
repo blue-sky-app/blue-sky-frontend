@@ -5,10 +5,13 @@ import "../Profile/Profile.css";
 import Modal from "../Modal/Modal.js";
 import { updateCategories } from "../API/Api.js";
 
+// Provides edit form for admin categories tab
 export function UpdateCategories(props) {
 
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [formCategories, setFormCategories] = useState([]);
+  const [serviceCheck, setServiceCheck] = useState();
+  const [checkServStat, setCheckServStat] = useState(false);
   const [formServices, setFormServices] = useState();
   const [selectServices, setSelectServices] = useState([]);
   const [formButtons, setFormButtons] = useState('');
@@ -30,6 +33,7 @@ export function UpdateCategories(props) {
   });
   const [isOpen, setIsOpen] = useState(false);
 
+  // Sets category options for user to select
   useEffect(() => {
     let formCategories = [];
     for(let i in props.categories) {
@@ -39,6 +43,7 @@ export function UpdateCategories(props) {
     setFormCategories(formCategories);
   }, [props.categories]);
 
+  // Provides "Add" form in second modal when "Add Service" button is pressed.
   const handleAdd = (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -51,7 +56,7 @@ export function UpdateCategories(props) {
         <Form.Group size="lg" controlId="newService">
         <Form.Control
                 type="text"
-                placeholder="Enter new service name."
+                placeholder="Enter new service name"
                 onChange={handleChange}
                 required
               />
@@ -72,22 +77,46 @@ export function UpdateCategories(props) {
 
   let newService = "";
 
+  // Sets value of new service entered and runs Service Check function
   const handleChange = (e) => {
     const { value } = e.target;
     newService = value;
+    // Capitalize first letter in each word
+    const finalValue = newService.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    newService = finalValue;
+    setServiceCheck(finalValue);
+    setCheckServStat(true);
   };
 
+  // Service Check function - Checks if new service entered is a duplicate of one already on the service list
   useEffect(() => {
-    console.log(newService)
-  }, [newService]);
+    if (checkServStat === true) {
+      if (selectServices.includes(serviceCheck)) {
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "fail",
+          message: "serviceDup"
+        }));
+      }
+      else {
+        setState((prevState) => ({
+          ...prevState,
+          action: "none",
+          display: false,
+          type: "",
+          message: ""
+        }));
+      }
+      setCheckServStat(false);
+    }
+  }, [selectServices, serviceCheck, checkServStat])
 
-  //test
-  useEffect(() => {
-    console.log(newService)
-  }, [newService]);
-
+  // Handles "Submit" button for adding new services. 
+  // Checks if input field is still blank before submitting new service
   const updateServices = (e) => {
     e.preventDefault();
+    
     var input = document.getElementById("newService").value
     const regex = /[a-zA-Z]/;
     if (regex.test(input)) {
@@ -99,7 +128,6 @@ export function UpdateCategories(props) {
       setSendArray(true);
       document.getElementById("newService").value = "";
     }
-    
     else {
       setState((prevState) => ({
         ...prevState,
@@ -110,15 +138,20 @@ export function UpdateCategories(props) {
     }
   }
 
+  // Reorders selectedServices array if "Others" is present, removes duplicate values and sends it to the db
   useEffect (() => {
     if (sendArray === true) {
-      console.log(selectServices);
-      console.log(deleteServices);
+      let newArray = selectServices;
+      if (selectServices.includes("Other")) {
+        newArray.push(newArray.splice(newArray.indexOf("Other"), 1)[0]);
+      }
+      let uniqueArr = [...new Set(newArray)];
+      setSelectServices(uniqueArr);
       var servArray = {};
-    
+
       if (state.action === "add") {
         servArray = {
-          services: selectServices
+          services: uniqueArr
         };
         setState((prevState) => ({
           ...prevState,
@@ -128,7 +161,6 @@ export function UpdateCategories(props) {
           message: "serviceAdded",
         }));
       }
-
       else if (state.action === "delete") {
         servArray = {
           services: deleteServices
@@ -142,32 +174,24 @@ export function UpdateCategories(props) {
         }));
         setSelectServices(deleteServices);
       }
-
       else if (state.action === "none") {
         setState((prevState) => ({
           ...prevState,
           display: false
         }));
       }
-      //sending array
-      console.log(servArray);
+      // Sends array to Db
       updateCategories(catState.catId, servArray, token)
       setSendArray(false);
     }
-  }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, props])
+  }, [selectServices, sendArray, catState.catId, token, state.action, deleteServices, serviceCheck, catState.refresh])
 
-
+  // fetches new data from db to update parent component services list 
   useEffect(() => {
-    if (sendArray === false){
-      console.log(catState.refresh)
       return catState.refresh;
-    }
-  }, [sendArray, catState.refresh])
+  }, [catState.refresh, sendArray])
 
-  useEffect (() => {
-    console.log(`selectServices = ${selectServices}`);
-  }, [selectServices]);
-
+  // Opens modal to confirm delete when "Delete" button is pressed.
   const handleDelete = (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -175,7 +199,6 @@ export function UpdateCategories(props) {
       deleteProcess: true,
       display: false
     }));
-    console.log(state.display);
   }
   
   // Creates new service array based on user select for delete
@@ -187,7 +210,7 @@ export function UpdateCategories(props) {
       }));
       let newArray = [];
       for (let i = 0; i < formServices.length; i++) {
-        let ele = document.getElementById(i + 1);
+        let ele = document.getElementById(selectServices[i]);
         if (!ele.checked) {
           newArray.push(ele.name);
         }
@@ -226,7 +249,7 @@ export function UpdateCategories(props) {
         )
       }
     }
-  }, [selectServices, state.deleteProcess, formServices, state.display, state.catType])
+  }, [selectServices, state.deleteProcess, formServices, state.display])
 
   // Handles "Confirm Delete" button press by closing modal and calling fetch function
   const confirmDelete = (e) => {
@@ -239,9 +262,17 @@ export function UpdateCategories(props) {
     }));
   }
 
+  // Double-checks to make sure "selectServices" array always matches "deleteServices" array...
+  // ... when a delete action is occurring so form list is always up to date after delete. 
+  useEffect(() => {
+    if (state.action === "delete") {
+      setSelectServices(deleteServices);
+    }
+  }, [state.action, deleteServices])
+
   let categoryType;
 
-  // Sets the service category based on admin selection from list
+  // Sets the service list based on admin selection from category type
   const handleSelect = (e) => {
     setState(() => ({
       action: "none"
@@ -252,14 +283,12 @@ export function UpdateCategories(props) {
 
   // Changes formServices list based on user edits to update form
   useEffect(() => {
-    console.log(selectServices);
-    console.log(catState.catType);
+    let keyNum = 0;
     let services = [];
-    let servId=1;
     for (let i in selectServices) {
       if (catState.catType === "Residential") {
         services.push(
-          <Form.Group controlId={servId++} key={servId + "res"}>
+          <Form.Group controlId={selectServices[i]} key={selectServices[i] + (keyNum++) + " res"}>
           <Form.Check
             className="mb-2 ml-2"
             style={{ fontSize: "14px" }}
@@ -272,7 +301,7 @@ export function UpdateCategories(props) {
       }
       else if (catState.catType ==="Commercial") {
         services.push(
-          <Form.Group controlId={servId++} key={servId + "com"}>
+          <Form.Group controlId={selectServices[i]} key={selectServices[i] + (keyNum++) + " com"}>
           <Form.Check
             className="mb-2 ml-2"
             style={{ fontSize: "14px" }}
@@ -288,7 +317,7 @@ export function UpdateCategories(props) {
   }, [selectServices, catState.catType])
 
   // Takes the category selection and matches it to category objects to pull down
-  // the correct services.
+  //    the correct services.
   const buildServiceList = () => {
     let selectServices = [];
       setCatState((prevState) => ({
@@ -316,6 +345,7 @@ export function UpdateCategories(props) {
     setSelectServices(selectServices);
   };
 
+  // Displays the buttons when a valid category is selected
   const showButtons = (state) => {
     let buttons;
     if(state) {
@@ -335,6 +365,7 @@ export function UpdateCategories(props) {
     setFormButtons(buttons);
   }
 
+  // Clears message component when a modal is closed
   const clearMessage = () => {
     setState((prevState) => ({
       ...prevState,
@@ -350,7 +381,6 @@ export function UpdateCategories(props) {
         open={isOpen} 
         onClose={() => setIsOpen(false)} 
         tab={"categories"} 
-        submit={props.refreshData} 
         clear={clearMessage}
       >
         <Message
@@ -365,10 +395,10 @@ export function UpdateCategories(props) {
       <Form>
             <Form.Group>
               <Form.Control 
-              as="select"
-              className="fcontrol"
-              type="text"
-              onChange={handleSelect}
+                as="select"
+                className="fcontrol"
+                type="text"
+                onChange={handleSelect}
               >
                 <option value="accountType">Choose a Service Category</option>
                 {formCategories}

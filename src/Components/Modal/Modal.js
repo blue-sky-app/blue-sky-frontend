@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import "./Modal.css";
 
-export default function Modal({ open, children, onClose, search, tab, submit, clear }) {
+// Provides modals for use in components. Can call parent functions based on tab value.
+export default function Modal({ open, children, onClose, search, tab, clear }) {
   if (!open) return null;
 
+  // Specifies close actions passed from props when modal is closed
   const closeActions = () => {
     onClose();
     if (tab === "users") {
       search()
     }
     else if (tab === "categories") {
-      submit();
       clear();
     }
   }

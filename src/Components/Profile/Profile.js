@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
-import axios from "axios";
 import {
   API_BASE_URL,
-  fetchUser,
+  userExistsByEmail,
   fetchNews,
   restrictPage,
+<<<<<<< HEAD
   headers,
+=======
+  updateUser
+>>>>>>> 1fdd224dea1a29a9f12aa5b1bb9a375128b89fe7
 } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
@@ -27,10 +30,10 @@ import { Message } from "../Message/Message.js";
 import "./Profile.css";
 import validator from "validator";
 
+// Provides the profile page
 export function Profile() {
   const [token] = useState(sessionStorage.getItem("token") || "");
   const [accountOption, setAccountOption] = useState();
-  const [users, setUsers] = useState([]);
   const [news, setNews] = useState([]);
   const [state, setState] = useState({
     userId: userId,
@@ -53,25 +56,10 @@ export function Profile() {
     restrictPage();
   }, []);
 
-  // Get news
+  // Fetch news from Db
   useEffect(() => {
     fetchNews(token).then(setNews);
   }, [token]);
-
-  useEffect(() => {
-    console.log(news);
-  }, [news]);
-
-  useEffect(() => {
-    console.log(state.email);
-  }, [state.email]);
-
-  // If email is changed, this fetches all user's emails for duplication check
-  useEffect(() => {
-    if (state.email !== email) {
-      fetchUser(token).then(setUsers);
-    }
-  }, [state.email, token]);
 
   // Capitalize first letter of Names
   useEffect(() => {
@@ -83,8 +71,12 @@ export function Profile() {
       ...prevState,
       firstName: capitalFirstLetter(state.firstName),
       lastName: capitalFirstLetter(state.lastName),
+<<<<<<< HEAD
     }));
     console.log(state.firstName);
+=======
+    }))
+>>>>>>> 1fdd224dea1a29a9f12aa5b1bb9a375128b89fe7
   }, [state.firstName, state.lastName]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
@@ -104,24 +96,20 @@ export function Profile() {
     }));
   };
 
-  // Sends updated user info array to server to update db
+  // Sends updated user info array (parameter) to server to update db
   // Also updates local session storage to match updated details
   const sendDetailsToServer = (info) => {
-    axios
-      .put(API_BASE_URL + "/User/" + userId, info, headers(token))
-      .then(function (response) {
-        if (response.status === 200) {
-          setState((prevState) => ({
-            ...prevState,
-            display: true,
-            type: "success",
-            message: "update",
-          }));
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const successMsg = () => {
+      setState((prevState) => ({
+        ...prevState,
+        display: true,
+        type: "success",
+        message: "update",
+      }));
+    }
+    updateUser(state.userId, info, token, successMsg())
+
+    // Updates session storage to match updated info sent to Db
     userArray.push({
       localId: state.userId,
       localFname: state.firstName,
@@ -131,7 +119,6 @@ export function Profile() {
       localInvoices: state.invoices,
       localBlueBucks: state.blueBucks,
     });
-
     for (let i in news) {
       if (state.accountType === news[i].customerType) {
         userArray.push({
@@ -141,6 +128,7 @@ export function Profile() {
       }
     }
     sessionStorage.setItem("localUser", JSON.stringify(userArray));
+<<<<<<< HEAD
     console.log(sessionStorage.getItem("localUser"));
   };
 
@@ -176,10 +164,12 @@ export function Profile() {
     if (!duplicate) {
       updateUser();
     }
+=======
+>>>>>>> 1fdd224dea1a29a9f12aa5b1bb9a375128b89fe7
   };
 
   // Checks if all required fields have values before calling server update function
-  const updateUser = () => {
+  const updateProfile = () => {
     if (
       state.newPassword.length &&
       state.firstName.length &&
@@ -195,7 +185,6 @@ export function Profile() {
         confirmPassword: state.confirmPassword,
       };
       sendDetailsToServer(payload);
-      console.log(state.newPassword);
     } else if (
       !state.newPassword.length &&
       state.firstName.length &&
@@ -219,23 +208,48 @@ export function Profile() {
     }
   };
 
+<<<<<<< HEAD
   // Checks password values to ensure they match, then calls email check
   const handleUpdate = (e) => {
+=======
+  // Checks password values to ensure they match, then calls email check 
+  const handleUpdate = async (e) => {
+>>>>>>> 1fdd224dea1a29a9f12aa5b1bb9a375128b89fe7
     e.preventDefault();
     setState((prevState) => ({
       ...prevState,
       message: "",
     }));
-    if (state.newPassword === state.confirmPassword) {
-      checkEmailDup();
-    } else {
+    if (state.newPassword !== state.confirmPassword) {
       setState((prevState) => ({
         ...prevState,
         display: true,
         type: "fail",
         message: "password",
       }));
+      return;
     }
+    if (state.email !== email) {
+      if (! validator.isEmail(state.email)) {
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "fail",
+          message: "emailFormat",
+        }));
+        return;
+      }
+      if (await userExistsByEmail(state.email)) {
+        setState((prevState) => ({
+          ...prevState,
+          display: true,
+          type: "fail",
+          message: "duplicate",
+        }));
+        return;
+      }
+    }
+    updateUser();
   };
 
   // Sets default value of account type for form dropdown
@@ -277,7 +291,7 @@ export function Profile() {
                     type="text"
                     data-testid="firstName"
                     value={state.firstName}
-                    placeholder={fName + " - required"}
+                    placeholder={"First Name (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -287,7 +301,7 @@ export function Profile() {
                     type="text"
                     data-testid="lastName"
                     value={state.lastName}
-                    placeholder={lName + " - required"}
+                    placeholder={"Last Name (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -308,7 +322,7 @@ export function Profile() {
                     type="email"
                     data-testid="email"
                     defaultValue={email}
-                    placeholder={email + " - required"}
+                    placeholder={"Email (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -380,7 +394,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.firstName}
-                    placeholder={fName + " - required"}
+                    placeholder={"First Name (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -389,7 +403,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.lastName}
-                    placeholder={lName + " - required"}
+                    placeholder={"Last Name (required)"}
                     onChange={handleChange}
                     required
                   />
@@ -406,7 +420,7 @@ export function Profile() {
                   <Form.Control
                     type="email"
                     defaultValue={email}
-                    placeholder={email + "- required"}
+                    placeholder={"Email (required)"}
                     onChange={handleChange}
                   />
                 </Form.Group>

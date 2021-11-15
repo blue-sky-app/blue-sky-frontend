@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchUser, fetchEstimates } from "../API/Api.js";
+import { fetchUsers, fetchEstimates } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserView, MobileView } from "react-device-detect";
 import { AdminSearchUsers } from "./AdminSearchUsers";
@@ -10,6 +10,7 @@ import { Card, Button, Image, Tabs, Tab } from "react-bootstrap";
 import HeaderLogo from "../Images/mTopLogoBar.png";
 // import "./Admin.css";
 
+// Provides admin console page
 export function Admin() {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [key, setKey] = useState(1);
@@ -21,14 +22,15 @@ export function Admin() {
     fetchEstimates(token).then(setEstimates);
   }, [token]);
 
-  // user Fetch
+  // Fetch USer data from Db
   useEffect(() => {
-    fetchUser(token).then(setUsers);
+    fetchUsers(token).then(setUsers);
   }, [token]);
 
   const totalEstimates = estimates.length;
   const totalUsers = users.length;
 
+  // Stores tab key to set active tab on Admin screen
   const handleSelect = (e, key) => {
     e.preventDefault();
     setKey(key);

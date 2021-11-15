@@ -3,12 +3,14 @@ import { Navbar, Nav, Image } from "react-bootstrap";
 import BlueSkyLogo from "../Images/topLogoBar.png";
 import "./NavBar.css";
 
+// Provides the nav bar for browser view
 export function BrowserNavBar(props) {
   const [navColor, setNavColor] = useState("");
   let navStyle = {
     color: "white",
   };
 
+  // Gets state when component loads or refreshes to determine which page is active
   useEffect(() => {
     getState();
   });
@@ -17,10 +19,12 @@ export function BrowserNavBar(props) {
     setNavColor(props.active);
   };
 
+  // Clears ssession storage when "logout" button is pressed
   const logOut = () => {
     sessionStorage.clear();
   };
 
+  // Changes selected button style to display as active
   switch (navColor) {
     case "home":
       var home = navStyle;
@@ -45,6 +49,7 @@ export function BrowserNavBar(props) {
     // no default
   }
 
+  // Returns to "Home" page
   const returnHome = () => {
     window.location.href = "/home";
   };

@@ -13,6 +13,7 @@ import { MoreMenu } from "./Components/MoreMenu/MoreMenu";
 import { Admin } from "./Components/Admin/Admin";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// This app uses the BrowserRouter api to navigate between component pages/views
 function App() {
   return (
     <BrowserRouter>

@@ -1,28 +1,21 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE_URL, headers } from "../API/Api.js";
+import { fetchEstimates } from "../API/Api.js";
 import Table from "react-bootstrap/Table";
 import "./Admin.css";
 
+// Provides estimates tab content for admin console
 export function AdminEstimates() {
-  const [token, setToken] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem('token') || '');
   const [estimates, setEstimates] = useState([]);
 
-  // This fetch is for the Estimates
+  // This fetches the Estimates data from Db
   useEffect(() => {
-    fetchEstimates(token);
-  }, []);
-  useEffect(() => {
-    console.log(estimates);
-  }, [estimates]);
+    fetchEstimates(token).then(setEstimates);
+  }, [token]);
 
-  const fetchEstimates = async (token) => {
-    const response = await axios(`${API_BASE_URL}/estimates/`, headers(token));
-    setEstimates(response.data);
-  };
+  const estimateInputs = [];
 
-  let estimateInputs = [];
-
+  // Builds Estimates table from data fetched from Db
   for (let i in estimates) {
     let date = JSON.stringify(estimates[i].created_date);
     let newDate = `${date.slice(6, 8)}/${date.slice(9, 11)}/${date.slice(
@@ -47,7 +40,7 @@ export function AdminEstimates() {
     );
   }
 
-  // posting No Service Info for users with no services
+  // posting "No Service Info" if no estimates are awaiting review
   if (estimateInputs.length === 0) {
     estimateInputs.push(
       <tr id="tableFont">

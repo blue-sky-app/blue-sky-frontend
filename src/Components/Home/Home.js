@@ -20,6 +20,7 @@ import { DeskFooter } from "../DeskFooter/DeskFooter";
 import { restrictPage } from "../API/Api";
 import "./Home.css";
 
+// Provides home page
 export function Home() {
   const picArray = [ImageOne, ImageTwo, ImageThree, ImageFour, ImageFive];
   const randIndex = Math.floor(Math.random() * picArray.length);

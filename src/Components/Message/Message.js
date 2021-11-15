@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+// Provides notice functionality to display status messages on user operations throughout site
 export function Message(props) {
   const [message, setMessage] = useState("");
   const [display, setDisplay] = useState("");
@@ -10,7 +11,7 @@ export function Message(props) {
     setAttributes();
   });
 
-  //grab props from parent components and pass to 'Message' states
+  // Grab props from parent components and pass to 'Message' states
   const setAttributes = () => {
     setDevice(props.device);
     setType(props.type);
@@ -18,14 +19,14 @@ export function Message(props) {
     setMessage(props.message);
   };
 
-  //set className based on device viewport
+  // Set className based on device viewport
   if (device === "browser") {
     var className = "mb-3 p-2";
   } else if (device === "mobile") {
     className = "mb-2 mx-auto p-1";
   }
 
-  //set div background and text color for success or failure mesages
+  // Set div background and text color for success or failure mesages
   if (type === "success") {
     var backgroundColor = "#d4edda";
     var textColor = "#454545";
@@ -34,7 +35,7 @@ export function Message(props) {
     textColor = "#ffffff";
   }
 
-  //set div to display and set style
+  // Set div to display and set style
   if (display === true) {
     var messageStyle = {
       display: "block",
@@ -47,7 +48,7 @@ export function Message(props) {
     messageStyle = { display: "none" };
   }
 
-  //set div text based on type of message from parent componenet
+  // Set div text based on type of message from parent componenet
   switch (message) {
     case "loginFail":
       var notice =

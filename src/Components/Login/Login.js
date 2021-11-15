@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import Form from "react-bootstrap/Form";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
+import { Form, Image, Button } from "react-bootstrap";
 import BlueSkyLogo from "../Images/loginLogo.png";
 import { Message } from "../Message/Message.js";
 import { API_BASE_URL, fetchNews, headers } from "../API/Api.js";
 import "./Login.css";
 import axios from "axios";
 
+// Provides login page
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +17,8 @@ export function Login() {
     message: "",
   });
 
+  // Handles actions when user presses the "Submit" button such as checking login credentials...
+  //  ... against Db, getting valid token and storing user details in session storage if fetched successfully.
   const handleSubmit = async (e) => {
     e.preventDefault();
     sessionStorage.clear();
@@ -57,10 +58,8 @@ export function Login() {
             localInvoices: user.invoices,
             localBlueBucks: user.blueBucks,
           });
-          console.log(userArray);
         });
       let news = await fetchNews(token);
-      console.log("news: " + news);
       for (let i in news) {
         if (userArray[0].localAccountType === news[i].customerType) {
           userArray.push({
@@ -72,7 +71,6 @@ export function Login() {
       }
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("localUser", JSON.stringify(userArray));
-      console.log(sessionStorage.getItem("localUser"));
       if (userArray[0].localEmail === "seth@blueforu.com") {
         window.location.href = "/admin";
       } else {
@@ -111,6 +109,7 @@ export function Login() {
                     data-testid="email"
                     type="email"
                     placeholder="Email"
+                    // sets "email" state to user entered value
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </Form.Group>
@@ -119,6 +118,7 @@ export function Login() {
                     data-testid="password"
                     type="password"
                     placeholder="Password"
+                    // sets "password" state to user entered value
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>
