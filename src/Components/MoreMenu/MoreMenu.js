@@ -1,3 +1,4 @@
+// Author(s): Sam
 import React from "react";
 import { NavDropdown, Image, Nav } from "react-bootstrap";
 import BlueSkyLogo from "../Images/topLogoBar.png";

@@ -1,3 +1,4 @@
+// Author(s): Dan, Sam
 import React from "react";
 import { Card } from "react-bootstrap";
 import "./DeskFooter.css";
