@@ -1,3 +1,4 @@
+// Author(s): Dan, Sam
 import React, { useState, useEffect } from "react";
 import { fetchNews } from "../API/Api.js";
 import { Table, Button } from "react-bootstrap";

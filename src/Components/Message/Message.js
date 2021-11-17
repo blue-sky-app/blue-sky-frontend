@@ -1,3 +1,4 @@
+// Author(s): Sam
 import React, { useState, useEffect } from "react";
 
 // Provides notice functionality to display status messages on user operations throughout site
