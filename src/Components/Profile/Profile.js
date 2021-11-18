@@ -5,11 +5,7 @@ import {
   userExistsByEmail,
   fetchNews,
   restrictPage,
-<<<<<<< HEAD
-  headers,
-=======
-  updateUser
->>>>>>> 1fdd224dea1a29a9f12aa5b1bb9a375128b89fe7
+  updateUser,
 } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
@@ -71,12 +67,7 @@ export function Profile() {
       ...prevState,
       firstName: capitalFirstLetter(state.firstName),
       lastName: capitalFirstLetter(state.lastName),
-<<<<<<< HEAD
     }));
-    console.log(state.firstName);
-=======
-    }))
->>>>>>> 1fdd224dea1a29a9f12aa5b1bb9a375128b89fe7
   }, [state.firstName, state.lastName]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
@@ -106,8 +97,8 @@ export function Profile() {
         type: "success",
         message: "update",
       }));
-    }
-    updateUser(state.userId, info, token, successMsg())
+    };
+    updateUser(state.userId, info, token, successMsg());
 
     // Updates session storage to match updated info sent to Db
     userArray.push({
@@ -128,44 +119,6 @@ export function Profile() {
       }
     }
     sessionStorage.setItem("localUser", JSON.stringify(userArray));
-<<<<<<< HEAD
-    console.log(sessionStorage.getItem("localUser"));
-  };
-
-  // Check if updated email already exists in db, then calls updateUser function
-  const checkEmailDup = () => {
-    var duplicate;
-    if (state.email !== email) {
-      for (let i in users) {
-        if (validator.isEmail(state.email)) {
-          if (state.email === users[i].email) {
-            duplicate = true;
-            setState((prevState) => ({
-              ...prevState,
-              display: true,
-              type: "fail",
-              message: "duplicate",
-            }));
-            return;
-          } else {
-            duplicate = false;
-          }
-        } else {
-          setState((prevState) => ({
-            ...prevState,
-            display: true,
-            type: "fail",
-            message: "emailFormat",
-          }));
-          return;
-        }
-      }
-    }
-    if (!duplicate) {
-      updateUser();
-    }
-=======
->>>>>>> 1fdd224dea1a29a9f12aa5b1bb9a375128b89fe7
   };
 
   // Checks if all required fields have values before calling server update function
@@ -208,13 +161,8 @@ export function Profile() {
     }
   };
 
-<<<<<<< HEAD
   // Checks password values to ensure they match, then calls email check
-  const handleUpdate = (e) => {
-=======
-  // Checks password values to ensure they match, then calls email check 
   const handleUpdate = async (e) => {
->>>>>>> 1fdd224dea1a29a9f12aa5b1bb9a375128b89fe7
     e.preventDefault();
     setState((prevState) => ({
       ...prevState,
@@ -230,7 +178,7 @@ export function Profile() {
       return;
     }
     if (state.email !== email) {
-      if (! validator.isEmail(state.email)) {
+      if (!validator.isEmail(state.email)) {
         setState((prevState) => ({
           ...prevState,
           display: true,
@@ -241,7 +189,7 @@ export function Profile() {
       }
       // Author(s): Asish
       if (await userExistsByEmail(state.email)) {
-      //
+        //
         setState((prevState) => ({
           ...prevState,
           display: true,
@@ -396,6 +344,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.firstName}
+                    data-testid="firstName"
                     placeholder={"First Name (required)"}
                     onChange={handleChange}
                     required
@@ -405,6 +354,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.lastName}
+                    data-testid="lastName"
                     placeholder={"Last Name (required)"}
                     onChange={handleChange}
                     required
@@ -422,6 +372,7 @@ export function Profile() {
                   <Form.Control
                     type="email"
                     defaultValue={email}
+                    data-testid="email"
                     placeholder={"Email (required)"}
                     onChange={handleChange}
                   />
@@ -433,6 +384,7 @@ export function Profile() {
                   <Form.Control
                     type="password"
                     defaultValue={state.newPassword}
+                    data-testid="password"
                     placeholder="new password"
                     onChange={handleChange}
                   />
@@ -441,6 +393,7 @@ export function Profile() {
                   <Form.Control
                     type="password"
                     defaultValue={state.confirmPassword}
+                    data-testid="confirmPassword"
                     placeholder="confirm password"
                     onChange={handleChange}
                   />
@@ -458,6 +411,7 @@ export function Profile() {
                   block
                   size="md"
                   type="submit"
+                  data-testid="profileUpdate"
                 >
                   UPDATE
                 </Button>
