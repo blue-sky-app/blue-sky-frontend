@@ -1,3 +1,4 @@
+// Author(s): Dan, Sam
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import MetaTags from "react-meta-tags";

@@ -1,11 +1,11 @@
+// Author(s): Sam
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import {
-  API_BASE_URL,
   userExistsByEmail,
   fetchNews,
   restrictPage,
-  updateUser
+  updateUser,
 } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
@@ -28,7 +28,7 @@ import validator from "validator";
 
 // Provides the profile page
 export function Profile() {
-  const [token] = useState(sessionStorage.getItem('token') || '');
+  const [token] = useState(sessionStorage.getItem("token") || "");
   const [accountOption, setAccountOption] = useState();
   const [news, setNews] = useState([]);
   const [state, setState] = useState({
@@ -62,12 +62,12 @@ export function Profile() {
     const capitalFirstLetter = (str) => {
       let newString = str.charAt(0).toUpperCase() + str.slice(1);
       return newString;
-    }
+    };
     setState((prevState) => ({
       ...prevState,
       firstName: capitalFirstLetter(state.firstName),
       lastName: capitalFirstLetter(state.lastName),
-    }))
+    }));
   }, [state.firstName, state.lastName]);
 
   // Sets state of profile items by grabbing form field control id and matching it with const
@@ -97,8 +97,8 @@ export function Profile() {
         type: "success",
         message: "update",
       }));
-    }
-    updateUser(state.userId, info, token, successMsg())
+    };
+    updateUser(state.userId, info, token, successMsg());
 
     // Updates session storage to match updated info sent to Db
     userArray.push({
@@ -161,7 +161,7 @@ export function Profile() {
     }
   };
 
-  // Checks password values to ensure they match, then calls email check 
+  // Checks password values to ensure they match, then calls email check
   const handleUpdate = async (e) => {
     e.preventDefault();
     setState((prevState) => ({
@@ -178,7 +178,7 @@ export function Profile() {
       return;
     }
     if (state.email !== email) {
-      if (! validator.isEmail(state.email)) {
+      if (!validator.isEmail(state.email)) {
         setState((prevState) => ({
           ...prevState,
           display: true,
@@ -187,7 +187,9 @@ export function Profile() {
         }));
         return;
       }
+      // Author(s): Asish
       if (await userExistsByEmail(state.email)) {
+        //
         setState((prevState) => ({
           ...prevState,
           display: true,
@@ -197,7 +199,7 @@ export function Profile() {
         return;
       }
     }
-    updateUser();
+    updateProfile();
   };
 
   // Sets default value of account type for form dropdown
@@ -237,6 +239,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="firstName">
                   <Form.Control
                     type="text"
+                    data-testid="firstName"
                     value={state.firstName}
                     placeholder={"First Name (required)"}
                     onChange={handleChange}
@@ -246,6 +249,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="lastName">
                   <Form.Control
                     type="text"
+                    data-testid="lastName"
                     value={state.lastName}
                     placeholder={"Last Name (required)"}
                     onChange={handleChange}
@@ -255,6 +259,7 @@ export function Profile() {
                 <Form.Group>
                   <Form.Control
                     as="select"
+                    data-testid="customerType"
                     defaultValue={accountType}
                     onChange={handleSelect}
                   >
@@ -265,6 +270,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="email">
                   <Form.Control
                     type="email"
+                    data-testid="email"
                     defaultValue={email}
                     placeholder={"Email (required)"}
                     onChange={handleChange}
@@ -277,6 +283,7 @@ export function Profile() {
                   </Form.Text>
                   <Form.Control
                     type="password"
+                    data-testid="password"
                     defaultValue={state.newPassword}
                     placeholder="new password"
                     onChange={handleChange}
@@ -285,6 +292,7 @@ export function Profile() {
                 <Form.Group size="lg" controlId="confirmPassword">
                   <Form.Control
                     type="password"
+                    data-testid="confirmPassword"
                     defaultValue={state.confirmPassword}
                     placeholder="confirm password"
                     onChange={handleChange}
@@ -299,6 +307,7 @@ export function Profile() {
                 <Button
                   onClick={handleUpdate}
                   id="btn"
+                  data-testid="profileUpdate"
                   variant="dark"
                   block
                   size="md"
@@ -331,10 +340,11 @@ export function Profile() {
           <Card.Body id="crdbody">
             <div className="w-75 mx-auto" id="form">
               <Form>
-              <Form.Group size="lg" controlId="firstName">
+                <Form.Group size="lg" controlId="firstName">
                   <Form.Control
                     type="text"
                     value={state.firstName}
+                    data-testid="firstName"
                     placeholder={"First Name (required)"}
                     onChange={handleChange}
                     required
@@ -344,6 +354,7 @@ export function Profile() {
                   <Form.Control
                     type="text"
                     value={state.lastName}
+                    data-testid="lastName"
                     placeholder={"Last Name (required)"}
                     onChange={handleChange}
                     required
@@ -361,6 +372,7 @@ export function Profile() {
                   <Form.Control
                     type="email"
                     defaultValue={email}
+                    data-testid="email"
                     placeholder={"Email (required)"}
                     onChange={handleChange}
                   />
@@ -372,6 +384,7 @@ export function Profile() {
                   <Form.Control
                     type="password"
                     defaultValue={state.newPassword}
+                    data-testid="password"
                     placeholder="new password"
                     onChange={handleChange}
                   />
@@ -380,6 +393,7 @@ export function Profile() {
                   <Form.Control
                     type="password"
                     defaultValue={state.confirmPassword}
+                    data-testid="confirmPassword"
                     placeholder="confirm password"
                     onChange={handleChange}
                   />
@@ -397,6 +411,7 @@ export function Profile() {
                   block
                   size="md"
                   type="submit"
+                  data-testid="profileUpdate"
                 >
                   UPDATE
                 </Button>
