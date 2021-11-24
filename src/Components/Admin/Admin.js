@@ -11,6 +11,7 @@ import { Card, Button, Image, Tabs, Tab } from "react-bootstrap";
 import HeaderLogo from "../Images/mTopLogoBar.png";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar.js";
 import { DeskFooter } from "../DeskFooter/DeskFooter.js";
+import { accountType } from "../LocalUser/LocalUser.js";
 
 // import "./Admin.css";
 
@@ -21,14 +22,9 @@ export function Admin() {
   const [estimates, setEstimates] = useState([]);
   const [users, setUsers] = useState([]);
 
-  if (window.name !== "kjhdRg8*&6!sDf$lKgfh%") {
+  if (window.name !== "kjhdRg8*&6!sDf$lKgfh%" || accountType !== "Administrator") {
     window.location.href = "/login";
   }
-
-  useEffect(() => {
-    console.log(window.name);
-  }, []);
-  
 
   // This fetch is for the Estimates
   useEffect(() => {
