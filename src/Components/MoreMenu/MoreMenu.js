@@ -11,6 +11,7 @@ export function MoreMenu() {
   // Clears ssession storage when "logout" button is pressed
   const logOut = () => {
     sessionStorage.clear();
+    window.name = "";
   };
 
   return (

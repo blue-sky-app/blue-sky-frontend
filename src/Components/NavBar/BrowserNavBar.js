@@ -23,6 +23,7 @@ export function BrowserNavBar(props) {
   // Clears ssession storage when "logout" button is pressed
   const logOut = () => {
     sessionStorage.clear();
+    window.name = "";
   };
 
   // Changes selected button style to display as active

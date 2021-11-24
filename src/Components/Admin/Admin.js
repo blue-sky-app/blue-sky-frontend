@@ -8,10 +8,10 @@ import { AdminEstimates } from "./AdminEstimates";
 import { AdminNews } from "./AdminNews";
 import { AdminCategories } from "./AdminCategories";
 import { Card, Button, Image, Tabs, Tab } from "react-bootstrap";
-import { email } from "../LocalUser/LocalUser.js";
 import HeaderLogo from "../Images/mTopLogoBar.png";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar.js";
 import { DeskFooter } from "../DeskFooter/DeskFooter.js";
+
 // import "./Admin.css";
 
 // Provides admin console page
@@ -21,9 +21,14 @@ export function Admin() {
   const [estimates, setEstimates] = useState([]);
   const [users, setUsers] = useState([]);
 
-  if (email !== "seth@blueforu.com") {
+  if (window.name !== "kjhdRg8*&6!sDf$lKgfh%") {
     window.location.href = "/login";
   }
+
+  useEffect(() => {
+    console.log(window.name);
+  }, []);
+  
 
   // This fetch is for the Estimates
   useEffect(() => {
