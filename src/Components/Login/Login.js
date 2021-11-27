@@ -185,20 +185,29 @@ export function Login() {
                 type={state.type}
                 message={state.message}
               />
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="email">
-                  <Form.Control type="email" placeholder="Email" />
+                  <Form.Control 
+                    type="email" 
+                    placeholder="Email" 
+                    // sets "email" state to user entered value
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </Form.Group>
                 <Form.Group size="lg" controlId="password">
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                    // sets "password" state to user entered value
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </Form.Group>
                 <br />
                 <Button
-                  onClick={handleSubmit}
                   id="loginButton"
                   block
                   size="md"
-                  type="button"
+                  type="submit"
                   data-testid="loginButton"
                 >
                   LOGIN
