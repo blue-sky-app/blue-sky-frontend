@@ -40,7 +40,7 @@ export function Admin() {
     <>
       <BrowserView>
         <Image
-          src={HeaderLogo}
+          src={HeaderLogo} alt="Company logo reading BLUESKY, half light blue, half navy blue, animated breezy cloud background."
           className="d-flex w-100 mx-auto justify-content-center"
         />
         <Card className="border-0">
@@ -99,7 +99,7 @@ export function Admin() {
 
       <MobileView>
         <Image
-          src={HeaderLogo}
+          src={HeaderLogo} alt="Company logo reading BLUESKY, half light blue, half navy blue, animated breezy cloud background."
           className="d-flex w-100 mx-auto justify-content-center"
         />
         <Card className="border-0" id="mcrd">

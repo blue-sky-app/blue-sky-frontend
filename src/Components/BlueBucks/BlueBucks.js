@@ -68,7 +68,7 @@ export function BlueBucks() {
           content="Welcome to Blue Sky, we are your go to for Commercial and Residential cleaning!"
         />
         <meta property="og:title" content="Blue Sky Blue Bucks" />
-        <meta property="og:image" content="../Images/Header.png" />
+        <meta property="og:image" content="../Images/Header.png" alt="Company logo reading BLUESKY, half light blue, half navy blue, animated breezy cloud background." />
       </MetaTags>
 
       <BrowserView>
@@ -119,7 +119,7 @@ export function BlueBucks() {
       <MobileView>
         <div className="bgheader">
           <div className="cloudyHeader">
-            <Image src={BlueSkyLogo} id="wdth" />
+            <Image src={BlueSkyLogo} id="wdth" alt="Company logo reading BLUESKY, half light blue, half navy blue, animated breezy cloud background."/>
           </div>
         </div>
 
