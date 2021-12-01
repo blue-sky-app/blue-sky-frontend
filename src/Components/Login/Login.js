@@ -18,7 +18,6 @@ export function Login() {
     message: "",
   });
 
-
   // Handles actions when user presses the "Submit" button such as checking login credentials...
   //  ... against Db, getting valid token and storing user details in session storage if fetched successfully.
   const handleSubmit = async (e) => {
@@ -60,9 +59,6 @@ export function Login() {
             localInvoices: user.invoices,
             localBlueBucks: user.blueBucks,
           });
-          if (user.accountType === "Administrator") {
-            window.name = "kjhdRg8*&6!sDf$lKgfh%";
-          }
         });
       let news = await fetchNews(token);
       for (let i in news) {
@@ -73,16 +69,10 @@ export function Login() {
             localNewsText: news[i].text,
           });
         }
-        else if (userArray[0].localAccountType === "Administrator") {
-          userArray.push({
-            localNewsHeadline: news[1].headline,
-            localNewsText: news[1].text,
-          });
-        }
       }
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("localUser", JSON.stringify(userArray));
-      if (userArray[0].localAccountType === "Administrator") {
+      if (userArray[0].localEmail === "seth@blueforu.com") {
         window.location.href = "/admin";
       } else {
         window.location.href = "/home";
