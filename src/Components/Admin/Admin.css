@@ -10,3 +10,39 @@
 #bform {
   width: 300px;
 }
+/* AdminCatagories table style */
+
+/* AdminEstimates table styles */
+#upSvcTr {
+  background: rgba(0,0,0,0);
+  border-style: "hidden";
+  align-content: center;
+}
+
+#pushEstTr {
+  font-size: 11px;
+  align-content: center;
+}
+
+#estInTr {
+  font-size: 11px;
+  text-align: center;
+}
+
+/* AdmimNews.js table style */
+#newsInTr {
+  font-size: 11px;
+  align-items: center;
+}
+
+/* AdminSearchUsers.js table styles */
+#updateSvcTr {
+  background: rgba(0, 0, 0, 0);
+  border-style: hidden;
+  
+}
+
+#inNewTr {
+  background: rgba(0, 0, 0, 0);
+  border-style: hidden;
+}

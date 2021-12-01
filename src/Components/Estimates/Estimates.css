@@ -1,5 +1,4 @@
 @media all and (min-width: 480px) {
-
     #bchead {
         background-color: #0a7ebd;
         height: 40px;
@@ -7,32 +6,27 @@
         color: white;
         font-size: 20px;
         border-radius: 0 !important;
-      }
-
-    #bcbody { 
+    }
+    #bcbody {
         overflow-y: auto;
-        min-height: 55vh; 
+        min-height: 55vh;
         max-height: 60vh;
     }
-
-    ::-webkit-scrollbar {
-        width: 0;  /* Remove scrollbar space */
+     ::-webkit-scrollbar {
+        width: 0;
+        /* Remove scrollbar space */
     }
-
     #tybbody {
         height: 55vh;
         overflow-y: auto;
     }
-
     #btn {
-        font-size: 14px; 
+        font-size: 14px;
         font-weight: bold;
     }
-
     #bctitle {
         font-size: 18px;
     }
-
     .thanks {
         color: #014388;
         display: block;
@@ -44,31 +38,41 @@
         text-align: center;
         padding: 45px 0;
         margin: 30px auto;
-        animation: roll 3s ease-in-out, moveRightToLeft 3s ease-in-out ;
+        animation: roll 3s ease-in-out, moveRightToLeft 3s ease-in-out;
     }
-
-    @keyframes roll
-        {
-            0% { transform: rotate(0deg); }
-            80% { transform: rotate(-385deg); }
-            90% { transform: rotate(-350deg); }
-            100% { transform: rotate(-360deg); }
+    @keyframes roll {
+        0% {
+            transform: rotate(0deg);
         }
-    
-    @keyframes moveRightToLeft
-        {
-            0%   { right: -65%; }
-            80% { right: 1%; }
-            90% {right: -1%}
-            100% {right: 0%}
+        80% {
+            transform: rotate(-385deg);
         }
-
+        90% {
+            transform: rotate(-350deg);
+        }
+        100% {
+            transform: rotate(-360deg);
+        }
+    }
+    @keyframes moveRightToLeft {
+        0% {
+            right: -65%;
+        }
+        80% {
+            right: 1%;
+        }
+        90% {
+            right: -1%
+        }
+        100% {
+            right: 0%
+        }
+    }
     #thanksText {
         font-family: "Lucida Handwriting", Arial Sans-serif;
         font-size: 2em;
         font-weight: bold;
     }
-
     .tcontact {
         position: relative;
         color: #0a7ebd;
@@ -77,41 +81,39 @@
         text-align: center;
         animation: fadeIn ease-in 4s;
     }
-
     @keyframes fadeIn {
-        0% {opacity:0;}
-        50% {opacity:0;}
-        100% {opacity:1;}
-      }
-
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 }
 
 @media all and (max-width: 480px) {
-
     #mchead {
         background-color: #0a7ebd;
         height: 40px;
         font-weight: bold;
     }
-
     #mcbody {
         overflow-y: scroll;
         height: 65vh;
     }
-
     #mctitle {
         font-size: 16px;
     }
-
     #mbtn {
-        font-size: 12px; 
+        font-size: 12px;
         font-weight: bold;
     }
-
     #mcrd {
         height: 71.5vh;
     }
-
     .thanks {
         color: #014388;
         display: block;
@@ -123,31 +125,41 @@
         text-align: center;
         padding: 35px 0;
         margin: 30px auto;
-        animation: roll 3s ease-in-out, moveRightToLeft 3s ease-in-out ;
+        animation: roll 3s ease-in-out, moveRightToLeft 3s ease-in-out;
     }
-
-    @keyframes roll
-        {
-            0% { transform: rotate(0deg); }
-            80% { transform: rotate(-385deg); }
-            90% { transform: rotate(-350deg); }
-            100% { transform: rotate(-360deg); }
+    @keyframes roll {
+        0% {
+            transform: rotate(0deg);
         }
-    
-    @keyframes moveRightToLeft
-        {
-            0%   { right: -100%; }
-            80% { right: 1%; }
-            90% {right: -1%}
-            100% {right: 0%}
+        80% {
+            transform: rotate(-385deg);
         }
-
+        90% {
+            transform: rotate(-350deg);
+        }
+        100% {
+            transform: rotate(-360deg);
+        }
+    }
+    @keyframes moveRightToLeft {
+        0% {
+            right: -100%;
+        }
+        80% {
+            right: 1%;
+        }
+        90% {
+            right: -1%
+        }
+        100% {
+            right: 0%
+        }
+    }
     #thanksText {
         font-family: "Lucida Handwriting", Arial Sans-serif;
         font-size: 1.5em;
         font-weight: bold;
     }
-
     .tcontact {
         position: relative;
         color: #0a7ebd;
@@ -156,16 +168,17 @@
         text-align: center;
         animation: fadeIn ease-in 4s;
     }
-
     @keyframes fadeIn {
-        0% {opacity:0;}
-        50% {opacity:0;}
-        100% {opacity:1;}
+        0% {
+            opacity: 0;
         }
-
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 }
 
-@media all and (max-width: 320px) {
-
-
-}
+@media all and (max-width: 320px) {}
