@@ -20,10 +20,13 @@ export function BrowserNavBar(props) {
         setNavColor(props.active);
     };
 
-    // Clears ssession storage when "logout" button is pressed
-    const logOut = () => {
-        sessionStorage.clear();
-    };
+
+  // Clears ssession storage when "logout" button is pressed
+  const logOut = () => {
+    sessionStorage.clear();
+    window.name = "";
+  };
+
 
     // Changes selected button style to display as active
     switch (navColor) {

@@ -16,6 +16,7 @@ import Modal from "../Modal/Modal.js";
 export function UpdateUser(props) {
   const [token] = useState(sessionStorage.getItem('token') || '');
   const [accountOption, setAccountOption] = useState();
+  const [accountOptionTwo, setAccountOptionTwo] = useState();
   const [state, setState] = useState({
     userId: props.userId,
     email: props.email,
@@ -172,8 +173,13 @@ export function UpdateUser(props) {
   useEffect(() => {
     if (props.accountType === "Commercial") {
       setAccountOption("Residential");
+      setAccountOptionTwo("Administrator");
+    } else if (props.accountType === "Residential") {
+      setAccountOption("Commercial");
+      setAccountOptionTwo("Administrator");
     } else {
       setAccountOption("Commercial");
+      setAccountOptionTwo("Residential");
     }
   }, [props.accountType]);
 
@@ -225,6 +231,7 @@ export function UpdateUser(props) {
               >
                 <option value={props.accountType}>{props.accountType}</option>
                 <option value={accountOption}>{accountOption}</option>
+                <option value={accountOptionTwo}>{accountOptionTwo}</option>
               </Form.Control>
             </Form.Group>
             <Form.Group size="lg" controlId="email">
