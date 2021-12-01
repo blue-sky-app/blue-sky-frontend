@@ -1,170 +1,186 @@
 @media all and (min-width: 480px) {
-    .card {
-        border-radius: 0px !important;
-    }
-    #cardh {
-        background-color: #fff;
-        height: 40px;
-        font-weight: bold;
-        color: #0a7ebd;
-        font-size: 20px;
-    }
-    #btitle {
-        font-size: 18px;
-        align-content: center;
-        text-align: center;
-    }
-    #rtitle {
-        font-size: 14px;
-        align-content: center;
-        text-align: center;
-    }
-    #tbdy {
-        font-size: 14px;
-        text-align: center;
-    }
-    .tableFixHead {
-        overflow-y: auto;
-        height: 60vh;
-    }
-    .tableFixHead thead th {
-        position: sticky;
-        top: 0;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th,
-    td {
-        padding: 8px 16px;
-        border: 1px solid #ccc;
-    }
-    th {
-        background: #434444;
-        color: white;
-        font-size: 16px;
-        text-align: center;
-        font-weight: normal;
-        -webkit-font-smoothing: antialiased;
-        padding: 1em;
-        text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-    }
-    td {
-        padding: 8px 16px;
-        border: 1px solid #ccc;
-        color: #f7f7f7;
-        padding: 0.7em 1em 0.7em 1.15em;
-        text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
-    }
-    thead {
-        text-align: center;
-    }
-    tbody {
-        font-size: 14px;
-        text-align: center;
-    }
+  .card {
+    border-radius: 0px !important;
+  }
+
+  #cardh {
+    background-color: #fff;
+    height: 40px;
+    font-weight: bold;
+    color: #0a7ebd;
+    font-size: 20px;
+  }
+
+  #btitle {
+    font-size: 18px;
+  }
+
+  #rtitle {
+    font-size: 14px;
+  }
+
+  #tbdy {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .tableFixHead {
+    overflow-y: auto;
+    height: 60vh;
+  }
+
+  .tableFixHead thead th {
+    position: sticky;
+    top: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+  }
+
+  th {
+    background: #434444;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  thead {
+    text-align: center;
+  }
+
+  tbody {
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
 @media all and (max-width: 1366px) {
-    .card {
-        border-radius: 0px !important;
-    }
-    #bcrd {
-        height: 75vh;
-    }
-    #cardh {
-        background-color: #fff;
-        height: 40px;
-        font-weight: bold;
-        color: #0a7ebd;
-        font-size: 20px;
-    }
-    #mchead {
-        background-color: #0a7ebd;
-        height: 40px;
-        font-weight: bold;
-    }
-    #btitle {
-        font-size: 18px;
-    }
-    #rtitle {
-        font-size: 14px;
-    }
-    #tbdy {
-        font-size: 12px;
-        text-align: center;
-    }
-    #bbearned {
-        font-size: 14px;
-    }
-    .tableFixHead {
-        overflow-y: auto;
-        height: 40vh;
-    }
-    .tableFixHead thead th {
-        position: sticky;
-        top: 0;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th,
-    td {
-        padding: 8px 16px;
-        border: 1px solid #ccc;
-    }
-    th {
-        background: #434444;
-        color: white;
-        font-size: 16px;
-        text-align: center;
-    }
-    thead {
-        text-align: center;
-    }
-    tbody {
-        font-size: 14px;
-        text-align: center;
-    }
+  .card {
+    border-radius: 0px !important;
+  }
+
+  #bcrd {
+    height: 75vh;
+  }
+
+  #cardh {
+    background-color: #fff;
+    height: 40px;
+    font-weight: bold;
+    color: #0a7ebd;
+    font-size: 20px;
+  }
+
+  #mchead {
+    background-color: #0a7ebd;
+    height: 40px;
+    font-weight: bold;
+  }
+
+  #btitle {
+    font-size: 18px;
+  }
+
+  #rtitle {
+    font-size: 14px;
+  }
+
+  #tbdy {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  #bbearned {
+    font-size: 14px;
+  }
+
+  .tableFixHead {
+    overflow-y: auto;
+    height: 40vh;
+  }
+
+  .tableFixHead thead th {
+    position: sticky;
+    top: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+  }
+
+  th {
+    background: #434444;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  thead {
+    text-align: center;
+  }
+
+  tbody {
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
 @media all and (min-height: 600px) {
-    .tableFixHead {
-        overflow-y: auto;
-        height: 45vh;
-    }
-    #brdbody {
-        height: 60vh;
-    }
+  .tableFixHead {
+    overflow-y: auto;
+    height: 45vh;
+  }
+
+  #brdbody {
+    height: 60vh;
+  }
 }
 
 @media all and (min-height: 700px) {
-    .tableFixHead {
-        overflow-y: auto;
-        height: 48vh;
-    }
-    #brdbody {
-        max-height: 64vh;
-    }
+  .tableFixHead {
+    overflow-y: auto;
+    height: 48vh;
+  }
+
+  #brdbody {
+    max-height: 64vh;
+  }
 }
 
 @media all and (min-height: 800px) {
-    .tableFixHead {
-        overflow-y: auto;
-        height: 55vh;
-    }
-    #brdbody {
-        max-height: 75vh;
-    }
-    #bcrd {
-        height: 80vh;
-    }
+  .tableFixHead {
+    overflow-y: auto;
+    height: 55vh;
+  }
+
+  #brdbody {
+    max-height: 75vh;
+  }
+
+  #bcrd {
+    height: 80vh;
+  }
 }
 
 @media all and (max-height: 570px) {
-    #bcrd {
-        height: 71.5vh;
-    }
+
+  #bcrd {
+    height: 71.5vh;
+  }
+
 }
