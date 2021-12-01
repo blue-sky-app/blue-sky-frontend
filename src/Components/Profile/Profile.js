@@ -1,11 +1,15 @@
+// Author(s): Sam
 import React, { useState, useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import {
+
     API_BASE_URL,
     userExistsByEmail,
     fetchNews,
     restrictPage,
     updateUser
+
+
 } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
 import { BrowserNavBar } from "../NavBar/BrowserNavBar";
@@ -46,6 +50,7 @@ export function Profile() {
         message: "",
     });
 
+
     const userArray = [];
 
     useEffect(() => {
@@ -56,6 +61,7 @@ export function Profile() {
     useEffect(() => {
         fetchNews(token).then(setNews);
     }, [token]);
+
 
     // Capitalize first letter of Names
     useEffect(() => {
@@ -69,6 +75,7 @@ export function Profile() {
             lastName: capitalFirstLetter(state.lastName),
         }))
     }, [state.firstName, state.lastName]);
+
 
     // Sets state of profile items by grabbing form field control id and matching it with const
     const handleChange = (e) => {
@@ -87,6 +94,7 @@ export function Profile() {
         }));
     };
 
+
     // Sends updated user info array (parameter) to server to update db
     // Also updates local session storage to match updated details
     const sendDetailsToServer = (info) => {
@@ -99,6 +107,7 @@ export function Profile() {
             }));
         }
         updateUser(state.userId, info, token, successMsg())
+
 
         // Updates session storage to match updated info sent to Db
         userArray.push({
@@ -163,10 +172,12 @@ export function Profile() {
     // Checks password values to ensure they match, then calls email check 
     const handleUpdate = async(e) => {
         e.preventDefault();
+
         setState((prevState) => ({
             ...prevState,
             message: "",
         }));
+
         if (state.newPassword !== state.confirmPassword) {
             setState((prevState) => ({
                 ...prevState,
@@ -334,6 +345,7 @@ export function Profile() {
         /Card> <
         /BrowserView>
 
+
         <
         MobileView >
         <
@@ -356,6 +368,7 @@ export function Profile() {
         { fName }
         's Profile <
         /Card.Header>
+
 
         <
         Card.Body id = "crdbody" >
@@ -444,6 +457,7 @@ export function Profile() {
         /div> <
         /Card.Body> <
         /Card>
+
 
         <
         MobileNavBar active = "moreMenu" / >

@@ -1,3 +1,4 @@
+// Author(s): Dan, Sam
 import React, { useState, useEffect } from "react";
 import { fetchUsers, fetchEstimates } from "../API/Api.js";
 import { MobileNavBar } from "../NavBar/MobileNavBar";
@@ -7,7 +8,10 @@ import { AdminEstimates } from "./AdminEstimates";
 import { AdminNews } from "./AdminNews";
 import { AdminCategories } from "./AdminCategories";
 import { Card, Button, Image, Tabs, Tab } from "react-bootstrap";
+import { email } from "../LocalUser/LocalUser.js";
 import HeaderLogo from "../Images/mTopLogoBar.png";
+import { BrowserNavBar } from "../NavBar/BrowserNavBar.js";
+import { DeskFooter } from "../DeskFooter/DeskFooter.js";
 // import "./Admin.css";
 
 // Provides admin console page
@@ -17,10 +21,17 @@ export function Admin() {
     const [estimates, setEstimates] = useState([]);
     const [users, setUsers] = useState([]);
 
+
     // This fetch is for the Estimates
     useEffect(() => {
         fetchEstimates(token).then(setEstimates);
     }, [token]);
+
+  if (email !== "seth@blueforu.com") {
+    window.location.href = "/login";
+  }
+
+
 
     // Fetch USer data from Db
     useEffect(() => {
@@ -35,6 +46,7 @@ export function Admin() {
         e.preventDefault();
         setKey(key);
     };
+
 
     return ( <
         >
@@ -119,6 +131,7 @@ export function Admin() {
         /Card.Body> <
         /Card> <
         /BrowserView>
+
 
         <
         MobileView >

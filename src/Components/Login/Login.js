@@ -1,8 +1,7 @@
+// Author(s): Asish, Dan, Sam
 import React, { useState } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import Form from "react-bootstrap/Form";
-import Image from "react-bootstrap/Image";
-import Button from "react-bootstrap/Button";
+import { Form, Image, Button } from "react-bootstrap";
 import BlueSkyLogo from "../Images/loginLogo.png";
 import { Message } from "../Message/Message.js";
 import { API_BASE_URL, fetchNews, headers } from "../API/Api.js";
@@ -44,7 +43,7 @@ export function Login() {
       .catch((error) => {
         console.log(error);
       });
-    
+
     if (login) {
       var userArray = [];
       await axios
@@ -65,6 +64,7 @@ export function Login() {
       for (let i in news) {
         if (userArray[0].localAccountType === news[i].customerType) {
           userArray.push({
+            localNewsId: news[i]._id,
             localNewsHeadline: news[i].headline,
             localNewsText: news[i].text,
           });
@@ -185,20 +185,29 @@ export function Login() {
                 type={state.type}
                 message={state.message}
               />
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Form.Group size="lg" controlId="email">
-                  <Form.Control type="email" placeholder="Email" />
+                  <Form.Control 
+                    type="email" 
+                    placeholder="Email" 
+                    // sets "email" state to user entered value
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </Form.Group>
                 <Form.Group size="lg" controlId="password">
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                    // sets "password" state to user entered value
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </Form.Group>
                 <br />
                 <Button
-                  onClick={handleSubmit}
                   id="loginButton"
                   block
                   size="md"
-                  type="button"
+                  type="submit"
                   data-testid="loginButton"
                 >
                   LOGIN
