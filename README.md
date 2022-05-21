@@ -1,3 +1,5 @@
+This application is for demo purposes only, not to be used in production
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
